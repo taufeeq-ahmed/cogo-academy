@@ -1,25 +1,36 @@
 require('./helpers/load-env');
 const Fastify = require('fastify');
 const qs = require('qs');
+const cors = require("fastify-cors");
 
-const routes = require('./routes');
-
-
-const fastify = Fastify({
-    logger            : true,
-    querystringParser : (str) => qs.parse(str),
-});
+const { prisma } = require("./helpers/db-client");
+const { registerRoutes } = require("./routes");
 
 const start = async () => {
-    await fastify.register(plugins);
-    await fastify.register(routes);
+    const fastify = Fastify({
+        logger            : true,
+        querystringParser : (str) => qs.parse(str),
+    });
+
+    // cors
+    fastify.register(cors, {
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+    });
+
+    // connect to database
+    await prisma.$connect();
+    fastify.log.info("Connected to Prisma");
+
+    // register all routes
+    await registerRoutes(fastify);
 
     try {
-        const port = process.env.PORT || 3000;
-        await fastify.listen({ port });
-        if (typeof process.send === 'function') process.send('ready');
+        await fastify.listen(process.env.PORT || 8080, "0.0.0.0");
     } catch (err) {
         fastify.log.error(err);
+        await prisma.$disconnect();
         process.exit(1);
     }
 };
