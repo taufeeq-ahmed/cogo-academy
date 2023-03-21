@@ -1,0 +1,12 @@
+{
+  "name": "cogo-academy",
+  "version": "1.0.0",
+  "description": "All about Cogo academy",
+  "main": "index.js",
+  "author": "Prashant Paddune <padadunep@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@cogoport/eslint-config": "^1.1.0",
+    "eslint": "^8.36.0"
+  }
+}
