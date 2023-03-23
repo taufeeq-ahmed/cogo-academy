@@ -1,5 +1,5 @@
-const signInUser = require("./auth/signInUser");
-const signUpUser = require("./auth/signUpUser");
+const signInUser = require("./auth/signIn");
+const signUpUser = require("./auth/signUp");
 const { addSection, updateSection, deleteSection, getSection } = require("./section");
 
 
