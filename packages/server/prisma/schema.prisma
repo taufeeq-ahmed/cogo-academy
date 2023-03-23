@@ -2,25 +2,26 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-	provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-	provider = "postgresql"
-	url      = env("DATABASE_URL_SCHEMA")
+    provider = "postgresql"
+    url      = env("DATABASE_URL_SCHEMA")
 }
 
 model Users {
-	id 						String @db.Uuid @id @default(dbgenerated("gen_random_uuid()"))
-	name					String
-	email					String @unique
-	password				String
+    id                           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    name                         String
+    email                        String   @unique
+    password                     String
+    github_username              String
+    batch                        String
+    total_score                  Int?
+    created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+    updated_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+    number_of_exercises_done     Int?     @default(0)
+    number_of_projects_submitted Int?     @default(0)
 
-	projects				ProjectUsers[]
-	Audits					Audits[]
-
-	created_on				DateTime @db.Timestamptz(3) @default(dbgenerated("now()"))
-	updated_on				DateTime @db.Timestamptz(3) @default(dbgenerated("now()"))
-
-	@@map("users")
+    @@map("users")
 }

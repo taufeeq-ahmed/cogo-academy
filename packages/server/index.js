@@ -1,15 +1,15 @@
 require('./helpers/load-env');
 const Fastify = require('fastify');
 const qs = require('qs');
-const cors = require("fastify-cors");
+const cors = require('@fastify/cors')
 
 const { prisma } = require("./helpers/db-client");
 const { registerRoutes } = require("./routes");
 
 const start = async () => {
     const fastify = Fastify({
-        logger            : true,
-        querystringParser : (str) => qs.parse(str),
+        logger: true,
+        querystringParser: (str) => qs.parse(str),
     });
 
     // cors
