@@ -1,23 +1,21 @@
-<<<<<<< HEAD
-const signInUser = require("./auth/signIn");
-const signUpUser = require("./auth/signUp");
-=======
 const signInUser = require("./auth/signInUser");
 const signUpUser = require("./auth/signUpUser");
->>>>>>> setup-db
+const { addSection, updateSection, deleteSection, getSection } = require("./section");
 
 
 const registerRoutes = async (fastify) => {
     const userRoutes = async (fastify) => {
-<<<<<<< HEAD
-        await signUpUser(fastify);
-        await signInUser(fastify);
-=======
         await signInUser(fastify);
         await signUpUser(fastify);
->>>>>>> setup-db
     }
     await userRoutes(fastify);
+    const sectionRoutes = async (fastify) => {
+        await addSection(fastify);
+        await getSection(fastify);
+        await updateSection(fastify);
+        await deleteSection(fastify);
+    }
+    await sectionRoutes(fastify);
 }
 
 module.exports = registerRoutes;

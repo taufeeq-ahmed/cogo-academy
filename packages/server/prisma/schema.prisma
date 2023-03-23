@@ -25,3 +25,14 @@ model Users {
 
     @@map("users")
 }
+
+model Sections {
+    id                          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    name                        String @unique
+    description                 String
+    number_of_exercises         Int    @default(0)
+    number_of_articles          Int    @default(0)
+    duration_in_minutes         Int    @default(0)
+    number_of_submissions       Int    @default(0)
+    number_of_section_materials Int    @default(0)
+}

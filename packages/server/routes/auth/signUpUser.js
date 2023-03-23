@@ -1,4 +1,4 @@
-const { addUsertoDB } = require("../../controllers/user");
+const { addUserToDB } = require("../../controllers/user");
 const { prisma } = require("../../helpers/db-client");
 const bcrypt = require("bcrypt");
 
@@ -10,7 +10,7 @@ const signUpUser = async (fastify) => {
         // console.log(password);
         // console.log(req.body.password);
         try {
-            const newUser = await addUsertoDB(req.body);
+            const newUser = await addUserToDB(req.body);
             res.send(newUser);
         } catch (err) {
             console.log(err);
