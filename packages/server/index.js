@@ -4,7 +4,11 @@ const qs = require('qs');
 const cors = require('@fastify/cors')
 
 const { prisma } = require("./helpers/db-client");
+<<<<<<< HEAD
 const  registerRoutes  = require("./routes");
+=======
+const registerRoutes = require("./routes");
+>>>>>>> setup-db
 
 const start = async () => {
     const fastify = Fastify({
@@ -22,7 +26,7 @@ const start = async () => {
     // connect to database
     await prisma.$connect();
     fastify.log.info("Connected to Prisma");
-
+    
     // register all routes
     await registerRoutes(fastify);
 
