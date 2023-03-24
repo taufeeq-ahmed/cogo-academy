@@ -1,0 +1,30 @@
+---
+import CourseCards from "../components/CourseCards.astro";
+import Layout from "../layouts/Layout.astro";
+
+
+export function getStaticPaths() {
+  const courses = [{ name: "html" }, { name: "css" }, { name: "javascript" }];
+
+  const paths = [];
+  courses.forEach((course,i) => {
+    paths.push({
+      params: {
+        course: course.name,
+      },
+       props: {
+          idx: i
+        },
+    });
+  });
+
+  return paths;
+}
+
+const { course } = Astro.params;
+const { idx } = Astro.props;
+---
+
+<Layout title={`Course - ${course}`} idx={idx}>
+    <CourseCards course={course}/>
+</Layout>

@@ -1,0 +1,144 @@
+---
+import CourseCard from "./CourseCard.astro";
+
+const {course} = Astro.props
+const sections = [
+        {
+            name: "Web Development Basics",
+            status: 3,
+            total: 7,
+            description: "What do web developers do? Web development could be a good profession for you if you like solving logical problems, building useful things, and experimenting with new technologies.",
+            lessons: 5,
+            time_to_complete: 56,
+        },
+        {
+            name: "GIT Basics",
+            status: 3,
+            total: 7,
+            description: "lorem ipsum 2",
+            lessons: 5,
+            time_to_complete: 56,
+        },
+        {
+            name: "GIT Basics",
+            status: 3,
+            total: 7,
+            description: "lorem ipsum 2",
+            lessons: 5,
+            time_to_complete: 56,
+        },
+        {
+            name: "GIT Basics",
+            status: 3,
+            total: 7,
+            description: "lorem ipsum 2",
+            lessons: 5,
+            time_to_complete: 56,
+        },
+        {
+            name: "GIT Basics",
+            status: 3,
+            total: 7,
+            description: "lorem ipsum 2",
+            lessons: 5,
+            time_to_complete: 56,
+        },
+        {
+            name: "GIT Basics",
+            status: 3,
+            total: 7,
+            description: "lorem ipsum 2",
+            lessons: 5,
+            time_to_complete: 56,
+        },
+        {
+            name: "GIT Basics",
+            status: 3,
+            total: 7,
+            description: "lorem ipsum 2",
+            lessons: 5,
+            time_to_complete: 56,
+        },
+        {
+            name: "GIT Basics",
+            status: 3,
+            total: 7,
+            description: "lorem ipsum 2",
+            lessons: 5,
+            time_to_complete: 56,
+        },
+
+]
+const gg = {
+    "id": "7020a2e4-8116-46fb-819f-7d6fce1a64ad",
+    "course_name": "SQL",
+    "sections": [
+        {
+            "id": "82dd1bf0-8694-4342-a872-06885a5d24d4",
+            "section_name": "Intro to Sql ",
+            "description": "macbook is a really good option",
+            "number_of_exercises": 0,
+            "number_of_articles": 0,
+            "duration_in_minutes": 0,
+            "number_of_submissions": 0,
+            "number_of_section_materials": 0,
+            "coursesId": "7020a2e4-8116-46fb-819f-7d6fce1a64ad"
+        },
+        {
+            "id": "606e9b65-4333-491d-9cec-858f8c7024a8",
+            "section_name": "Intro to Queries ",
+            "description": "macbook is a really good option",
+            "number_of_exercises": 0,
+            "number_of_articles": 0,
+            "duration_in_minutes": 0,
+            "number_of_submissions": 0,
+            "number_of_section_materials": 0,
+            "coursesId": "7020a2e4-8116-46fb-819f-7d6fce1a64ad"
+        },
+        {
+            "id": "3c1f2cbd-ad31-4196-8334-0ecd193d2ba9",
+            "section_name": "Intro to joins ",
+            "description": "macbook is a really good option",
+            "number_of_exercises": 0,
+            "number_of_articles": 0,
+            "duration_in_minutes": 0,
+            "number_of_submissions": 0,
+            "number_of_section_materials": 0,
+            "coursesId": "7020a2e4-8116-46fb-819f-7d6fce1a64ad"
+        },
+        {
+            "id": "2a8ccc6b-2cb1-4f22-8ad1-9fb0d5d690d1",
+            "section_name": "Intro to postgres ",
+            "description": "macbook is a really good option",
+            "number_of_exercises": 0,
+            "number_of_articles": 0,
+            "duration_in_minutes": 0,
+            "number_of_submissions": 0,
+            "number_of_section_materials": 0,
+            "coursesId": "7020a2e4-8116-46fb-819f-7d6fce1a64ad"
+        }
+    ]
+}
+const colors = [
+    ['#FEF3E9','#C26D1A'],
+    ['#F2F3FA','#7278AD'],
+    ['#F7FAEF','#849E4C'],
+    ['#F3FAFA','#6FA5AB'],
+    ['#FFFCE6','#D6B300'],
+    ['#FDEBE9','#BF291E']
+
+]
+const newSections = gg.sections.map((sec,i)=>{
+        return {
+            ...sec,
+            colors: colors[i%6]
+        }
+    })
+---
+    {
+        newSections.map((sec) => {
+            return (
+                <CourseCard section={sec} />
+            );
+        })
+    }

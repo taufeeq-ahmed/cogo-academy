@@ -1,0 +1,38 @@
+body, html {
+    padding: 0;
+    margin: 0;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+}
+
+:root {
+    --color-primary: #FFFCE6;
+    --color-primary-1: #ABCD62;
+    --color-primary-2: #D9D9D9;
+    --color-secondary: #f9fbfc;
+    --color-secondary-1: rgb(209 213 219/1);
+    --color-secondary-2: #828282;
+    --border-color:#E0E0E0;
+    --font-color: #221F20;
+    --font-color-tab: #828282;
+    --font-color-heading: #000;
+    --font-color-sub-heading: #4F4F4F;
+    --font-color-tertiary: #BDBDBD;
+    --font-color-btn: var(--font-color);
+    --font-color-link: var(--color-primary);
+    --font-family: "PT Sans",sans-serif;
+    --font-family-heading: "Ubuntu",sans-serif;
+    --font-size-xl: 18px;
+    --font-size-lg: 16px;
+    --font-size-md: 14px;
+    --font-size-sm: 12px;
+    --font-size-xs: 10px;
+    --line-height: 1.5;
+}
