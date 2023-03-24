@@ -1,20 +1,28 @@
 ---
 import CourseCards from "../components/CourseCards.astro";
+import CourseTabs from "../components/CourseTabs.astro";
 import Layout from "../layouts/Layout.astro";
+const response = await fetch(
+  `${import.meta.env.PUBLIC_SERVER_URL}/courses/get-all-courses`
+);
+const courses = await response.json();
 
+export async function getStaticPaths() {
 
-export function getStaticPaths() {
-  const courses = [{ name: "html" }, { name: "css" }, { name: "javascript" }];
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_SERVER_URL}/courses/get-all-courses`
+  );
+  const data = await response.json();
 
   const paths = [];
-  courses.forEach((course,i) => {
+  data.forEach((course, i) => {
     paths.push({
       params: {
-        course: course.name,
+        course: course.id,
       },
-       props: {
-          idx: i
-        },
+      props: {
+        idx: i,
+      },
     });
   });
 
@@ -25,6 +33,7 @@ const { course } = Astro.params;
 const { idx } = Astro.props;
 ---
 
-<Layout title={`Course - ${course}`} idx={idx}>
-    <CourseCards course={course}/>
+<Layout title={`Course - ${course}`}>
+  <CourseTabs slot="coursetabs" selected={idx} courses={courses} />
+  <CourseCards course={course} />
 </Layout>

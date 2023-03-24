@@ -2,8 +2,7 @@
 import CourseTabs from "../components/CourseTabs.astro";
 import Header from "../components/Header.astro";
 
-const { title, idx } = Astro.props;
-const courses = ["HTML", "CSS", "Javascript"];
+const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -19,8 +18,9 @@ const courses = ["HTML", "CSS", "Javascript"];
 		<title>{title}</title>
 	</head>
 	<body>
+		<!-- <div>{JSON.stringify(data)}</div>	 -->
 		<div class="root">
-			<CourseTabs selected={idx} courses={courses} />
+			<slot name="coursetabs" />
 			<div class="main_container">
 				<Header />
 				<div class="course_details">
@@ -59,7 +59,3 @@ const courses = ["HTML", "CSS", "Javascript"];
 		padding: 5px;
 	}
 </style>
-
-<script>
-    console.log(window.location)
-</script>

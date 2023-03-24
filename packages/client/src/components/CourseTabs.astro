@@ -9,8 +9,8 @@ import '../styles/global.css'
     <img src={BrandLogo}  alt="brand-logo"/>
   </div>
   {courses.map((course: any, idx: any) => 
-    <a href={`/${course.toLowerCase()}`} class={`tab ${selected === idx ? "selected" : "not-selected"}`}>
-      {course}
+    <a href={`/${course.id}`} class={`tab ${selected === idx ? "selected" : "not-selected"}`}>
+      {course.course_name}
     </a>)}
 </div>
 
