@@ -1,6 +1,6 @@
-const { getUserFromDB } = require("../../controllers/user");
 const { prisma } = require("../../helpers/db-client");
 const bcrypt = require("bcrypt");
+const getUserFromDB = require("../../controllers/user/getUserFromDB");
 const signInUser = async (fastify) => {
     fastify.post("/users/sign-in", async (req, res) => {
         console.log("In sign-in route")

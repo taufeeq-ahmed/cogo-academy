@@ -1,7 +1,6 @@
-const { addUserToDB } = require("../../controllers/user");
 const { prisma } = require("../../helpers/db-client");
 const bcrypt = require("bcrypt");
-
+const addUserToDB = require("../../controllers/user/addUserToDB");
 const signUpUser = async (fastify) => {
     fastify.post("/users/sign-up", async (req, res) => {
         const password = req.body.password;

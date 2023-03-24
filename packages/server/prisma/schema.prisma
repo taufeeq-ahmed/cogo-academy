@@ -17,7 +17,7 @@ model Users {
     password                     String
     github_username              String
     batch                        String
-    total_score                  Int?
+    total_score                  Int? @default(0)
     created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
     updated_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
     number_of_exercises_done     Int?     @default(0)
@@ -27,13 +27,13 @@ model Users {
 }
 
 model Courses {
-    id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    course_id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     course_name String     @unique
     sections    Sections[]
 }
 
 model Sections {
-    id                          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    section_id                          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     section_name                String   @unique
     description                 String
     number_of_exercises         Int      @default(0)
@@ -41,6 +41,6 @@ model Sections {
     duration_in_minutes         Int      @default(0)
     number_of_submissions       Int      @default(0)
     number_of_section_materials Int      @default(0)
-    Courses                     Courses? @relation(fields: [coursesId], references: [id])
-    coursesId                   String?  @db.Uuid
+    Courses                     Courses? @relation(fields: [course_id], references: [course_id])
+    course_id                   String?  @db.Uuid
 }

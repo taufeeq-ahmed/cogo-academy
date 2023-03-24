@@ -1,4 +1,4 @@
-const { prisma } = require("../helpers/db-client");
+const { prisma } = require("../../helpers/db-client");
 
 const addUserToDB = async (params) => {
 
@@ -13,16 +13,5 @@ const addUserToDB = async (params) => {
     })
     return newUser;
 
-}
-
-const getUserFromDB = async (params) => {
-    const { email } = params;
-    const user = await prisma.Users.findUnique({
-        where: {
-            email: email,
-        },
-    })
-    return user;
-}
-
-module.exports = { addUserToDB, getUserFromDB }
+};
+module.exports=addUserToDB;
