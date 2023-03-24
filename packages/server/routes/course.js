@@ -1,6 +1,15 @@
-const { addCoursetoDB, getCourseFromDB, UpdateCourseFromDB, DeleteCourseFromDB } = require("../controllers/course");
+const { addCoursetoDB, getCourseFromDB, UpdateCourseFromDB, DeleteCourseFromDB, addCourseAndSectionsToDB, getCourseAndSectionsFromDB } = require("../controllers/course");
 const { prisma } = require("../helpers/db-client");
-//const bcrypt = require("bcrypt");
+const addCourseAndSections = async (fastify) => {
+    fastify.post("/courses/add-courses-and-sections", async (req, res) => {
+        try {
+            const courseAndSections = await addCourseAndSectionsToDB(req.body);
+            req.status(200).send(courseAndSections);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+}
 const addCourse = async (fastify) => {
     fastify.post("/courses/add-course", async (req, res) => {
         try {
@@ -20,6 +29,16 @@ const getCourse = async (fastify) => {
             console.log(err);
         }
     });
+}
+const getCourseAndSections = async (fastify) => {
+    fastify.post("/courses/get-course-and-sections", async (req, res) => {
+        try {
+            const courseAndSections = await getCourseAndSectionsFromDB(req.body);
+            res.status(200).send(courseAndSections);
+        } catch (err) {
+            console.log(err);
+        }
+    })
 }
 const updateCourse = async (fastify) => {
     fastify.post("/courses/update-course", async (req, res) => {
@@ -41,4 +60,4 @@ const deleteCourse = async (fastify) => {
         }
     });
 }
-module.exports = { addCourse, getCourse, updateCourse, deleteCourse }
+module.exports = { addCourse, getCourse, updateCourse, deleteCourse, addCourseAndSections, getCourseAndSections }
