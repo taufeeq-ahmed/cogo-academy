@@ -3,7 +3,7 @@ const getSectionFromDB = async (params) => {
     const { name ,coureseid ,lse} = params;
     const section = await prisma.Sections.findUnique({
         where: {
-            name: name
+            section_name: name
         },
     })
     return section;

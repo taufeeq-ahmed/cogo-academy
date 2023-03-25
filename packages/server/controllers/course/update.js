@@ -1,14 +1,14 @@
 const { prisma } = require("../../helpers/db-client");
-const updateCourseFromDB = async (params) => {
-    const { course_name } = params;
+const updateCourseFromDB = async (params, data) => {
+    const { course_id } = params;
+    console.log(data);
+    const {new_data}= data;
     // console.log(params)
     const updateCourse = await prisma.Courses.update({
         where: {
-            course_name: course_name
+            course_id: course_id
         },
-        data: {
-            course_name: course_name
-        }
+        data: new_data
     })
     return updateCourse;
 };

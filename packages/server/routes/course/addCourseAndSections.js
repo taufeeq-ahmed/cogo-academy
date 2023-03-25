@@ -4,7 +4,7 @@ const addCourseAndSections = async (fastify) => {
     fastify.post("/course/addCourseAndSections", async (req, res) => {
         try {
             const courseAndSections = await addCourseAndSectionsToDB(req.body);
-            req.status(200).send(courseAndSections);
+            res.status(200).send(courseAndSections);
         } catch (err) {
             console.log(err);
         }

@@ -1,6 +1,5 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
@@ -17,30 +16,31 @@ model Users {
     password                     String
     github_username              String
     batch                        String
-    total_score                  Int? @default(0)
+    total_score                  Int?
     created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
     updated_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
     number_of_exercises_done     Int?     @default(0)
     number_of_projects_submitted Int?     @default(0)
+    user_rank                    Int      @default(0)
 
     @@map("users")
 }
 
 model Courses {
-    course_id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    course_name String     @unique
+    id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    course_name String
     sections    Sections[]
 }
 
 model Sections {
-    section_id                          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    section_name                String   @unique
+    id                          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    section_name                String
     description                 String
     number_of_exercises         Int      @default(0)
     number_of_articles          Int      @default(0)
     duration_in_minutes         Int      @default(0)
     number_of_submissions       Int      @default(0)
     number_of_section_materials Int      @default(0)
-    Courses                     Courses? @relation(fields: [course_id], references: [course_id])
-    course_id                   String?  @db.Uuid
+    Courses                     Courses? @relation(fields: [courses_id], references: [id])
+    courses_id                  String?  @db.Uuid
 }

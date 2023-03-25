@@ -1,11 +1,11 @@
 const { prisma } = require("../../helpers/db-client");
 const deleteSectionFromDB = async (params) => {
-    const { name } = params;
+    const { id } = params;
     const deletedSection = await prisma.Sections.delete({
         where: {
-            name: name
+            id: id
         },
     })
     return deletedSection;
-};
-module.exports=deleteSectionFromDB;
+}
+module.exports = deleteSectionFromDB;
