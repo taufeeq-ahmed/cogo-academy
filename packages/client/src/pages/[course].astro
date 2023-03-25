@@ -1,6 +1,6 @@
 ---
 import CourseCards from "../components/CourseCards.astro";
-import CourseTabs from "../components/CourseTabs.astro";
+import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
 const response = await fetch(
   `${import.meta.env.PUBLIC_SERVER_URL}/courses/get-all-courses`
@@ -33,7 +33,54 @@ const { course } = Astro.params;
 const { idx } = Astro.props;
 ---
 
-<Layout title={`Course - ${course}`}>
-  <CourseTabs slot="coursetabs" selected={idx} courses={courses} />
+<Layout title={`Course - ${course}`} selected={idx} courses={courses}>
+  <Header slot="header" text="Courses">
+    <div class="search-box">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                class="h-5 w-6 text-black"
+                ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                ></path></svg>
+            <input
+                class="search-input"
+                type="text"
+                name=""
+                id=""
+                placeholder="Search for Content"
+            />
+        </div>
+    </Header>
   <CourseCards course={course} />
 </Layout>
+
+<style>
+  .search-box {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 0 0.5rem;
+		border: 1px solid var(--border-color);
+		color: var(--border-color);
+		border-radius: 0.375rem;
+		width: 300px;
+	}
+	.search-box > svg {
+		height: 1.25rem;
+		padding-left: 0.25rem;
+		color: #BDBDBD;
+	}
+	.search-input {
+		flex: 1;
+		outline: none;
+		border: none;
+		padding: 0.75rem 0;
+	}
+</style>

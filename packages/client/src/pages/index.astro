@@ -1,25 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-console.log("fds",import.meta.env.PUBLIC_SERVER_URL)
----
+import Dashboard from "../components/Dashboard.astro";
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv = "refresh" content = "0; url = /html" /> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-<!-- <Layout title="Welcome to Astro." > -->
-    <!-- <div>Select Any Course</div> -->
-    <!-- <div>Select Any Section</div> -->
-<!-- </Layout> -->
+const response = await fetch(
+  `${import.meta.env.PUBLIC_SERVER_URL}/courses/get-all-courses`
+);
+const courses = await response.json();
+---
+<Layout title="Home - Dashboard" selected={"/"} courses={courses}>
+    <Header slot="header" text="Welcome Back, Shivom!"/>
+    <Dashboard rank={12} points={3534} />
+</Layout>

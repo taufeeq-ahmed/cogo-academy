@@ -8,7 +8,10 @@ import '../styles/global.css'
   <div class="brand-logo">
     <img src={BrandLogo}  alt="brand-logo"/>
   </div>
-  {courses.map((course: any, idx: any) => 
+  <a href="/" class={`tab ${selected === "/" ? "selected" : "not-selected"}`}>
+    Home
+  </a>
+  {courses && courses.map((course: any, idx: any) => 
     <a href={`/${course.id}`} class={`tab ${selected === idx ? "selected" : "not-selected"}`}>
       {course.course_name}
     </a>)}

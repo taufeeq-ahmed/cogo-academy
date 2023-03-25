@@ -15,17 +15,17 @@ const colors = [
     ['#FDEBE9','#BF291E']
 
 ]
-const newSections = data.map((sec,i)=>{
+const newSections = data?.map((sec,i)=>{
         return {
             ...sec,
             colors: colors[i%6]
         }
     })
 ---
-    {
-        newSections && newSections.map((sec) => {
-            return (
-                <CourseCard section={sec} />
-            );
-        })
-    }
+{
+    newSections && newSections.map((sec) => {
+        return (
+            <CourseCard section={sec} />
+        );
+    })
+}

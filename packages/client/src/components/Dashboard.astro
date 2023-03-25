@@ -1,0 +1,157 @@
+---
+import ExerciseSVG from "/assets/exercises.svg"
+import ProjectSVG from "/assets/projects.svg"
+import LeaderBoardSVG from "/assets/leaderboard.svg"
+import CourseCard from "./CourseCard.astro"
+import Tile from "./Tile.astro"
+const response = await fetch(
+  `${import.meta.env.PUBLIC_SERVER_URL}/users/dashboard/4b3b5c9f-01a1-4070-a32d-9c94d111e7d3`,
+);
+const {userData,topThreeUsersData} = await response.json();
+const sections = [
+    {
+        "id": "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
+        "section_name": "Introduction to Go",
+        "description": "Introduction to Go",
+        "number_of_exercises": 0,
+        "number_of_articles": 0,
+        "duration_in_minutes": 0,
+        "number_of_submissions": 0,
+        "number_of_section_materials": 0,
+        "course_id": "821fd291-c4e0-4646-882a-51d7b8dd37b6"
+    },
+    {
+        "id": "a16be1fc-7834-4960-bf0d-178663cbd3b1",
+        "section_name": "Go Basics",
+        "description": "Go Basics",
+        "number_of_exercises": 0,
+        "number_of_articles": 0,
+        "duration_in_minutes": 0,
+        "number_of_submissions": 0,
+        "number_of_section_materials": 0,
+        "course_id": "821fd291-c4e0-4646-882a-51d7b8dd37b6"
+    },
+]
+---
+<div class="dashboard">
+    <div class="dash-nav">
+        <div class="dash-rank">
+            <h2>Rank {userData.user_rank}</h2>
+        </div>
+        <div class="dash-box">
+            <div class="img_div">
+                <img src={ExerciseSVG} alt="exercise-svg" />
+            </div>
+            <div class="dash-stat">
+                <h1>{userData.number_of_exercises_done}</h1>
+                <span>Exercises</span>
+            </div>
+        </div>
+
+        <div class="dash-box">
+            <div class="img_div">
+                <img src={ProjectSVG} alt="exercise-svg" />
+            </div>
+            <div class="dash-stat">
+                <h1>{userData.number_of_projects_submitted}</h1>
+                <span>Projects</span>
+            </div>
+        </div>
+    </div>
+    <h4>Jump right back in!</h4>
+    <div class="dash_body">
+        <div class="dash-sections">
+        {
+            sections && sections.map((sec)=>{
+                return (
+                    <CourseCard section={sec}/>
+                )
+            })
+        }
+        </div>
+        <div class="leader-box">
+            <div>Leaderboard <img src={LeaderBoardSVG} /></div>
+            <div class="leader-board">
+                {
+                    topThreeUsersData?.map((user)=>{
+                        return (
+                            <Tile user={user}/>
+                        )
+                    })
+                }
+                <Tile user={userData} />
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    .dash-nav{
+        display: flex;
+        padding: 0 0 24px 0;
+        border-bottom: 1px solid #E0E0E0;
+    }
+    .dash-sections{
+        display: flex;
+		overflow: auto;
+		gap: 20px;
+		padding: 5px;
+    }
+    .dash_body{
+        display: flex;
+        gap: 16px;
+        width: 90%;
+    }
+    .leader-box{
+        display: flex;
+        padding: 0 24px;
+        flex: 1;
+        flex-direction: column;
+        gap: 10px;
+        height: 375px;
+    }
+    .leader-board{
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+        flex: 1;
+        overflow-y: auto;
+        padding: 8px;
+    }
+    .dash-rank{
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+    }
+    .dash-box{
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+    .dash-rank,.dash-box{
+        margin-right: 20px;
+    }
+    .dash-stat{
+        display: flex;
+        flex-direction: column;
+    }
+    .img_div{
+        padding: 15px;
+        border-radius: 50%;
+        background-color: #F2F3FA;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .img_div > img{
+        width: 20px;
+    }
+</style>
