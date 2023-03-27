@@ -1,7 +1,7 @@
 ---
-import CourseTabs from "../components/CourseTabs.astro";
+import TabsNav from "../components/TabsNav.astro";
 
-const { title,selected,courses } = Astro.props;
+const { title, selected, courses } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -11,14 +11,38 @@ const { title,selected,courses } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
 		<title>{title}</title>
 	</head>
 	<body>
 		<div class="root">
-  			<CourseTabs selected={selected} courses={courses} />
+			<TabsNav selected={selected}>
+				<a
+					href="/"
+					class={`tab ${
+						selected === "/" ? "tab_selected" : "not-selected"
+					}`}
+				>
+					Home
+				</a>
+				{
+					courses?.map((course: any, idx: any) => (
+						<a
+							href={`/${course.id}`}
+							class={`tab ${
+								selected === idx ? "selected" : "not-selected"
+							}`}
+						>
+							{course.course_name}
+						</a>
+					))
+				}
+			</TabsNav>
 			<div class="main_container">
 				<slot name="header" />
 				<div class="container_body">
@@ -28,7 +52,7 @@ const { title,selected,courses } = Astro.props;
 		</div>
 	</body>
 </html>
-<style is:global>
+<style>
 	html {
 		font-family: system-ui, sans-serif;
 	}

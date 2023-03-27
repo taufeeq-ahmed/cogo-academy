@@ -1,0 +1,26 @@
+---
+import BrandLogo from "/assets/brand.svg"
+import '../styles/global.css'
+---
+
+<div class="tabs">
+  <div class="brand-logo">
+    <img src={BrandLogo}  alt="brand-logo"/>
+  </div>
+  <slot/>
+</div>
+
+<style>
+  .tabs{
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1rem 0px 1rem;
+    box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
+    z-index: 10;
+  }
+  .brand-logo{
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+</style>

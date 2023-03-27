@@ -1,8 +1,9 @@
 ---
 import LessonsSVG from "/assets/lessons.svg";
 import ClockSVG from "/assets/clock.svg";
-import Link from "./Link.astro";
+import LinkBtn from "./LinkBtn.astro";
 const { section } = Astro.props;
+import ArrowSVG from "/assets/arrow.svg"
 ---
 
 <div class="section">
@@ -67,7 +68,7 @@ const { section } = Astro.props;
                     <span>{section.duration_in_minutes} Minutes</span>
                 </div>
             </div>
-            <Link text="Continue" sectionId={section.id} />
+            <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={`playground/${section.id}`} />
         </div>
     </div>
 </div>

@@ -1,15 +1,15 @@
 ---
-const { text,sectionId } = Astro.props;
-import ArrowSVG from "/assets/arrow.svg"
+const { text,link,iconPlacement,icon,iconStyle,btnStyle } = Astro.props;
 ---
 
-<a href={`playground/${sectionId}`} class="btn">
+<a href={link} class="link-btn" style={btnStyle} >
+    {iconPlacement === "left" && <img style={iconStyle} src={icon} alt="arrow-icon" />}
     <span>{text}</span>
-    <img src={ArrowSVG} alt="arrow-icon" />
+    {iconPlacement === "right" && <img style={iconStyle} src={icon} alt="arrow-icon" />}
 </a>
 
 <style>
-    .btn {
+    .link-btn {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -17,7 +17,7 @@ import ArrowSVG from "/assets/arrow.svg"
         border-radius: 6px;
         border: 1px solid #E0E0E0;
         cursor: pointer;
-        width: min-content;
+        width: max-content;
         height: min-content;
         gap: 5px;
         background-color: white;
@@ -27,7 +27,7 @@ import ArrowSVG from "/assets/arrow.svg"
         text-decoration: none;
     }
 
-    .btn:hover {
+    .link-btn:hover {
         background: #FFFCE6;
         border: 1px solid #FDE74D;
         border-radius: 6px;

@@ -1,0 +1,90 @@
+---
+const { title } = Astro.props;
+import PlaygroundContent from "../components/PlaygroundContent.astro";
+import TabsNav from "../components/TabsNav.astro";
+const currentPath = Astro.url.pathname;
+const course_contents = [
+    {
+        id: 1,
+        name: "Intro",
+        time: "4 Mins",
+    },
+    {
+        id: 2,
+        name: "Intro",
+        time: "4 Mins",
+    },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Playground - {title}</title>
+    </head>
+    <body>
+        <div class="root">
+            <TabsNav>
+                <p>Course Contents</p>
+                {
+                    course_contents?.map((course_content: any) => (
+                        <a
+                            href={`${course_content.id}`}
+                            class={`tab ${
+                                currentPath ===
+                                "/playground/" + course_content.id
+                                    ? "tab_selected"
+                                    : "not-selected"
+                            }`}
+                        >
+                            <div class="img-div"></div>
+                            <div class="course-content">
+                                <div>{course_content.name}</div>
+                                <div>{course_content.time}</div>
+                            </div>
+                        </a>
+                    ))
+                }
+            </TabsNav>
+            <div class="content">
+                <PlaygroundContent />
+            </div>
+            <div class="right_box">
+                
+            </div>
+        </div>
+    </body>
+</html>
+
+<style>
+    .root {
+        display: flex;
+        height: 100vh;
+    }
+    .content {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        height: 100vh;
+        overflow: auto;
+    }
+    .right_box {
+        z-index: 10;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        height: 100vh;
+        background: #ffffff;
+        box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
+    }
+    .img-div{
+        width: 16px;
+        height: 16px;
+        background-color: red;
+    }
+</style>

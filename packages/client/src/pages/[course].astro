@@ -5,14 +5,14 @@ import Layout from "../layouts/Layout.astro";
 const response = await fetch(
   `${import.meta.env.PUBLIC_SERVER_URL}/courses/get-all-courses`
 );
-const courses = await response.json();
+const courses = [] || await response.json();
 
 export async function getStaticPaths() {
 
   const response = await fetch(
     `${import.meta.env.PUBLIC_SERVER_URL}/courses/get-all-courses`
   );
-  const data = await response.json();
+  const data = [] || await response.json();
 
   const paths = [];
   data.forEach((course, i) => {

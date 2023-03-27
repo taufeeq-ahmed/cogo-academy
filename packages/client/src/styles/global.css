@@ -20,13 +20,18 @@ h1,h2,h3,h4,h5,h6{
     --color-secondary-1: rgb(209 213 219/1);
     --color-secondary-2: #828282;
     --border-color:#E0E0E0;
+
     --font-color: #221F20;
-    --font-color-tab: #828282;
+    --font-color-tab: var(--color-secondary-2);
     --font-color-heading: #000;
     --font-color-sub-heading: #4F4F4F;
     --font-color-tertiary: #BDBDBD;
     --font-color-btn: var(--font-color);
     --font-color-link: var(--color-primary);
+
+    --btn-bg: var(--font-color);
+    --btn-hover-bg: var(--font-color-sub-heading);
+
     --font-family: "PT Sans",sans-serif;
     --font-family-heading: "Ubuntu",sans-serif;
     --font-size-xl: 18px;
@@ -36,3 +41,23 @@ h1,h2,h3,h4,h5,h6{
     --font-size-xs: 10px;
     --line-height: 1.5;
 }
+
+  .tab{
+    padding: 0.5rem 1.25rem;
+    margin: 0.25rem 0;
+    text-decoration: none;
+    color: var(--font-color-tab);
+    font-weight: 400;
+    font-size: var(--font-size-lg);
+    display:flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tab:hover{
+    background-color: var(--color-primary);
+  }
+  .tab_selected{
+    background-color: var(--color-primary);
+    font-weight: 500;
+    color: var(--font-color);
+  }
