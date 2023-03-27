@@ -1,12 +1,12 @@
 const { prisma } = require("../../helpers/db-client");
-const addCoursetoDB = async (params) => {
-    const { course_name } = params;
+const addCoursetoDB = async (data) => {
+    const { course_name } = data;
 
-    const newCourse = await prisma.Courses.create({
+    const newCourse = await prisma.Course.create({
         data: {
             course_name
         },
     })
     return newCourse;
 };
-module.exports =addCoursetoDB;
+module.exports = addCoursetoDB;

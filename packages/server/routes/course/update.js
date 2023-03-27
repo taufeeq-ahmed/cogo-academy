@@ -1,10 +1,10 @@
-const updateCourseFromDB = require("../../controllers/course/update");
-const { prisma } = require("../../helpers/db-client");
+const updateCourseInDB = require("../../controllers/course/update");
+
 const updateCourse = async (fastify) => {
     fastify.patch("/course/:course_id", async (req, res) => {
         try {
-            const updateCours = await updateCourseFromDB(req.params, req.body);
-            res.send(updateCours);
+            const updatedCourse = await updateCourseInDB(req.params, req.body);
+            res.send(updatedCourse);
         } catch (err) {
             console.log(err);
         }

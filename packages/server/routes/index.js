@@ -1,10 +1,10 @@
 const signInUser = require("./auth/signIn");
 const signUpUser = require("./auth/signUp");
 const addCourse = require("./course/add");
-const addCourseAndSections = require("./course/addCourseAndSections");
+const addCourseWithSections = require("./course/addWithSections");
 const deleteCourse = require("./course/delete");
 const getCourse = require("./course/get");
-const getAllCourse = require("./course/getList");
+const getAllCourses = require("./course/list");
 const updateCourse = require("./course/update");
 const addSection = require("./section/add");
 const deleteSection = require("./section/delete");
@@ -26,9 +26,9 @@ const registerRoutes = async (fastify) => {
     await sectionRoutes(fastify);
     const courseRoutes = async (fastify) => {
         await addCourse(fastify);
-        await addCourseAndSections(fastify);
+        await addCourseWithSections(fastify);
         await getCourse(fastify);
-        await getAllCourse(fastify);
+        await getAllCourses(fastify);
         await updateCourse(fastify);
         await deleteCourse(fastify);
     }

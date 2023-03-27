@@ -1,5 +1,5 @@
 const addCoursetoDB = require("../../controllers/course/add");
-const { prisma } = require("../../helpers/db-client");
+
 const addCourse = async (fastify) => {
     fastify.post("/course/add", async (req, res) => {
         try {

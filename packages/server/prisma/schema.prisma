@@ -1,5 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator client {
     provider = "prisma-client-js"
 }
@@ -9,8 +7,8 @@ datasource db {
     url      = env("DATABASE_URL_SCHEMA")
 }
 
-model Users {
-    id                           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+model User {
+    user_id                      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     user_name                    String
     email                        String   @unique
     password                     String
@@ -26,21 +24,21 @@ model Users {
     @@map("users")
 }
 
-model Courses {
-    id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+model Course {
+    course_id   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     course_name String
-    sections    Sections[]
+    sections    Section[]
 }
 
-model Sections {
-    id                          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+model Section {
+    section_id                  String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     section_name                String
     description                 String
-    number_of_exercises         Int      @default(0)
-    number_of_articles          Int      @default(0)
-    duration_in_minutes         Int      @default(0)
-    number_of_submissions       Int      @default(0)
-    number_of_section_materials Int      @default(0)
-    Courses                     Courses? @relation(fields: [courses_id], references: [id])
-    courses_id                  String?  @db.Uuid
+    number_of_exercises         Int     @default(0)
+    number_of_articles          Int     @default(0)
+    duration_in_minutes         Int     @default(0)
+    number_of_submissions       Int     @default(0)
+    number_of_section_materials Int     @default(0)
+    Course                      Course? @relation(fields: [course_id], references: [course_id])
+    course_id                   String? @db.Uuid
 }

@@ -1,12 +1,12 @@
 const { prisma } = require("../../helpers/db-client");
+
 const deleteCourseFromDB = async (params) => {
     const { course_id } = params;
-    // console.log(params)
-    const deleteCourse = await prisma.Courses.delete({
+    const deletedCourse = await prisma.Course.delete({
         where: {
             course_id: course_id
         },
     })
-    return deleteCourse;
+    return deletedCourse;
 };
 module.exports =deleteCourseFromDB

@@ -1,13 +1,13 @@
 const deleteCourseFromDB = require("../../controllers/course/delete");
-const { prisma } = require("../../helpers/db-client");
+
 const deleteCourse = async (fastify) => {
     fastify.delete("/course/:course_id", async (req, res) => {
         try {
-            const deleteCourse = await deleteCourseFromDB(req.params);
-            res.send(deleteCourse);
+            const deletedCourse = await deleteCourseFromDB(req.params);
+            res.send(deletedCourse);
         } catch (err) {
             console.log(err);
         }
     });
 };
-module.exports =deleteCourse;
+module.exports = deleteCourse;
