@@ -1,0 +1,47 @@
+{
+    "userData": {
+        "user_id": "a331e31a-e47e-455e-8b33-c9ba545cf27e",
+        "user_name": "sumit",
+        "email": "sumit@gmail.com",
+        "password": "$2b$10$MKDULAyKY8jZ0o/KWp6itetoITNxptKPsrW1ODnO6KUheOSRlPcbm",
+        "github_username": "sumit",
+        "batch": "batch-2",
+        "total_score": 100,
+        "created_on": "2023-03-27T08:03:03.238Z",
+        "updated_on": "2023-03-27T08:03:03.238Z",
+        "number_of_exercises_done": 0,
+        "number_of_projects_submitted": 0,
+        "user_rank": 5
+    },
+    "topThreeUsers": [
+        {
+            "user_name": "taufeeq-Ahmed",
+            "total_score": 500,
+            "user_rank": 1
+        },
+        {
+            "user_name": "sai tarun ",
+            "total_score": 400,
+            "user_rank": 2
+        },
+        {
+            "user_name": "shivom ",
+            "total_score": 300,
+            "user_rank": 3
+        }
+    ],
+    "coursesData": [
+        {
+            "course_id": "fb58029e-f7ba-4c5c-8036-b2e85746002e",
+            "course_name": "HTML"
+        },
+        {
+            "course_id": "97a42e20-3561-4a03-9843-dfe0f026cca9",
+            "course_name": "CSS"
+        },
+        {
+            "course_id": "9ae2398f-a029-427a-b514-948f94aed6cb",
+            "course_name": "Python"
+        }
+    ]
+}

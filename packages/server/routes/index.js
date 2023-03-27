@@ -6,6 +6,7 @@ const deleteCourse = require("./course/delete");
 const getCourse = require("./course/get");
 const getAllCourses = require("./course/list");
 const updateCourse = require("./course/update");
+const getUserDashboard = require("./pages/userDashboard");
 const addSection = require("./section/add");
 const deleteSection = require("./section/delete");
 const getSection = require("./section/get");
@@ -41,6 +42,11 @@ const registerRoutes = async (fastify) => {
         await deleteCourse(fastify);
     }
     await courseRoutes(fastify);
+
+    const pageRoutes = async (fastify) => {
+        await getUserDashboard(fastify);
+    }
+    await pageRoutes(fastify);
 }
 
 module.exports = registerRoutes;

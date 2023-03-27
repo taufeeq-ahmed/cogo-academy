@@ -14,7 +14,7 @@ model User {
     password                     String
     github_username              String
     batch                        String
-    total_score                  Int?
+    total_score                  Int      @default(0)
     created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
     updated_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
     number_of_exercises_done     Int?     @default(0)
