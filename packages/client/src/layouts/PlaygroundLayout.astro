@@ -2,19 +2,46 @@
 const { title } = Astro.props;
 import PlaygroundContent from "../components/PlaygroundContent.astro";
 import TabsNav from "../components/TabsNav.astro";
+import LinkSVG from "/assets/link.svg";
+import BookSVG from '/assets/book.svg'
 const currentPath = Astro.url.pathname;
-const course_contents = [
-    {
-        id: 1,
-        name: "Intro",
-        time: "4 Mins",
-    },
-    {
-        id: 2,
-        name: "Intro",
-        time: "4 Mins",
-    },
-];
+const ids = currentPath.split("/")
+
+const response = await fetch(
+  `${import.meta.env.PUBLIC_SERVER_URL}/playground/${ids[ids.length-2]}/${ids[ids.length-1]}`,
+);
+const data = await response.json();
+console.log(data);
+// interface CourseContent {
+//     id: number;
+//     name: string;
+//     time: string;
+// }
+// const course_contents: CourseContent[] = [
+// //     {
+// //         id: 1,
+// //         name: "Intro",
+// //         time: "4 Mins",
+// //     },
+// //     {
+// //         id: 2,
+// //         name: "Intro",
+// //         time: "4 Mins",
+// //     },
+// ...data?.all_articles
+// ];
+
+// const links = [
+//     // {
+//     //     name: "fidsnfoipn",
+//     //     domain: "cogoport.com",
+//     // },
+//     // {
+//     //     name: "fidsnfoipn",
+//     //     domain: "cogoport.com",
+//     // },
+//     ...data?.clicked_article.links
+// ];
 ---
 
 <!DOCTYPE html>
@@ -28,32 +55,57 @@ const course_contents = [
     <body>
         <div class="root">
             <TabsNav>
-                <p>Course Contents</p>
+                <p class="left_title">Course Contents</p>
                 {
-                    course_contents?.map((course_content: any) => (
-                        <a
-                            href={`${course_content.id}`}
-                            class={`tab ${
-                                currentPath ===
-                                "/playground/" + course_content.id
-                                    ? "tab_selected"
-                                    : "not-selected"
-                            }`}
-                        >
-                            <div class="img-div"></div>
-                            <div class="course-content">
-                                <div>{course_content.name}</div>
-                                <div>{course_content.time}</div>
-                            </div>
-                        </a>
-                    ))
+                    data?.all_articles?.map((course_content: any) => {
+                        return (
+                            <a
+                                href={`/playground/${ids[ids.length-2]}/${course_content.article_id}`}
+                                class={`tab ${
+                                    parseInt(ids[ids.length-2]) ===
+                                    course_content.course_id
+                                        ? "tab_selected"
+                                        : "not-selected"
+                                }`}
+                            >
+                                <div class="img-div" >
+                                </div>
+                                <div class="name-time">
+                                    <div>{course_content.article_name}</div>
+                                    <div>
+                                        <img src={BookSVG} alt="book-icon" /> 
+                                        <span>{course_content.article_time_in_mins}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        );
+                    })
                 }
             </TabsNav>
             <div class="content">
-                <PlaygroundContent />
+                <PlaygroundContent course_content={data.clicked_article} />
             </div>
             <div class="right_box">
-                
+                <div class="right_box_title">Additional Links</div>
+                {
+                    data?.links?.map((link) => {
+                        return (
+                            <div class="link_box">
+                                <a href={link.link_url}>
+                                    <img src={LinkSVG} alt="" />
+                                </a>
+                                <div class="link_content">
+                                    <a href={link.link_url} class="link_title">
+                                        {link.link_name}
+                                    </a>
+                                    <a href={link.link_url} class="domain_text">
+                                        {link.link_url}
+                                    </a>
+                                </div>
+                            </div>
+                        );
+                    })
+                }
             </div>
         </div>
     </body>
@@ -69,22 +121,75 @@ const course_contents = [
         display: flex;
         flex-direction: column;
         gap: 24px;
-        height: 100vh;
-        overflow: auto;
+        background-color: #fdfbf6;
+    }
+    .name-time > div:last-child {
+        font-weight: 400;
+        font-size: var(--font-size-sm);
+        color: var(--color-secondary-2);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .left_title.right_box_title {
+        color: var(--font-color);
+        font-weight: 500;
     }
     .right_box {
         z-index: 10;
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding: 16px;
         height: 100vh;
         background: #ffffff;
         box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
+        overflow: auto;
     }
-    .img-div{
+    .right_box_title {
+        padding: 16px;
+    }
+    .img-div {
         width: 16px;
         height: 16px;
         background-color: red;
+    }
+    .link_box {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        padding: 14px 16px;
+    }
+    .link_content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .link_content > a:first-child {
+        font-weight: 500;
+        font-size: var(--font-size-md);
+        color: var(--font-color);
+    }
+    .link_content > a:last-child {
+        font-weight: 400;
+        font-size: var(--font-size-sm);
+        color: var(--color-secondary-2);
+    }
+    .link_box > *,
+    .link_content > * {
+        text-decoration: none;
+        color: black;
+    }
+    .link_box > a:first-child {
+        padding: 10px;
+        background-color: #f3fafa;
+        border-radius: 50%;
+    }
+    .link_box > a:last-child {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
     }
 </style>

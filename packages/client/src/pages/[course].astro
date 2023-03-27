@@ -3,37 +3,38 @@ import CourseCards from "../components/CourseCards.astro";
 import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
 const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/courses/get-all-courses`
+  `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
 );
-const courses = [] || await response.json();
+const courses = await response.json() || [];
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
 
-  const response = await fetch(
-    `${import.meta.env.PUBLIC_SERVER_URL}/courses/get-all-courses`
-  );
-  const data = [] || await response.json();
+//   const response = await fetch(
+//     `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
+//   );
+//   const data = await response.json() || [];
+//   console.log(data)
 
-  const paths = [];
-  data.forEach((course, i) => {
-    paths.push({
-      params: {
-        course: course.id,
-      },
-      props: {
-        idx: i,
-      },
-    });
-  });
+//   const paths = [];
+//   data.forEach((course, i) => {
+//     paths.push({
+//       params: {
+//         course: course.course_id,
+//       },
+//       props: {
+//         idx: i,
+//       },
+//     });
+//   });
 
-  return paths;
-}
+//   return paths;
+// }
 
 const { course } = Astro.params;
-const { idx } = Astro.props;
+// const { idx } = Astro.props;
 ---
 
-<Layout title={`Course - ${course}`} selected={idx} courses={courses}>
+<Layout title={`Course - ${course}`}  courses={courses}>
   <Header slot="header" text="Courses">
     <div class="search-box">
             <svg

@@ -1,13 +1,4 @@
----
-const { text,btnStyle } = Astro.props;
----
-
-<div class="btn" style={btnStyle} >
-    <span>{text}</span>
-</div>
-
-<style>
-    .btn {
+ .btn {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -21,6 +12,13 @@ const { text,btnStyle } = Astro.props;
         color: white;
         font-weight: 500;
         font-size: var(--font-size-sm);
+        border: none;
+        outline: none;
+    }
+
+    .disabled_btn{
+        opacity: 0.6;
+        cursor: not-allowed;
     }
 
     .btn:hover {
@@ -29,4 +27,3 @@ const { text,btnStyle } = Astro.props;
     .btn:active{
         background-color: var(--color-secondary-2);
     }
-</style>

@@ -5,7 +5,7 @@ import LeaderBoardSVG from "/assets/leaderboard.svg"
 import CourseCard from "./CourseCard.astro"
 import Tile from "./Tile.astro"
 const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/users/dashboard/4b3b5c9f-01a1-4070-a32d-9c94d111e7d3`,
+  `${import.meta.env.PUBLIC_SERVER_URL}/user-dashboard/a331e31a-e47e-455e-8b33-c9ba545cf27e`,
 );
 const {userData,topThreeUsersData} = await response.json();
 const sections = [
