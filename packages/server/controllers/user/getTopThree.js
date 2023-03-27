@@ -6,15 +6,14 @@ const getTopThreeUsersFromDB = async () => {
         where: {
             user_rank: { in: [1, 2, 3] }
         },
-    })
-    const topThreeUsersData = topThreeUsers.map((user) => {
-        return {
-            user_name: user.user_name,
-            total_score: user.total_score,
-            user_rank: user.user_rank
+        select: {
+            user_name: true,
+            total_score: true,
+            user_rank: true,
         }
     })
-    return topThreeUsersData;
+
+    return topThreeUsers;
 
 }
 module.exports = getTopThreeUsersFromDB;

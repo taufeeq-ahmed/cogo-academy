@@ -1,15 +1,26 @@
-const signInUser = require("./auth/signIn");
-const signUpUser = require("./auth/signUp");
+
+const addArticle = require("./article/add");
+const deleteArticle = require("./article/delete");
+const getArticle = require("./article/get");
+const getArticlesBySectionId = require("./article/getBySectionId");
+const updateArticle = require("./article/update");
 const addCourse = require("./course/add");
 const addCourseWithSections = require("./course/addWithSections");
 const deleteCourse = require("./course/delete");
 const getCourse = require("./course/get");
 const getAllCourses = require("./course/list");
 const updateCourse = require("./course/update");
-const getUserDashboard = require("./pages/userDashboard");
+const addLink = require("./link/add");
+const deleteLink = require("./link/delete");
+const getLink = require("./link/get");
+const updateLink = require("./link/update");
+
+const getPlaygroundData = require("./pages/playground");
+const getUserDashboardData = require("./pages/userDashboard");
 const addSection = require("./section/add");
 const deleteSection = require("./section/delete");
 const getSection = require("./section/get");
+const getSectionByCourseId = require("./section/getByCourseId");
 const updateSection = require("./section/update");
 const addUser = require("./user/add");
 const deleteUser = require("./user/delete");
@@ -22,8 +33,7 @@ const registerRoutes = async (fastify) => {
         await getUser(fastify);
         await updateUser(fastify);
         await deleteUser(fastify);
-        // await signInUser(fastify);
-        // await signUpUser(fastify);
+
     }
     await userRoutes(fastify);
     const sectionRoutes = async (fastify) => {
@@ -31,6 +41,7 @@ const registerRoutes = async (fastify) => {
         await getSection(fastify);
         await updateSection(fastify);
         await deleteSection(fastify);
+        await getSectionByCourseId(fastify);
     }
     await sectionRoutes(fastify);
     const courseRoutes = async (fastify) => {
@@ -42,11 +53,27 @@ const registerRoutes = async (fastify) => {
         await deleteCourse(fastify);
     }
     await courseRoutes(fastify);
-
+    const articleRoutes = async (fastify) => {
+        await addArticle(fastify);
+        await getArticle(fastify);
+        await updateArticle(fastify);
+        await deleteArticle(fastify);
+        await getArticlesBySectionId(fastify);
+    }
+    await articleRoutes(fastify);
+    const linkRoutes = async (fastify) => {
+        await addLink(fastify);
+        await getLink(fastify);
+        await updateLink(fastify);
+        await deleteLink(fastify);
+    }
+    await linkRoutes(fastify);
     const pageRoutes = async (fastify) => {
-        await getUserDashboard(fastify);
+        await getUserDashboardData(fastify);
+        await getPlaygroundData(fastify);
     }
     await pageRoutes(fastify);
 }
 
 module.exports = registerRoutes;
+
