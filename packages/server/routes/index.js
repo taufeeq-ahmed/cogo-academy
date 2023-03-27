@@ -10,11 +10,19 @@ const addSection = require("./section/add");
 const deleteSection = require("./section/delete");
 const getSection = require("./section/get");
 const updateSection = require("./section/update");
+const addUser = require("./user/add");
+const deleteUser = require("./user/delete");
+const getUser = require("./user/get");
+const updateUser = require("./user/update");
 
 const registerRoutes = async (fastify) => {
     const userRoutes = async (fastify) => {
-        await signInUser(fastify);
-        await signUpUser(fastify);
+        await addUser(fastify);
+        await getUser(fastify);
+        await updateUser(fastify);
+        await deleteUser(fastify);
+        // await signInUser(fastify);
+        // await signUpUser(fastify);
     }
     await userRoutes(fastify);
     const sectionRoutes = async (fastify) => {

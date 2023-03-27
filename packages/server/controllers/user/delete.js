@@ -1,11 +1,12 @@
 const { prisma } = require("../../helpers/db-client");
+
 const deleteUserFromDB = async (params) => {
-    const { id } = params;
-    const deletedUser = await prisma.Users.delete({
+    const { user_id } = params;
+    const deletedUser = await prisma.User.delete({
         where: {
-            id: id,
+            user_id: user_id,
         },
     })
     return deletedUser;
 };
-module.exports=deleteUserFromDB;
+module.exports = deleteUserFromDB;

@@ -1,12 +1,14 @@
 const { prisma } = require("../../helpers/db-client");
-const updateUserFromDB = async ({ id, password, newData }) => {
 
-    const updatedUser = await prisma.Users.update({
+const updateUserInDB = async (params, data) => {
+    const { user_id } = params;
+    const { new_data } = data;
+    const updatedUser = await prisma.User.update({
         where: {
-            id: id,
+            user_id: user_id,
         },
-        data: newData
+        data: new_data
     })
     return updatedUser;
 };
-module.exports=updateUserFromDB;
+module.exports = updateUserInDB;
