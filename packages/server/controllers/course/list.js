@@ -1,6 +1,6 @@
 const { prisma } = require("../../helpers/db-client");
 
-const getAllCourseFromDB = async () => {
+const getAllCoursesFromDB = async () => {
     try {
         const allCourses = await prisma.Course.findMany();
         return allCourses;
@@ -8,4 +8,4 @@ const getAllCourseFromDB = async () => {
         console.log(err);
     }
 };
-module.exports = getAllCourseFromDB;
+module.exports = getAllCoursesFromDB;
