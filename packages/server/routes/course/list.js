@@ -4,7 +4,7 @@ const getAllCourses = async (fastify) => {
     fastify.get("/course/list", async (req, res) => {
         try {
             const courses = await getAllCourseFromDB();
-            res.send(courses);
+            res.status(200).send(courses);
         } catch (err) {
             console.log(err);
         }

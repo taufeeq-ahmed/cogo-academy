@@ -1,11 +1,12 @@
 const { prisma } = require("../../helpers/db-client");
+
 const getSectionFromDB = async (params) => {
-    const { name ,coureseid ,lse} = params;
-    const section = await prisma.Sections.findUnique({
+    const { section_id } = params;
+    const section = await prisma.Section.findUnique({
         where: {
-            section_name: name
+            section_id: section_id
         },
     })
     return section;
 };
-module.exports=getSectionFromDB;
+module.exports = getSectionFromDB;

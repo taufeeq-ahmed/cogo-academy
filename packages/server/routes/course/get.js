@@ -4,10 +4,10 @@ const getCourse = async (fastify) => {
     fastify.get("/course/:course_id", async (req, res) => {
         try {
             const course = await getCourseFromDB(req.params);
-            res.send(course);
+            res.status(200).send(course);
         } catch (err) {
             console.log(err);
         }
     });
 };
-module.exports =getCourse;
+module.exports = getCourse;

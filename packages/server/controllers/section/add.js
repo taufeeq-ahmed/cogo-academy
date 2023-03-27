@@ -1,13 +1,13 @@
 const { prisma } = require("../../helpers/db-client");
+
 const addSectionToDB = async (params, data) => {
-    const { courses_id } = params;
+    const { course_id } = params;
     const { section_name, description } = data;
-    const newSection = await prisma.Sections.create({
+    const newSection = await prisma.Section.create({
         data: {
-            // courses_id: courses_id,
+            course_id: course_id,
             section_name: section_name,
             description: description
-
         }
     })
     return newSection;

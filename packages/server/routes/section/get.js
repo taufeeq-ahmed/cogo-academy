@@ -1,9 +1,13 @@
 const getSectionFromDB = require("../../controllers/section/get");
-const { prisma } = require("../../helpers/db-client");
+
 const getSection = async (fastify) => {
-    fastify.get("/sections/:coursesId", async (req, res) => {
-        const section = await getSectionByCourseIdFromDB(req.params);
-        res.status(200).send(section);
+    fastify.get("/section/:section_id", async (req, res) => {
+        try {
+            const section = await getSectionFromDB(req.params);
+            res.status(200).send(section);
+        } catch (err) {
+            console.log(err);
+        }
     });
 }
 module.exports = getSection;
