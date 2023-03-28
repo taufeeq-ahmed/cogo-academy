@@ -14,7 +14,12 @@ const addLink = require("./link/add");
 const deleteLink = require("./link/delete");
 const getLink = require("./link/get");
 const updateLink = require("./link/update");
-
+const addSubmission = require("./submission/add")
+const getSubmission = require("./submission/get")
+const getSubmissionBySectionId = require('./submission/getBySectionId')
+const updateSubmission = require('./submission/update')
+const deleteSubmission = require('./submission/delete')
+const getLandingPageData = require('./pages/landing')
 const getPlaygroundData = require("./pages/playground");
 const getUserDashboardData = require("./pages/userDashboard");
 const addSection = require("./section/add");
@@ -68,7 +73,16 @@ const registerRoutes = async (fastify) => {
         await deleteLink(fastify);
     }
     await linkRoutes(fastify);
+    const submissionRoutes = async (fastify) => {
+        await addSubmission(fastify);
+        await getSubmission(fastify);
+        await getSubmissionBySectionId(fastify);
+        await updateSubmission(fastify);
+        await deleteSubmission(fastify);
+    }
+    await submissionRoutes(fastify);
     const pageRoutes = async (fastify) => {
+        await getLandingPageData(fastify);
         await getUserDashboardData(fastify);
         await getPlaygroundData(fastify);
     }
