@@ -11,8 +11,20 @@ const response = await fetch(
   `${import.meta.env.PUBLIC_SERVER_URL}/playground/${sectionId}/${articleId}`,
 );
 const resp = await response?.json();
-console.log("gfd",resp)
 const data = !resp.error ? resp : []
+
+const getNextArticle = () =>{
+    let next_article = "/"
+    data?.all_articles?.forEach((article,i)=>{
+        if(article.article_id===articleId){
+            if(i===data.all_articles.length-1){
+                return next_article
+            }
+            next_article = data?.all_articles[i+1].article_id
+        }
+    })
+    return next_article
+}
 ---
 
 <!DOCTYPE html>
@@ -40,6 +52,7 @@ const data = !resp.error ? resp : []
                                 }`}
                             >
                                 <div class="img-div" >
+                                    <input disabled type="checkbox" />
                                 </div>
                                 <div class="name-time">
                                     <div>{article.article_name}</div>
@@ -54,7 +67,7 @@ const data = !resp.error ? resp : []
                 }
             </TabsNav>
             <div class="content">
-                <PlaygroundContent course_content={data.clicked_article} />
+                <PlaygroundContent course_content={data.clicked_article} next_article={getNextArticle()} />
             </div>
             <div class="right_box">
                 <div class="right_box_title">Additional Links</div>
@@ -62,14 +75,14 @@ const data = !resp.error ? resp : []
                     data?.links?.map((link) => {
                         return (
                             <div class="link_box">
-                                <a href={link.link_url}>
+                                <a target="_blank" href={link.link_url}>
                                     <img src={LinkSVG} alt="" />
                                 </a>
                                 <div class="link_content">
-                                    <a href={link.link_url} class="link_title">
+                                    <a target="_blank" href={link.link_url} class="link_title">
                                         {link.link_name}
                                     </a>
-                                    <a href={link.link_url} class="domain_text">
+                                    <a target="_blank" href={link.link_url} class="domain_text">
                                         {link.link_url}
                                     </a>
                                 </div>
@@ -122,7 +135,7 @@ const data = !resp.error ? resp : []
     .img-div {
         width: 16px;
         height: 16px;
-        background-color: red;
+        /* background-color: red; */
     }
     .link_box {
         display: flex;

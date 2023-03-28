@@ -3,14 +3,13 @@ import ExerciseSVG from "/assets/exercises.svg"
 import ProjectSVG from "/assets/projects.svg"
 import LeaderBoardSVG from "/assets/leaderboard.svg"
 import Tile from "./Tile.astro"
-import SectionCard from "./SectionCard.astro";
 import SectionCards from "./SectionCards.astro";
 const response = await fetch(
   `${import.meta.env.PUBLIC_SERVER_URL}/user-dashboard/a331e31a-e47e-455e-8b33-c9ba545cf27e`,
 );
 const data = await response?.json();
 const ff = !data.error ? data : {userData:{}, topThreeUsersData: []};
-const { userData, topThreeUsersData } = ff;
+const { userData, topThreeUsers } = ff;
 const sections = [
     {
         "id": "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
@@ -64,20 +63,13 @@ const sections = [
     <h4>Jump right back in!</h4>
     <div class="dash_body">
         <div class="dash-sections">
-        <!-- {
-            sections && sections?.map((sec)=>{
-                return (
-                    <SectionCard section={sec}/>
-                )
-            })
-        } -->
         <SectionCards sections={sections} />
         </div>
         <div class="leader-box">
             <div>Leaderboard <img src={LeaderBoardSVG} /></div>
             <div class="leader-board">
                 {
-                    topThreeUsersData?.map((user)=>{
+                    topThreeUsers?.map((user)=>{
                         return (
                             <Tile user={user}/>
                         )
