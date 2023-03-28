@@ -4,44 +4,15 @@ import PlaygroundContent from "../components/PlaygroundContent.astro";
 import TabsNav from "../components/TabsNav.astro";
 import LinkSVG from "/assets/link.svg";
 import BookSVG from '/assets/book.svg'
-const currentPath = Astro.url.pathname;
-const ids = currentPath.split("/")
+
+const { sectionId, articleId } = Astro.props
 
 const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/playground/${ids[ids.length-2]}/${ids[ids.length-1]}`,
+  `${import.meta.env.PUBLIC_SERVER_URL}/playground/${sectionId}/${articleId}`,
 );
-const data = await response.json();
-console.log(data);
-// interface CourseContent {
-//     id: number;
-//     name: string;
-//     time: string;
-// }
-// const course_contents: CourseContent[] = [
-// //     {
-// //         id: 1,
-// //         name: "Intro",
-// //         time: "4 Mins",
-// //     },
-// //     {
-// //         id: 2,
-// //         name: "Intro",
-// //         time: "4 Mins",
-// //     },
-// ...data?.all_articles
-// ];
-
-// const links = [
-//     // {
-//     //     name: "fidsnfoipn",
-//     //     domain: "cogoport.com",
-//     // },
-//     // {
-//     //     name: "fidsnfoipn",
-//     //     domain: "cogoport.com",
-//     // },
-//     ...data?.clicked_article.links
-// ];
+const resp = await response?.json();
+console.log("gfd",resp)
+const data = !resp.error ? resp : []
 ---
 
 <!DOCTYPE html>
@@ -57,13 +28,13 @@ console.log(data);
             <TabsNav>
                 <p class="left_title">Course Contents</p>
                 {
-                    data?.all_articles?.map((course_content: any) => {
+                    data?.all_articles?.map((article: any) => {
                         return (
                             <a
-                                href={`/playground/${ids[ids.length-2]}/${course_content.article_id}`}
+                                href={article.article_id}
                                 class={`tab ${
-                                    parseInt(ids[ids.length-2]) ===
-                                    course_content.course_id
+                                    articleId ===
+                                    article.article_id
                                         ? "tab_selected"
                                         : "not-selected"
                                 }`}
@@ -71,10 +42,10 @@ console.log(data);
                                 <div class="img-div" >
                                 </div>
                                 <div class="name-time">
-                                    <div>{course_content.article_name}</div>
+                                    <div>{article.article_name}</div>
                                     <div>
                                         <img src={BookSVG} alt="book-icon" /> 
-                                        <span>{course_content.article_time_in_mins}</span>
+                                        <span>{article.article_time_in_mins}</span>
                                     </div>
                                 </div>
                             </a>

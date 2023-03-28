@@ -3,14 +3,12 @@ const getArticlesBySectionIdFromDB = require("../article/getBySectionId");
 const getLinksByArticleIdFromDB = require("../link/getByArticleId");
 
 const getPlaygroundDataFromDB = async (params) => {
-    console.log(params);
+    console.log("fdsf",params);
     const all_articles = await getArticlesBySectionIdFromDB(params);
-    let clicked_article;
-    if (params.article_id === '') {
-        clicked_article = all_articles[0];
-    } else {
-        clicked_article = await getArticleFromDB(params);
+    if(params.article_id===""){
+        params.article_id = all_articles[0].article_id;
     }
+    const clicked_article = await getArticleFromDB(params);
 
     const links = await getLinksByArticleIdFromDB(clicked_article);
 

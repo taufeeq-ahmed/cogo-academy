@@ -1,0 +1,12 @@
+---
+import SectionCard from "./SectionCard.astro";
+
+const {sections} = Astro.props
+---
+{
+    sections?.map((sec) => {
+        return (
+            <SectionCard section={sec} />
+        );
+    })
+}

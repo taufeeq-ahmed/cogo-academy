@@ -6,7 +6,8 @@ import Layout from "../layouts/Layout.astro";
 const response = await fetch(
   `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
 );
-const courses = await response.json() || [];
+const data = await response?.json();
+const courses = !data.error ? data : []
 ---
 <Layout title="Home - Dashboard" selected={"/"} courses={courses}>
     <Header slot="header" text="Welcome Back, Shivom!"/>

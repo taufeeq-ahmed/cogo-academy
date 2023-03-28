@@ -1,40 +1,23 @@
 ---
-import CourseCards from "../components/CourseCards.astro";
 import Header from "../components/Header.astro";
+import SectionCards from "../components/SectionCards.astro";
 import Layout from "../layouts/Layout.astro";
-const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
-);
-const courses = await response.json() || [];
+// const response = await fetch(
+//   `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
+// );
+// const data = await response?.json();
+// const courses = !data.error ? data : []
 
-// export async function getStaticPaths() {
-
-//   const response = await fetch(
-//     `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
-//   );
-//   const data = await response.json() || [];
-//   console.log(data)
-
-//   const paths = [];
-//   data.forEach((course, i) => {
-//     paths.push({
-//       params: {
-//         course: course.course_id,
-//       },
-//       props: {
-//         idx: i,
-//       },
-//     });
-//   });
-
-//   return paths;
-// }
 
 const { course } = Astro.params;
-// const { idx } = Astro.props;
+const response = await fetch(
+  `${import.meta.env.PUBLIC_SERVER_URL}/landing/${course}`,
+);
+const resp = await response?.json();
+const data = !resp.error ? resp : []
 ---
 
-<Layout title={`Course - ${course}`}  courses={courses}>
+<Layout title={`Course - ${course}`}  courses={data.allCourses}>
   <Header slot="header" text="Courses">
     <div class="search-box">
             <svg
@@ -59,7 +42,7 @@ const { course } = Astro.params;
             />
         </div>
     </Header>
-  <CourseCards course={course} />
+  <SectionCards sections={data.sections} />
 </Layout>
 
 <style>

@@ -2,12 +2,15 @@
 import ExerciseSVG from "/assets/exercises.svg"
 import ProjectSVG from "/assets/projects.svg"
 import LeaderBoardSVG from "/assets/leaderboard.svg"
-import CourseCard from "./CourseCard.astro"
 import Tile from "./Tile.astro"
+import SectionCard from "./SectionCard.astro";
+import SectionCards from "./SectionCards.astro";
 const response = await fetch(
   `${import.meta.env.PUBLIC_SERVER_URL}/user-dashboard/a331e31a-e47e-455e-8b33-c9ba545cf27e`,
 );
-const {userData,topThreeUsersData} = await response.json();
+const data = await response?.json();
+const ff = !data.error ? data : {userData:{}, topThreeUsersData: []};
+const { userData, topThreeUsersData } = ff;
 const sections = [
     {
         "id": "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
@@ -36,14 +39,14 @@ const sections = [
 <div class="dashboard">
     <div class="dash-nav">
         <div class="dash-rank">
-            <h2>Rank {userData.user_rank}</h2>
+            <h2>Rank {userData?.user_rank}</h2>
         </div>
         <div class="dash-box">
             <div class="img_div">
                 <img src={ExerciseSVG} alt="exercise-svg" />
             </div>
             <div class="dash-stat">
-                <h1>{userData.number_of_exercises_done}</h1>
+                <h1>{userData?.number_of_exercises_done}</h1>
                 <span>Exercises</span>
             </div>
         </div>
@@ -53,7 +56,7 @@ const sections = [
                 <img src={ProjectSVG} alt="exercise-svg" />
             </div>
             <div class="dash-stat">
-                <h1>{userData.number_of_projects_submitted}</h1>
+                <h1>{userData?.number_of_projects_submitted}</h1>
                 <span>Projects</span>
             </div>
         </div>
@@ -61,13 +64,14 @@ const sections = [
     <h4>Jump right back in!</h4>
     <div class="dash_body">
         <div class="dash-sections">
-        {
-            sections && sections.map((sec)=>{
+        <!-- {
+            sections && sections?.map((sec)=>{
                 return (
-                    <CourseCard section={sec}/>
+                    <SectionCard section={sec}/>
                 )
             })
-        }
+        } -->
+        <SectionCards sections={sections} />
         </div>
         <div class="leader-box">
             <div>Leaderboard <img src={LeaderBoardSVG} /></div>
