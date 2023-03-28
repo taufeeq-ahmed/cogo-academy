@@ -31,17 +31,18 @@ model Course {
 }
 
 model Section {
-    section_id                  String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    section_id                  String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     section_name                String
     description                 String
-    number_of_exercises         Int       @default(0)
-    number_of_articles          Int       @default(0)
-    duration_in_minutes         Int       @default(0)
-    number_of_submissions       Int       @default(0)
-    number_of_section_materials Int       @default(0)
-    Course                      Course?   @relation(fields: [course_id], references: [course_id])
-    course_id                   String?   @db.Uuid
+    number_of_exercises         Int          @default(0)
+    number_of_articles          Int          @default(0)
+    duration_in_minutes         Int          @default(0)
+    number_of_submissions       Int          @default(0)
+    number_of_section_materials Int          @default(0)
+    Course                      Course?      @relation(fields: [course_id], references: [course_id])
+    course_id                   String?      @db.Uuid
     articles                    Article[]
+    submsissions                Submission[]
 }
 
 model Article {
@@ -60,4 +61,13 @@ model Link {
     link_url   String
     Article    Article? @relation(fields: [article_id], references: [article_id])
     article_id String?  @db.Uuid
+}
+
+model Submission {
+    submission_id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    submsiion_name         String
+    submission_description String
+    submission_url         String
+    Section                Section? @relation(fields: [section_id], references: [section_id])
+    section_id             String?  @db.Uuid
 }
