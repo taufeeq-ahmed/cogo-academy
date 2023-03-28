@@ -1,40 +1,43 @@
 ---
-import ExerciseSVG from "/assets/exercises.svg"
-import ProjectSVG from "/assets/projects.svg"
-import LeaderBoardSVG from "/assets/leaderboard.svg"
-import Tile from "./Tile.astro"
+import ExerciseSVG from "/assets/exercises.svg";
+import ProjectSVG from "/assets/projects.svg";
+import LeaderBoardSVG from "/assets/leaderboard.svg";
+import Tile from "./Tile.astro";
 import SectionCards from "./SectionCards.astro";
 const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/user-dashboard/a331e31a-e47e-455e-8b33-c9ba545cf27e`,
+    `${
+        import.meta.env.PUBLIC_SERVER_URL
+    }/user-dashboard/a331e31a-e47e-455e-8b33-c9ba545cf27e`
 );
 const data = await response?.json();
-const ff = !data.error ? data : {userData:{}, topThreeUsersData: []};
+const ff = !data.error ? data : { userData: {}, topThreeUsersData: [] };
 const { userData, topThreeUsers } = ff;
 const sections = [
     {
-        "id": "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
-        "section_name": "Introduction to Go",
-        "description": "Introduction to Go",
-        "number_of_exercises": 0,
-        "number_of_articles": 0,
-        "duration_in_minutes": 0,
-        "number_of_submissions": 0,
-        "number_of_section_materials": 0,
-        "course_id": "821fd291-c4e0-4646-882a-51d7b8dd37b6"
+        id: "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
+        section_name: "Introduction to Go",
+        description: "Introduction to Go",
+        number_of_exercises: 0,
+        number_of_articles: 0,
+        duration_in_minutes: 0,
+        number_of_submissions: 0,
+        number_of_section_materials: 0,
+        course_id: "821fd291-c4e0-4646-882a-51d7b8dd37b6",
     },
     {
-        "id": "a16be1fc-7834-4960-bf0d-178663cbd3b1",
-        "section_name": "Go Basics",
-        "description": "Go Basics",
-        "number_of_exercises": 0,
-        "number_of_articles": 0,
-        "duration_in_minutes": 0,
-        "number_of_submissions": 0,
-        "number_of_section_materials": 0,
-        "course_id": "821fd291-c4e0-4646-882a-51d7b8dd37b6"
+        id: "a16be1fc-7834-4960-bf0d-178663cbd3b1",
+        section_name: "Go Basics",
+        description: "Go Basics",
+        number_of_exercises: 0,
+        number_of_articles: 0,
+        duration_in_minutes: 0,
+        number_of_submissions: 0,
+        number_of_section_materials: 0,
+        course_id: "821fd291-c4e0-4646-882a-51d7b8dd37b6",
     },
-]
+];
 ---
+
 <div class="dashboard">
     <div class="dash-nav">
         <div class="dash-rank">
@@ -63,16 +66,14 @@ const sections = [
     <h4>Jump right back in!</h4>
     <div class="dash_body">
         <div class="dash-sections">
-        <SectionCards sections={sections} />
+            <SectionCards sections={sections} />
         </div>
         <div class="leader-box">
             <div>Leaderboard <img src={LeaderBoardSVG} /></div>
             <div class="leader-board">
                 {
-                    topThreeUsers?.map((user)=>{
-                        return (
-                            <Tile user={user}/>
-                        )
+                    topThreeUsers?.map((user) => {
+                        return <Tile user={user} />;
                     })
                 }
                 <Tile user={userData} />
@@ -82,29 +83,45 @@ const sections = [
 </div>
 
 <style>
-    .dashboard{
+    .dash-rank > h2 {
+        color: var(--font-color);
+        font-weight: 500;
+        font-size: 16px;
+        height: 100%;
+    }
+    .dash-stat > h1 {
+        font-weight: 500;
+        font-size: 24px;
+    }
+
+    .dash-stat > span {
+        font-weight: 400;
+        font-size: 16px;
+        color: #828282;
+    }
+    .dashboard {
         display: flex;
         flex-direction: column;
         gap: 15px;
         width: 100%;
     }
-    .dash-nav{
+    .dash-nav {
         display: flex;
         padding: 0 0 24px 0;
-        border-bottom: 1px solid #E0E0E0;
+        border-bottom: 1px solid #e0e0e0;
     }
-    .dash-sections{
+    .dash-sections {
         display: flex;
-		overflow: auto;
-		gap: 20px;
-		padding: 5px;
+        overflow: auto;
+        gap: 20px;
+        padding: 5px;
     }
-    .dash_body{
+    .dash_body {
         display: flex;
         gap: 16px;
         width: 90%;
     }
-    .leader-box{
+    .leader-box {
         display: flex;
         padding: 0 24px;
         flex: 1;
@@ -112,7 +129,7 @@ const sections = [
         gap: 10px;
         height: 375px;
     }
-    .leader-board{
+    .leader-board {
         display: flex;
         flex-direction: column;
         box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
@@ -120,34 +137,35 @@ const sections = [
         overflow-y: auto;
         padding: 8px;
     }
-    .dash-rank{
+    .dash-rank {
         display: flex;
         flex-direction: column;
         width: 150px;
     }
-    .dash-box{
+    .dash-box {
         width: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 15px;
     }
-    .dash-rank,.dash-box{
+    .dash-rank,
+    .dash-box {
         margin-right: 20px;
     }
-    .dash-stat{
+    .dash-stat {
         display: flex;
         flex-direction: column;
     }
-    .img_div{
+    .img_div {
         padding: 15px;
         border-radius: 50%;
-        background-color: #F2F3FA;
+        background-color: #f2f3fa;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    .img_div > img{
+    .img_div > img {
         width: 20px;
     }
 </style>

@@ -8,7 +8,7 @@ import BookSVG from '/assets/book.svg'
 const { sectionId, articleId } = Astro.props
 
 const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/playground/${sectionId}/${articleId}`,
+  `${import.meta.env.PUBLIC_SERVER_URL}/playground/${sectionId}/article/${articleId}`,
 );
 const resp = await response?.json();
 const data = !resp.error ? resp : []
