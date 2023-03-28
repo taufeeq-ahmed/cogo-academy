@@ -10,6 +10,9 @@ const getTopThreeUsersFromDB = async () => {
             user_name: true,
             total_score: true,
             user_rank: true,
+        },
+        orderBy: {
+            user_rank: 'asc'  // messages for each converastion will be ordered newest first. 
         }
     })
 

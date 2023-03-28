@@ -12,10 +12,10 @@ const getLandingPageDataFromDB = async (params) => {
         const articles = await getArticlesBySectionIdFromDB(section.section_id);
         section.first_article_id = articles[0].article_id
     }
-    
-    return { allCourses, sections }
 
+    return { allCourses, sections }
 
 }
 
 module.exports = getLandingPageDataFromDB
+
