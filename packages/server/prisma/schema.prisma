@@ -1,26 +1,73 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-	provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-	provider = "postgresql"
-	url      = env("DATABASE_URL_SCHEMA")
+    provider = "postgresql"
+    url      = env("DATABASE_URL_SCHEMA")
 }
 
-model Users {
-	id 						String @db.Uuid @id @default(dbgenerated("gen_random_uuid()"))
-	name					String
-	email					String @unique
-	password				String
+model User {
+    user_id                      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_name                    String
+    email                        String   @unique
+    password                     String
+    github_username              String
+    batch                        String
+    total_score                  Int      @default(0)
+    created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+    updated_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+    number_of_exercises_done     Int?     @default(0)
+    number_of_projects_submitted Int?     @default(0)
+    user_rank                    Int      @default(0)
 
-	projects				ProjectUsers[]
-	Audits					Audits[]
+    @@map("users")
+}
 
-	created_on				DateTime @db.Timestamptz(3) @default(dbgenerated("now()"))
-	updated_on				DateTime @db.Timestamptz(3) @default(dbgenerated("now()"))
+model Course {
+    course_id   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    course_name String
+    sections    Section[]
+}
 
-	@@map("users")
+model Section {
+    section_id                  String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    section_name                String
+    description                 String
+    number_of_exercises         Int          @default(0)
+    number_of_articles          Int          @default(0)
+    duration_in_minutes         Int          @default(0)
+    number_of_submissions       Int          @default(0)
+    number_of_section_materials Int          @default(0)
+    Course                      Course?      @relation(fields: [course_id], references: [course_id])
+    course_id                   String?      @db.Uuid
+    articles                    Article[]
+    submsissions                Submission[]
+}
+
+model Article {
+    article_id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    article_name         String
+    article_time_in_mins Int      @default(0)
+    article_content      String
+    Section              Section? @relation(fields: [section_id], references: [section_id])
+    section_id           String?  @db.Uuid
+    Links                Link[]
+}
+
+model Link {
+    link_id    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    link_name  String
+    link_url   String
+    Article    Article? @relation(fields: [article_id], references: [article_id])
+    article_id String?  @db.Uuid
+}
+
+model Submission {
+    submission_id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    submsiion_name         String
+    submission_description String
+    submission_url         String
+    Section                Section? @relation(fields: [section_id], references: [section_id])
+    section_id             String?  @db.Uuid
 }
