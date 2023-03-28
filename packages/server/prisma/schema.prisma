@@ -20,8 +20,6 @@ model User {
     number_of_exercises_done     Int?     @default(0)
     number_of_projects_submitted Int?     @default(0)
     user_rank                    Int      @default(0)
-
-    @@map("users")
 }
 
 model Course {
@@ -65,9 +63,16 @@ model Link {
 
 model Submission {
     submission_id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    submsiion_name         String
+    submission_name        String
     submission_description String
-    submission_url         String
+    submission_url         String?
     Section                Section? @relation(fields: [section_id], references: [section_id])
     section_id             String?  @db.Uuid
+}
+
+model SubmissionLinkMap {
+    submission_link_id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id            String
+    submission_id      String
+    submission_url     String
 }
