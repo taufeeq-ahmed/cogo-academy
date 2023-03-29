@@ -3,7 +3,7 @@ import ExerciseSVG from "/assets/exercises.svg";
 import ProjectSVG from "/assets/projects.svg";
 import LeaderBoardSVG from "/assets/leaderboard.svg";
 import Tile from "./Tile.astro";
-import SectionCards from "./SectionCards.astro";
+import SectionCard from "./SectionCard";
 const response = await fetch(
     `${
         import.meta.env.PUBLIC_SERVER_URL
@@ -14,7 +14,7 @@ const ff = !data.error ? data : { userData: {}, topThreeUsersData: [] };
 const { userData, topThreeUsers } = ff;
 const sections = [
     {
-        id: "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
+        section_id: "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
         section_name: "Introduction to Go",
         description: "Introduction to Go",
         number_of_exercises: 0,
@@ -25,7 +25,7 @@ const sections = [
         course_id: "821fd291-c4e0-4646-882a-51d7b8dd37b6",
     },
     {
-        id: "a16be1fc-7834-4960-bf0d-178663cbd3b1",
+        section_id: "a16be1fc-7834-4960-bf0d-178663cbd3b1",
         section_name: "Go Basics",
         description: "Go Basics",
         number_of_exercises: 0,
@@ -66,7 +66,11 @@ const sections = [
     <h4>Jump right back in!</h4>
     <div class="dash_body">
         <div class="dash-sections">
-            <SectionCards sections={sections} />
+            {
+                sections.map((sec) => {
+                    return <SectionCard section={sec} />;
+                })
+            }
         </div>
         <div class="leader-box">
             <div class="leader-board-title">

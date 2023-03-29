@@ -3,28 +3,29 @@ const { title } = Astro.props;
 import PlaygroundContent from "../components/PlaygroundContent.astro";
 import TabsNav from "../components/TabsNav.astro";
 import LinkSVG from "/assets/link.svg";
-import BookSVG from '/assets/book.svg'
+import BookSVG from "/assets/book.svg";
 
-const { sectionId, articleId } = Astro.props
+const { sectionId, articleId } = Astro.props;
 
 const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/playground/${sectionId}/article/${articleId}`,
+    `${
+        import.meta.env.PUBLIC_SERVER_URL
+    }/playground/${sectionId}/article/${articleId}`
 );
 const resp = await response?.json();
-const data = !resp.error ? resp : []
-
-const getNextArticle = () =>{
-    let next_article = "/"
-    data?.all_articles?.forEach((article,i)=>{
-        if(article.article_id===articleId){
-            if(i===data.all_articles.length-1){
-                return next_article
+const data = !resp.error ? resp : [];
+const getNextArticle = (all_articles: any[], articleId: any) => {
+    let next_article = "/";
+    all_articles?.forEach((article, i) => {
+        if (article?.article_id === articleId) {
+            if (i === all_articles.length - 1) {
+                return next_article;
             }
-            next_article = data?.all_articles[i+1].article_id
+            next_article = all_articles[i + 1].article_id;
         }
-    })
-    return next_article
-}
+    });
+    return next_article;
+};
 ---
 
 <!DOCTYPE html>
@@ -45,20 +46,21 @@ const getNextArticle = () =>{
                             <a
                                 href={article.article_id}
                                 class={`tab ${
-                                    articleId ===
-                                    article.article_id
+                                    articleId === article.article_id
                                         ? "tab_selected"
                                         : "not-selected"
                                 }`}
                             >
-                                <div class="img-div" >
+                                <div class="img-div">
                                     <input disabled type="checkbox" />
                                 </div>
                                 <div class="name-time">
                                     <div>{article.article_name}</div>
                                     <div>
-                                        <img src={BookSVG} alt="book-icon" /> 
-                                        <span>{article.article_time_in_mins}</span>
+                                        <img src={BookSVG} alt="book-icon" />
+                                        <span>
+                                            {article.article_time_in_mins}
+                                        </span>
                                     </div>
                                 </div>
                             </a>
@@ -67,7 +69,10 @@ const getNextArticle = () =>{
                 }
             </TabsNav>
             <div class="content">
-                <PlaygroundContent course_content={data.clicked_article} next_article={getNextArticle()} />
+                <PlaygroundContent
+                    course_content={data.clicked_article}
+                    next_article={getNextArticle(data?.all_articles, articleId)}
+                />
             </div>
             <div class="right_box">
                 <div class="right_box_title">Additional Links</div>
@@ -79,10 +84,18 @@ const getNextArticle = () =>{
                                     <img src={LinkSVG} alt="" />
                                 </a>
                                 <div class="link_content">
-                                    <a target="_blank" href={link.link_url} class="link_title">
+                                    <a
+                                        target="_blank"
+                                        href={link.link_url}
+                                        class="link_title"
+                                    >
                                         {link.link_name}
                                     </a>
-                                    <a target="_blank" href={link.link_url} class="domain_text">
+                                    <a
+                                        target="_blank"
+                                        href={link.link_url}
+                                        class="domain_text"
+                                    >
                                         {link.link_url}
                                     </a>
                                 </div>
