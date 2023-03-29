@@ -1,0 +1,187 @@
+[
+    {
+        "course_name": "HTML",
+        "sections_data": [
+            {
+                "section_name": "Web Development Basics",
+                "description": "What do web developers do? Web development could be a good profession for you if you like solving logical problems, building useful things, and experimenting with new technologies."
+            },
+            {
+                "section_name": "GIT Basics",
+                "description": "Git is like a really epic save button for your files and directories. Officially, Git is a version control system."
+            },
+            {
+                "section_name": "HTML Basics",
+                "description": "Learn the basics of HTML like Portfolio creation, tic-tac-toe game."
+            },
+            {
+                "section_name": "HTML Text",
+                "description": "Learn how to add links to your website. Go to a different page, website or open in new tab"
+            },
+            {
+                "section_name": "HTML Lists",
+                "description": "Learn to show lists in your website"
+            },
+            {
+                "section_name": "HTML Links and Images",
+                "description": "Learn how to add images to your websites."
+            },
+            {
+                "section_name": "HTML Forms",
+                "description": "Learns how to create, use and submit forms using HTML"
+            }
+        ]
+    },
+    {
+        "course_name": "Javascript",
+        "sections_data": [
+            {
+                "section_name": "Javascript Foundations",
+                "description": "Basics of Javascript allowing you to hide or show elements on button clicks"
+            },
+            {
+                "section_name": "Javascript Arrays",
+                "description": "Learn a better way to manage your data"
+            },
+            {
+                "section_name": "Javascript Conditionals",
+                "description": "Making your website depend on a condition to present in a certain way or not"
+            },
+            {
+                "section_name": "Javascript Objects",
+                "description": "A course on data types that is closest to JSON"
+            },
+            {
+                "section_name": "Javascript Functions",
+                "description": "Making your website modular for lesser lines of code"
+            },
+            {
+                "section_name": "Object Oriented Programming",
+                "description": "OOPs' work with objects"
+            },
+            {
+                "section_name": "Javascript Debugging",
+                "description": "Code never works the first time. Let's chin up and figure things out together"
+            },
+            {
+                "section_name": "Javascript ES6",
+                "description": "A course introducing the learners about ES6 coding formats"
+            },
+            {
+                "section_name": "Regular Expression",
+                "description": "Regular expressions making life with strings easier"
+            },
+            {
+                "section_name": "Javascript DOM",
+                "description": "DOM"
+            }
+        ]
+    },
+    {
+        "course_name": "SQL",
+        "sections_data": [
+            {
+                "section_name": "Introduction to SQL",
+                "description": "SQL, or Structured Query Language, is a language designed to allow both technical and non-technical users query, manipulate, and transform data from a relational database."
+            },
+            {
+                "section_name": "Select Queries",
+                "description": "To retrieve data from a SQL database, we need to write SELECT statements, which are often colloquially refered to as queries"
+            },
+            {
+                "section_name": "Constraints",
+                "description": "In order to filter certain results from being returned, we need to use a WHERE clause in the query."
+            },
+            {
+                "section_name": "Filtering & Sorting",
+                "description": "Expanding on the where clause, we now look at distinct and sorting in SQL"
+            },
+            {
+                "section_name": "Joins",
+                "description": "Using the JOIN clause in a query, we can combine row data across two separate tables using this unique key."
+            },
+            {
+                "section_name": "Nulls",
+                "description": "Sometimes, it's also not possible to avoid NULL values, as we saw in the last lesson when outer-joining two tables with asymmetric data. In these cases, you can test a column for NULL values in a WHERE clause by using either the IS NULL or IS NOT NULL constraint"
+            },
+            {
+                "section_name": "Queries with Expressions",
+                "description": "We can also use expressions to write more complex logic on column values in a query. These expressions can use mathematical and string functions along with basic arithmetic to transform values when the query is executed"
+            },
+            {
+                "section_name": "Queries with Aggregates",
+                "description": "SQL also supports the use of aggregate expressions (or functions) that allow you to summarize information about a group of rows of data."
+            },
+            {
+                "section_name": "Order of execution",
+                "description": "Now that we have an idea of all the parts of a query, we can now talk about how they all fit together in the context of a complete query."
+            },
+            {
+                "section_name": "Inserting Rows",
+                "description": "We've spent quite a few lessons on how to query for data in a database, so it's time to start learning a bit about SQL schemas and how to add new data."
+            },
+            {
+                "section_name": "Updating Rows",
+                "description": "In addition to adding new data, a common task is to update existing data, which can be done using an UPDATE statement"
+            },
+            {
+                "section_name": "Deleting Rows",
+                "description": "When you need to delete data from a table in the database, you can use a DELETE statement, which describes the table to act on, and the rows of the table to delete through the WHERE clause"
+            },
+            {
+                "section_name": "Advanced SQL",
+                "description": "A detailed overview to SQL"
+            }
+        ]
+    },
+    {
+        "course_name": "Ruby",
+        "sections_data": [
+            {
+                "section_name": "Basic Ruby",
+                "description": "You'll cover Data Type, Variables, etc"
+            },
+            {
+                "section_name": "Object Oriented Programming Basics",
+                "description": "Object Oriented Programming Basics"
+            },
+            {
+                "section_name": "Files and Serialization",
+                "description": "Files and Serialization"
+            },
+            {
+                "section_name": "Advanced Ruby",
+                "description": "Advanced Ruby"
+            },
+            {
+                "section_name": "Computer science",
+                "description": "A Bit of Computer Science"
+            },
+            {
+                "section_name": "Final Project",
+                "description": "Final Project"
+            }
+        ]
+    },
+    {
+        "course_name": "Python",
+        "sections_data": [
+            {
+                "section_name": "Introduction to Python",
+                "description": "Introduction to Python"
+            },
+            {
+                "section_name": "Python Basics",
+                "description": "Basics to Python"
+            },
+            {
+                "section_name": "Python Files",
+                "description": "Managing files with Python"
+            },
+            {
+                "section_name": "Python Lists & Dictionaries",
+                "description": "Lists, object and other data types with Python"
+            }
+        ]
+    }
+]
