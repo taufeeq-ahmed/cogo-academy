@@ -1,9 +1,9 @@
 ---
 import LessonsSVG from "/assets/lessons.svg";
 import ClockSVG from "/assets/clock.svg";
-import LinkBtn from "./LinkBtn.astro";
 const { section } = Astro.props;
-import ArrowSVG from "/assets/arrow.svg"
+import ArrowSVG from "/assets/arrow.svg";
+import LinkBtn from "./LinkBtn";
 ---
 
 <div class="section">
@@ -68,12 +68,19 @@ import ArrowSVG from "/assets/arrow.svg"
                     <span>{section.duration_in_minutes} Minutes</span>
                 </div>
             </div>
-            <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={`playground/${section.section_id}/${section.first_article_id}`} />
+            <LinkBtn
+                btnStyle={}
+                iconStyle={}
+                icon={ArrowSVG}
+                iconPlacement="right"
+                text="Continue"
+                link={`playground/${section.section_id}/${section.first_article_id}`}
+            />
         </div>
     </div>
 </div>
 
-<style >
+<style>
     .section {
         padding: 16px 24px;
         display: flex;

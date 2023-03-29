@@ -34,22 +34,23 @@ const currentPath = Astro.url.pathname;
 				{
 					courses?.map((course: any) => {
 						return (
-						<a
-							href={`/${course.course_id}`}
-							class={`tab ${
-								currentPath.split("/").pop() === course.course_id ? "tab_selected" : "not-selected"
-							}`}
-						>
-							{course.course_name}
-						</a>
-					)})
+							<a
+								href={`/${course.course_id}`}
+								class={`tab ${
+									currentPath.split("/").pop() ===
+									course.course_id
+										? "tab_selected"
+										: "not-selected"
+								}`}
+							>
+								{course.course_name}
+							</a>
+						);
+					})
 				}
 			</TabsNav>
 			<div class="main_container">
-				<slot name="header" />
-				<div class="container_body">
-					<slot />
-				</div>
+				<slot />
 			</div>
 		</div>
 	</body>
@@ -74,12 +75,5 @@ const currentPath = Astro.url.pathname;
 		padding: 0 1rem;
 		margin-top: 1.25rem;
 		max-height: 100vh;
-	}
-	.container_body {
-		display: flex;
-		flex-wrap: wrap;
-		overflow: auto;
-		gap: 20px;
-		padding: 5px;
 	}
 </style>

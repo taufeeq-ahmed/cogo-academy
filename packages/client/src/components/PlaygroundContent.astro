@@ -1,10 +1,9 @@
 ---
 import ContentBody from "./ContentBody";
-import LinkBtn from "./LinkBtn.astro";
+import LinkBtn from "./LinkBtn";
 import ArrowSVG from "/assets/arrow.svg";
 
-const {course_content,next_article} = Astro.props
-
+const { course_content, next_article } = Astro.props;
 ---
 
 <div class="content-header">
@@ -14,17 +13,14 @@ const {course_content,next_article} = Astro.props
         icon={ArrowSVG}
         iconPlacement="left"
         text="Back to course"
-        link={}
+        link={"back"}
     />
 </div>
-<ContentBody course_content={course_content} next_article={next_article} client:load />
-
-<script>
-    const ff = document.getElementsByClassName("link-btn")[0];
-    ff.addEventListener("click",()=>{
-        window.history.back()
-    })
-</script>
+<ContentBody
+    course_content={course_content}
+    next_article={next_article}
+    client:load
+/>
 
 <style>
     .content-body {

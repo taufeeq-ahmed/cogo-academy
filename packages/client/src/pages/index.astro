@@ -1,15 +1,32 @@
 ---
 import Dashboard from "../components/Dashboard.astro";
-import Header from "../components/Header.astro";
-import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header/Header";
+import DashLayout from "../layouts/DashLayout.astro";
 
 const response = await fetch(
   `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
 );
 const data = await response?.json();
-const courses = !data.error ? data : []
+const courses = !data.error ? data : [];
 ---
-<Layout title="Home - Dashboard" selected={"/"} courses={courses}>
-    <Header slot="header" text="Welcome Back, Shivom!"/>
-    <Dashboard rank={12} points={3534} />
-</Layout>
+
+<DashLayout title="Home - Dashboard" selected={"/"} courses={courses}>
+  <Header
+    slot="header"
+    text={"Dashboard"}
+    user={{ user_name: "Tarun", user_rank: "12" }}
+    isSearch={false}
+    client:load
+  />
+  <Dashboard rank={12} points={3534} />
+</DashLayout>
+
+<style>
+  .container_body {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    gap: 20px;
+    padding: 5px;
+  }
+</style>
