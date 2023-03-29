@@ -48,7 +48,7 @@ model Article {
     article_id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     article_name         String
     article_time_in_mins Int      @default(0)
-    article_content      String
+    article_content      String   @db.Text
     Section              Section? @relation(fields: [section_id], references: [section_id])
     section_id           String?  @db.Uuid
     Links                Link[]
