@@ -1,6 +1,5 @@
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["orderByRelation"]
+    provider = "prisma-client-js"
 }
 
 datasource db {
@@ -72,8 +71,8 @@ model Submission {
 }
 
 model SubmissionLinkMap {
-    submission_link_id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user_id            String
-    submission_id      String
-    submission_url     String
+    submission_linkmap_id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id               String
+    submission_id         String
+    submission_url        String
 }

@@ -5,19 +5,19 @@ import TabsNav from "../components/TabsNav.astro";
 import LinkSVG from "/assets/link.svg";
 import BookSVG from "/assets/book.svg";
 
-const { sectionId, articleId } = Astro.props;
-
+const { sectionId, elementId, type = "article" } = Astro.props;
 const response = await fetch(
     `${
         import.meta.env.PUBLIC_SERVER_URL
-    }/playground/${sectionId}/article/${articleId}`
+    }/playground/${sectionId}/${type}/${elementId}`
 );
 const resp = await response?.json();
 const data = !resp.error ? resp : [];
+console.log("The data is ", data);
 const getNextArticle = (all_articles: any[], articleId: any) => {
     let next_article = "/";
     all_articles?.forEach((article, i) => {
-        if (article?.article_id === articleId) {
+        if (article?.article_id === elementId) {
             if (i === all_articles.length - 1) {
                 return next_article;
             }
@@ -44,9 +44,9 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                     data?.all_articles?.map((article: any) => {
                         return (
                             <a
-                                href={article.article_id}
+                                href={`/playground/${sectionId}/article/${article.article_id}`}
                                 class={`tab ${
-                                    articleId === article.article_id
+                                    elementId === article.article_id
                                         ? "tab_selected"
                                         : "not-selected"
                                 }`}
@@ -67,11 +67,36 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                         );
                     })
                 }
+                {
+                    data?.all_submissions?.map((submission: any) => {
+                        return (
+                            <a
+                                href={`/playground/${sectionId}/submission/${submission.submission_id}`}
+                                class={`tab ${
+                                    elementId === submission.submission_id
+                                        ? "tab_selected"
+                                        : "not-selected"
+                                }`}
+                            >
+                                <div class="img-div">
+                                    <input disabled type="checkbox" />
+                                </div>
+                                <div class="name-time">
+                                    <div>{submission.submission_name}</div>
+                                    <div>
+                                        <img src={BookSVG} alt="book-icon" />
+                                        <span>{"15 mins"}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        );
+                    })
+                }
             </TabsNav>
             <div class="content">
                 <PlaygroundContent
-                    course_content={data.clicked_article}
-                    next_article={getNextArticle(data?.all_articles, articleId)}
+                    element_content={data.clicked_element}
+                    next_element={getNextArticle(data?.all_articles, elementId)}
                 />
             </div>
             <div class="right_box">
@@ -119,6 +144,7 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
         flex-direction: column;
         gap: 24px;
         background-color: #fdfbf6;
+        max-width: 55%;
     }
     .name-time > div:last-child {
         font-weight: 400;

@@ -67,7 +67,7 @@ const SectionCard = ({ section }) => {
                             <span>{section.duration_in_minutes} Minutes</span>
                         </div>
                     </div>
-                    <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={`playground/${section.section_id}/${section.first_article_id}`} />
+                    <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={`playground/${section.section_id}/article/${section.first_article_id}`} />
                 </div>
             </div>
         </div >

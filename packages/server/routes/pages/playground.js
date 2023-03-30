@@ -5,9 +5,5 @@ const getPlaygroundData = async (fastify) => {
         const playgroundData = await getPlaygroundDataFromDB(req.params, req.params.type);
         res.status(200).send(playgroundData);
     });
-    fastify.post("/playground/:section_id/:type/:element_id", async (req, res) => {
-        const mapEntry = await addSubmissionLinkMapToDB(req.body);
-        res.status(200).send(mapEntry);
-    });
 };
 module.exports = getPlaygroundData;
