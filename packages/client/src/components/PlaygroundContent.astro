@@ -3,7 +3,7 @@ import ContentBody from "./ContentBody";
 import LinkBtn from "./LinkBtn";
 import ArrowSVG from "/assets/arrow.svg";
 
-const { course_content, next_article } = Astro.props;
+const { element_content, next_element } = Astro.props;
 ---
 
 <div class="content-header">
@@ -17,8 +17,8 @@ const { course_content, next_article } = Astro.props;
     />
 </div>
 <ContentBody
-    course_content={course_content}
-    next_article={next_article}
+    element_content={element_content}
+    next_element={next_element}
     client:load
 />
 

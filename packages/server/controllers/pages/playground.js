@@ -11,14 +11,14 @@ const getPlaygroundDataFromDB = async (params, type) => {
     if (type === 'article') {
         const { element_id } = params;
         params.article_id = element_id;
-        const clicked_article = await getArticleFromDB(params);
-        const links = await getLinksByArticleIdFromDB(clicked_article);
-        return { all_articles, all_submissions, clicked_article, links };
+        const clicked_element = await getArticleFromDB(params);
+        const links = await getLinksByArticleIdFromDB(clicked_element);
+        return { all_articles, all_submissions, clicked_element, links };
     } else if (type === 'submission') {
         const { element_id } = params;
         params.submission_id = element_id;
-        const clicked_submission = await getSubmissionFromDB(params);
-        return { all_articles, all_submissions, clicked_submission };
+        const clicked_element = await getSubmissionFromDB(params);
+        return { all_articles, all_submissions, clicked_element };
     }
 
 

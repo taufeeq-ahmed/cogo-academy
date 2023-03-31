@@ -31,6 +31,11 @@ const addUser = require("./user/add");
 const deleteUser = require("./user/delete");
 const getUser = require("./user/get");
 const updateUser = require("./user/update");
+const getSubmissionLinkMap = require("./SubmissionLinkMap/get");
+const updateSubmissionLinkMap = require("./SubmissionLinkMap/update");
+const deleteSubmissionLinkMap = require('./SubmissionLinkMap/delete');
+const addSubmissionLinkMap = require("./SubmissionLinkMap/add");
+
 const getAdminPageData = require("./pages/admin");
 const addBatch = require("./batch/add");
 const getBatch = require("./batch/get");
@@ -89,6 +94,13 @@ const registerRoutes = async (fastify) => {
         await deleteSubmission(fastify);
     }
     await submissionRoutes(fastify);
+    const submissionLinkMapRoutes = async (fastify) => {
+        await addSubmissionLinkMap(fastify);
+        await getSubmissionLinkMap(fastify);
+        await updateSubmissionLinkMap(fastify);
+        await deleteSubmissionLinkMap(fastify);
+    }
+    await submissionLinkMapRoutes(fastify);
     const batchRoutes = async (fastify) => {
         await addBatch(fastify)
         await getBatch(fastify)
@@ -109,6 +121,7 @@ const registerRoutes = async (fastify) => {
         await getLandingPageData(fastify);
         await getUserDashboardData(fastify);
         await getPlaygroundData(fastify);
+
         await getAdminPageData(fastify);
     }
     await pageRoutes(fastify);
