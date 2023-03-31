@@ -21,6 +21,8 @@ model User {
     number_of_exercises_done     Int?     @default(0)
     number_of_projects_submitted Int?     @default(0)
     user_rank                    Int      @default(0)
+    Batch                        Batch?   @relation(fields: [batch_id], references: [batch_id])
+    batch_id                     String?  @db.Uuid
 }
 
 model Course {
@@ -66,7 +68,6 @@ model Submission {
     submission_id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     submission_name        String
     submission_description String
-    submission_url         String?
     Section                Section? @relation(fields: [section_id], references: [section_id])
     section_id             String?  @db.Uuid
 }
@@ -76,4 +77,22 @@ model SubmissionLinkMap {
     user_id            String
     submission_id      String
     submission_url     String
+}
+
+model Batch {
+    batch_id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    batch_name String
+    user       User[]
+}
+
+model Batch_Course {
+    id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    batch_id  String
+    course_id String
+}
+
+model Batch_User {
+    id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    batch_id String
+    user_id  String
 }

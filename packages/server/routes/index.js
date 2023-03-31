@@ -31,6 +31,14 @@ const addUser = require("./user/add");
 const deleteUser = require("./user/delete");
 const getUser = require("./user/get");
 const updateUser = require("./user/update");
+const getAdminPageData = require("./pages/admin");
+const addBatch = require("./batch/add");
+const getBatch = require("./batch/get");
+const getAllBatches = require("./batch/list");
+const deleteBatch = require("./batch/delete");
+const updateBatch = require("./batch/update");
+const addCourseToBatch = require("./batch_course/add");
+const addUserToBatch = require("./batch_user/add");
 
 const registerRoutes = async (fastify) => {
     const userRoutes = async (fastify) => {
@@ -81,10 +89,27 @@ const registerRoutes = async (fastify) => {
         await deleteSubmission(fastify);
     }
     await submissionRoutes(fastify);
+    const batchRoutes = async (fastify) => {
+        await addBatch(fastify)
+        await getBatch(fastify)
+        await getAllBatches(fastify)
+        await updateBatch(fastify)
+        await deleteBatch(fastify)
+    }
+    await batchRoutes(fastify)
+    const batchLinkCourseRoutes = async (fastify) => {
+        await addCourseToBatch(fastify)
+    }
+    await batchLinkCourseRoutes(fastify)
+    const batchLinkUserRoutes = async (fastify) => {
+        await addUserToBatch(fastify)
+    }
+    await batchLinkUserRoutes(fastify)
     const pageRoutes = async (fastify) => {
         await getLandingPageData(fastify);
         await getUserDashboardData(fastify);
         await getPlaygroundData(fastify);
+        await getAdminPageData(fastify);
     }
     await pageRoutes(fastify);
 }
