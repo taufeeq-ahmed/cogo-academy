@@ -22,12 +22,15 @@ model User {
     user_rank                    Int      @default(0)
     Batch                        Batch?   @relation(fields: [batch_id], references: [batch_id])
     batch_id                     String?  @db.Uuid
+    track                        Track?   @relation(fields: [track_id], references: [track_id])
+    track_id                     String?  @db.Uuid
 }
 
 model Course {
     course_id   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     course_name String
     sections    Section[]
+    batches     Batch[]
 }
 
 model Section {
@@ -80,13 +83,22 @@ model SubmissionLinkMap {
 }
 
 model Batch {
-    batch_id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    batch_id   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     batch_name String
     user       User[]
+    courses    Course[]
 }
 
-model Batch_Course {
-    id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    batch_id  String
-    course_id String
+model Track {
+    track_id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    track_name String
+    User       User[]
 }
+
+// model Batch_Course {
+//     id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+//     batch_id  String? @db.Uuid
+//     course_id String  @db.Uuid
+//     Course    Course? @relation(fields: [course_id], references: [course_id])
+//     Batch     Batch?  @relation(fields: [batch_id], references: [batch_id])
+// }

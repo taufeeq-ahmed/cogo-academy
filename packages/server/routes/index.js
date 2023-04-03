@@ -42,8 +42,16 @@ const getBatch = require("./batch/get");
 const getAllBatches = require("./batch/list");
 const deleteBatch = require("./batch/delete");
 const updateBatch = require("./batch/update");
-const addCourseToBatch = require("./batch_course/add");
 const getUserByBatch = require("./user/getByBatch");
+const getAdminCoursesPageData = require("./pages/adminCourses");
+const addCourseToBatch = require("./batch/addCoursesToBatch");
+const getAdminStudentsPageData = require("./pages/adminStudents");
+const addTrack = require("./track/add");
+const getAllTracks = require("./track/list");
+const updateTrack = require("./track/update");
+const deleteTrack = require("./track/delete");
+const getTrack = require("./track/get");
+const getFilteredUsers = require("./user/filter");
 
 const registerRoutes = async (fastify) => {
     const userRoutes = async (fastify) => {
@@ -51,6 +59,7 @@ const registerRoutes = async (fastify) => {
         await getUser(fastify);
         await updateUser(fastify);
         await deleteUser(fastify);
+        await getFilteredUsers(fastify)
 
     }
     await userRoutes(fastify);
@@ -108,17 +117,23 @@ const registerRoutes = async (fastify) => {
         await getAllBatches(fastify)
         await updateBatch(fastify)
         await deleteBatch(fastify)
-    }
-    await batchRoutes(fastify)
-    const batchLinkCourseRoutes = async (fastify) => {
         await addCourseToBatch(fastify)
     }
-    await batchLinkCourseRoutes(fastify)
+    await batchRoutes(fastify)
+    const trackRoutes = async (fastify) => {
+        await addTrack(fastify)
+        await getTrack(fastify)
+        await getAllTracks(fastify)
+        await updateTrack(fastify)
+        await deleteTrack(fastify)
+    }
+    await trackRoutes(fastify)
     const pageRoutes = async (fastify) => {
         await getLandingPageData(fastify);
         await getUserDashboardData(fastify);
         await getPlaygroundData(fastify);
-
+        await getAdminCoursesPageData(fastify);
+        await getAdminStudentsPageData(fastify)
         await getAdminPageData(fastify);
     }
     await pageRoutes(fastify);
