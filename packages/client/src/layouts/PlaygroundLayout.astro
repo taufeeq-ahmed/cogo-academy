@@ -4,7 +4,7 @@ import PlaygroundContent from "../components/PlaygroundContent.astro";
 import TabsNav from "../components/TabsNav.astro";
 import LinkSVG from "/assets/link.svg";
 import BookSVG from "/assets/book.svg";
-
+import EditorLayout from "../components/CodeEditorLayout/EditorLayout";
 const { sectionId, elementId, type = "article" } = Astro.props;
 const response = await fetch(
     `${
@@ -13,7 +13,6 @@ const response = await fetch(
 );
 const resp = await response?.json();
 const data = !resp.error ? resp : [];
-console.log("The data is ", data);
 const getNextArticle = (all_articles: any[], articleId: any) => {
     let next_article = "/";
     all_articles?.forEach((article, i) => {
@@ -99,7 +98,7 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                     next_element={getNextArticle(data?.all_articles, elementId)}
                 />
             </div>
-            <div class="right_box">
+            <!-- <div class="right_box">
                 <div class="right_box_title">Additional Links</div>
                 {
                     data?.links?.map((link) => {
@@ -128,7 +127,8 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                         );
                     })
                 }
-            </div>
+            </div> -->
+            <EditorLayout client:only/>
         </div>
     </body>
 </html>

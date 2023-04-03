@@ -8,8 +8,6 @@ const SubmissionContent = ({ submissionContent, github_username = "sumit" }) => 
 
 
 
-
-    console.log(submissionContent, "dhjbchdc")
     const handleUrlInput = (e) => {
         setURL(e.target.value);
     }

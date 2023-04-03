@@ -8,7 +8,6 @@ import SubmissionContent from '../SubmissionContent/SubmissionContent'
 import styles from './styles.module.css'
 
 const ContentBody = ({ element_content, next_element }) => {
-    console.log("The content is : ", element_content)
     const [disabled, setDisabled] = useState(true)
     const contentRef = useRef()
     useEffect(() => {
@@ -30,7 +29,6 @@ const ContentBody = ({ element_content, next_element }) => {
     }
     let contentElement;
 
-    console.log('element content is ', element_content)
     if (element_content.article_id) {
         const content = element_content.article_content;
         contentElement = <ArticleContent htmlContent={content} />
