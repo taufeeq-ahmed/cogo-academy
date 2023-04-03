@@ -4,7 +4,7 @@
   "description": "Daemon Server",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js | jq",
+    "dev": "nodemon index.js",
     "db:push": "dotenv -e ../../.env -- prisma db push --skip-generate"
   },
   "keywords": [],

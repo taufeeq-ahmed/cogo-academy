@@ -43,7 +43,7 @@ const getAllBatches = require("./batch/list");
 const deleteBatch = require("./batch/delete");
 const updateBatch = require("./batch/update");
 const addCourseToBatch = require("./batch_course/add");
-const addUserToBatch = require("./batch_user/add");
+const getUserByBatch = require("./user/getByBatch");
 
 const registerRoutes = async (fastify) => {
     const userRoutes = async (fastify) => {
@@ -60,6 +60,7 @@ const registerRoutes = async (fastify) => {
         await updateSection(fastify);
         await deleteSection(fastify);
         await getSectionByCourseId(fastify);
+        await getUserByBatch(fastify);
     }
     await sectionRoutes(fastify);
     const courseRoutes = async (fastify) => {
@@ -113,10 +114,6 @@ const registerRoutes = async (fastify) => {
         await addCourseToBatch(fastify)
     }
     await batchLinkCourseRoutes(fastify)
-    const batchLinkUserRoutes = async (fastify) => {
-        await addUserToBatch(fastify)
-    }
-    await batchLinkUserRoutes(fastify)
     const pageRoutes = async (fastify) => {
         await getLandingPageData(fastify);
         await getUserDashboardData(fastify);

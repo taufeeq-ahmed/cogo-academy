@@ -7,7 +7,7 @@ import SectionCard from "./SectionCard";
 const response = await fetch(
     `${
         import.meta.env.PUBLIC_SERVER_URL
-    }/user-dashboard/ff9f9d31-3321-43da-b8b2-00063e87abd3`
+    }/user-dashboard/e7cb215f-6f67-4048-a956-d2bdd10b1e27`
 );
 const data = await response?.json();
 const ff = !data.error ? data : { userData: {}, topThreeUsersData: [] };

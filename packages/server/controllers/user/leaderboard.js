@@ -1,19 +1,21 @@
 const { prisma } = require("../../helpers/db-client");
 
-const getLeaderBoardFromDB = async () => {
-
-    const leaderBoardData = await prisma.User.findMany({
-        select: {
-            user_name: true,
-            total_score: true,
-            user_rank: true,
+const getLeaderBoardByBatchFromDB = async (params) => {
+    const { batch_id } = params
+    const leaderBoardData = await prisma.user.findMany({
+        where: {
+            batch_id: batch_id,
+            user_rank: {
+                lte: 5
+            }
         },
         orderBy: {
             user_rank: 'asc'
-        }
+        },
+
     })
 
     return leaderBoardData;
 
 }
-module.exports = getLeaderBoardFromDB;
+module.exports = getLeaderBoardByBatchFromDB;

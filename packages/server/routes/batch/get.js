@@ -1,11 +1,13 @@
 const getBatchFromDB = require("../../controllers/batch/get");
+const getBatchCourseFromDB = require("../../controllers/batch_course/get");
 
 
 const getBatch = async (fastify) => {
     fastify.get("/batch/:batch_id", async (req, res) => {
         try {
             const batch = await getBatchFromDB(req.params);
-            res.status(200).send(batch);
+            const courses = await getBatchCourseFromDB(req.params)
+            res.status(200).send({ batch, courses });
         } catch (err) {
             console.log(err);
         }
