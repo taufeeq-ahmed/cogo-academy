@@ -8,22 +8,24 @@ datasource db {
 }
 
 model User {
-    user_id                      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id                      String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     user_name                    String
-    email                        String   @unique
+    email                        String            @unique
     password                     String
     github_username              String
-    batch                        String
-    total_score                  Int      @default(0)
-    created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-    updated_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-    number_of_exercises_done     Int?     @default(0)
-    number_of_projects_submitted Int?     @default(0)
-    user_rank                    Int      @default(0)
-    Batch                        Batch?   @relation(fields: [batch_id], references: [batch_id])
-    batch_id                     String?  @db.Uuid
-    track                        Track?   @relation(fields: [track_id], references: [track_id])
-    track_id                     String?  @db.Uuid
+    total_score                  Int?              @default(0)
+    created_on                   DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    updated_on                   DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    number_of_articles_read      Int?              @default(0)
+    number_of_exercises_done     Int?              @default(0)
+    number_of_projects_submitted Int?              @default(0)
+    user_rank                    Int               @default(0)
+    batch                        Batch?            @relation(fields: [batch_id], references: [batch_id])
+    batch_id                     String?           @db.Uuid
+    track                        Track?            @relation(fields: [track_id], references: [track_id])
+    track_id                     String?           @db.Uuid
+    User_Article                 User_Article[]
+    User_Submission              User_Submission[]
 }
 
 model Course {
@@ -49,13 +51,15 @@ model Section {
 }
 
 model Article {
-    article_id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    article_id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     article_name         String
-    article_time_in_mins Int      @default(0)
-    article_content      String   @db.Text
-    Section              Section? @relation(fields: [section_id], references: [section_id])
-    section_id           String?  @db.Uuid
+    article_time_in_mins Int            @default(0)
+    article_content      String         @db.Text
+    total_score          Int
+    Section              Section?       @relation(fields: [section_id], references: [section_id])
+    section_id           String?        @db.Uuid
     Links                Link[]
+    User_Article         User_Article[]
 }
 
 model Link {
@@ -67,19 +71,25 @@ model Link {
 }
 
 model Submission {
-    submission_id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    submission_id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     submission_name        String
     submission_description String
     submission_url         String?
-    Section                Section? @relation(fields: [section_id], references: [section_id])
-    section_id             String?  @db.Uuid
+    Section                Section?          @relation(fields: [section_id], references: [section_id])
+    section_id             String?           @db.Uuid
+    User_Submission        User_Submission[]
 }
 
-model SubmissionLinkMap {
-    submission_linkmap_id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user_id               String
-    submission_id         String
+model User_Submission {
+    submission_linkmap_id String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user                  User       @relation(fields: [user_id], references: [user_id])
+    user_id               String     @db.Uuid
+    submission            Submission @relation(fields: [submission_id], references: [submission_id])
+    submission_id         String     @db.Uuid
     submission_url        String
+    score                 Int?
+
+    @@unique([user_id, submission_id])
 }
 
 model Batch {
@@ -93,6 +103,18 @@ model Track {
     track_id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     track_name String
     User       User[]
+}
+
+model User_Article {
+    id         String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user       User    @relation(fields: [user_id], references: [user_id])
+    article    Article @relation(fields: [article_id], references: [article_id])
+    user_id    String  @db.Uuid
+    article_id String  @db.Uuid
+    score      Int?
+    code       String?
+
+    @@unique([user_id, article_id])
 }
 
 // model Batch_Course {

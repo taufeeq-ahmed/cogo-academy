@@ -31,10 +31,10 @@ const addUser = require("./user/add");
 const deleteUser = require("./user/delete");
 const getUser = require("./user/get");
 const updateUser = require("./user/update");
-const getSubmissionLinkMap = require("./SubmissionLinkMap/get");
-const updateSubmissionLinkMap = require("./SubmissionLinkMap/update");
-const deleteSubmissionLinkMap = require('./SubmissionLinkMap/delete');
-const addSubmissionLinkMap = require("./SubmissionLinkMap/add");
+const getSubmissionLinkMap = require("./user_submission/get");
+const updateSubmissionLinkMap = require("./user_submission/update");
+const deleteSubmissionLinkMap = require('./user_submission/delete');
+const addSubmissionLinkMap = require("./user_submission/add");
 
 const getAdminPageData = require("./pages/admin");
 const addBatch = require("./batch/add");
@@ -52,6 +52,10 @@ const updateTrack = require("./track/update");
 const deleteTrack = require("./track/delete");
 const getTrack = require("./track/get");
 const getFilteredUsers = require("./user/filter");
+const getStudentProfilePageData = require("./pages/adminStudentProfile");
+const addReadArticle = require("./user_article/add");
+const getReadArticle = require("./user_article/get");
+const getReadArticlesByUser = require("./user_article/getArticlesByUser");
 
 const registerRoutes = async (fastify) => {
     const userRoutes = async (fastify) => {
@@ -60,7 +64,6 @@ const registerRoutes = async (fastify) => {
         await updateUser(fastify);
         await deleteUser(fastify);
         await getFilteredUsers(fastify)
-
     }
     await userRoutes(fastify);
     const sectionRoutes = async (fastify) => {
@@ -104,13 +107,13 @@ const registerRoutes = async (fastify) => {
         await deleteSubmission(fastify);
     }
     await submissionRoutes(fastify);
-    const submissionLinkMapRoutes = async (fastify) => {
+    const userSubmissionsRoutes = async (fastify) => {
         await addSubmissionLinkMap(fastify);
         await getSubmissionLinkMap(fastify);
         await updateSubmissionLinkMap(fastify);
         await deleteSubmissionLinkMap(fastify);
     }
-    await submissionLinkMapRoutes(fastify);
+    await userSubmissionsRoutes(fastify);
     const batchRoutes = async (fastify) => {
         await addBatch(fastify)
         await getBatch(fastify)
@@ -128,6 +131,12 @@ const registerRoutes = async (fastify) => {
         await deleteTrack(fastify)
     }
     await trackRoutes(fastify)
+    const userArticleRoutes = async (fastify) => {
+        await addReadArticle(fastify)
+        await getReadArticle(fastify)
+        await getReadArticlesByUser(fastify)
+    }
+    await userArticleRoutes(fastify)
     const pageRoutes = async (fastify) => {
         await getLandingPageData(fastify);
         await getUserDashboardData(fastify);
@@ -135,6 +144,7 @@ const registerRoutes = async (fastify) => {
         await getAdminCoursesPageData(fastify);
         await getAdminStudentsPageData(fastify)
         await getAdminPageData(fastify);
+        await getStudentProfilePageData(fastify)
     }
     await pageRoutes(fastify);
 }

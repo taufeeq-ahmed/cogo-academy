@@ -1,22 +1,18 @@
 const { prisma } = require("../../helpers/db-client");
 
-const updateSubmissionLinkMapInDB = async (params, data) => {
+const deleteSubmissionLinkMapFromDB = async (params) => {
     const { user_id, submission_id, } = params;
 
-    const map = await prisma.submissionLinkMap.updateMany({
+    const map = await prisma.user_Submission.delete({
         where: {
             AND: [
                 { user_id: user_id },
                 { submission_id: submission_id }
             ]
-        },
-        data: data
+        }
     })
     return map;
 };
-
-module.exports = updateSubmissionLinkMapInDB;
-
-
+module.exports = deleteSubmissionLinkMapFromDB;
 
 

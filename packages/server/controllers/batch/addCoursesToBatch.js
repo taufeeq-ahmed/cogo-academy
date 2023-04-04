@@ -1,6 +1,7 @@
 const { prisma } = require("../../helpers/db-client");
-const addCoursesToBatchToDB = async (data) => {
-    const { courses, batch_id } = data;
+const addCoursesToBatchToDB = async (params, body) => {
+    const { batch_id } = params;
+    const { courses } = body;
 
     const result = await prisma.batch.update({
         where: {

@@ -1,7 +1,8 @@
-const updateSubmissionLinkMapInDB = require('../../controllers/SubmissionLinkMap/update');
+const updateSubmissionLinkMapInDB = require("../../controllers/user_submission/update");
+
 
 const updateSubmissionLinkMap = async (fastify) => {
-    fastify.patch("/submission-link-map/:user_id/:submission_id", async (req, res) => {
+    fastify.patch("/user_submission/:user_id/:submission_id", async (req, res) => {
         const updatedMap = await updateSubmissionLinkMapInDB(req.params, req.body);
         res.status(200).send(updatedMap);
     });
