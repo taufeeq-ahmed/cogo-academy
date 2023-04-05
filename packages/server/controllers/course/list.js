@@ -4,7 +4,8 @@ const getAllCoursesFromDB = async () => {
     try {
         const allCourses = await prisma.Course.findMany({
             include: {
-                batches: true
+                batches: true,
+                sections: true
             }
         });
         return allCourses;

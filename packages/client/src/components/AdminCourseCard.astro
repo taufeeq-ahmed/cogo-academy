@@ -3,14 +3,13 @@ import Edit from "/assets/edit.svg";
 import Delete from "/assets/delete.svg";
 import { Button } from "@cogoport/components";
 
-const { courseName = "HTML", courseId = "1234" } = Astro.props;
-const nSections = 10;
+const { course } = Astro.props;
 ---
 
 <>
     <div class="admin_course_card">
         <div class="course_title">
-            {courseName}
+            {course.course_name}
             <div class="course_buttons">
                 <div class="edit_button">
                     <img src={Edit} alt="edit_button" />
@@ -20,7 +19,7 @@ const nSections = 10;
                 </div>
             </div>
         </div>
-        <div class=".course_sections">{nSections} sections</div>
+        <div class=".course_sections">{course.sections.length} sections</div>
         <!-- <Button client:load size="md" themeType="primary">Button</Button> -->
     </div>
 </>

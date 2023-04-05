@@ -1,9 +1,14 @@
 ---
-import Layout from "../../layouts/Layout.astro";
 import Button from "../../components/Button/Button";
 import AdminCourseCard from "../../components/AdminCourseCard.astro";
 import ModalLayout from "../../layouts/ModalLayout.astro";
 import EditCourse from "../../components/EditCourse/EditCourse";
+const response = await fetch(
+    `${import.meta.env.PUBLIC_SERVER_URL}/admin/courses`
+);
+const resp = await response?.json();
+const data = !resp.error ? resp : [];
+console.log("The data is ", data);
 ---
 
 <ModalLayout>
@@ -13,7 +18,11 @@ import EditCourse from "../../components/EditCourse/EditCourse";
             <Button text="Create Course" id={"open_modal"} />
         </div>
         <div class="courses_container">
-            <AdminCourseCard courseName="Html" />
+            {
+                data.map((course) => {
+                    return <AdminCourseCard course={course} />;
+                })
+            }
         </div>
     </div>
     <div slot="modal_header_slot">Edit Course</div>
