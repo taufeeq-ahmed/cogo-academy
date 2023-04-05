@@ -52,7 +52,10 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                                 }`}
                             >
                                 <div class="img-div">
-                                    <input disabled type="checkbox" />
+                                    <input
+                                        type="checkbox"
+                                        checked={!!article.done}
+                                    />
                                 </div>
                                 <div class="name-time">
                                     <div>{article.article_name}</div>
@@ -79,7 +82,7 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                                 }`}
                             >
                                 <div class="img-div">
-                                    <input disabled type="checkbox" />
+                                    <input type="checkbox" />
                                 </div>
                                 <div class="name-time">
                                     <div>{submission.submission_name}</div>
@@ -217,5 +220,8 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
         display: flex;
         flex-direction: column;
         gap: 5px;
+    }
+    input[type="checkbox"] {
+        pointer-events: none;
     }
 </style>

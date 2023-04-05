@@ -6,6 +6,9 @@ const getUserByBatchFromDB = async (params) => {
         {
             where: {
                 batch_id: batch_id
+            },
+            include: {
+                track: true
             }
         }
     )

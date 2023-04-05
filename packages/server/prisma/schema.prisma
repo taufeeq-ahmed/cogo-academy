@@ -24,7 +24,7 @@ model User {
     batch_id                     String?           @db.Uuid
     track                        Track?            @relation(fields: [track_id], references: [track_id])
     track_id                     String?           @db.Uuid
-    User_Article                 User_Article[]
+    user_article                 User_Article[]
     User_Submission              User_Submission[]
 }
 
@@ -56,10 +56,10 @@ model Article {
     article_time_in_mins Int            @default(0)
     article_content      String         @db.Text
     total_score          Int
-    Section              Section?       @relation(fields: [section_id], references: [section_id])
+    section              Section?       @relation(fields: [section_id], references: [section_id])
     section_id           String?        @db.Uuid
     Links                Link[]
-    User_Article         User_Article[]
+    user_article         User_Article[]
 }
 
 model Link {
@@ -88,6 +88,7 @@ model User_Submission {
     submission_id         String     @db.Uuid
     submission_url        String
     score                 Int?
+    code                  String?
 
     @@unique([user_id, submission_id])
 }
@@ -112,7 +113,6 @@ model User_Article {
     user_id    String   @db.Uuid
     article_id String   @db.Uuid
     score      Int?
-    code       String?
     updated_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 
     @@unique([user_id, article_id])
