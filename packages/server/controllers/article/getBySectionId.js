@@ -9,7 +9,8 @@ const getArticlesBySectionIdFromDB = async (params) => {
         select: {
             article_id: true,
             article_name: true,
-            article_time_in_mins: true
+            article_time_in_mins: true,
+            user_article: true
         },
     })
 

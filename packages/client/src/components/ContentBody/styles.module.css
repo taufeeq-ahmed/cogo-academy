@@ -1,6 +1,7 @@
     .content_body {
         height: 100vh;
         overflow: auto;
+        
     }
     .content_footer {
         position: sticky;

@@ -14,7 +14,7 @@ const addSubmissionLinkMapToDB = async (data) => {
     } else {
         console.log(isThereMap);
         console.log("In create Part")
-        const newMap = await prisma.submissionLinkMap.create({
+        const newMap = await prisma.user_Submission.create({
             data: {
                 user_id: user_id,
                 submission_id: submission_id,

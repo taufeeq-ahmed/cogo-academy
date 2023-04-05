@@ -1,8 +1,8 @@
 ---
 import Dashboard from "../components/Dashboard.astro";
 import Header from "../components/Header/Header";
-import DashLayout from "../layouts/DashLayout.astro";
 
+import DashLayout from "../layouts/DashLayout.astro";
 const response = await fetch(
   `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
 );
@@ -15,7 +15,6 @@ const courses = !data.error ? data : [];
     slot="header"
     text={"Welcome back Tarun"}
     user={{ user_name: "Tarun", user_rank: "12" }}
-    isSearch={false}
     client:load
   />
   <Dashboard rank={12} points={3534} />

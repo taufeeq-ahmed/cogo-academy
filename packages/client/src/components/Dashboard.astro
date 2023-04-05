@@ -7,11 +7,11 @@ import SectionCard from "./SectionCard";
 const response = await fetch(
     `${
         import.meta.env.PUBLIC_SERVER_URL
-    }/user-dashboard/ff9f9d31-3321-43da-b8b2-00063e87abd3`
+    }/user-dashboard/f57566b2-fc3a-4c3e-82b2-af49b0a6a070`
 );
 const data = await response?.json();
 const ff = !data.error ? data : { userData: {}, topThreeUsersData: [] };
-const { userData, topThreeUsers } = ff;
+const { userData, topThreeUsers, recentCourses } = ff;
 const sections = [
     {
         section_id: "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
@@ -67,8 +67,10 @@ const sections = [
     <div class="dash_body">
         <div class="dash-sections">
             {
-                sections.map((sec) => {
-                    return <SectionCard section={sec} />;
+                recentCourses.map((courses) => {
+                    courses.article.section.first_article_id =
+                        courses.article_id;
+                    return <SectionCard section={courses.article.section} />;
                 })
             }
         </div>
@@ -125,7 +127,7 @@ const sections = [
     .dash_body {
         display: flex;
         gap: 16px;
-        width: 90%;
+        justify-content: space-between;
     }
     .leader-box {
         display: flex;
@@ -134,6 +136,7 @@ const sections = [
         flex-direction: column;
         gap: 10px;
         height: 375px;
+        max-width: 400px;
     }
     .leader-board {
         display: flex;

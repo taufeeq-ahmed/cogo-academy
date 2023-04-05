@@ -26,7 +26,12 @@ const ContentBody = ({ element_content, next_element }) => {
     }, [])
 
     const handleMarkAsDone = () => {
-        window.location.href = next_element
+        fetch(`http://0.0.0.0:8080/user_article/f57566b2-fc3a-4c3e-82b2-af49b0a6a070/${element_content.article_id}/add`, {
+            method: 'POST'
+        })
+            // .then((res) => console.log("sdfsad", res))
+            .then(() => window.location.href = next_element)
+            .catch((err) => console.log("error", err))
     }
     let contentElement;
 
@@ -45,7 +50,7 @@ const ContentBody = ({ element_content, next_element }) => {
                 {contentElement}
             </div>
             <div className={styles.content_footer}>
-                <Button onClick={handleMarkAsDone} disabled={disabled} text="Mark As Completed" />
+                <Button onClick={handleMarkAsDone} btnStyle={{ backgroundColor: element_content.done ? 'green' : '' }} disabled={disabled} text={element_content.done ? "Completed" : "Mark As Complete"} />
             </div>
         </>
     )

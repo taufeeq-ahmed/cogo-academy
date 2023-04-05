@@ -52,7 +52,10 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                                 }`}
                             >
                                 <div class="img-div">
-                                    <input disabled type="checkbox" />
+                                    <input
+                                        type="checkbox"
+                                        checked={!!article.done}
+                                    />
                                 </div>
                                 <div class="name-time">
                                     <div>{article.article_name}</div>
@@ -79,7 +82,7 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                                 }`}
                             >
                                 <div class="img-div">
-                                    <input disabled type="checkbox" />
+                                    <input type="checkbox" />
                                 </div>
                                 <div class="name-time">
                                     <div>{submission.submission_name}</div>
@@ -99,36 +102,39 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
                     next_element={getNextArticle(data?.all_articles, elementId)}
                 />
             </div>
-            <div class="right_box">
-                <div class="right_box_title">Additional Links</div>
-                {
-                    data?.links?.map((link) => {
-                        return (
-                            <div class="link_box">
-                                <a target="_blank" href={link.link_url}>
-                                    <img src={LinkSVG} alt="" />
-                                </a>
-                                <div class="link_content">
-                                    <a
-                                        target="_blank"
-                                        href={link.link_url}
-                                        class="link_title"
-                                    >
-                                        {link.link_name}
+            {
+                data.clicked_element.article_id && (
+                    <div class="right_box">
+                        <div class="right_box_title">Additional Links</div>
+
+                        {data?.links?.map((link) => {
+                            return (
+                                <div class="link_box">
+                                    <a target="_blank" href={link.link_url}>
+                                        <img src={LinkSVG} alt="" />
                                     </a>
-                                    <a
-                                        target="_blank"
-                                        href={link.link_url}
-                                        class="domain_text"
-                                    >
-                                        {link.link_url}
-                                    </a>
+                                    <div class="link_content">
+                                        <a
+                                            target="_blank"
+                                            href={link.link_url}
+                                            class="link_title"
+                                        >
+                                            {link.link_name}
+                                        </a>
+                                        <a
+                                            target="_blank"
+                                            href={link.link_url}
+                                            class="domain_text"
+                                        >
+                                            {link.link_url}
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })
-                }
-            </div>
+                            );
+                        })}
+                    </div>
+                )
+            }
         </div>
     </body>
 </html>
@@ -144,7 +150,7 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
         flex-direction: column;
         gap: 24px;
         background-color: #fdfbf6;
-        max-width: 55%;
+        width: 50%;
     }
     .name-time > div:last-child {
         font-weight: 400;
@@ -214,5 +220,8 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
         display: flex;
         flex-direction: column;
         gap: 5px;
+    }
+    input[type="checkbox"] {
+        pointer-events: none;
     }
 </style>

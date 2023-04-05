@@ -6,6 +6,9 @@ const getUserFromDB = async (params) => {
         where: {
             user_id: user_id,
         },
+        include: {
+            batch: true
+        }
     })
     return user;
 };

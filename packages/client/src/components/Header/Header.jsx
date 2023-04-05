@@ -2,7 +2,7 @@ import LogoutSVG from "/assets/logout.svg";
 import styles from './styles.module.css'
 import SearchSVG from "/assets/search.svg";
 
-const Header = ({ text, user, isSearch, query, setQuery }) => {
+const Header = ({ text, user, isSearch = false, query = "", setQuery = () => { } }) => {
 	return (
 		<div className={styles.header}>
 			<div className={styles.course_title}>{text}</div>
