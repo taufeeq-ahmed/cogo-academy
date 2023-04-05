@@ -4,7 +4,7 @@
   "description": "Daemon Server",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js | jq",
+    "dev": "nodemon index.js",
     "db:push": "dotenv -e ../../.env -- prisma db push --skip-generate"
   },
   "keywords": [],
@@ -16,6 +16,8 @@
     "bcrypt": "^5.1.0",
     "dotenv-cli": "^6.0.0",
     "fastify": "^4.15.0",
+    "fastify-mailer": "^2.3.1",
+    "nodemailer": "^6.9.1",
     "postgres": "^3.3.3",
     "qs": "^6.11.0"
   },

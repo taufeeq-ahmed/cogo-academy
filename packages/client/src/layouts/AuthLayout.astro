@@ -1,0 +1,67 @@
+---
+import Demo from "/assets/demo.svg";
+import "../styles/global.css";
+import BrandLogo from "/assets/brand.svg";
+---
+
+<div class="container">
+    <div class="content">
+        <div class="brand-logo">
+            <a href="/"><img src={BrandLogo} alt="brand-logo" /></a>
+        </div>
+        <slot />
+    </div>
+    <div class="image_box">
+        <img alt="cogo-academy" src={Demo} />
+    </div>
+</div>
+<style>
+    .container {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+    .content {
+        flex: 1;
+    }
+    .image_box {
+        flex: 1;
+        background-size: cover;
+        background-position: center;
+        background-color: #fafafa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .brand-logo {
+        margin-bottom: 36px;
+        margin-left: 36px;
+        margin-top: 36px;
+    }
+    /* media queries for smaller screens */
+    /* @media screen and (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+        .brand-logo {
+            margin: 10px;
+            text-align: center;
+        }
+        .image_box {
+            height: 0vh;
+            display: none;
+        }
+    } */
+
+    @media only screen and (max-width: 768px) {
+        .brand-logo {
+            margin: 10px;
+        }
+        .image_box {
+            display: none;
+            /* height: 40vh; */
+        }
+    }
+</style>

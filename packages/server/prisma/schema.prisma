@@ -76,3 +76,9 @@ model SubmissionLinkMap {
     submission_id         String
     submission_url        String
 }
+model UserAuth {
+    id                      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    email                        String 
+    otp                          String
+    created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
