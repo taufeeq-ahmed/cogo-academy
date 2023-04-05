@@ -1,0 +1,14 @@
+---
+import AdminUserHeader from "../../../components/AdminUserHeader/AdminUserHeader";
+import EditCourse from "../../../components/EditCourse/EditCourse";
+import ProgressOverview from "../../../components/ProgressOverview/ProgressOverview";
+import Layout from "../../../layouts/Layout.astro";
+---
+
+<Layout>
+    <AdminUserHeader client:load />
+    <ProgressOverview client:load />
+    <EditCourse client:load />
+</Layout>
+
+<style></style>

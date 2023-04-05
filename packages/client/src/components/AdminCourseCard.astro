@@ -1,0 +1,58 @@
+---
+import Edit from "/assets/edit.svg";
+import Delete from "/assets/delete.svg";
+import { Button } from "@cogoport/components";
+
+const { courseName = "HTML", courseId = "1234" } = Astro.props;
+const nSections = 10;
+---
+
+<>
+    <div class="admin_course_card">
+        <div class="course_title">
+            {courseName}
+            <div class="course_buttons">
+                <div class="edit_button">
+                    <img src={Edit} alt="edit_button" />
+                </div>
+                <div class="delete_button">
+                    <img src={Delete} alt="delete_button" />
+                </div>
+            </div>
+        </div>
+        <div class=".course_sections">{nSections} sections</div>
+        <!-- <Button client:load size="md" themeType="primary">Button</Button> -->
+    </div>
+</>
+
+<style>
+    .admin_course_card {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 14px;
+        background: #ffffff;
+        box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
+        border-radius: 6px;
+        margin: 1rem;
+        width: 30%;
+    }
+    .course_title {
+        color: #221f20;
+        font-weight: 500;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .course_buttons {
+        display: flex;
+    }
+    .course_buttons img {
+        margin: 10px;
+    }
+    .course_buttons img:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+</style>

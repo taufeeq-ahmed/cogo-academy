@@ -1,3 +1,6 @@
+@import url("@cogoport/components/dist/themes/base.css");
+@import url("@cogoport/components/dist/themes/dawn.css");
+
 body, html {
     padding: 0;
     margin: 0;
@@ -52,6 +55,7 @@ h1,h2,h3,h4,h5,h6{
     display:flex;
     align-items: center;
     gap: 10px;
+    border-radius: 6px;
   }
   .tab:hover{
     background-color: var(--color-primary);

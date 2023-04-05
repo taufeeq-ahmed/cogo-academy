@@ -12,5 +12,8 @@ const server = process.env.PUBLIC_SERVER_URL;
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
-  integrations: [react()]
+  integrations: [react()],
+  define: {
+    'process.env': process.env
+  }
 });
