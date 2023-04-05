@@ -106,13 +106,14 @@ model Track {
 }
 
 model User_Article {
-    id         String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user       User    @relation(fields: [user_id], references: [user_id])
-    article    Article @relation(fields: [article_id], references: [article_id])
-    user_id    String  @db.Uuid
-    article_id String  @db.Uuid
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user       User     @relation(fields: [user_id], references: [user_id])
+    article    Article  @relation(fields: [article_id], references: [article_id])
+    user_id    String   @db.Uuid
+    article_id String   @db.Uuid
     score      Int?
     code       String?
+    updated_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 
     @@unique([user_id, article_id])
 }
