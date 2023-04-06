@@ -1,5 +1,5 @@
 import React from 'react'
-import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar'
+// import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar'
 import styles from "./styles.module.css"
 const data = [
     {
