@@ -12,30 +12,6 @@ const response = await fetch(
 const data = await response?.json();
 const ff = !data.error ? data : { userData: {}, topThreeUsersData: [] };
 const { userData, topThreeUsers, recentCourses } = ff;
-const sections = [
-    {
-        section_id: "12f1b53f-6ab2-4bd3-ba66-30e6a3eb7a47",
-        section_name: "Introduction to Go",
-        description: "Introduction to Go",
-        number_of_exercises: 0,
-        number_of_articles: 0,
-        duration_in_minutes: 0,
-        number_of_submissions: 0,
-        number_of_section_materials: 0,
-        course_id: "821fd291-c4e0-4646-882a-51d7b8dd37b6",
-    },
-    {
-        section_id: "a16be1fc-7834-4960-bf0d-178663cbd3b1",
-        section_name: "Go Basics",
-        description: "Go Basics",
-        number_of_exercises: 0,
-        number_of_articles: 0,
-        duration_in_minutes: 0,
-        number_of_submissions: 0,
-        number_of_section_materials: 0,
-        course_id: "821fd291-c4e0-4646-882a-51d7b8dd37b6",
-    },
-];
 ---
 
 <div class="dashboard">

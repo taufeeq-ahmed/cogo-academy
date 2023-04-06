@@ -1,80 +1,35 @@
 ---
 import TabsNav from "../components/TabsNav.astro";
+import MainLayout from "./MainLayout.astro";
 
 const { title, selected, courses } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
-			rel="stylesheet"
-		/>
-		<title>{title}</title>
-	</head>
-	<body>
-		<div class="root">
-			<TabsNav>
-				<a
-					href="/"
-					class={`tab ${
-						selected === "/" ? "tab_selected" : "not-selected"
-					}`}
-				>
-					Home
-				</a>
-				{
-					courses?.map((course: any) => {
-						return (
-							<a
-								href={`/${course.course_id}`}
-								class={`tab ${
-									currentPath.split("/").pop() ===
-									course.course_id
-										? "tab_selected"
-										: "not-selected"
-								}`}
-							>
-								{course.course_name}
-							</a>
-						);
-					})
-				}
-			</TabsNav>
-			<div class="main_container">
-				<slot />
-			</div>
-		</div>
-	</body>
-</html>
-<style>
-	html {
-		font-family: system-ui, sans-serif;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-			DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-	.root {
-		display: flex;
-		height: 100vh;
-	}
-	.main_container {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		padding: 0 1rem;
-		margin-top: 1.25rem;
-		max-height: 100vh;
-		overflow: auto;
-	}
-</style>
+<MainLayout title={title}>
+	<TabsNav slot="tabs">
+		<a
+			href="/"
+			class={`tab ${selected === "/" ? "tab_selected" : "not-selected"}`}
+		>
+			Home
+		</a>
+		{
+			courses?.map((course: any) => {
+				return (
+					<a
+						href={`/${course.course_id}`}
+						class={`tab ${
+							currentPath.split("/").pop() === course.course_id
+								? "tab_selected"
+								: "not-selected"
+						}`}
+					>
+						{course.course_name}
+					</a>
+				);
+			})
+		}
+	</TabsNav>
+	<slot />
+</MainLayout>

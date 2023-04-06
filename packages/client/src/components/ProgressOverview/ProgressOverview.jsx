@@ -6,8 +6,8 @@ const data = [
         "id": "Articles",
         "data": [
             {
-                "x": 150,
-                "y": 142
+                "x": 142,
+                "y": 14
             },
 
         ]
@@ -17,10 +17,8 @@ const data = [
         "data": [
             {
                 "x": 20,
-                "y": 14
+                "y": 1
             },
-
-
         ]
     },
     {
@@ -28,12 +26,22 @@ const data = [
         "data": [
             {
                 "x": 2,
-                "y": 2
+                "y": 0
             },
 
         ]
     }
 ]
+// const data = [
+//     {
+//         id: 'Fruits',
+//         data: [{ x: 'Apples', y: 32 }]
+//     },
+//     {
+//         id: 'Vegetables',
+//         data: [{ x: 'Eggplants', y: 27 }]
+//     }
+// ]
 const userCoursesData = [
     {
         course: 'HTML',
@@ -62,11 +70,10 @@ const userCoursesData = [
 
 ]
 
-const ProgressOverview = () => {
+const ProgressOverview = ({ progressData }) => {
     const userCourses = userCoursesData.map((c) => {
         return <li className={styles.course_title}>{c.course} : {c.score}</li>
     })
-    console.log(userCourses)
     return (
         <div className={styles.progress_overview} >
             <div style={{ width: '70%', }} >

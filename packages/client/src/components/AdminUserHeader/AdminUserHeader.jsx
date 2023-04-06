@@ -3,27 +3,21 @@ import styles from './styles.module.css'
 import ExercisesSVG from '/assets/exercises.svg'
 import ArticlesSVG from '/assets/articles.svg'
 import ProjectsSVG from '/assets/projects.svg'
-const userData = {
-    name: 'Taufeeq',
-    rank: 12,
-    batch: 'Batch 1',
-    track: 'React'
-}
 
-const AdminUserHeader = () => {
+const AdminUserHeader = ({ userData }) => {
     return (
         <div className={styles.adminuser_header}>
             <div className="name_rank">
                 <div className={styles.name}>
-                    {userData.name}
+                    {userData.user_name}
                 </div>
                 <div className={styles.under_text}>
-                    Rank {userData.rank}
+                    Rank {userData.user_rank}
                 </div>
             </div>
             <div className="batch_number">
                 <div className={styles.number}>
-                    {userData.batch}
+                    {userData.batch.batch_name}
                 </div>
                 <div className={styles.under_text}>
                     Batch
@@ -31,7 +25,7 @@ const AdminUserHeader = () => {
             </div>
             <div className="track_name">
                 <div className={styles.name}>
-                    {userData.track}
+                    {userData.track.track_name}
                 </div>
                 <div className={styles.under_text}>
                     Track
@@ -44,7 +38,7 @@ const AdminUserHeader = () => {
                     </div>
                     <div className="icon_text">
                         <div className={styles.number}>
-                            142
+                            {userData.number_of_exercises_done}
                         </div>
                         <div className={styles.under_text}>
                             Exercises
@@ -57,7 +51,7 @@ const AdminUserHeader = () => {
                     </div>
                     <div className="icon_text">
                         <div className={styles.number}>
-                            14
+                            {userData.number_of_articles_read}
                         </div>
                         <div className={styles.under_text}>
                             Articles
@@ -70,7 +64,7 @@ const AdminUserHeader = () => {
                     </div>
                     <div className="icon_text">
                         <div className={styles.number}>
-                            2
+                            {userData.number_of_projects_submitted}
                         </div>
                         <div className={styles.under_text}>
                             Submissions

@@ -7,7 +7,8 @@ const getUserFromDB = async (params) => {
             user_id: user_id,
         },
         include: {
-            batch: true
+            batch: true,
+            track: true
         }
     })
     return user;

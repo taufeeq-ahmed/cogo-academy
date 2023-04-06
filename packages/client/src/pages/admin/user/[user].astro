@@ -2,13 +2,18 @@
 import AdminUserHeader from "../../../components/AdminUserHeader/AdminUserHeader";
 import EditCourse from "../../../components/EditCourse/EditCourse";
 import ProgressOverview from "../../../components/ProgressOverview/ProgressOverview";
-import Layout from "../../../layouts/Layout.astro";
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+const { user } = Astro.params;
+const response = await fetch(
+    `${import.meta.env.PUBLIC_SERVER_URL}/admin/user/${user}`
+);
+const data = await response?.json();
 ---
 
-<Layout>
-    <AdminUserHeader client:load />
-    <ProgressOverview client:load />
+<AdminLayout title="Admin | User Profile Page">
+    <AdminUserHeader client:load userData={data.studentData} />
+    <ProgressOverview client:load progressData={data} />
     <EditCourse client:load />
-</Layout>
+</AdminLayout>
 
 <style></style>

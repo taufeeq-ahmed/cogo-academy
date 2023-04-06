@@ -88,7 +88,6 @@ const EditCourse = () => {
     const [course, setCourse] = useState();
     useEffect(() => {
         setCourse(courseDetails);
-        console.log(course);
     }, [])
 
     // const sectionElements = course.sections_data.map((s) => {

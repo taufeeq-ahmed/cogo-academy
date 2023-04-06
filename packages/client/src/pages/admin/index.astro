@@ -1,10 +1,27 @@
 ---
 import AdminHeader from "../../components/AdminHeader/AdminHeader";
 import StudentsTable from "../../components/StudentsTable/StudentsTable";
-import Layout from "../../layouts/Layout.astro";
+import Table from "../../components/Table/Table";
+import AdminLayout from "../../layouts/AdminLayout.astro";
+// const data = {
+//     user_name: "Admin",
+//     total_students: 213,
+//     total_batches: 12,
+//     total_projects: 21,
+// };
+const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/admin`);
+const data = await response?.json();
+console.log("dfkjsb", data);
+// const table_data = {
+//     head: ["Name", "Email", "Phone"],
+//     rows: [
+//         ["Tarun", "tarun@gmail.com", "8897702428"],
+//         ["Sai", "sai@gmail.com", "123454452"],
+//     ],
+// };
 ---
 
-<Layout>
+<AdminLayout title="Admin | Dashboard">
     <!-- <div class="admin_dashboard_courses_container">
         <div class="create_course_container">
             <div class="header_title">Courses</div>
@@ -16,9 +33,10 @@ import Layout from "../../layouts/Layout.astro";
         <EditCourse client:load showModal={showModal} />
     </div> -->
 
-    <AdminHeader />
+    <AdminHeader data={data} />
     <StudentsTable client:load />
-</Layout>
+    <!-- <Table data={table_data} client:load /> -->
+</AdminLayout>
 
 <style>
     .courses_container {

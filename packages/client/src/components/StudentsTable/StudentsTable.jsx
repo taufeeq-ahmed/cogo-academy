@@ -5,14 +5,6 @@ import { useState } from 'react'
 // import { Input } from '@cogoport/components'
 // import { IcMSearchlight } from '@cogoport/icons-react';
 
-const studentData = {
-    name: "Taufeeq Ahmed",
-    stream: 'React',
-    exercises: 31,
-    projects: 12,
-    score: 220,
-    rank: 12,
-}
 const StudentsTable = () => {
     const [studentsData, setStudentsData] = useState([])
     const trackOptions = [
@@ -57,7 +49,7 @@ const StudentsTable = () => {
         // const cols = vals.map((v) => <td>{v}</td>)
         return (
             <tr className={styles.student_row}>
-                <td>{s.user_name}</td>
+                <td><a href={`admin/user/${s.user_id}`}>{s.user_name}</a></td>
                 <td>{s.track.track_name}</td>
                 <td>{s.number_of_exercises_done}</td>
                 <td>{s.number_of_projects_submitted}</td>

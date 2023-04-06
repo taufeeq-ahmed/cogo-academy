@@ -11,6 +11,10 @@ const getFilteredUsersFromDB = async (query) => {
                 mode: 'insensitive'
             }
         },
+        include: {
+            track: true,
+            batch: true
+        },
         orderBy: {
             user_rank: 'asc'
         },

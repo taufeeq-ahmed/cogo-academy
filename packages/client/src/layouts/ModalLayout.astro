@@ -1,9 +1,9 @@
 ---
-import Layout from "./Layout.astro";
-import Button from "../components/Button/Button";
+import AdminLayout from "./AdminLayout.astro";
+const { title } = Astro.props;
 ---
 
-<Layout>
+<AdminLayout title={title}>
     <slot />
     <dialog id="modal">
         <div class="modal_header">
@@ -16,7 +16,7 @@ import Button from "../components/Button/Button";
             <slot name="modal_footer_slot" />
         </div>
     </dialog>
-</Layout>
+</AdminLayout>
 
 <style>
     #modal {
