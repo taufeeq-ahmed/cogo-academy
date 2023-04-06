@@ -1,20 +1,37 @@
 import React, { lazy, useEffect } from 'react'
 import styles from './styles.module.css'
 import { useState } from 'react'
-// import { Select } from '@cogoport/components'
-// import { Input } from '@cogoport/components'
-// import { IcMSearchlight } from '@cogoport/icons-react';
+import Table from '../Table/Table'
 
-const studentData = {
-    name: "Taufeeq Ahmed",
-    stream: 'React',
-    exercises: 31,
-    projects: 12,
-    score: 220,
-    rank: 12,
-}
 const StudentsTable = () => {
-    const [studentsData, setStudentsData] = useState([])
+    const [studentsData, setStudentsData] = useState({
+        head: ["Name", "Batch", "Track", "Exercises", "Projects", "Score", "Rank"],
+        rows: []
+    })
+    const [track, setTrack] = useState('Chocolate');
+    const [batch, setBatch] = useState('b1');
+
+    useEffect(() => {
+        fetch(`http://0.0.0.0:8080/users_by_batch/6df42c78-a742-46c4-9a1b-32c530805866`)
+            .then((res) => res.json())
+            .then((data) => {
+                const newData = data.map((user) => {
+                    const newUser = [
+                        user.user_name,
+                        user.batch.batch_name,
+                        user.track.track_name,
+                        user.number_of_exercises_done,
+                        user.number_of_projects_submitted,
+                        user.total_score,
+                        user.user_rank,
+                    ]
+                    return newUser
+                })
+                setStudentsData({ head: [...studentsData.head], rows: [...studentsData.rows, ...newData] })
+            })
+            .catch((err) => console.log(err))
+    }, [])
+
     const trackOptions = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
@@ -27,45 +44,6 @@ const StudentsTable = () => {
         { value: 'vanilla', label: 'Vanilla' },
     ];
 
-    const [track, setTrack] = useState('Chocolate');
-    const [batch, setBatch] = useState('b1');
-
-    useEffect(() => {
-        fetch(`http://0.0.0.0:8080/users_by_batch/6df42c78-a742-46c4-9a1b-32c530805866`)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                setStudentsData(data)
-            })
-            .catch((err) => console.log(err))
-    }, [])
-
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    // studentsData.push(studentData);
-    const studentRows = studentsData?.map((s) => {
-        // const vals = Object.values(s);
-        // console.log(vals)
-        // const cols = vals.map((v) => <td>{v}</td>)
-        return (
-            <tr className={styles.student_row}>
-                <td>{s.user_name}</td>
-                <td>{s.track.track_name}</td>
-                <td>{s.number_of_exercises_done}</td>
-                <td>{s.number_of_projects_submitted}</td>
-                <td>{s.total_score}</td>
-                <td>{s.user_rank}</td>
-            </tr>
-        )
-    })
     const handleTrackChange = (e) => {
         setTrack(e.target.value)
     }
@@ -107,23 +85,7 @@ const StudentsTable = () => {
                     </div>
                 </div>
             </div>
-            <div className='students_table_rows'>
-                <table className='table'>
-                    <thead>
-                        <tr className={styles.heading_row}>
-                            <th>Name</th>
-                            <th>Track</th>
-                            <th>Exercises</th>
-                            <th>Projects</th>
-                            <th>Score</th>
-                            <th>Rank</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {studentRows}
-                    </tbody>
-                </table>
-            </div>
+            <Table data={studentsData} />
         </div>
     )
 }

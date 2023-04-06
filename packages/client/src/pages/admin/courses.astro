@@ -8,10 +8,9 @@ const response = await fetch(
 );
 const resp = await response?.json();
 const data = !resp.error ? resp : [];
-console.log("The data is ", data);
 ---
 
-<ModalLayout>
+<ModalLayout title="Admin | Courses">
     <div class="admin_dashboard_courses_container">
         <div class="create_course_container">
             <div class="header_title">Courses</div>

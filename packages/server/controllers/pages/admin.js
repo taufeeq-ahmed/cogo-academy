@@ -1,12 +1,13 @@
 const { prisma } = require("../../helpers/db-client");
-const getBatchFromDB = require("../batch/get");
+const getAllBatchesFromDB = require("../batch/list");
 const getLeaderBoardByBatchFromDB = require("../user/leaderboard")
 
 const getAdminPageDataFromDB = async (params) => {
 
     params.rank_lte = 5;
 
-    const batch = await getBatchFromDB(params)
+    const batches = await getAllBatchesFromDB(params)
+    params.batch_id = batches[0].batch_id
     const leaderBoardByBatchData = await getLeaderBoardByBatchFromDB(params)
     const studentsCount = await prisma.user.count({
         where: {
@@ -16,7 +17,7 @@ const getAdminPageDataFromDB = async (params) => {
     const batchCount = await prisma.batch.count()
     const courseCount = await prisma.course.count()
 
-    return { batch, leaderBoardByBatchData, studentsCount, batchCount, courseCount }
+    return { batch: batches[0], leaderBoardByBatchData, studentsCount, batchCount, courseCount }
 
 }
 

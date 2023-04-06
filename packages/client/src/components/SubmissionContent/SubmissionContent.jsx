@@ -5,11 +5,6 @@ const SubmissionContent = ({ submissionContent, github_username = "sumit" }) => 
     const { submission_name, submission_description, submission_url, submission_id } = submissionContent;
     const [url, setURL] = useState(submission_url);
 
-
-
-
-
-    console.log(submissionContent, "dhjbchdc")
     const handleUrlInput = (e) => {
         setURL(e.target.value);
     }

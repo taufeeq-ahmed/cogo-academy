@@ -13,7 +13,6 @@ const response = await fetch(
 );
 const resp = await response?.json();
 const data = !resp.error ? resp : [];
-console.log("The data is ", data);
 const getNextArticle = (all_articles: any[], articleId: any) => {
     let next_article = "/";
     all_articles?.forEach((article, i) => {

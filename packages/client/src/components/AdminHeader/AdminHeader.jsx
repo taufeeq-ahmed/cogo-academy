@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import ProfileSVG from '/assets/Profile.svg'
 import BatchesSVG from '/assets/batches.svg'
 import CoursesSVG from '/assets/courses.svg'
-const AdminHeader = () => {
+const AdminHeader = ({ data }) => {
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var today = new Date();
     var date = today.getDate() + ' ' + (months[today.getMonth() + 1]) + ' ' + today.getFullYear();
@@ -11,7 +11,7 @@ const AdminHeader = () => {
         <div className={styles.admin_header}>
             <div className="admin_details">
                 <div className={styles.welcome_text}>
-                    Welcome Back Shivom !
+                    Welcome Back {data.user_name} !
                 </div>
                 <div className="current_date">
                     {date}
@@ -22,7 +22,7 @@ const AdminHeader = () => {
                     <div className={styles.icon_container}><img src={ProfileSVG} alt="profile" className={styles.icon} /></div>
                     <div>
                         <div className={styles.number}>
-                            142
+                            {data.studentsCount}
                         </div>
                         Students
                     </div>
@@ -33,7 +33,7 @@ const AdminHeader = () => {
 
                     <div>
                         <div className={styles.number}>
-                            12
+                            {data.batchCount}
                         </div>
                         Batches
                     </div>
@@ -43,9 +43,9 @@ const AdminHeader = () => {
 
                     <div>
                         <div className={styles.number}>
-                            2
+                            {data.courseCount}
                         </div>
-                        Projects
+                        Courses
                     </div>
                 </div>
             </div>
