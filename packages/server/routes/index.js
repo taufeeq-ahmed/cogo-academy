@@ -56,7 +56,7 @@ const getStudentProfilePageData = require("./pages/adminStudentProfile");
 const addReadArticle = require("./user_article/add");
 const getReadArticle = require("./user_article/get");
 const getReadArticlesByUser = require("./user_article/getArticlesByUser");
-
+const forgotPassword=require("./auth/forgotPassword");
 const registerRoutes = async (fastify) => {
     const userRoutes = async (fastify) => {
         await addUser(fastify);
@@ -147,6 +147,10 @@ const registerRoutes = async (fastify) => {
         await getStudentProfilePageData(fastify)
     }
     await pageRoutes(fastify);
+    const authRoutes = async (fastify) => {
+        await forgotPassword(fastify);
+    }
+    await authRoutes(fastify);
 }
 
 module.exports = registerRoutes;
