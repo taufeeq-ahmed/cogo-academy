@@ -123,3 +123,12 @@ model UserAuth {
     otp                          String
     created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
+model User_Invites {
+	id 						String @db.Uuid @id @default(dbgenerated("gen_random_uuid()"))
+	user_id					String @db.Uuid
+	email					String @unique
+	token					String
+	created_on				DateTime @db.Timestamptz(3) @default(dbgenerated("now()"))
+	@@map("user_invites")
+	@@unique([email,token])
+}
