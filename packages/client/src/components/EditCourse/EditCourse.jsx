@@ -82,28 +82,14 @@ import Dropdown from '../DropDown/Dropdown'
 //     )
 // }
 
-const EditCourse = () => {
+const EditCourse = ({ courseData }) => {
 
-    const [score, setScore] = useState(0);
-    const options = [
-        { value: "green", label: "Green" },
-        { value: "blue", label: "Blue" },
-        { value: "red", label: "Red" },
-    ]
-    useEffect(() => {
-        setScore((s) => s + 10)
-    }, [])
+    const [courseName, setCourseName] = useState();
+    const [courseDescription, setCourseDescription] = useState();
 
-    const handleClick = () => {
-        alert("hello")
-        setScore((s) => s + 1)
-    }
     return (
-        <div className='add_game' style={{ width: '50vw' }}>
-            <p>The score is : {score}</p>
-            <Dropdown placeHolder={"Select .."} options={options} />
-            {/* <Button variant="contained" onClick={handleClick} text='clink + ' /> */}
-            <Button onClick={handleClick} variant="contained">Hello World</Button>
+        <div className="edit_course">
+            
         </div>
     )
 
