@@ -12,7 +12,7 @@ model User {
     user_name                    String
     email                        String            @unique
     password                     String
-    github_username              String
+    github_username              String?
     total_score                  Int?              @default(0)
     created_on                   DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
     updated_on                   DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
