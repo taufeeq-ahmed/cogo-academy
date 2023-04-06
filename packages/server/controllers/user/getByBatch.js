@@ -8,7 +8,8 @@ const getUserByBatchFromDB = async (params) => {
                 batch_id: batch_id
             },
             include: {
-                track: true
+                track: true,
+                batch: true
             }
         }
     )
