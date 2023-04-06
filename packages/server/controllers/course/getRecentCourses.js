@@ -15,7 +15,6 @@ const getRecentCoursesFromDB = async (params) => {
                 }
             }
         },
-        take: 2
     })
     const uniqueSections = new Set()
     const filteredRecentCourses = recentCourses.filter((course) => {
@@ -23,7 +22,7 @@ const getRecentCoursesFromDB = async (params) => {
         uniqueSections.add(course.article.section.section_id);
         return !fl
     })
-    console.log("fdfs", filteredRecentCourses)
+    console.log("fdfs", filteredRecentCourses[2])
     return filteredRecentCourses;
 };
 module.exports = getRecentCoursesFromDB;

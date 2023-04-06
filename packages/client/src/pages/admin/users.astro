@@ -1,8 +1,10 @@
 ---
+import StudentsTable from "../../components/StudentsTable/StudentsTable";
 import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
 ---
 
 <AdminLayout title="Admin | Students">
     <TableStudents client:load />
+    <!-- <StudentsTable batches={[]} tracks={[]} /> -->
 </AdminLayout>
