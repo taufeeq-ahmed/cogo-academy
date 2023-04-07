@@ -1,22 +1,22 @@
 const { prisma } = require("../../helpers/db-client");
 const bcrypt = require("bcrypt");
-const addUserToDB = require("../../controllers/user/add");
 const signUpUser = async (fastify) => {
-    fastify.post("/users/sign-up", async (req, res) => {
-        const password = req.body.password;
-        const hashedPassword = await bcrypt.hash(password, 10);
-        req.body.password = hashedPassword;
-        // console.log(password);
-        // console.log(req.body.password);
+    fastify.post('/users/register', async (req, res) => {
+        const { user_name, email, password } = req.body
+
+        // Hash the password using bcrypt
+        const hashedPassword = await bcrypt.hash(password, 10)
+
+        // Insert the user's credentials into the database
         try {
-            const newUser = await addUserToDB(req.body);
+            const newUser = await prisma.user.create({ data: { user_name, email, password: hashedPassword } })
             res.send(newUser);
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            res.status(500).send('Error registering user')
         }
-
-    });
-
+    })
 }
+
+
 
 module.exports = signUpUser;

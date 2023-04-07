@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/cors": "^8.2.1",
+    "@fastify/jwt": "^6.7.1",
     "@fastify/formbody": "^7.4.0",
     "@prisma/client": "^4.11.0",
     "aws-sdk": "^2.1351.0",

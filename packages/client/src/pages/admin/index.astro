@@ -9,7 +9,7 @@ console.log("dfkjsb", data);
 
 <AdminLayout title="Admin | Dashboard">
     <AdminHeader data={data} />
-    <StudentsTable client:load />
+    <StudentsTable batches={data.batches} tracks={data.tracks} client:load />
 </AdminLayout>
 
 <style>

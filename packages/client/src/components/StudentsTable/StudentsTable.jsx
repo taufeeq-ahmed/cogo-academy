@@ -2,20 +2,25 @@ import React, { lazy, useEffect } from 'react'
 import styles from './styles.module.css'
 import { useState } from 'react'
 import Table from '../Table/Table'
+import Dropdown from '../DropDown/Dropdown'
 
-const StudentsTable = () => {
+
+const StudentsTable = ({ batches, tracks }) => {
     const [studentsData, setStudentsData] = useState({
         head: ["Name", "Batch", "Track", "Exercises", "Projects", "Score", "Rank"],
         rows: []
     })
-    const [track, setTrack] = useState('Chocolate');
-    const [batch, setBatch] = useState('b1');
+    const [track, setTrack] = useState(tracks[0].track_id);
+    const [batch, setBatch] = useState(batches[0].batch_id);
+    const [loading, setLoading] = useState(true)
+
 
     useEffect(() => {
-        fetch(`http://0.0.0.0:8080/users_by_batch/6df42c78-a742-46c4-9a1b-32c530805866`)
+        setLoading(true)
+        fetch(`http://0.0.0.0:8080/users_by_batch/${batch}`)
             .then((res) => res.json())
             .then((data) => {
-                const newData = data.map((user) => {
+                const newData = data?.map((user) => {
                     const newUser = [
                         user.user_name,
                         user.batch.batch_name,
@@ -28,34 +33,47 @@ const StudentsTable = () => {
                     return newUser
                 })
                 setStudentsData({ head: [...studentsData.head], rows: [...studentsData.rows, ...newData] })
+                setLoading(false)
             })
             .catch((err) => console.log(err))
-    }, [])
+    }, [batch, track])
 
-    const trackOptions = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-    ];
+    const trackOptions = tracks.map((track) => {
+        return {
+            value: track.track_id,
+            label: track.track_name
+        }
+    })
 
-    const batchOptions = [
-        { value: 'b1', label: 'Batch 1' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-    ];
+    const batchOptions = batches.map((batch) => {
+        return {
+            value: batch.batch_id,
+            label: batch.batch_name
+        }
+    })
 
-    const handleTrackChange = (e) => {
-        setTrack(e.target.value)
+    const clearTable = () => {
+        setStudentsData({
+            head: ["Name", "Batch", "Track", "Exercises", "Projects", "Score", "Rank"],
+            rows: []
+        })
     }
-    const handleBatchChange = (e) => {
-        setTrack(e.target.value)
+
+    const handleTrackChange = (selected) => {
+        clearTable()
+        setTrack(selected.value)
+    }
+    const handleBatchChange = (selected) => {
+        console.log(selected.value)
+        clearTable()
+        setBatch(selected.value)
     }
 
     return (
         <div className={styles.students_table} >
             <div className={styles.students_heading}>
                 <div className={styles.heading_text}>
-                    Students {43}
+                    Students {43} {loading && "Loading.."}
                 </div>
                 <div className={styles.heading_inputs}>
                     <div style={{ padding: 16, width: 'fit-content' }}>
@@ -66,6 +84,11 @@ const StudentsTable = () => {
                             options={trackOptions}
                             style={{ width: 300 }}
                         /> */}
+                        <Dropdown
+                            placeHolder={"Select Batch"}
+                            options={batchOptions}
+                            onChange={(selected) => handleBatchChange(selected)}
+                        />
                     </div>
                     <div style={{ padding: 16, width: 'fit-content' }}>
                         {/* <Select
@@ -75,6 +98,11 @@ const StudentsTable = () => {
                             options={batchOptions}
                             style={{ width: 300 }}
                         /> */}
+                        <Dropdown
+                            placeHolder={"Select Track"}
+                            options={trackOptions}
+                            onChange={handleTrackChange}
+                        />
                     </div>
                     <div style={{ padding: 16, width: 'fit-content' }}>
                         {/* <Input

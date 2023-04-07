@@ -12,14 +12,15 @@ const TableStudents = () => {
             .then((res) => res.json())
             .then((data) => {
                 const newData = data.map((user) => {
+                    console.log("user", user)
                     const newUser = [
-                        user.user_name,
-                        user.batch.batch_name,
-                        user.track.track_name,
-                        user.number_of_exercises_done,
-                        user.number_of_projects_submitted,
-                        user.total_score,
-                        user.user_rank,
+                        user?.user_name,
+                        user?.batch?.batch_name,
+                        user?.track?.track_name,
+                        user?.number_of_exercises_done,
+                        user?.number_of_projects_submitted,
+                        user?.total_score,
+                        user?.user_rank,
                     ]
                     return newUser
                 })
