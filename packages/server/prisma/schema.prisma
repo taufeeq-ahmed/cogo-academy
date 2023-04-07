@@ -47,7 +47,7 @@ model Section {
     Course                      Course?      @relation(fields: [course_id], references: [course_id])
     course_id                   String?      @db.Uuid
     articles                    Article[]
-    submsissions                Submission[]
+    submissions                 Submission[]
 }
 
 model Article {
@@ -74,7 +74,6 @@ model Submission {
     submission_id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     submission_name        String
     submission_description String
-    submission_url         String?
     Section                Section?          @relation(fields: [section_id], references: [section_id])
     section_id             String?           @db.Uuid
     User_Submission        User_Submission[]

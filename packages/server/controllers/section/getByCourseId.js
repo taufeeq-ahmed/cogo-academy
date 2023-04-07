@@ -6,6 +6,20 @@ const getSectionByCourseIdFromDB = async (params) => {
         where: {
             course_id: course_id
         },
+        include: {
+            articles: {
+                select: {
+                    article_id: true
+                },
+                take: 1
+            },
+            submissions: {
+                select: {
+                    submission_id: true
+                },
+                take: 1
+            }
+        }
     })
     return sections;
 };

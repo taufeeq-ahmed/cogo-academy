@@ -12,7 +12,10 @@ const Table = ({ data }) => {
             <tbody>
                 {data.rows.map((row) => {
                     return (<tr className={styles.student_row}>
-                        {row.map((col) => <td>{col}</td>)}
+                        {row.map((col) => {
+                            if (col.link) { return (<a href={col.link}><td>{col.name}</td></a>) }
+                            return <td>{col.name}</td>
+                        })}
                     </tr>)
                 })}
             </tbody>

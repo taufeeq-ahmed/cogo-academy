@@ -1,6 +1,7 @@
 ---
 import AdminHeader from "../../components/AdminHeader/AdminHeader";
 import StudentsTable from "../../components/StudentsTable/StudentsTable";
+import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
 const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/admin`);
 const data = await response?.json();
@@ -9,7 +10,7 @@ console.log("dfkjsb", data);
 
 <AdminLayout title="Admin | Dashboard">
     <AdminHeader data={data} />
-    <StudentsTable batches={data.batches} tracks={data.tracks} client:load />
+    <TableStudents client:load />
 </AdminLayout>
 
 <style>

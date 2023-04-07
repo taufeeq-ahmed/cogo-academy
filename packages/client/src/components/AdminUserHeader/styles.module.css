@@ -1,45 +1,53 @@
-.adminuser_header{
+.adminuser_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0px;
     border-bottom: 1px solid #F2F3FA;
 }
-.adminuser_header>div {
-    margin: 10px;
-}
-.name,.number{
+
+
+.name,
+.number {
     font-size: 24px;
     font-weight: 600;
 }
 
-.exercises_icon_container,.articles_icon_container,.projects_icon_container{
-    width: 40px;
-    height: 40px;
+.exercises_icon_container,
+.articles_icon_container,
+.projects_icon_container {
     background: #F2F3FA;
     border: 1px solid #F2F3FA;
     border-radius: 50%;
-    display: flex;;
+    display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px;
 }
 
-.under_text{
+.under_text {
     color: #828282;
 }
-.icon{
+
+.icon {
     width: 16px;
     height: 20px;
 }
-.exercises_number,.articles_number,.projects_number{
+
+.icon_text {
+    display: flex;
+    flex-direction: column;
+}
+
+.exercises_number,
+.articles_number,
+.projects_number {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 15px;
+    margin: 10px 20px;
 }
-.icons_details{
+
+.icons_details {
     display: flex;
-}
-.icons_details>div{
-    margin: 13px;
 }

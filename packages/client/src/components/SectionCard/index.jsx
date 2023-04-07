@@ -5,6 +5,21 @@ import LinkBtn from "../LinkBtn";
 import styles from './styles.module.css'
 
 const SectionCard = ({ section }) => {
+
+    const getLink = () => {
+        let type = "article"
+        let link_id = section.first_article_id
+        if (section.first_article_id) {
+            type = "article"
+            link_id = section.first_article_id
+        }
+        else if (section.first_submission_id) {
+            type = "submission"
+            link_id = section.first_submission_id
+        }
+        return `playground/${section?.section_id}/${type}/${link_id}`
+    }
+
     return (
         <div className={styles.section}>
             <div className={styles.imgDiv}>
@@ -67,7 +82,9 @@ const SectionCard = ({ section }) => {
                             <span>{section.duration_in_minutes} Minutes</span>
                         </div>
                     </div>
-                    <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={`playground/${section.section_id}/article/${section.first_article_id}`} />
+                    {(section.first_article_id || section.first_submission_id) ?
+                        <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={getLink()} /> :
+                        <p style={{ fontSize: '12px' }}>Coming soon..</p>}
                 </div>
             </div>
         </div >

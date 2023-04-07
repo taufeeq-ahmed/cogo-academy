@@ -1,8 +1,8 @@
-const getAllCoursesFromDB = require("../course/list")
+const getAllCoursesWithDetailsFromDB = require("../course/listWithDetails")
 
 
 const getAdminCoursesPageDataFromDB = async (params) => {
-    const coursesWithBatches = await getAllCoursesFromDB(params)
+    const coursesWithBatches = await getAllCoursesWithDetailsFromDB(params)
     return coursesWithBatches
 
 }

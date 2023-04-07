@@ -17,7 +17,7 @@ const StudentsTable = ({ batches, tracks }) => {
 
     useEffect(() => {
         setLoading(true)
-        fetch(`http://0.0.0.0:8080/users_by_batch/${batch}`)
+        fetch(`http://0.0.0.0:8080/admin/users?batch_id=${batch}`)
             .then((res) => res.json())
             .then((data) => {
                 const newData = data?.map((user) => {

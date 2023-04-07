@@ -11,11 +11,7 @@ const getAdminPageDataFromDB = async (params) => {
     const tracks = await getAllTracksFromDB(params)
     params.batch_id = batches[0].batch_id
     const leaderBoardByBatchData = await getLeaderBoardByBatchFromDB(params)
-    const studentsCount = await prisma.user.count({
-        where: {
-            batch_id: params.batch_id
-        }
-    })
+    const studentsCount = await prisma.user.count()
     const batchCount = await prisma.batch.count()
     const courseCount = await prisma.course.count()
 
