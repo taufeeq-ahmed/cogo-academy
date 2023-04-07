@@ -117,18 +117,19 @@ model User_Article {
 
     @@unique([user_id, article_id])
 }
+
 model UserAuth {
-    id                      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    email                        String 
-    otp                          String
-    created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    email      String
+    otp        String
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
-model User_Invites {
-	id 						String @db.Uuid @id @default(dbgenerated("gen_random_uuid()"))
-	user_id					String @db.Uuid
-	email					String @unique
-	token					String
-	created_on				DateTime @db.Timestamptz(3) @default(dbgenerated("now()"))
-	@@map("user_invites")
-	@@unique([email,token])
+
+model UserInvites {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    email      String   @unique
+    token      String
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+
+    @@unique([email, token])
 }

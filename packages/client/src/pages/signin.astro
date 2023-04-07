@@ -11,38 +11,42 @@ import eye from "../assets/eye.svg";
         <div class="sub_heading">
             <p>Please enter your details</p>
         </div>
-        <div>
-            <div class="section">
-                <label for="">Email</label>
-                <input type="email" class="email" placeholder="Enter your email" required/>
-            </div>
-            <div class="section">
-                <label for="">Password</label>
-                <div class="password_input">
-                    <input
-                        class="password"
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
-                    />
-                    <button id="toggle_eye" class="toggle_password"
-                        ><img
-                            src={eye}
-                            alt="Toggle Password Visibility"
-                        /></button
-                    >
+        <form action="http://0.0.0.0:8080/users/sign-in" method="post">
+            <div>
+                <div class="section">
+                    <label for="">Email</label>
+                    <input type="email" class="email" placeholder="Enter your email" required/>
+                </div>
+                <div class="section">
+                    <label for="">Password</label>
+                    <div class="password_input">
+                        <input
+                            class="password"
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                        />
+                        <button id="toggle_eye" class="toggle_password"
+                            ><img
+                                src={eye}
+                                alt="Toggle Password Visibility"
+                            /></button
+                        >
+                    </div>
+                </div>
+                <div class="forgot_link"><a href="/forgotpassword"> Forgot Password?</a></div>
+                <div class="btn">
+                    <button type="submit" class="submit">Login</button>
+                </div>
+                <div class="bottom">
+                    <span>Don't have an account? </span><a href="/signup">Register Now</a>
                 </div>
             </div>
-            <div class="forgot_link"><a href="/forgotpassword"> Forgot Password?</a></div>
-            <div class="btn">
-                <button type="submit" class="submit">Login</button>
-            </div>
-            <div class="bottom">
-                <span>Don't have an account? </span><a href="/signup">Register Now</a>
-            </div>
-        </div>
+        </form>
     </div>
 </AuthLayout>
+<script>
+</script>
 <script>
     function togglePasswordVisibility(e) {
         e.preventDefault();

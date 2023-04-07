@@ -1,13 +1,23 @@
 ---
-import AuthLayout from "../layouts/AuthLayout.astro";
+import AuthLayout from "../../layouts/AuthLayout.astro";
 import eye from "../assets/eye.svg";
+
+const { token } = Astro.params;
+
+const response = await fetch(
+    `${import.meta.env.PUBLIC_SERVER_URL}/invited_user/${token}`
+);
+const data = await response?.json();
+console.log(data);
+
+const server = import.meta.env.PUBLIC_SERVER_URL;
 ---
 
 <AuthLayout>
     <div class="signup_container">
         <div class="heading"><p>Let's get started for free</p></div>
         <div class="subheading"><p>create your account in one step</p></div>
-        <form action="/" class="fm">
+        <form action={`${server}/invited_user/${token}`} class="fm">
             <div class="section">
                 <label for="full-name">Full Name</label>
                 <input
@@ -23,7 +33,8 @@ import eye from "../assets/eye.svg";
                     type="email"
                     class="email"
                     placeholder="Enter your Email "
-                    required
+                    value={data.email}
+                    disabled
                 />
             </div>
             <div class="section">
@@ -81,7 +92,8 @@ import eye from "../assets/eye.svg";
                 <button type="submit">Create Account</button>
             </div>
             <div class="bottom">
-                <span>already have an account? </span><a href="/signin">Log In</a>
+                <span>already have an account?</span><a href="/signin">Log In</a
+                >
             </div>
         </form>
     </div>
@@ -201,7 +213,7 @@ import eye from "../assets/eye.svg";
         background-color: white;
         border: none;
     }
-    .bottom{
+    .bottom {
         width: 416px;
     }
     .bottom span {
@@ -231,8 +243,8 @@ import eye from "../assets/eye.svg";
         text-decoration-line: underline;
         color: #757575;
     }
-    button{
-        cursor:pointer;
+    button {
+        cursor: pointer;
     }
     button[type="submit"]:hover {
         background-color: rgb(199, 125, 125);
