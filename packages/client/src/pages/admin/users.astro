@@ -4,5 +4,7 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
 ---
 
 <AdminLayout title="Admin | Students">
-    <TableStudents batches={[]} tracks={[]} client:load />
+    <div style={{ marginTop: "20px", display: "flex", height: "100vh" }}>
+        <TableStudents client:load />
+    </div>
 </AdminLayout>

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^2.1.0",
+    "@cogoport/charts": "^1.0.3",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.16",

@@ -61,7 +61,7 @@ const TableStudents = () => {
                         { name: user?.batch?.batch_name },
                         { name: user?.track?.track_name },
                         { name: user?.number_of_exercises_done },
-                        { name: user?.number_of_projects_submitted },
+                        { name: user?.number_of_submissions },
                         { name: user?.total_score },
                         { name: user?.user_rank },
                     ]

@@ -7,7 +7,7 @@
         "batch": "batch-2",
         "total_score": 500,
         "number_of_exercises_done": 112,
-        "number_of_projects_submitted": 3,
+        "number_of_submissions": 3,
         "user_rank": 1
     },
     {
@@ -18,7 +18,7 @@
         "batch": "batch-2",
         "total_score": 400,
         "number_of_exercises_done": 98,
-        "number_of_projects_submitted": 3,
+        "number_of_submissions": 3,
         "user_rank": 2
     },
     {
@@ -29,7 +29,7 @@
         "batch": "batch-2",
         "total_score": 300,
         "number_of_exercises_done": 88,
-        "number_of_projects_submitted": 3,
+        "number_of_submissions": 3,
         "user_rank": 3
     },
     {
@@ -40,7 +40,7 @@
         "batch": "batch-2",
         "total_score": 100,
         "number_of_exercises_done": 68,
-        "number_of_projects_submitted": 2,
+        "number_of_submissions": 2,
         "user_rank": 7
     }
 ]

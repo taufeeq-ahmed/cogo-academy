@@ -1,6 +1,5 @@
 const getAllCoursesFromDB = require("../course/list");
 const getSectionByCourseIdFromDB = require("../section/getByCourseId");
-const getSubmissionBySectionIdFromDB = require("../submission/getBySectionId");
 
 const getLandingPageDataFromDB = async (params) => {
 

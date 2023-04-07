@@ -6,6 +6,8 @@ const cors = require('@fastify/cors')
 const { prisma } = require("./helpers/db-client");
 const registerRoutes = require("./routes");
 
+const plugins = require('./plugins');
+
 const start = async () => {
     const fastify = Fastify({
         logger: true,
@@ -26,26 +28,12 @@ const start = async () => {
         secret: 'supersecret'
     })
 
-    fastify.decorate("authenticate", async (request, reply) => {
-        try {
-            await request.jwtVerify()
-        } catch (err) {
-            reply.send(err)
-        }
-    })
-
-    // jwt user verification
-    // fastify.addHook("onRequest", async (request, reply) => {
-    //     try {
-    //         await request.jwtVerify()
-    //     } catch (err) {
-    //         reply.send(err)
-    //     }
-    // })
-
     // connect to database
     await prisma.$connect();
     fastify.log.info("Connected to Prisma");
+
+    //register all plugins
+    await fastify.register(plugins);
 
     // register all routes
     await registerRoutes(fastify);

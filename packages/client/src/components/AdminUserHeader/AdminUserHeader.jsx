@@ -64,7 +64,7 @@ const AdminUserHeader = ({ userData }) => {
                     </div>
                     <div className={styles.icon_text}>
                         <div className={styles.number}>
-                            {userData?.number_of_projects_submitted}
+                            {userData?.number_of_submissions}
                         </div>
                         <div className={styles.under_text}>
                             Submissions

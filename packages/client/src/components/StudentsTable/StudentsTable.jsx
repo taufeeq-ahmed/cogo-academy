@@ -26,7 +26,7 @@ const StudentsTable = ({ batches, tracks }) => {
                         user.batch.batch_name,
                         user.track.track_name,
                         user.number_of_exercises_done,
-                        user.number_of_projects_submitted,
+                        user.number_of_submissions,
                         user.total_score,
                         user.user_rank,
                     ]

@@ -4,7 +4,7 @@ const getSectionByCourseIdFromDB = async (params) => {
     const { course_id } = params;
     const sections = await prisma.Section.findMany({
         where: {
-            course_id: course_id
+            course_id: course_id,
         },
         include: {
             articles: {
@@ -19,6 +19,9 @@ const getSectionByCourseIdFromDB = async (params) => {
                 },
                 take: 1
             }
+        },
+        orderBy: {
+            created_on: 'desc'
         }
     })
     return sections;

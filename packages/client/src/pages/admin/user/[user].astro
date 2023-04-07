@@ -2,17 +2,35 @@
 import AdminUserHeader from "../../../components/AdminUserHeader/AdminUserHeader";
 import EditCourse from "../../../components/EditCourse/EditCourse";
 import ProgressOverview from "../../../components/ProgressOverview/ProgressOverview";
+import Table from "../../../components/Table/Table";
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 const { user } = Astro.params;
 const response = await fetch(
     `${import.meta.env.PUBLIC_SERVER_URL}/admin/user/${user}`
 );
 const data = await response?.json();
+console.log(data);
+const formatTableData = () => {
+    const tableData = {
+        head: ["Title", "Section", "Course", "Score", "Action"],
+        rows: data.readArticles.map((article) => {
+            const newArticle = [
+                { name: article?.article?.article_name },
+                { name: article?.article?.section?.section_name },
+                { name: article?.article?.section?.course?.course_name },
+                { name: article?.score },
+            ];
+            return newArticle;
+        }),
+    };
+    return tableData;
+};
 ---
 
 <AdminLayout title="Admin | User Profile Page">
     <AdminUserHeader client:load userData={data.studentData} />
-    <!-- <ProgressOverview client:load progressData={data} /> -->
+    <ProgressOverview client:load progressData={data} />
+    <Table data={formatTableData()} />
     <!-- <EditCourse client:load /> -->
 </AdminLayout>
 
