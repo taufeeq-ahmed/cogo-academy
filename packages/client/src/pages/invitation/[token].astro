@@ -1,0 +1,71 @@
+---
+import SignUp from "../../components/SignUp";
+import AuthLayout from "../../layouts/AuthLayout.astro";
+
+const { token } = Astro.params;
+
+const response = await fetch(
+    `${import.meta.env.PUBLIC_SERVER_URL}/invited_user/${token}`
+);
+const data = await response?.json();
+
+const server = import.meta.env.PUBLIC_SERVER_URL;
+---
+
+<AuthLayout>
+    <SignUp token={token} data={data.email} client:load />
+</AuthLayout>
+<!-- <script>
+    function togglePasswordVisibility(e) {
+        e.preventDefault();
+        const passwordInput = document.querySelector("#password");
+        const toggleButton = document.querySelector("#toggle_eye");
+        const isPasswordVisible = passwordInput.type === "text";
+        console.log(toggleButton);
+
+        if (isPasswordVisible) {
+            passwordInput.type = "password";
+        } else {
+            passwordInput.type = "text";
+        }
+    }
+    document.querySelectorAll("toggle_password").forEach((toggleEye) => {
+        toggleEye.addEventListener("click", togglePasswordVisibility);
+    });
+
+    const server = import.meta.env.PUBLIC_SERVER_URL;
+
+    // function clickHandler(e) {
+    //     e.preventDefault();
+    //     const form = document.getElementsByTagName("form")[0];
+    //     console.log("form", form);
+
+    //     const formdata = new FormData(form);
+    //     console.log("formdata", formdata);
+    //     // fetch(`${server}/users/register`, {
+    //     //     method: "POST",
+    //     //     body: formdata,
+    //     // })
+    //     //     .then((response) => response.json())
+    //     //     .then((data) => {
+    //     //         console.log(data);
+    //     //     })
+    //     //     .catch((error) => {
+    //     //         console.error(error);
+    //     //     });
+    // }
+    // document
+    //     .getElementById("submit_btn")
+    //     .addEventListener("click", clickHandler);
+    testForm.onsubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(testForm);
+        formData.append("email", document.getElementById("email").value);
+
+        console.log("Form Data");
+        for (let obj of formData) {
+            console.log(obj);
+        }
+    };
+</script>
+-->

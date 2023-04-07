@@ -59,10 +59,15 @@ const getReadArticlesByUser = require("./user_article/getArticlesByUser");
 const signUpUser = require("./auth/signUp");
 const signInUser = require("./auth/signIn");
 
+const forgotPassword=require("./auth/forgotPassword");
+const userInvitation = require("./user/invite");
+const getInvite = require("./user/getInvite");
+const acceptInviteUser = require("./user/acceptInvite");
 const registerRoutes = async (fastify) => {
     const authRoutes = async (fastify) => {
         await signUpUser(fastify);
         await signInUser(fastify);
+        await forgotPassword(fastify);
     }
     await authRoutes(fastify)
     const userRoutes = async (fastify) => {
@@ -154,6 +159,17 @@ const registerRoutes = async (fastify) => {
         await getStudentProfilePageData(fastify)
     }
     await pageRoutes(fastify);
+    // const authRoutes = async (fastify) => {
+    //     await forgotPassword(fastify);
+    // }
+    // await authRoutes(fastify);
+    const inviteRoutes = async (fastify) => {
+        await userInvitation(fastify);
+        await getInvite(fastify);
+        await acceptInviteUser(fastify);
+        // await signInUser(fastify);
+    }
+    await inviteRoutes(fastify);
 }
 
 module.exports = registerRoutes;

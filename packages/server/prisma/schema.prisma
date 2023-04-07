@@ -120,3 +120,19 @@ model User_Article {
 
     @@unique([user_id, article_id])
 }
+
+model UserAuth {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    email      String
+    otp        String
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model UserInvites {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    email      String   @unique
+    token      String
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+
+    @@unique([email, token])
+}
