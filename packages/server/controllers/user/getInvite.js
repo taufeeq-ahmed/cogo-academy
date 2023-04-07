@@ -1,7 +1,6 @@
 const { prisma } = require("../../helpers/db-client");
 const getInviteUser = async ({ params = {} }) => {
     const { token } = params;
-    console.log("token", token)
     const user = await prisma.UserInvites.findFirst({
         select: {
             email: true
