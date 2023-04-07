@@ -1,23 +1,13 @@
 import LogoutSVG from "/assets/logout.svg";
 import styles from './styles.module.css'
 import SearchSVG from "/assets/search.svg";
-
+import InputBox from "../InputBox/InputBox";
 const Header = ({ text, user, isSearch = false, query = "", setQuery = () => { } }) => {
 	return (
 		<div className={styles.header}>
 			<div className={styles.course_title}>{text}</div>
 			<div className={styles.header_right}>
-				{isSearch && <div className={styles.search_box}>
-					<img src={SearchSVG} alt="search-icon" />
-					<input
-						className={styles.search_input}
-						type="text"
-						id="search-bar"
-						placeholder="Search for Content"
-						value={query}
-						onChange={(e) => setQuery(e.target.value)}
-					/>
-				</div>}
+				{isSearch && <InputBox icon={SearchSVG} query={query} setQuery={setQuery} placeholder={'Search for Content'} />}
 				<div className={styles.profile_box}>
 					<div className={styles.prof_pic}>
 						<img
