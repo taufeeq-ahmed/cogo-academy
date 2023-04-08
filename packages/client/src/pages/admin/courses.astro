@@ -1,10 +1,9 @@
 ---
 import Button from "../../components/Button/Button";
-import AdminCourseCard from "../../components/AdminCourseCard.astro";
 import ModalLayout from "../../layouts/ModalLayout.astro";
-import EditCourse from "../../components/EditCourse/EditCourse";
 
-import CreateCourse from "../../components/CreateCourse/CreateCourse";
+import AddCourse from "../../components/AddCourse/AddCourse";
+import AdminCourseCard from "../../components/AdminCourseCard/AdminCourseCard";
 const response = await fetch(
     `${import.meta.env.PUBLIC_SERVER_URL}/admin/courses`
 );
@@ -21,14 +20,15 @@ const data = !resp.error ? resp : [];
         <div class="courses_container">
             {
                 data.map((course) => {
-                    return <AdminCourseCard course={course} />;
+                    return <AdminCourseCard course={course} client:load />;
                 })
             }
         </div>
     </div>
     <div slot="modal_header_slot">Edit Course</div>
     <div slot="modal_content_slot">
-        <CreateCourse client:load />
+        <AddCourse client:load />
+        <!-- <CreateCourse client:load /> -->
         <!-- <EditCourse client:load /> -->
         <!-- <AddGame client:load /> -->
     </div>

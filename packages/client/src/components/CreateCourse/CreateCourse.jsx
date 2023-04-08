@@ -4,6 +4,7 @@ import CreateSection from '../CreateSection/CreateSection';
 import styles from './styles.module.css'
 import InputBox from '../InputBox/InputBox'
 
+
 const CreateCourse = () => {
     const [course, setCourse] = useState({
         course_name: '',
