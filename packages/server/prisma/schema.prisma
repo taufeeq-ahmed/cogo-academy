@@ -8,24 +8,24 @@ datasource db {
 }
 
 model User {
-    user_id                      String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user_name                    String
-    email                        String            @unique
-    password                     String
-    github_username              String
-    total_score                  Int?              @default(0)
-    created_on                   DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
-    updated_on                   DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
-    number_of_articles_read      Int?              @default(0)
-    number_of_exercises_done     Int?              @default(0)
-    number_of_projects_submitted Int?              @default(0)
-    user_rank                    Int               @default(0)
-    batch                        Batch?            @relation(fields: [batch_id], references: [batch_id])
-    batch_id                     String?           @db.Uuid
-    track                        Track?            @relation(fields: [track_id], references: [track_id])
-    track_id                     String?           @db.Uuid
-    user_article                 User_Article[]
-    User_Submission              User_Submission[]
+    user_id                  String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_name                String
+    email                    String            @unique
+    password                 String
+    github_username          String?
+    total_score              Int?              @default(0)
+    created_on               DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    updated_on               DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    number_of_articles_read  Int?              @default(0)
+    number_of_exercises_done Int?              @default(0)
+    number_of_submissions    Int?              @default(0)
+    user_rank                Int               @default(0)
+    batch                    Batch?            @relation(fields: [batch_id], references: [batch_id])
+    batch_id                 String?           @db.Uuid
+    track                    Track?            @relation(fields: [track_id], references: [track_id])
+    track_id                 String?           @db.Uuid
+    user_article             User_Article[]
+    User_Submission          User_Submission[]
 }
 
 model Course {
@@ -44,10 +44,11 @@ model Section {
     duration_in_minutes         Int          @default(0)
     number_of_submissions       Int          @default(0)
     number_of_section_materials Int          @default(0)
-    Course                      Course?      @relation(fields: [course_id], references: [course_id])
+    course                      Course?      @relation(fields: [course_id], references: [course_id])
     course_id                   String?      @db.Uuid
     articles                    Article[]
-    submsissions                Submission[]
+    submissions                 Submission[]
+    created_on                  DateTime     @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
 model Article {
@@ -60,6 +61,7 @@ model Article {
     section_id           String?        @db.Uuid
     Links                Link[]
     user_article         User_Article[]
+    created_on           DateTime       @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
 model Link {
@@ -74,10 +76,10 @@ model Submission {
     submission_id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     submission_name        String
     submission_description String
-    submission_url         String?
     Section                Section?          @relation(fields: [section_id], references: [section_id])
     section_id             String?           @db.Uuid
     User_Submission        User_Submission[]
+    created_on             DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
 model User_Submission {
@@ -88,7 +90,6 @@ model User_Submission {
     submission_id         String     @db.Uuid
     submission_url        String
     score                 Int?
-    code                  String?
 
     @@unique([user_id, submission_id])
 }
@@ -98,12 +99,14 @@ model Batch {
     batch_name String
     user       User[]
     courses    Course[]
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
 model Track {
-    track_id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    track_id   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     track_name String
     User       User[]
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
 model User_Article {
@@ -117,11 +120,3 @@ model User_Article {
 
     @@unique([user_id, article_id])
 }
-
-// model Batch_Course {
-//     id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-//     batch_id  String? @db.Uuid
-//     course_id String  @db.Uuid
-//     Course    Course? @relation(fields: [course_id], references: [course_id])
-//     Batch     Batch?  @relation(fields: [batch_id], references: [batch_id])
-// }

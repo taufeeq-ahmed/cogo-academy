@@ -1,5 +1,5 @@
 import React from 'react'
-// import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar'
+import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar'
 import styles from "./styles.module.css"
 const data = [
     {
@@ -32,48 +32,8 @@ const data = [
         ]
     }
 ]
-// const data = [
-//     {
-//         id: 'Fruits',
-//         data: [{ x: 'Apples', y: 32 }]
-//     },
-//     {
-//         id: 'Vegetables',
-//         data: [{ x: 'Eggplants', y: 27 }]
-//     }
-// ]
-const userCoursesData = [
-    {
-        course: 'HTML',
-        score: 122,
-    },
-    {
-        course: 'CSS',
-        score: 15,
-    },
-    {
-        course: 'Ruby',
-        score: 132,
-    },
-    {
-        course: 'HTML',
-        score: 122,
-    },
-    {
-        course: 'CSS',
-        score: 15,
-    },
-    {
-        course: 'Ruby',
-        score: 132,
-    },
-
-]
 
 const ProgressOverview = ({ progressData }) => {
-    const userCourses = userCoursesData.map((c) => {
-        return <li className={styles.course_title}>{c.course} : {c.score}</li>
-    })
     return (
         <div className={styles.progress_overview} >
             <div style={{ width: '70%', }} >
@@ -108,25 +68,25 @@ const ProgressOverview = ({ progressData }) => {
                         />
                     </div>
                     <div className={styles.progress_details}>
-                        <div className="articles_progress">
+                        <div className={styles.progress_box}>
                             <div className={styles.number}>
-                                142/150
+                                {progressData.studentData.number_of_articles_read} / 210
                             </div>
                             <div className={styles.text}>
                                 Articles
                             </div>
                         </div>
-                        <div className="exercises_progress">
+                        <div className={styles.progress_box}>
                             <div className={styles.number}>
-                                14/20
+                                {progressData.studentData.number_of_exercises_done} / 32
                             </div>
                             <div className={styles.text}>
                                 Exercises
                             </div>
                         </div>
-                        <div className="exercises_progress">
+                        <div className={styles.progress_box}>
                             <div className={styles.number}>
-                                2/2
+                                {progressData.studentData.number_of_submissions} / 20
                             </div>
                             <div className={styles.text}>
                                 Submissions
@@ -135,12 +95,14 @@ const ProgressOverview = ({ progressData }) => {
                     </div>
                 </div>
             </div>
-            <div className={styles.user_courses_report} style={{ width: '40%', height: '80%', margin: '10px' }}>
+            <div className={styles.user_courses_report}>
                 <div className={styles.courses_title}>
                     Course Overview
                 </div>
                 <ol className={styles.user_courses}>
-                    {userCourses}
+                    {progressData.coursesDone.map((c) => {
+                        return <li className={styles.course_title}><div><span>{c.course_name}</span><span> {c.total_score}</span></div></li>
+                    })}
                 </ol>
             </div>
         </div>

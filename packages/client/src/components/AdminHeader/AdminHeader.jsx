@@ -20,7 +20,7 @@ const AdminHeader = ({ data }) => {
             <div className={styles.all_students_details}>
                 <div className={styles.all_students_section}>
                     <div className={styles.icon_container}><img src={ProfileSVG} alt="profile" className={styles.icon} /></div>
-                    <div>
+                    <div className={styles.stat_box}>
                         <div className={styles.number}>
                             {data.studentsCount}
                         </div>

@@ -7,7 +7,24 @@ const getReadArticlesByUserFromDB = async (params) => {
             user_id: user_id,
         },
         include: {
-            article: true
+            article: {
+                select: {
+                    article_id: true,
+                    article_name: true,
+                    section: {
+                        select: {
+                            section_id: true,
+                            section_name: true,
+                            course: {
+                                select: {
+                                    course_id: true,
+                                    course_name: true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     })
     return readArticles;

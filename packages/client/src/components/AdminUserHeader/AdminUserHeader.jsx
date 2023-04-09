@@ -9,15 +9,15 @@ const AdminUserHeader = ({ userData }) => {
         <div className={styles.adminuser_header}>
             <div className="name_rank">
                 <div className={styles.name}>
-                    {userData.user_name}
+                    {userData?.user_name}
                 </div>
                 <div className={styles.under_text}>
-                    Rank {userData.user_rank}
+                    Rank {userData?.user_rank}
                 </div>
             </div>
             <div className="batch_number">
                 <div className={styles.number}>
-                    {userData.batch.batch_name}
+                    {userData?.batch?.batch_name}
                 </div>
                 <div className={styles.under_text}>
                     Batch
@@ -25,7 +25,7 @@ const AdminUserHeader = ({ userData }) => {
             </div>
             <div className="track_name">
                 <div className={styles.name}>
-                    {userData.track.track_name}
+                    {userData?.track?.track_name}
                 </div>
                 <div className={styles.under_text}>
                     Track
@@ -36,9 +36,9 @@ const AdminUserHeader = ({ userData }) => {
                     <div className={styles.exercises_icon_container}>
                         <img src={ExercisesSVG} alt="exercises" className={styles.icon} />
                     </div>
-                    <div className="icon_text">
+                    <div className={styles.icon_text}>
                         <div className={styles.number}>
-                            {userData.number_of_exercises_done}
+                            {userData?.number_of_exercises_done}
                         </div>
                         <div className={styles.under_text}>
                             Exercises
@@ -49,9 +49,9 @@ const AdminUserHeader = ({ userData }) => {
                     <div className={styles.articles_icon_container}>
                         <img src={ArticlesSVG} alt="exercises" className={styles.icon} />
                     </div>
-                    <div className="icon_text">
+                    <div className={styles.icon_text}>
                         <div className={styles.number}>
-                            {userData.number_of_articles_read}
+                            {userData?.number_of_articles_read}
                         </div>
                         <div className={styles.under_text}>
                             Articles
@@ -62,9 +62,9 @@ const AdminUserHeader = ({ userData }) => {
                     <div className={styles.projects_icon_container}>
                         <img src={ProjectsSVG} alt="exercises" className={styles.icon} />
                     </div>
-                    <div className="icon_text">
+                    <div className={styles.icon_text}>
                         <div className={styles.number}>
-                            {userData.number_of_projects_submitted}
+                            {userData?.number_of_submissions}
                         </div>
                         <div className={styles.under_text}>
                             Submissions
