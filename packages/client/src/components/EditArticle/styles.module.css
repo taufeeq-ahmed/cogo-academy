@@ -1,0 +1,9 @@
+.editor{
+    width: 70%;
+    margin: auto;
+}
+.submit_article{
+    width: 85%;
+    display: flex;
+    justify-content: flex-end;
+}

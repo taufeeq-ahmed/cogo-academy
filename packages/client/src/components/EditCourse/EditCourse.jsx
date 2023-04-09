@@ -1,107 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../Button/Button'
-import UploadSVG from '/assets/upload.svg'
+import CreateSection from '../CreateSection/CreateSection';
 import styles from './styles.module.css'
-import Dropdown from '../DropDown/Dropdown'
 import InputBox from '../InputBox/InputBox'
+import UploadSVG from '/assets/upload.svg'
+import { useForm, useFieldArray, } from 'react-hook-form';
+import Modal from '../Modal/Modal';
 
-let courseDetails = {
-    
-}
-
-
-const EditSection = ({ section = {}, index }) => {
-
-    const [sectionData, setSectionData] = useState({
-        section_name: section.section_name,
-        section_description: section.section_description,
-        banner: section.section_banner || ''
-    })
-
-
-    const handleSectionChange = (e) => {
-        // alert(e.target.name + " hello " + e.target.value);
-        const name = e.target.name;
-        const value = e.target.value;
-
-        setSectionData((prev) => {
-            const ele = { ...prev, [name]: value };
-            courseDetails.sections_data[index] = { ...courseDetails.sections_data[index], ...ele };
-            return ele;
-        })
-
-        // alert(JSON.stringify(courseDetails))
-    }
-
-    return (
-        <div className={styles.section_details}>
-            <div className={styles.section_data}>
-                <div className={styles.section_name}>
-                    <label htmlFor="section_name" >Section Name</label>
-                    <InputBox
-                        placeholder='Section Name'
-                        name='section_name'
-                        value={sectionData.section_name}
-                        setValue={handleSectionChange}
-                        style={{ fontSize: '16px' }}
-                    />
-                </div>
-                <div className={styles.section_banner}>
-                    <input
-                        type="file"
-                        id="file_input"
-                        className={styles.file_input}
-                        hidden
-                        value={sectionData.section_banner}
-                    // name='section_banner'
-                    // setValue={handleSectionChange} 
-                    />
-                    <label htmlFor="file_input" className={styles.upload_button}>
-                        <img src={UploadSVG} alt="upload_icon" />
-                        Browse To Upload Image
-                    </label>
-                </div>
-            </div>
-            <label htmlFor="section_description">Section Description</label>
-            <InputBox
-                textarea
-                placeholder='Section Description'
-                rows={6}
-                name='section_description'
-                value={sectionData.section_description}
-                onChange={handleSectionChange}
-                style={{ fontSize: '16px' }}
-            />
-        </div>
-    )
-}
-
-
-const EditCourse = ({ courseData = {} }) => {
-    courseData = courseDetails;
-    const [course, setCourse] = useState({
-        course_name: courseData.course_name
+const EditCourse = ({ course, show, toggle }) => {
+    const { sections_data } = course;
+    const { register, control, handleSubmit, reset, watch } = useForm({
+        defaultValues: {
+            sections: sections_data
+        }
     });
-    const sectionElements = courseData.sections_data?.map((s, i) => {
-        return (
-            <EditSection section={s} index={i} />
-        )
-    })
-    const handleCourseChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        // alert("The name : " + name + " adn value is :" + value)
-        setCourse((prev) => {
-            const ele = { ...prev, [name]: value }
-            courseDetails = { ...courseData, ...ele }
-            return ele;
-        })
+    const {
+        fields,
+        append,
+        prepend,
+        remove,
+        swap,
+        move,
+        insert,
+        replace
+    } = useFieldArray({
+        control,
+        name: "sections"
+    });
 
-    }
-    const handleSubmit = async () => {
+    const onSubmit = async (data) => {
+        alert(JSON.stringify(data));
         await fetch('http://localhost:8080/course/add-with-sections', {
-            method: 'POST',
-            body: JSON.stringify(courseDetails),
+            method: 'PATCH',
+            body: JSON.stringify({ new_data: data }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
@@ -111,26 +42,94 @@ const EditCourse = ({ courseData = {} }) => {
                 alert(res);
             })
     }
+
+
     return (
-        <form className={styles.edit_course}>
-            <div className="course_deatils_inputs">
-                <label htmlFor="course_name"></label>
-                <InputBox
-                    placeholder={"Course Name"}
-                    style={{ fontSize: '16px' }}
-                    value={course.course_name}
-                    name="course_name"
-                    setValue={handleCourseChange}
-                />
-            </div>
-            <div className="sections_details">
-                {sectionElements}
-            </div>
+        <Modal isShowing={show} hide={toggle} heading={'Edit'} >
+            <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
+                <div className="course_deatils_inputs">
+                    <InputBox
+                        placeholder={"Course Name"}
+                        style={{ fontSize: '16px' }}
+                        name="course_name"
+                        register={register}
+                        registerQuery={"course_name"}
+                    />
+                </div>
+                <ul>
+                    {fields.map((item, index) => {
+                        return (
+                            <li key={item.id}>
+                                <div className={styles.section_details}>
+                                    <Button type="button" onClick={() => remove(index)} text='X' />
+                                    <div className={styles.section_data}>
+                                        <div className={styles.section_name}>
+                                            <label htmlFor="section_name" >Section Name</label>
+                                            <InputBox
+                                                placeholder='Section Name'
+                                                name='section_name'
+                                                style={{ fontSize: '16px' }}
+                                                register={register}
+                                                registerQuery={`sections.${index}.section_name`}
+                                            />
+                                        </div>
+                                        <div className={styles.section_banner}>
+                                            <input
+                                                type="file"
+                                                id="file_input"
+                                                className={styles.file_input}
+                                                hidden
+                                            // value={section.section_banner}
+                                            // name='section_banner'
+                                            // setValue={handleSectionChange} 
+                                            />
+                                            <label htmlFor="file_input" className={styles.upload_button}>
+                                                <img src={UploadSVG} alt="upload_icon" />
+                                                Browse To Upload Image
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <label htmlFor="section_description">Section Description</label>
+                                    <InputBox
+                                        textarea
+                                        placeholder='Section Description'
+                                        rows={6}
+                                        name='section_description'
+                                        style={{ fontSize: '16px' }}
+                                        register={register}
+                                        // value={section.section_description}
+                                        registerQuery={`sections.${index}.section_description`}
+                                    />
 
-            <Button text='Submit' onClick={handleSubmit} />
-        </form>
+
+                                </div>
+
+                            </li>
+
+                        );
+                    })}
+                </ul>
+                <div className={styles.control_buttons}>
+                    <Button
+                        text="+ Add Section"
+                        onClick={() => {
+                            append({ section_name: '', section_description: '', section_banner: '' });
+                        }}
+                    />
+
+                    <Button
+                        text="Reset"
+                        onClick={() =>
+                            reset({
+                                section: []
+                            })
+                        }
+                    />
+                    <Button text=' Submit ' type='submit' />
+                </div>
+            </form>
+        </Modal>
     )
-
 }
 
 export default EditCourse;

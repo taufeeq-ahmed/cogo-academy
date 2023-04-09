@@ -1,47 +1,143 @@
-import React from 'react'
-import { useState } from 'react';
-import Modal from './Modal/Modal';
-const ModalHeader = () => {
-    return (
-        <div>Header</div>
-    )
+import React from "react";
+import { useForm, useFieldArray, Controller, useWatch } from "react-hook-form";
+import ReactDOM from "react-dom";
+
+import "./styles.css";
+
+let renderCount = 0;
+
+function App() {
+  const { register, control, handleSubmit, reset, watch } = useForm({
+    defaultValues: {
+      test: [{ firstName: "Bill", lastName: "Luo" }]
+    }
+  });
+  const {
+    fields,
+    append,
+    prepend,
+    remove,
+    swap,
+    move,
+    insert,
+    replace
+  } = useFieldArray({
+    control,
+    name: "test"
+  });
+
+  const onSubmit = (data) => console.log("data", data);
+
+  // if you want to control your fields with watch
+  // const watchResult = watch("test");
+  // console.log(watchResult);
+
+  // The following is useWatch example
+  // console.log(useWatch({ name: "test", control }));
+
+  renderCount++;
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>Field Array </h1>
+      <p>The following demo allow you to delete, append, prepend items</p>
+      <span className="counter">Render Count: {renderCount}</span>
+      <ul>
+        {fields.map((item, index) => {
+          return (
+            <li key={item.id}>
+              <input
+                {...register(`test.${index}.firstName`, { required: true })}
+              />
+
+              <Controller
+                render={({ field }) => <input {...field} />}
+                name={`test.${index}.lastName`}
+                control={control}
+              />
+              
+            </li>
+          );
+        })}
+      </ul>
+      <section>
+        <button
+          type="button"
+          onClick={() => {
+            append({ firstName: "appendBill", lastName: "appendLuo" });
+          }}
+        >
+          append
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            prepend({
+              firstName: "prependFirstName",
+              lastName: "prependLastName"
+            })
+          }
+        >
+          prepend
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            insert(2, {
+              firstName: "insertFirstName",
+              lastName: "insertLastName"
+            })
+          }
+        >
+          insert at
+        </button>
+
+        <button type="button" onClick={() => swap(1, 2)}>
+          swap
+        </button>
+
+        <button type="button" onClick={() => move(1, 2)}>
+          move
+        </button>
+
+        <button
+          type="button"
+          onClick={() =>
+            replace([
+              {
+                firstName: "test1",
+                lastName: "test1"
+              },
+              {
+                firstName: "test2",
+                lastName: "test2"
+              }
+            ])
+          }
+        >
+          replace
+        </button>
+
+        <button type="button" onClick={() => remove(1)}>
+          remove at
+        </button>
+
+        <button
+          type="button"
+          onClick={() =>
+            reset({
+              test: [{ firstName: "Bill", lastName: "Luo" }]
+            })
+          }
+        >
+          reset
+        </button>
+      </section>
+
+      <input type="submit" />
+    </form>
+  );
 }
-const ModalFooter = () => {
-    return (
-        <div>Footer</div>
-    )
-}
-const Testing = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const toggleModal = () => setIsModalOpen(!isModalOpen);
-
-    return (
-        <div>
-            <button onClick={toggleModal}>Open Modal</button>
-            <Modal isShowing={isModalOpen} hide={toggleModal} heading={'Testing'} >
-                <h2>Modal Title</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolore consequuntur harum illum quod! Hic ipsum nemo optio excepturi sit velit neque ad commodi accusamus eaque. At natus quis, atque beatae laborum mollitia harum vel odio error nulla sint molestiae tempora eos a enim dolorum ullam nihil, architecto eum, praesentium aliquam earum voluptatum asperiores voluptatibus! Id fugiat at laboriosam culpa, aliquam dignissimos distinctio asperiores dolores unde, quae odit cumque omnis modi, sed recusandae eos adipisci. Atque nisi architecto omnis, dignissimos quis, placeat dolores, est nostrum voluptate beatae debitis hic! Magnam voluptatum tenetur aspernatur nam odio ad dicta obcaecati maiores reiciendis.</p>
-
-            </Modal>
-        </div >
-    );
-}
-
-export default Testing;
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);

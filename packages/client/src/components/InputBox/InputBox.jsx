@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./styles.module.css"
 
-const InputBox = ({ icon = '', value, setValue, placeholder, textarea = false, style = {}, rows = 6, name, register = {}, registerQuery = '', ...rest }) => {
+const InputBox = ({ icon = '', value, setValue = () => { }, placeholder, textarea = false, style = {}, rows = 6, name, register = () => { }, registerQuery = '', ...rest }) => {
     return (
         <div className={styles.input_box}>
             {icon !== '' && <img src={icon} alt="search-icon" />}
@@ -16,7 +16,7 @@ const InputBox = ({ icon = '', value, setValue, placeholder, textarea = false, s
                     style={style}
                     rows={rows}
                     name={name}
-                    // {...register(registerQuery)}
+                    {...register(registerQuery)}
                     {...rest}
                 />
             ) : (
@@ -29,7 +29,7 @@ const InputBox = ({ icon = '', value, setValue, placeholder, textarea = false, s
                     onChange={(e) => setValue(e)}
                     style={style}
                     name={name}
-                    // {...register(registerQuery)}
+                    {...register(registerQuery)}
                     {...rest}
                 // {...register(name)}
                 />

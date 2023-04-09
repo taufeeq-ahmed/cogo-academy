@@ -4,23 +4,44 @@ import CreateSection from '../CreateSection/CreateSection';
 import styles from './styles.module.css'
 import InputBox from '../InputBox/InputBox'
 import UploadSVG from '/assets/upload.svg'
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray, } from 'react-hook-form';
+
 const AddCourse = () => {
-
-    const defaultValues = {
-        sections: [{ section_name: '', section_description: '', section_banner: '' }],
-    };
-
-    const { register, handleSubmit } = useForm({ defaultValues });
-
-    const [sections, setSections] = useState(defaultValues.sections);
+    const { register, control, handleSubmit, reset, watch } = useForm({
+        defaultValues: {
+            sections: [{ section_name: '', section_description: '', section_banner: '' }]
+        }
+    });
+    const {
+        fields,
+        append,
+        prepend,
+        remove,
+        swap,
+        move,
+        insert,
+        replace
+    } = useFieldArray({
+        control,
+        name: "sections"
+    });
 
     const onSubmit = async (data) => {
         alert(JSON.stringify(data));
+        await fetch('http://localhost:8080/course/add-with-sections', {
+            method: 'POST',
+            body: JSON.stringify(courseDetails),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => {
+                const res = response.json()
+                alert(res);
+            })
     }
-    const handleAddSection = () => {
-        setSections([...sections, { section_name: '', section_description: '', section_banner: '' }]);
-    };
+
+
     return (
         <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
             <div className="course_deatils_inputs">
@@ -32,11 +53,12 @@ const AddCourse = () => {
                     registerQuery={"course_name"}
                 />
             </div>
-            <div className="sections_details">
-                {
-                    sections?.map((section, index) => {
-                        return (
+            <ul>
+                {fields.map((item, index) => {
+                    return (
+                        <li key={item.id}>
                             <div className={styles.section_details}>
+                                <Button type="button" onClick={() => remove(index)} text='X' />
                                 <div className={styles.section_data}>
                                     <div className={styles.section_name}>
                                         <label htmlFor="section_name" >Section Name</label>
@@ -45,7 +67,7 @@ const AddCourse = () => {
                                             name='section_name'
                                             style={{ fontSize: '16px' }}
                                             register={register}
-                                            registerQuery={`sections[${index}].section_name`}
+                                            registerQuery={`sections.${index}.section_name`}
                                         />
                                     </div>
                                     <div className={styles.section_banner}>
@@ -73,15 +95,36 @@ const AddCourse = () => {
                                     style={{ fontSize: '16px' }}
                                     register={register}
                                     // value={section.section_description}
-                                    registerQuery={`sections[${index}].section_description`}
+                                    registerQuery={`sections.${index}.section_description`}
                                 />
+
+
                             </div>
-                        )
-                    })
-                }
+
+                        </li>
+
+                    );
+                })}
+            </ul>
+            <div className={styles.control_buttons}>
+                <Button
+                    text="+ Add Section"
+                    onClick={() => {
+                        append({ section_name: '', section_description: '', section_banner: '' });
+                    }}
+                />
+
+                <Button
+                    text="Reset"
+                    onClick={() =>
+                        reset({
+                            section: []
+                        })
+                    }
+                />
+                <Button text=' Submit ' type='submit' />
             </div>
-            <Button text=' + Add Section' onClick={handleAddSection} />
-            <Button text=' Submit ' type='submit' />
+
         </form>
     )
 }
