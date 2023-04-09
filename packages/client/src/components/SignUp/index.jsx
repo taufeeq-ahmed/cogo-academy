@@ -12,8 +12,6 @@ const SignUp = ({ token, data }) => {
     });
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("ooonjknjkknjjnk")
-        console.log('run')
         try {
             const response = await axios.post(`${server}/accept_invite`,
                 { body: { ...formdata, token } },
@@ -24,7 +22,7 @@ const SignUp = ({ token, data }) => {
                 }
             );
             console.log(response)
-            
+
             if (response.status === 200) {
                 window.location.href = `/signin`;
             } else {

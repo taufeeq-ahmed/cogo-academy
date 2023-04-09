@@ -3,21 +3,21 @@ import Dashboard from "../components/Dashboard.astro";
 import Header from "../components/Header/Header";
 
 import DashLayout from "../layouts/DashLayout.astro";
-const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/course/list`
-);
-const data = await response?.json();
-const courses = !data.error ? data : [];
+import { fetchData } from "../utils/common";
+
+const headers = Astro.request.headers[];
+console.log("headers", headers);
+const data = await fetchData("user-dashboard");
 ---
 
-<DashLayout title="Home - Dashboard" selected={"/"} courses={courses}>
+<DashLayout title="Home - Dashboard" selected={"/"} courses={data?.allCourses}>
   <Header
     slot="header"
-    text={"Welcome back Tarun"}
-    user={{ user_name: "Tarun", user_rank: "12" }}
+    text={`Welcome back ${data?.userData?.user_name}`}
+    user={data?.userData}
     client:load
   />
-  <Dashboard />
+  <Dashboard data={data} />
 </DashLayout>
 
 <style>

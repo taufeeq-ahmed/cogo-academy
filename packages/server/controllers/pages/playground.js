@@ -12,7 +12,6 @@ const getPlaygroundDataFromDB = async (params, type) => {
         article.done = (article.user_article.length === 0) ? false : true
     })
     const all_submissions = await getSubmissionBySectionIdFromDB(params);
-    params.user_id = "f57566b2-fc3a-4c3e-82b2-af49b0a6a070"
     if (type === 'article') {
         const { element_id } = params;
         params.article_id = element_id;

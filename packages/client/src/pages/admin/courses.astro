@@ -3,11 +3,8 @@ import Button from "../../components/Button/Button";
 import AdminCourseCard from "../../components/AdminCourseCard.astro";
 import ModalLayout from "../../layouts/ModalLayout.astro";
 import EditCourse from "../../components/EditCourse/EditCourse";
-const response = await fetch(
-    `${import.meta.env.PUBLIC_SERVER_URL}/admin/courses`
-);
-const resp = await response?.json();
-const data = !resp.error ? resp : [];
+import { fetchData } from "../../utils/common";
+const data = await fetchData(`admin/courses`);
 ---
 
 <ModalLayout title="Admin | Courses">

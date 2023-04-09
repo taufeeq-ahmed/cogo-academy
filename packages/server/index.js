@@ -33,7 +33,7 @@ const start = async () => {
     fastify.log.info("Connected to Prisma");
 
     //register all plugins
-    // await fastify.register(plugins);
+    await fastify.register(plugins);
 
     // register all routes
     await registerRoutes(fastify);

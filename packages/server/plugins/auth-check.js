@@ -1,3 +1,5 @@
+const getUserFromDB = require('../controllers/user/get');
+const { prisma } = require('../helpers/db-client');
 const { ForbiddenError } = require('../helpers/error-helper');
 
 const PUBLIC_ROUTES = [
@@ -8,12 +10,19 @@ const PUBLIC_ROUTES = [
 const authCheckPlugin = async (fastify) => {
     await fastify.addHook('preHandler', async (request, reply) => {
         const { routerPath } = request;
-        if (PUBLIC_ROUTES.includes(routerPath)) {
-            return;
-        }
+        // if (PUBLIC_ROUTES.includes(routerPath)) {
+        //     return;
+        // }
         try {
             const decoded = await request.jwtVerify(); // Verify and decode the JWT token
-            request.user = decoded; // Add the decoded payload to the request object
+            console.log("dec", decoded)
+            const user = await prisma.user.findFirst({
+                where: {
+                    email: decoded.email
+                }
+            })
+            console.log("user", user)
+            request.user = user; // Add the decoded payload to the request object
         } catch (err) {
             throw new ForbiddenError('No permission to access this route'); // Throw an error if the token is invalid or missing
         }

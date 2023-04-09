@@ -2,9 +2,8 @@
 import AdminHeader from "../../components/AdminHeader/AdminHeader";
 import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
-const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/admin`);
-const data = await response?.json();
-console.log("dfkjsb", data);
+import { fetchData } from "../../utils/common";
+const data = await fetchData("admin");
 ---
 
 <AdminLayout title="Admin | Dashboard">
