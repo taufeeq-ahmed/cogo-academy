@@ -25,7 +25,7 @@ const ContentBody = ({ element_content, next_element }) => {
     }, [])
 
     const handleMarkAsDone = () => {
-        fetch(`http://0.0.0.0:8080/user_article/f57566b2-fc3a-4c3e-82b2-af49b0a6a070/${element_content.article_id}/add`, {
+        fetch(`http://0.0.0.0:8080/user_article/${element_content.article_id}/add`, {
             method: 'POST'
         })
             // .then((res) => console.log("sdfsad", res))

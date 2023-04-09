@@ -6,7 +6,8 @@ import Table from "../../../components/Table/Table";
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 import { fetchData } from "../../../utils/common";
 const { user } = Astro.params;
-const data = await fetchData(`admin/user/${user}`);
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+const data = await fetchData(`admin/user/${user}`, token);
 const formatTableData = () => {
     const tableData = {
         head: ["Title", "Section", "Course", "Score", "Action"],

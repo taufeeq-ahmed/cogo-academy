@@ -4,7 +4,8 @@ import AdminCourseCard from "../../components/AdminCourseCard.astro";
 import ModalLayout from "../../layouts/ModalLayout.astro";
 import EditCourse from "../../components/EditCourse/EditCourse";
 import { fetchData } from "../../utils/common";
-const data = await fetchData(`admin/courses`);
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+const data = await fetchData(`admin/courses`, token);
 ---
 
 <ModalLayout title="Admin | Courses">

@@ -1,49 +1,52 @@
-import styles from './styles.module.css'
-import eye from '/assets/eye.svg'
-import { useEffect, useState } from 'react';
-import axios from 'axios'
-const SignIn=()=>{
+import React, { useState } from 'react';
+
+function SignIn() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setError(null);
+
+        try {
+            const response = await fetch('http://0.0.0.0:8080/users/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (response.ok) {
+                const { token } = await response.json();
+                console.log("token", token)
+                const expires = new Date(Date.now() + 60 * 60 * 1000); // Cookie expires in 1 hour
+                document.cookie = `token=${token}; expires=${expires.toUTCString()}; path=/`;
+            } else {
+                setError('Invalid email or password');
+            }
+        } catch (err) {
+            console.error(err);
+            setError('Something went wrong. Please try again later.');
+        }
+    };
+
     return (
-        <div className={styles.signin_container}>
-        <div className={styles.heading}>
-            <p>Welcome Back!</p>
+        <div>
+            <h1>Sign In</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label htmlFor="email">Email:</label>
+                    <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+                <div>
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                </div>
+                <button type="submit">Sign In</button>
+            </form>
+            {error && <div>{error}</div>}
         </div>
-        <div className={styles.sub_heading}>
-            <p>Please enter your details</p>
-        </div>
-        <form action="" method="post">
-            <div>
-                <div className={styles.section}>
-                    <label htmlFor="">Email</label>
-                    <input type="email" className={styles.email} placeholder="Enter your email" required/>
-                </div>
-                <div className={styles.section}>
-                    <label for="">Password</label>
-                    <div className={styles.password_input}>
-                        <input
-                            className={styles.password}
-                            type="password"
-                            id="password"
-                            placeholder="Enter your password"
-                        />
-                        <button id="toggle_eye" className={styles.toggle_password}
-                            ><img
-                                src={eye}
-                                alt="Toggle Password Visibility"
-                            /></button
-                        >
-                    </div>
-                </div>
-                <div className={styles.forgot_link}><a href="/forgotpassword"> Forgot Password?</a></div>
-                <div className={styles.btn}>
-                    <button type="submit" className={styles.submit}>Login</button>
-                </div>
-                <div className={styles.bottom}>
-                    <span>Don't have an account? </span><a href="/signup">Register Now</a>
-                </div>
-            </div>
-        </form>
-    </div>
-    )
-};
+    );
+}
+
 export default SignIn;

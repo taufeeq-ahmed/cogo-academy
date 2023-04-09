@@ -3,16 +3,17 @@ const { prisma } = require('../helpers/db-client');
 const { ForbiddenError } = require('../helpers/error-helper');
 
 const PUBLIC_ROUTES = [
-    '/',
-    '/course/list'
+    '/users/login',
+    '/users/register',
+    '/user/add'
 ];
 
 const authCheckPlugin = async (fastify) => {
     await fastify.addHook('preHandler', async (request, reply) => {
         const { routerPath } = request;
-        // if (PUBLIC_ROUTES.includes(routerPath)) {
-        //     return;
-        // }
+        if (PUBLIC_ROUTES.includes(routerPath)) {
+            return;
+        }
         try {
             const decoded = await request.jwtVerify(); // Verify and decode the JWT token
             console.log("dec", decoded)

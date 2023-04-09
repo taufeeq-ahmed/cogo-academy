@@ -3,7 +3,8 @@ import AdminHeader from "../../components/AdminHeader/AdminHeader";
 import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import { fetchData } from "../../utils/common";
-const data = await fetchData("admin");
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+const data = await fetchData("admin", token);
 ---
 
 <AdminLayout title="Admin | Dashboard">

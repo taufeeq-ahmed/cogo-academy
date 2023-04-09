@@ -11,13 +11,12 @@ export const getNextArticle1 = (all_articles, articleId) => {
     return next_article
 }
 
-
-
-export async function fetchData(url) {
+export async function fetchData(url, token) {
+    // const token = "dsadas"
     try {
         const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${url}`, {
             headers: {
-                authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJTYWkgVGFydW4iLCJlbWFpbCI6InNhaXRhcnVuc3N0QGdtYWlsLmNvbSIsImlhdCI6MTY4MDc4Mjc1N30.LKGBNau60yrLGGlTUgJcvFv5lJoDj3LWe1gD1uKQkbk`
+                authorization: `Bearer ${token}`
             }
         });
         if (!response.ok) {

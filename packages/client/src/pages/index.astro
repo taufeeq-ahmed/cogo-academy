@@ -5,9 +5,12 @@ import Header from "../components/Header/Header";
 import DashLayout from "../layouts/DashLayout.astro";
 import { fetchData } from "../utils/common";
 
-const headers = Astro.request.headers[];
-console.log("headers", headers);
-const data = await fetchData("user-dashboard");
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+
+const data = await fetchData("user-dashboard", token);
+if (!data) {
+  return Astro.redirect("/signin");
+}
 ---
 
 <DashLayout title="Home - Dashboard" selected={"/"} courses={data?.allCourses}>
@@ -29,3 +32,17 @@ const data = await fetchData("user-dashboard");
     padding: 5px;
   }
 </style>
+
+<!-- <script>
+  const parseCookie = (str) =>
+    str
+      .split(";")
+      .map((v) => v.split("="))
+      .reduce((acc, v) => {
+        acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
+        return acc;
+      }, {});
+  if (!parseCookie(document.cookie).auth) {
+    window.location = "/login";
+  }
+</script> -->

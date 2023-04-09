@@ -3,8 +3,9 @@ import CourseSections from "../components/CourseSections";
 import Layout from "../layouts/Layout.astro";
 import { fetchData } from "../utils/common";
 
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
 const { course } = Astro.params;
-const data = await fetchData(`landing/${course}`);
+const data = await fetchData(`landing/${course}`, token);
 ---
 
 <Layout
