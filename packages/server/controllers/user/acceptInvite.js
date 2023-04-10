@@ -4,9 +4,17 @@ const { prisma } = require('../../helpers/db-client');
 const acceptInvite = async ({ data = {} }) => {
     const { user_name: userName, email, password, github_username: gitUserName, token } = data.body;
 
-    console.log("data", data)
+    const check = await prisma.userInvites.findUnique({
+        where: {
+            email: email
+        }
+    })
 
-    const user = await prisma.user.findFirst({
+    if (!check) {
+        return ({ message: 'Not invited' });
+    }
+
+    const user = await prisma.user.findUnique({
         where: {
             email: email,
         }
@@ -32,7 +40,7 @@ const acceptInvite = async ({ data = {} }) => {
     console.log("new user", createuser)
 
 
-    const deleteUserInvite = await prisma.UserInvites.delete({
+    const deleteUserInvite = await prisma.userInvites.delete({
         where: {
             email: email
         }

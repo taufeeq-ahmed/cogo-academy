@@ -5,7 +5,8 @@ const signInUser = async (fastify) => {
         const { email, password } = req.body
 
         // Query the database for the user's credentials
-        const user = await prisma.user.findUnique({
+        console.log("email", email, "password", password)
+        const user = await prisma.user.findFirst({
             where: {
                 email: email
             }
@@ -27,7 +28,6 @@ const signInUser = async (fastify) => {
 
         // Generate a JWT with the user's information
         const token = fastify.jwt.sign({ user_name: user.user_name, email })
-        // const token = true
 
         // Return the JWT to the client
         res.send({ token })

@@ -7,6 +7,7 @@ import Button from '../Button/Button'
 import SubmissionContent from '../SubmissionContent/SubmissionContent'
 import styles from './styles.module.css'
 import axios from 'axios'
+import instance from '../../utils/axios'
 
 const ContentBody = ({ element_content, next_element }) => {
     const [disabled, setDisabled] = useState(true)
@@ -26,15 +27,9 @@ const ContentBody = ({ element_content, next_element }) => {
     }, [])
 
     const handleMarkAsDone = () => {
-        axios.post(`http://0.0.0.0:8080/user_article/${element_content.article_id}/add`, {}, {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            withCredentials: true
-        })
-            // .then((res) => console.log("sdfsad", res))
-            // .then(() => window.location.href = next_element)
+
+        instance.post(`/user_article/${element_content.article_id}/add`)
+            .then(() => window.location.href = next_element)
             .catch((err) => console.log("error", err))
     }
     let contentElement;

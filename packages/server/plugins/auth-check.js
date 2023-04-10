@@ -4,21 +4,28 @@ const { ForbiddenError } = require('../helpers/error-helper');
 const PUBLIC_ROUTES = [
     '/users/login',
     '/users/register',
-    '/user/add'
+    '/invite_user',
+    '/invited_user/:token',
+    '/accept_invite'
 ];
 
 const authCheckPlugin = async (fastify) => {
     await fastify.addHook('preHandler', async (request, reply) => {
         const { routerPath } = request;
-        // if (PUBLIC_ROUTES.includes(routerPath)) {
-        //     return;
-        // }
+        console.log(PUBLIC_ROUTES.includes(routerPath), routerPath)
+        if (PUBLIC_ROUTES.includes(routerPath)) {
+            return;
+        }
         try {
             // const decoded = await request.jwtVerify(); // Verify and decode the JWT token
             // console.log("dec", decoded)
             const user = await prisma.user.findFirst({
                 where: {
-                    email: 'tarun@gmail.com'
+                    email: decoded.email
+                },
+                include: {
+                    track: true,
+                    batch: true
                 }
             })
             console.log("user", user)

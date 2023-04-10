@@ -12,7 +12,6 @@ export const getNextArticle1 = (all_articles, articleId) => {
 }
 
 export async function fetchData(url, token) {
-    // const token = "dsadas"
     try {
         const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${url}`, {
             headers: {
@@ -29,4 +28,8 @@ export async function fetchData(url, token) {
         return false
         // Handle the error, such as by displaying an error message to the user
     }
+}
+
+export async function isLoggedIn(cookies){
+    
 }

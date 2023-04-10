@@ -1,7 +1,8 @@
+import axios from 'axios';
+import instance from '../../utils/axios';
 import styles from './styles.module.css'
 import eye from '/assets/eye.svg'
-import { useEffect, useState } from 'react';
-import axios from 'axios'
+import { useState } from 'react';
 const SignUp = ({ token, data }) => {
     const server = import.meta.env.PUBLIC_SERVER_URL;
     const [formdata, setFormData] = useState({
@@ -13,17 +14,9 @@ const SignUp = ({ token, data }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${server}/accept_invite`,
+            const response = await instance.post(`/accept_invite`,
                 { body: { ...formdata, token } },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    withCredentials: true
-                }
             );
-            console.log(response)
 
             if (response.status === 200) {
                 window.location.href = `/signin`;

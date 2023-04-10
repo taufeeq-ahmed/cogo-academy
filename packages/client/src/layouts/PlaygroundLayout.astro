@@ -8,6 +8,9 @@ import { fetchData } from "../utils/common";
 
 const { sectionId, elementId, type = "article" } = Astro.props;
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
 const data = await fetchData(
     `playground/${sectionId}/${type}/${elementId}`,
     token

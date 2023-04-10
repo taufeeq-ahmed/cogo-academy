@@ -20,7 +20,7 @@ const start = async () => {
     fastify.register(cors, {
         origin: '*',
         methods: ["GET", "POST", "PATCH", "DELETE"],
-        // allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+        allowedHeaders: ["Content-Type", "Authorization", "Accept"],
         credentials: true
     });
 

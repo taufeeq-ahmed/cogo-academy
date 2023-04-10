@@ -2,6 +2,10 @@
 import PlaygroundLayout from "../../../../layouts/PlaygroundLayout.astro";
 
 const { section, element, type } = Astro.params;
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
 
 console.log(section, element);
 ---

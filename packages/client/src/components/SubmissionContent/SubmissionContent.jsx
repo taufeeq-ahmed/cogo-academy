@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import axios from 'axios';
+import instance from '../../utils/axios';
 const SubmissionContent = ({ submissionContent, github_username = "sumit" }) => {
 
     const { submission_name, submission_description, submission_url, submission_id } = submissionContent;
@@ -11,18 +12,12 @@ const SubmissionContent = ({ submissionContent, github_username = "sumit" }) => 
     }
     const handleUrlSubmit = () => {
         alert("hello")
-        axios.post(`${import.meta.env.PUBLIC_SERVER_URL}/submission-link-map/add`,
+        instance.post(`/submission-link-map/add`,
             {
                 "user_id": 'ff9f9d31-3321-43da-b8b2-00063e87abd3',
                 "submission_id": submission_id,
                 "submission_url": `https://github.com/${github_username}/${url}`
             },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: true
-            }
         )
             .then((res) => {
                 console.log(res);
