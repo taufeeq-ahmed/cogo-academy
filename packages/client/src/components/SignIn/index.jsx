@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles.module.css'; // Import CSS module styles
 import instance from '../../utils/axios';
-
+import eye from '/assets/eye.svg'
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -33,9 +33,14 @@ function SignIn() {
 
     return (
         <div className={styles.container}>
-            <h1>Sign In</h1>
+            <div className={styles.heading}>
+                <p>Welcome Back!</p>
+            </div>
+            <div className={styles.sub_heading}>
+                <p>Please enter your details</p>
+            </div>
             <form onSubmit={handleSubmit} className={styles.form}>
-                <div>
+                <div className={styles.section}>
                     <label htmlFor="email" className={styles.label}>
                         Email:
                     </label>
@@ -45,25 +50,36 @@ function SignIn() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className={styles.input}
+                        className={styles.email}
                     />
                 </div>
-                <div>
+                <div className={styles.section}>
                     <label htmlFor="password" className={styles.label}>
                         Password:
                     </label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className={styles.input}
-                    />
+                    <div className={styles.password_input}>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className={styles.password}
+                        />
+                        <button id="toggle_eye" className={styles.toggle_password} 
+                        ><img
+                                src={eye}
+                                alt="Toggle Password Visibility"
+                            /></button
+                        >
+                    </div>
                 </div>
-                <button type="submit" className={styles.button}>
+                <div className={styles.forgot_link}><a href="/forgotpassword"> Forgot Password?</a></div>
+                <div className={styles.btn}>
+                <button type="submit" className={styles.submit}>
                     Sign In
                 </button>
+                </div>
             </form>
             {error && <div className={styles.error}>{error}</div>}
         </div>
