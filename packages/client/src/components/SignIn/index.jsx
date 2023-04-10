@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 function SignIn() {
@@ -10,15 +11,12 @@ function SignIn() {
         setError(null);
 
         try {
-            const response = await fetch('http://0.0.0.0:8080/users/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
+            const response = await axios.post('http://0.0.0.0:8080/users/login', { email, password }, {
             });
 
-            if (response.ok) {
-                const { token } = await response.json();
-                console.log("token", token)
+            if (response.status === 200) {
+                const { token } = response.data;
+                console.log("token", token);
                 const expires = new Date(Date.now() + 60 * 60 * 1000); // Cookie expires in 1 hour
                 document.cookie = `token=${token}; expires=${expires.toUTCString()}; path=/`;
             } else {
@@ -28,6 +26,7 @@ function SignIn() {
             console.error(err);
             setError('Something went wrong. Please try again later.');
         }
+
     };
 
     return (

@@ -14,13 +14,12 @@ const start = async () => {
         querystringParser: (str) => qs.parse(str),
     });
 
-    // fastify.register(require('./plugins/auth-plugin'))
-
     // cors
     fastify.register(cors, {
-        origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+        origin: 'http://127.0.0.1:3000',
+        methods: ["GET", "POST", "PATCH", "DELETE"],
+        // allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+        credentials: true
     });
 
     // jwt

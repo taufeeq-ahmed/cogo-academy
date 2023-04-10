@@ -1,8 +1,7 @@
 const { prisma } = require("../../helpers/db-client");
 
-const getReadArticleFromDB = async (params, req) => {
-    const { user_id } = req.user
-    const { article_id } = params;
+const getReadArticleFromDB = async (params) => {
+    const { user_id, article_id } = params;
     const readArticle = await prisma.user_Article.findUnique({
         where: {
             user_id_article_id: {

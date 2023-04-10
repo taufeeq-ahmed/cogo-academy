@@ -33,6 +33,10 @@ const TableStudents = () => {
     useEffect(() => {
         setLoading(true)
         axios.get(`http://0.0.0.0:8080/admin/users`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
             params: getQueryParams()
         })
             .then((res) => res.data)

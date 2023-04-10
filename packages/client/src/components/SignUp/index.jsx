@@ -18,7 +18,9 @@ const SignUp = ({ token, data }) => {
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                    }
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    withCredentials: true
                 }
             );
             console.log(response)

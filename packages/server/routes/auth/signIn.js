@@ -5,6 +5,7 @@ const signInUser = async (fastify) => {
         const { email, password } = req.body
 
         // Query the database for the user's credentials
+        console.log("email", email, "password", password)
         const user = await prisma.user.findUnique({
             where: {
                 email: email

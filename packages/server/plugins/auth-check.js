@@ -1,4 +1,3 @@
-const getUserFromDB = require('../controllers/user/get');
 const { prisma } = require('../helpers/db-client');
 const { ForbiddenError } = require('../helpers/error-helper');
 
