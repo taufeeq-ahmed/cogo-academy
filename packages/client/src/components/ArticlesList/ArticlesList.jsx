@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import LinkBtn from '../LinkBtn';
-
+import instance from '../../utils/axios';
 const ArticlesList = ({ sectionId }) => {
     const [articles, setArticles] = useState([]);
     useEffect(() => {
         const getArticles = async () => {
-            const resp = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${sectionId}/article`)
-            const articlesData = await resp.json();
+            const resp = await instance.get(`/${sectionId}/article`)
+            const articlesData = await resp.data;
             setArticles(articlesData)
         }
 

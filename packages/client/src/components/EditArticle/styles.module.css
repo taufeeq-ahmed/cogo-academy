@@ -7,3 +7,8 @@
     display: flex;
     justify-content: flex-end;
 }
+.inputs{
+    width: 70%;
+    margin: auto;
+    display: flex;
+}

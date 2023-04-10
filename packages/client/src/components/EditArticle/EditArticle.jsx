@@ -4,6 +4,7 @@ import styles from './styles.module.css'
 import Button from '../Button/Button'
 import { useForm } from 'react-hook-form'
 import InputBox from '../InputBox/InputBox';
+import instance from '../../utils/axios';
 const EditArticle = ({ article }) => {
 
     const [text, setText] = useState('');
@@ -21,21 +22,14 @@ const EditArticle = ({ article }) => {
     const updateArticle = async (data) => {
         alert(JSON.stringify(data))
         try {
-            await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/article/${article_id}`, {
-                method: "PATCH",
-                body: JSON.stringify({
-                    new_data: {
-                        article_name: data.article_name,
-                        article_time_in_mins: data.article_time_in_mins,
-                        article_content: text,
-                        total_score: 1
-                    }
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
+            await instance.patch(`/article/${article_id}`, {
+                new_data: {
+                    article_name: data.article_name,
+                    article_time_in_mins: data.article_time_in_mins,
+                    article_content: text,
+                    total_score: 1
                 }
             })
-
         } catch (err) {
             alert(err)
         }

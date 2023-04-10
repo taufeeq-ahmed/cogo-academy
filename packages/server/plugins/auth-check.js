@@ -17,8 +17,8 @@ const authCheckPlugin = async (fastify) => {
             return;
         }
         try {
-            // const decoded = await request.jwtVerify(); // Verify and decode the JWT token
-            // console.log("dec", decoded)
+            const decoded = await request.jwtVerify(); // Verify and decode the JWT token
+            console.log("dec", decoded)
             const user = await prisma.user.findFirst({
                 where: {
                     email: decoded.email

@@ -30,6 +30,6 @@ export async function fetchData(url, token) {
     }
 }
 
-export async function isLoggedIn(cookies){
-    
+export async function isLoggedIn(cookies) {
+
 }

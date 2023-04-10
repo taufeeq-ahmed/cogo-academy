@@ -5,6 +5,7 @@ import styles from './styles.module.css'
 import InputBox from '../InputBox/InputBox'
 import UploadSVG from '/assets/upload.svg'
 import { useForm, useFieldArray, } from 'react-hook-form';
+import instance from '../../utils/axios'
 
 const AddCourse = () => {
     const { register, control, handleSubmit, reset, watch } = useForm({
@@ -29,14 +30,7 @@ const AddCourse = () => {
     const onSubmit = async (data) => {
         // alert(JSON.stringify(data))
         try {
-            await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/course/add-with-sections`, {
-                method: "POST",
-                body: JSON.stringify(data),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            })
-
+            await instance.post(`/course/add-with-sections`, data)
         } catch (err) {
             alert(err)
         }

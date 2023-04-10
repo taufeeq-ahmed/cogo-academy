@@ -4,6 +4,7 @@ import styles from './styles.module.css'
 import Button from '../Button/Button'
 import InputBox from '../InputBox/InputBox'
 import { useForm } from 'react-hook-form'
+import instance from '../../utils/axios';
 
 
 const AddArticle = ({ sectionId }) => {
@@ -14,17 +15,11 @@ const AddArticle = ({ sectionId }) => {
     const addArticle = async (data) => {
         alert(JSON.stringify(data))
         try {
-            await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/article/${sectionId}/add`, {
-                method: "POST",
-                body: JSON.stringify({
-                    article_name: data.article_name,
-                    article_time_in_mins: parseInt(data.article_time_in_mins),
-                    article_content: text,
-                    total_score: 1,
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
+            await instance.post(`/article/${sectionId}/add`, {
+                article_name: data.article_name,
+                article_time_in_mins: parseInt(data.article_time_in_mins),
+                article_content: text,
+                total_score: 1,
             })
 
         } catch (err) {

@@ -8,6 +8,7 @@ import { useForm, useFieldArray, } from 'react-hook-form';
 import Modal from '../Modal/Modal';
 import LinkBtn from '../LinkBtn';
 import ArticlesList from '../ArticlesList/ArticlesList';
+import instance from '../../utils/axios';
 const EditCourse = ({ course, show, toggle }) => {
     const { sections, course_id, course_name } = course;
 
@@ -34,17 +35,11 @@ const EditCourse = ({ course, show, toggle }) => {
 
     const onSubmit = async (data) => {
         alert(JSON.stringify(data));
-        await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
-            method: 'PATCH',
-            body: JSON.stringify({ new_data: data }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
+        await instance.patch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
+            new_data: data
         })
 
     }
-
-
 
     return (
         <Modal isShowing={show} hide={toggle} heading={'Edit'} >
