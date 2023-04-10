@@ -7,18 +7,17 @@ import UploadSVG from '/assets/upload.svg'
 import { useForm, useFieldArray, } from 'react-hook-form';
 import Modal from '../Modal/Modal';
 import LinkBtn from '../LinkBtn';
-
+import ArticlesList from '../ArticlesList/ArticlesList';
 const EditCourse = ({ course, show, toggle }) => {
     const { sections, course_id, course_name } = course;
+
     const { register, control, handleSubmit, reset } = useForm({
         defaultValues: {
             course_name: course_name,
             sections: sections
         }
     });
-    useEffect(() => {
-        // alert(JSON.stringify(course))
-    }, [])
+
     const {
         fields,
         append,
@@ -46,6 +45,7 @@ const EditCourse = ({ course, show, toggle }) => {
     }
 
 
+
     return (
         <Modal isShowing={show} hide={toggle} heading={'Edit'} >
             <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
@@ -60,7 +60,7 @@ const EditCourse = ({ course, show, toggle }) => {
                 </div>
                 <ul style={{ listStyle: 'none' }}>
                     {fields.map((item, index) => {
-                        // alert(JSON.stringify(item))
+
                         return (
                             <li key={item.id}>
                                 <div className={styles.section_details}>
@@ -104,7 +104,8 @@ const EditCourse = ({ course, show, toggle }) => {
                                         registerQuery={`sections.${index}.description`}
                                     />
 
-                                    <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} />
+                                    <ArticlesList sectionId={item.section_id} />
+                                    <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} btnStyle={{ fontSize: '20px' }} />
                                 </div>
 
                             </li>

@@ -5,6 +5,7 @@ import { fetchData } from "../utils/common";
 
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
 const { course } = Astro.params;
+alert(course);
 const data = await fetchData(`landing/${course}`, token);
 ---
 

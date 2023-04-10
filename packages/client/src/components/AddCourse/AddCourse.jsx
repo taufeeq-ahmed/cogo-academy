@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../Button/Button'
-import CreateSection from '../CreateSection/CreateSection';
+
 import styles from './styles.module.css'
 import InputBox from '../InputBox/InputBox'
 import UploadSVG from '/assets/upload.svg'

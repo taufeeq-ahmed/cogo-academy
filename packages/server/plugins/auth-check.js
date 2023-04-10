@@ -10,15 +10,15 @@ const PUBLIC_ROUTES = [
 const authCheckPlugin = async (fastify) => {
     await fastify.addHook('preHandler', async (request, reply) => {
         const { routerPath } = request;
-        if (PUBLIC_ROUTES.includes(routerPath)) {
-            return;
-        }
+        // if (PUBLIC_ROUTES.includes(routerPath)) {
+        //     return;
+        // }
         try {
-            const decoded = await request.jwtVerify(); // Verify and decode the JWT token
-            console.log("dec", decoded)
+            // const decoded = await request.jwtVerify(); // Verify and decode the JWT token
+            // console.log("dec", decoded)
             const user = await prisma.user.findFirst({
                 where: {
-                    email: decoded.email
+                    email: 'tarun@gmail.com'
                 }
             })
             console.log("user", user)

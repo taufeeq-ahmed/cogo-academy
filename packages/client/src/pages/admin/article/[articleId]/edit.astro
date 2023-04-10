@@ -1,0 +1,11 @@
+---
+import EditArticle from "../../../../components/EditArticle/EditArticle";
+const { articleId } = Astro.params;
+const response = await fetch(
+    `${import.meta.env.PUBLIC_SERVER_URL}/article/${articleId}`
+);
+const article = await response.json();
+alert(article);
+---
+
+<EditArticle client:only article={article} />

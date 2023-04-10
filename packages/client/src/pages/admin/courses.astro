@@ -3,7 +3,7 @@ import Button from "../../components/Button/Button";
 import ModalLayout from "../../layouts/ModalLayout.astro";
 import EditCourse from "../../components/EditCourse/EditCourse";
 import AdminCourseCard from "../../components/AdminCourseCard/AdminCourseCard";
-
+import AddCourse from "../../components/AddCourse/AddCourse";
 import { fetchData } from "../../utils/common";
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
 const data = await fetchData(`admin/courses`, token);
@@ -17,7 +17,7 @@ const data = await fetchData(`admin/courses`, token);
         </div>
         <div class="courses_container">
             {
-                data.map((course) => {
+                data?.map((course) => {
                     return <AdminCourseCard course={course} client:load />;
                 })
             }
@@ -26,9 +26,6 @@ const data = await fetchData(`admin/courses`, token);
     <div slot="modal_header_slot">Edit Course</div>
     <div slot="modal_content_slot">
         <AddCourse client:load />
-        <!-- <CreateCourse client:load /> -->
-        <!-- <EditCourse client:load /> -->
-        <!-- <AddGame client:load /> -->
     </div>
     <div slot="modal_footer_slot" class="modal_footer">
         <Button text="Close Modal" id={"close_modal"} />

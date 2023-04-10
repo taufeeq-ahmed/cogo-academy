@@ -61,3 +61,6 @@ input{
     display: flex;
     justify-content: flex-end;
 }
+.articles{
+    display: flex;
+}

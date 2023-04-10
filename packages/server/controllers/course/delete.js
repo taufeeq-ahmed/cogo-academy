@@ -7,6 +7,8 @@ const deleteCourseFromDB = async (params) => {
             course_id: course_id
         },
     })
+    
     return deletedCourse;
+    
 };
 module.exports =deleteCourseFromDB

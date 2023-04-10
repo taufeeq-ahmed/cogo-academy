@@ -2,26 +2,25 @@ import { useState, useEffect } from 'react';
 import { RichTextEditor } from '@mantine/rte';
 import styles from './styles.module.css'
 import Button from '../Button/Button'
-
+import InputBox from '../InputBox/InputBox'
+import { useForm } from 'react-hook-form'
 
 
 const AddArticle = ({ sectionId }) => {
 
+    const { register, handleSubmit } = useForm();
+    const onSubmit = async data => { alert(JSON.stringify(data)) };
     const [text, setText] = useState('');
-    // const getArticle = async () => {
-    //     const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/article/${articleId}`);
-    //     const article = await response.json();
-    //     setText(article)
-    // }
-    const addArticle = async () => {
+    const addArticle = async (data) => {
+        alert(JSON.stringify(data))
         try {
             await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/article/${sectionId}/add`, {
                 method: "POST",
                 body: JSON.stringify({
-                    article_name: 'DOM-INTRO',
-                    article_time_in_mins: 4,
+                    article_name: data.article_name,
+                    article_time_in_mins: parseInt(data.article_time_in_mins),
                     article_content: text,
-                    total_score: 6,
+                    total_score: 1,
                 }),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
@@ -35,6 +34,20 @@ const AddArticle = ({ sectionId }) => {
 
     return (
         <div className="edit_article">
+            <form className={styles.inputs}>
+                <InputBox
+                    register={register}
+                    registerQuery='article_name'
+                    placeholder='Article Name'
+
+                />
+                <InputBox
+                    register={register}
+                    registerQuery='article_time_in_mins'
+                    placeholder='Article Time In Minutes'
+                    type='number'
+                />
+            </form>
             <div className={styles.editor}>
                 <RichTextEditor
                     value={text}
@@ -43,7 +56,7 @@ const AddArticle = ({ sectionId }) => {
 
             </div>
             <div className={styles.submit_article}>
-                <Button text='Save Article' onClick={addArticle} />
+                <Button text='Save Article' onClick={handleSubmit(addArticle)} />
             </div>
         </div>
 
