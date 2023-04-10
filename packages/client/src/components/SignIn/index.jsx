@@ -21,7 +21,7 @@ function SignIn() {
                 console.log('token', token);
                 const expires = new Date(Date.now() + 60 * 60 * 1000); // Cookie expires in 1 hour
                 document.cookie = `cogoacademytoken=${token}; expires=${expires.toUTCString()}; path=/`;
-                window.location = '/'
+                window.location.href = '/'
             } else {
                 setError('Invalid email or password');
             }
@@ -66,7 +66,7 @@ function SignIn() {
                             required
                             className={styles.password}
                         />
-                        <button id="toggle_eye" className={styles.toggle_password} 
+                        <button id="toggle_eye" className={styles.toggle_password}
                         ><img
                                 src={eye}
                                 alt="Toggle Password Visibility"
@@ -76,9 +76,9 @@ function SignIn() {
                 </div>
                 <div className={styles.forgot_link}><a href="/forgotpassword"> Forgot Password?</a></div>
                 <div className={styles.btn}>
-                <button type="submit" className={styles.submit}>
-                    Sign In
-                </button>
+                    <button type="submit" className={styles.submit}>
+                        Sign In
+                    </button>
                 </div>
             </form>
             {error && <div className={styles.error}>{error}</div>}

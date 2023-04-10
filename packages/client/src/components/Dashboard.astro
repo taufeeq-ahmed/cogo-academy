@@ -2,6 +2,7 @@
 import ExerciseSVG from "/assets/exercises.svg";
 import ProjectSVG from "/assets/projects.svg";
 import LeaderBoardSVG from "/assets/leaderboard.svg";
+import LessonSVG from "/assets/lesson.svg";
 import Tile from "./Tile.astro";
 import SectionCard from "./SectionCard";
 const { data } = Astro.props;
@@ -21,6 +22,15 @@ const { userData, topThreeUsers, recentCourses } = ff;
             <div class="dash-stat">
                 <h1>{userData?.number_of_exercises_done}</h1>
                 <span>Exercises</span>
+            </div>
+        </div>
+        <div class="dash-box">
+            <div class="img_div">
+                <img src={LessonSVG} alt="lesson-svg" />
+            </div>
+            <div class="dash-stat">
+                <h1>{userData?.number_of_articles_read}</h1>
+                <span>Articles</span>
             </div>
         </div>
 

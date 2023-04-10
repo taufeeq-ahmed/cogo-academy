@@ -1,6 +1,10 @@
 ---
 import SignIn from "../components/SignIn";
 import AuthLayout from "../layouts/AuthLayout.astro";
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (token) {
+    return Astro.redirect("/");
+}
 ---
 
 <AuthLayout>

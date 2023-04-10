@@ -1,7 +1,9 @@
 const getAllCoursesFromDB = require("../course/list");
 const getSectionByCourseIdFromDB = require("../section/getByCourseId");
 
-const getLandingPageDataFromDB = async (params) => {
+const getLandingPageDataFromDB = async (req) => {
+
+    const { params } = req
 
     const allCourses = await getAllCoursesFromDB();
     let sections = await getSectionByCourseIdFromDB(params);
@@ -22,7 +24,7 @@ const getLandingPageDataFromDB = async (params) => {
     });
 
 
-    return { allCourses, sections: newSections }
+    return { allCourses, sections: newSections, userData: req.user }
 
 }
 
