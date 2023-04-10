@@ -14,13 +14,12 @@ const start = async () => {
         querystringParser: (str) => qs.parse(str),
     });
 
-    // fastify.register(require('./plugins/auth-plugin'))
-
     // cors
     fastify.register(cors, {
-        origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE"],
+        origin: '*',
+        methods: ["GET", "POST", "PATCH", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+        credentials: true
     });
 
     // jwt
@@ -33,7 +32,7 @@ const start = async () => {
     fastify.log.info("Connected to Prisma");
 
     //register all plugins
-    // await fastify.register(plugins);
+    await fastify.register(plugins);
 
     // register all routes
     await registerRoutes(fastify);

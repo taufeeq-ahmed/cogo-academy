@@ -9,7 +9,14 @@ const signUpUser = async (fastify) => {
 
         // Insert the user's credentials into the database
         try {
-            const newUser = await prisma.user.create({ data: { user_name, email, password: hashedPassword } })
+            const newUser = await prisma.User.create({
+                data: {
+                    user_name: user_name,
+                    email: email,
+                    password: hashedPassword,
+                    github_username: req.body.github_username
+                }
+            })
             res.send(newUser);
         } catch (error) {
             res.status(500).send('Error registering user')

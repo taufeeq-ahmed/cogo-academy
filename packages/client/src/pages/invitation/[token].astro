@@ -1,0 +1,15 @@
+---
+import SignUp from "../../components/SignUp";
+import AuthLayout from "../../layouts/AuthLayout.astro";
+import { fetchData } from "../../utils/common";
+
+const { token } = Astro.params;
+const response = await fetch(
+    `${import.meta.env.PUBLIC_SERVER_URL}/invited_user/${token}`
+);
+const data = await response?.json();
+---
+
+<AuthLayout>
+    <SignUp token={token} data={data.email} client:load />
+</AuthLayout>

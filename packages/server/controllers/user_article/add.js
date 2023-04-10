@@ -1,7 +1,8 @@
 const { prisma } = require("../../helpers/db-client");
 
-const addReadArticleToDB = async (params, body) => {
-    const { user_id, article_id } = params;
+const addReadArticleToDB = async (req) => {
+    const { user_id } = req.user
+    const { article_id } = req.params;
 
     const newReadArticle = prisma.user_Article.upsert({
         where: {

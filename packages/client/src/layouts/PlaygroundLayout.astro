@@ -4,15 +4,17 @@ import PlaygroundContent from "../components/PlaygroundContent.astro";
 import TabsNav from "../components/TabsNav.astro";
 import LinkSVG from "/assets/link.svg";
 import BookSVG from "/assets/book.svg";
+import { fetchData } from "../utils/common";
 
 const { sectionId, elementId, type = "article" } = Astro.props;
-const response = await fetch(
-    `${
-        import.meta.env.PUBLIC_SERVER_URL
-    }/playground/${sectionId}/${type}/${elementId}`
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const data = await fetchData(
+    `playground/${sectionId}/${type}/${elementId}`,
+    token
 );
-const resp = await response?.json();
-const data = !resp.error ? resp : [];
 const getNextArticle = (all_articles: any[], articleId: any) => {
     let next_article = "/";
     all_articles?.forEach((article, i) => {

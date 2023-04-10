@@ -3,6 +3,8 @@ import styles from './styles.module.css'
 import { useState } from 'react'
 import Table from '../Table/Table'
 import Dropdown from '../DropDown/Dropdown'
+import axios from 'axios'
+import instance from '../../utils/axios'
 
 
 const StudentsTable = ({ batches, tracks }) => {
@@ -17,8 +19,8 @@ const StudentsTable = ({ batches, tracks }) => {
 
     useEffect(() => {
         setLoading(true)
-        fetch(`http://0.0.0.0:8080/admin/users?batch_id=${batch}`)
-            .then((res) => res.json())
+        instance.get(`/admin/users?batch_id=${batch}`)
+            .then((res) => res.data)
             .then((data) => {
                 const newData = data?.map((user) => {
                     const newUser = [
