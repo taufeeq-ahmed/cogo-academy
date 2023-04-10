@@ -6,6 +6,7 @@ import ArticleContent from '../ArticleContent/ArticleContent'
 import Button from '../Button/Button'
 import SubmissionContent from '../SubmissionContent/SubmissionContent'
 import styles from './styles.module.css'
+import axios from 'axios'
 
 const ContentBody = ({ element_content, next_element }) => {
     const [disabled, setDisabled] = useState(true)
@@ -25,11 +26,15 @@ const ContentBody = ({ element_content, next_element }) => {
     }, [])
 
     const handleMarkAsDone = () => {
-        fetch(`http://0.0.0.0:8080/user_article/f57566b2-fc3a-4c3e-82b2-af49b0a6a070/${element_content.article_id}/add`, {
-            method: 'POST'
+        axios.post(`http://0.0.0.0:8080/user_article/${element_content.article_id}/add`, {}, {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            withCredentials: true
         })
             // .then((res) => console.log("sdfsad", res))
-            .then(() => window.location.href = next_element)
+            // .then(() => window.location.href = next_element)
             .catch((err) => console.log("error", err))
     }
     let contentElement;

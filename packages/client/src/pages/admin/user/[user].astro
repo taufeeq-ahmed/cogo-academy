@@ -4,12 +4,10 @@ import EditCourse from "../../../components/EditCourse/EditCourse";
 import ProgressOverview from "../../../components/ProgressOverview/ProgressOverview";
 import Table from "../../../components/Table/Table";
 import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { fetchData } from "../../../utils/common";
 const { user } = Astro.params;
-const response = await fetch(
-    `${import.meta.env.PUBLIC_SERVER_URL}/admin/user/${user}`
-);
-const data = await response?.json();
-console.log(data);
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+const data = await fetchData(`admin/user/${user}`, token);
 const formatTableData = () => {
     const tableData = {
         head: ["Title", "Section", "Course", "Score", "Action"],

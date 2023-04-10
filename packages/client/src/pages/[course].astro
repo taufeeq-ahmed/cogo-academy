@@ -1,13 +1,11 @@
 ---
 import CourseSections from "../components/CourseSections";
 import Layout from "../layouts/Layout.astro";
+import { fetchData } from "../utils/common";
 
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
 const { course } = Astro.params;
-const response = await fetch(
-  `${import.meta.env.PUBLIC_SERVER_URL}/landing/${course}`
-);
-const resp = await response?.json();
-const data = !resp.error ? resp : [];
+const data = await fetchData(`landing/${course}`, token);
 ---
 
 <Layout

@@ -1,15 +1,12 @@
 ---
 import Button from "../../components/Button/Button";
 import ModalLayout from "../../layouts/ModalLayout.astro";
-
-import AddCourse from "../../components/AddCourse/AddCourse";
+import EditCourse from "../../components/EditCourse/EditCourse";
 import AdminCourseCard from "../../components/AdminCourseCard/AdminCourseCard";
-const response = await fetch(
-    `${import.meta.env.PUBLIC_SERVER_URL}/admin/courses`
-);
-const resp = await response?.json();
-const data = !resp.error ? resp : [];
-console.log(data);
+
+import { fetchData } from "../../utils/common";
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+const data = await fetchData(`admin/courses`, token);
 ---
 
 <ModalLayout title="Admin | Courses">

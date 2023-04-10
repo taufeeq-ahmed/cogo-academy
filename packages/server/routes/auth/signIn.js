@@ -1,28 +1,17 @@
 const bcrypt = require("bcrypt");
 const { prisma } = require("../../helpers/db-client");
 const signInUser = async (fastify) => {
-    fastify.post('/users/login', async (req, res) => {
-        const { email, password } = req.body
-
-        // Query the database for the user's credentials
-        const user = await prisma.user.findUnique({
-            where: {
-                email: email
-            }
-        })
-
-
-        if (!user) {
-            res.status(401).send('Invalid username or password')
-            return
-        }
-
-        // Compare the password with the hashed password in the database
-        const passwordMatches = await bcrypt.compare(password, user.password)
-
-        if (!passwordMatches) {
-            res.status(401).send('Invalid username or password')
-            return
+    fastify.post("/users/sign-in", async (req, res) => {
+        console.log("In sign-in route")
+        try {
+            const user = await getUserFromDB(req.body);
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            console.log("The hashed is " + hashedPassword);
+            console.log("The password is " + user.password);
+            if (bcrypt.compare(req.body.password, hashedPassword)) res.send("valid user");
+            else res.send("Invalid user")
+        } catch (err) {
+            console.log(err);
         }
 
         // Generate a JWT with the user's information
