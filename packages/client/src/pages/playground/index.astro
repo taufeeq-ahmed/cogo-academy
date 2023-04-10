@@ -1,1 +1,8 @@
+---
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
+---
+
 <div>No id</div>

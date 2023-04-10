@@ -1,6 +1,10 @@
 ---
 import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+  return Astro.redirect("/signin");
+}
 ---
 
 <AdminLayout title="Admin | Students">

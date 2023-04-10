@@ -4,12 +4,15 @@ const { ForbiddenError } = require('../helpers/error-helper');
 const PUBLIC_ROUTES = [
     '/users/login',
     '/users/register',
-    '/user/add'
+    '/invite_user',
+    '/invited_user/:token',
+    '/accept_invite'
 ];
 
 const authCheckPlugin = async (fastify) => {
     await fastify.addHook('preHandler', async (request, reply) => {
         const { routerPath } = request;
+        console.log(PUBLIC_ROUTES.includes(routerPath), routerPath)
         if (PUBLIC_ROUTES.includes(routerPath)) {
             return;
         }
@@ -19,6 +22,10 @@ const authCheckPlugin = async (fastify) => {
             const user = await prisma.user.findFirst({
                 where: {
                     email: decoded.email
+                },
+                include: {
+                    track: true,
+                    batch: true
                 }
             })
             console.log("user", user)

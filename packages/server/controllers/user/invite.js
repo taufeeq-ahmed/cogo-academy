@@ -9,7 +9,7 @@ AWS.config.update({
 });
 const inviteUser = async ({ params = {} }) => {
 	const { email } = params;
-	const user = await prisma.User.findUnique({
+	const user = await prisma.User.findFirst({
 		where: {
 			email: email,
 		}
@@ -20,7 +20,7 @@ const inviteUser = async ({ params = {} }) => {
 	}
 
 	const token = await uid(18);
-	const invitationrequest = await prisma.UserInvites.create({
+	const invitationrequest = await prisma.userInvites.create({
 		data: {
 			token: token,
 			email: email

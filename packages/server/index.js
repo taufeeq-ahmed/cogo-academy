@@ -16,9 +16,9 @@ const start = async () => {
 
     // cors
     fastify.register(cors, {
-        origin: 'http://127.0.0.1:3000',
+        origin: '*',
         methods: ["GET", "POST", "PATCH", "DELETE"],
-        // allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+        allowedHeaders: ["Content-Type", "Authorization", "Accept"],
         credentials: true
     });
 

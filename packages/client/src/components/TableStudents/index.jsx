@@ -3,6 +3,7 @@ import Table from '../Table/Table'
 import styles from './styles.module.css'
 import Dropdown from '../DropDown/Dropdown'
 import axios from 'axios'
+import instance from '../../utils/axios'
 
 const TableStudents = () => {
     const [tableData, setTableData] = useState({
@@ -32,11 +33,7 @@ const TableStudents = () => {
 
     useEffect(() => {
         setLoading(true)
-        axios.get(`http://0.0.0.0:8080/admin/users`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            withCredentials: true,
+        instance.get(`admin/users`, {
             params: getQueryParams()
         })
             .then((res) => res.data)

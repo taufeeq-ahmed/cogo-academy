@@ -5,6 +5,9 @@ import ModalLayout from "../../layouts/ModalLayout.astro";
 import EditCourse from "../../components/EditCourse/EditCourse";
 import { fetchData } from "../../utils/common";
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
 const data = await fetchData(`admin/courses`, token);
 ---
 

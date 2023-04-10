@@ -7,6 +7,9 @@ import AdminLayout from "../../../layouts/AdminLayout.astro";
 import { fetchData } from "../../../utils/common";
 const { user } = Astro.params;
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
 const data = await fetchData(`admin/user/${user}`, token);
 const formatTableData = () => {
     const tableData = {
