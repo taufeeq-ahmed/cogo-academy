@@ -5,7 +5,7 @@ import Button from '../Button/Button'
 
 
 
-const AddArticle = ({ sectionId = '549fa7ed-4f49-4ae1-a105-ae68b3ad4e11' }) => {
+const AddArticle = ({ sectionId }) => {
 
     const [text, setText] = useState('');
     // const getArticle = async () => {

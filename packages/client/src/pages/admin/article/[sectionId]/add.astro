@@ -1,0 +1,6 @@
+---
+import AddArticle from "../../../../components/AddArticle/AddArticle";
+const { sectionId } = Astro.props;
+---
+
+<AddArticle client:only sectionId={sectionId} />

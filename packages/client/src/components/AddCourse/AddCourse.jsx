@@ -9,7 +9,7 @@ import { useForm, useFieldArray, } from 'react-hook-form';
 const AddCourse = () => {
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
-            sections: [{ section_name: '', section_description: '', section_banner: '' }]
+            sections: [{ section_name: '', description: '' }]
         }
     });
     const {
@@ -27,18 +27,19 @@ const AddCourse = () => {
     });
 
     const onSubmit = async (data) => {
-        alert(JSON.stringify(data));
-        await fetch('http://localhost:8080/course/add-with-sections', {
-            method: 'POST',
-            body: JSON.stringify(courseDetails),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => {
-                const res = response.json()
-                alert(res);
+        // alert(JSON.stringify(data))
+        try {
+            await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/course/add-with-sections`, {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
             })
+
+        } catch (err) {
+            alert(err)
+        }
     }
 
 
@@ -95,7 +96,7 @@ const AddCourse = () => {
                                     style={{ fontSize: '16px' }}
                                     register={register}
                                     // value={section.section_description}
-                                    registerQuery={`sections.${index}.section_description`}
+                                    registerQuery={`sections.${index}.description`}
                                 />
 
 
@@ -110,7 +111,7 @@ const AddCourse = () => {
                 <Button
                     text="+ Add Section"
                     onClick={() => {
-                        append({ section_name: '', section_description: '', section_banner: '' });
+                        append({ section_name: '', description: '' });
                     }}
                 />
 
@@ -118,7 +119,7 @@ const AddCourse = () => {
                     text="Reset"
                     onClick={() =>
                         reset({
-                            section: []
+                            sections: []
                         })
                     }
                 />

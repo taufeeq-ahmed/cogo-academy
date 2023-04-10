@@ -6,14 +6,19 @@ import InputBox from '../InputBox/InputBox'
 import UploadSVG from '/assets/upload.svg'
 import { useForm, useFieldArray, } from 'react-hook-form';
 import Modal from '../Modal/Modal';
+import LinkBtn from '../LinkBtn';
 
 const EditCourse = ({ course, show, toggle }) => {
-    const { sections_data } = course;
-    const { register, control, handleSubmit, reset, watch } = useForm({
+    const { sections, course_id, course_name } = course;
+    const { register, control, handleSubmit, reset } = useForm({
         defaultValues: {
-            sections: sections_data
+            course_name: course_name,
+            sections: sections
         }
     });
+    useEffect(() => {
+        // alert(JSON.stringify(course))
+    }, [])
     const {
         fields,
         append,
@@ -30,17 +35,14 @@ const EditCourse = ({ course, show, toggle }) => {
 
     const onSubmit = async (data) => {
         alert(JSON.stringify(data));
-        await fetch('http://localhost:8080/course/add-with-sections', {
+        await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
             method: 'PATCH',
             body: JSON.stringify({ new_data: data }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
-            .then(response => {
-                const res = response.json()
-                alert(res);
-            })
+
     }
 
 
@@ -56,12 +58,13 @@ const EditCourse = ({ course, show, toggle }) => {
                         registerQuery={"course_name"}
                     />
                 </div>
-                <ul>
+                <ul style={{ listStyle: 'none' }}>
                     {fields.map((item, index) => {
+                        // alert(JSON.stringify(item))
                         return (
                             <li key={item.id}>
                                 <div className={styles.section_details}>
-                                    <Button type="button" onClick={() => remove(index)} text='X' />
+                                    {/* <Button type="button" onClick={() => remove(index)} text='X' /> */}
                                     <div className={styles.section_data}>
                                         <div className={styles.section_name}>
                                             <label htmlFor="section_name" >Section Name</label>
@@ -98,10 +101,10 @@ const EditCourse = ({ course, show, toggle }) => {
                                         style={{ fontSize: '16px' }}
                                         register={register}
                                         // value={section.section_description}
-                                        registerQuery={`sections.${index}.section_description`}
+                                        registerQuery={`sections.${index}.description`}
                                     />
 
-
+                                    <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} />
                                 </div>
 
                             </li>
@@ -113,7 +116,7 @@ const EditCourse = ({ course, show, toggle }) => {
                     <Button
                         text="+ Add Section"
                         onClick={() => {
-                            append({ section_name: '', section_description: '', section_banner: '' });
+                            append({ section_name: '', description: '' });
                         }}
                     />
 

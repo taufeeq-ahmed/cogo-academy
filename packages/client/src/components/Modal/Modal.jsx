@@ -27,8 +27,7 @@ Modal.propTypes = {
     isShowing: PropTypes.bool.isRequired,
     hide: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
-    header: PropTypes.node.isRequired,
-    footer: PropTypes.node.isRequired,
+    heading: PropTypes.node.isRequired
 };
 
 export default Modal;

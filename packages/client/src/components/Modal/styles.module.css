@@ -17,9 +17,13 @@
     font-family: "PT Sans", sans-serif;
     border: 1px solid #F2F3FA;
     border-radius: 6px;
-    width: 60%;
+    /* width: fit-content; */
+    height: fit-content;
+    width: 70%;
+    
+    max-height: 90%;
+    
     margin: auto;
-    height: 90%;
     
 }
 .modal_header{
@@ -39,6 +43,7 @@
 }
 .modal_content{
     padding: 10px 20px ;
-    height: 80%;
+    max-height: calc(70vh - 30px);
     overflow: auto;
+   
 }

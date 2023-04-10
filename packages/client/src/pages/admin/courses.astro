@@ -9,6 +9,7 @@ const response = await fetch(
 );
 const resp = await response?.json();
 const data = !resp.error ? resp : [];
+console.log(data);
 ---
 
 <ModalLayout title="Admin | Courses">
