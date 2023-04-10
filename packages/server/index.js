@@ -14,6 +14,8 @@ const start = async () => {
         querystringParser: (str) => qs.parse(str),
     });
 
+    // fastify.register(require('./plugins/auth-plugin'))
+
     // cors
     fastify.register(cors, {
         origin: '*',

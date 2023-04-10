@@ -54,7 +54,7 @@ model Section {
 model Article {
     article_id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     article_name         String
-    article_time_in_mins Int            @default(0)
+    article_time_in_mins Int
     article_content      String         @db.Text
     total_score          Int
     section              Section?       @relation(fields: [section_id], references: [section_id])

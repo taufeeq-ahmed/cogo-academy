@@ -1,0 +1,14 @@
+---
+import EditArticle from "../../../../components/EditArticle/EditArticle";
+import { fetchData } from "../../../../utils/common";
+const { articleId } = Astro.params;
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const article = await fetchData(`article/${articleId}`, token);
+console.log("aricle", article);
+---
+
+<EditArticle client:only article={article} />
+

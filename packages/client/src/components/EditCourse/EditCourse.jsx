@@ -1,99 +1,137 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../Button/Button'
-import UploadSVG from '/assets/upload.svg'
+import CreateSection from '../CreateSection/CreateSection';
 import styles from './styles.module.css'
-import Dropdown from '../DropDown/Dropdown'
+import InputBox from '../InputBox/InputBox'
+import UploadSVG from '/assets/upload.svg'
+import { useForm, useFieldArray, } from 'react-hook-form';
+import Modal from '../Modal/Modal';
+import LinkBtn from '../LinkBtn';
+import ArticlesList from '../ArticlesList/ArticlesList';
+import instance from '../../utils/axios';
+const EditCourse = ({ course, show, toggle }) => {
+    const { sections, course_id, course_name } = course;
 
-// const courseDetails = {
-//     course_name: 'HTML',
-//     sections_data: [
-//         {
-//             section_name: "Web Development Basics",
-//             description: "What do web developers do? Web development could be a good profession for you if you like solving logical problems, building useful things, and experimenting with new technologies."
-//         },
-//         {
-//             section_name: "GIT Basics",
-//             description: "Git is like a really epic save button for your files and directories. Officially, Git is a version control system."
-//         },
-//         {
-//             section_name: "HTML Basics",
-//             description: "Learn the basics of HTML like Portfolio creation, tic-tac-toe game."
-//         },
-//         {
-//             section_name: "HTML Text",
-//             description: "Learn how to add links to your website. Go to a different page, website or open in new tab"
-//         },
-//         {
-//             section_name: "HTML Lists",
-//             description: "Learn to show lists in your website"
-//         },
-//         {
-//             section_name: "HTML Links and Images",
-//             description: "Learn how to add images to your websites."
-//         },
-//         {
-//             section_name: "HTML Forms",
-//             description: "Learns how to create, use and submit forms using HTML"
-//         }
-//     ]
-// }
-// const EditSection = ({ section_name = '', section_description = '', section_banner = '' }) => {
-//     const [sectionName, setSectionName] = useState(section_name);
-//     const [sectionDescription, setSectionDescription] = useState(section_description);
-//     const [banner, setBanner] = useState(section_banner);
+    const { register, control, handleSubmit, reset } = useForm({
+        defaultValues: {
+            course_name: course_name,
+            sections: sections
+        }
+    });
 
-//     return (
-//         <div className={styles.section_details}>
-//             <div className={styles.section_data}>
-//                 <div className="section_name">
-//                     <label htmlFor="section_name" >Section Name</label>
-//                     <Input
-//                         placeholder='Course Name'
-//                         size='md'
-//                         style={{ width: '500px' }}
-//                         name='section_name'
-//                         value={sectionName}
-//                         onChange={(e) => { setSectionName(e.target.value) }} />
-//                 </div>
-//                 <div className={styles.section_banner}>
-//                     <input
-//                         type="file"
-//                         id="file_input"
-//                         className={styles.file_input}
-//                         hidden
-//                         value={banner}
-//                         onChange={(e) => { setBanner(e.target.value) }} />
-//                     <label htmlFor="file_input" className={styles.upload_button}>
-//                         <img src={UploadSVG} alt="upload_icon" />
-//                         Browse To Upload Image
-//                     </label>
-//                 </div>
-//             </div>
-//             <label htmlFor="section_description">Section Description</label>
-//             <Textarea
-//                 size='md'
-//                 placeholder='Section Description'
-//                 rows={6}
-//                 name='section_description'
-//                 value={sectionDescription}
-//                 onChange={(e) => { setSectionDescription(e.target.value) }}
-//             />
-//         </div>
-//     )
-// }
+    const {
+        fields,
+        append,
+        prepend,
+        remove,
+        swap,
+        move,
+        insert,
+        replace
+    } = useFieldArray({
+        control,
+        name: "sections"
+    });
 
-const EditCourse = ({ courseData }) => {
+    const onSubmit = async (data) => {
+        alert(JSON.stringify(data));
+        await instance.patch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
+            new_data: data
+        })
 
-    const [courseName, setCourseName] = useState();
-    const [courseDescription, setCourseDescription] = useState();
+    }
 
     return (
-        <div className="edit_course">
-            
-        </div>
-    )
+        <Modal isShowing={show} hide={toggle} heading={'Edit'} >
+            <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
+                <div className="course_deatils_inputs">
+                    <InputBox
+                        placeholder={"Course Name"}
+                        style={{ fontSize: '16px' }}
+                        name="course_name"
+                        register={register}
+                        registerQuery={"course_name"}
+                    />
+                </div>
+                <ul style={{ listStyle: 'none' }}>
+                    {fields.map((item, index) => {
 
+                        return (
+                            <li key={item.id}>
+                                <div className={styles.section_details}>
+                                    {/* <Button type="button" onClick={() => remove(index)} text='X' /> */}
+                                    <div className={styles.section_data}>
+                                        <div className={styles.section_name}>
+                                            <label htmlFor="section_name" >Section Name</label>
+                                            <InputBox
+                                                placeholder='Section Name'
+                                                name='section_name'
+                                                style={{ fontSize: '16px' }}
+                                                register={register}
+                                                registerQuery={`sections.${index}.section_name`}
+                                            />
+                                        </div>
+                                        <div className={styles.section_banner}>
+                                            <input
+                                                type="file"
+                                                id="file_input"
+                                                className={styles.file_input}
+                                                hidden
+                                            // value={section.section_banner}
+                                            // name='section_banner'
+                                            // setValue={handleSectionChange} 
+                                            />
+                                            <label htmlFor="file_input" className={styles.upload_button}>
+                                                <img src={UploadSVG} alt="upload_icon" />
+                                                Browse To Upload Image
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <label htmlFor="section_description">Section Description</label>
+                                    <InputBox
+                                        textarea
+                                        placeholder='Section Description'
+                                        rows={6}
+                                        name='section_description'
+                                        style={{ fontSize: '16px' }}
+                                        register={register}
+                                        // value={section.section_description}
+                                        registerQuery={`sections.${index}.description`}
+                                    />
+
+                                    <ArticlesList sectionId={item.section_id} />
+                                    <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} btnStyle={{ fontSize: '20px' }} />
+                                </div>
+
+                            </li>
+
+                        );
+                    })}
+                </ul>
+                <div className={styles.control_buttons}>
+                    <Button
+                        text="+ Add Section"
+                        onClick={() => {
+                            append({ section_name: '', description: '' });
+                        }}
+                    />
+
+                    <Button
+                        text="Reset"
+                        onClick={() =>
+                            reset({
+                                section: []
+                            })
+                        }
+                    />
+                    <Button text=' Submit ' type='submit' />
+                </div>
+            </form>
+        </Modal>
+    )
 }
 
 export default EditCourse;
+
+
 

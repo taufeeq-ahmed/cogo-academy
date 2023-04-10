@@ -1,0 +1,6 @@
+---
+import AddArticle from "../../../../components/AddArticle/AddArticle";
+const { sectionId } = Astro.params;
+---
+
+<AddArticle client:only sectionId={sectionId} />

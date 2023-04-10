@@ -5,6 +5,9 @@ const getCourseFromDB = async (params) => {
         where: {
             course_id: course_id
         },
+        include: {
+            sections: true
+        }
     })
     return course;
 };
