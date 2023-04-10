@@ -6,7 +6,6 @@ import ArticleContent from '../ArticleContent/ArticleContent'
 import Button from '../Button/Button'
 import SubmissionContent from '../SubmissionContent/SubmissionContent'
 import styles from './styles.module.css'
-import axios from 'axios'
 import instance from '../../utils/axios'
 
 const ContentBody = ({ element_content, next_element }) => {

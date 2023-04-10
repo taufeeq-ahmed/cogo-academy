@@ -20,7 +20,7 @@ function SignIn() {
                 const { token } = await response.data;
                 console.log('token', token);
                 const expires = new Date(Date.now() + 60 * 60 * 1000); // Cookie expires in 1 hour
-                document.cookie = `token=${token}; expires=${expires.toUTCString()}; path=/`;
+                document.cookie = `cogoacademytoken=${token}; expires=${expires.toUTCString()}; path=/`;
                 window.location = '/'
             } else {
                 setError('Invalid email or password');

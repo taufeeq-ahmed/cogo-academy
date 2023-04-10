@@ -15,17 +15,26 @@ const data = await fetchData(
     `playground/${sectionId}/${type}/${elementId}`,
     token
 );
-const getNextArticle = (all_articles: any[], articleId: any) => {
-    let next_article = "/";
-    all_articles?.forEach((article, i) => {
-        if (article?.article_id === elementId) {
-            if (i === all_articles.length - 1) {
-                return next_article;
+
+const getNextArticle = (all_articles: any[]) => {
+    const elements_list = all_articles.map((element) => {
+        if (element?.article_id)
+            return { id: element?.article_id, type: "article" };
+        return { id: element?.submission_id, type: "submission" };
+    });
+    console.log(elements_list);
+    let next_element = "/";
+    elements_list?.forEach((element, i) => {
+        if (element?.id === elementId) {
+            if (i === elements_list.length - 1) {
+                return next_element;
             }
-            next_article = all_articles[i + 1].article_id;
+            next_element = `/playground/${sectionId}/${
+                elements_list[i + 1]?.type
+            }/${elements_list[i + 1]?.id}`;
         }
     });
-    return next_article;
+    return next_element;
 };
 ---
 
@@ -100,7 +109,10 @@ const getNextArticle = (all_articles: any[], articleId: any) => {
             <div class="content">
                 <PlaygroundContent
                     element_content={data.clicked_element}
-                    next_element={getNextArticle(data?.all_articles, elementId)}
+                    next_element={getNextArticle([
+                        ...data?.all_articles,
+                        ...data?.all_submissions,
+                    ])}
                 />
             </div>
             {
