@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
@@ -10,18 +7,116 @@ datasource db {
     url      = env("DATABASE_URL_SCHEMA")
 }
 
-model Users {
-    id                           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    name                         String
-    email                        String   @unique
-    password                     String
-    github_username              String
-    batch                        String
-    total_score                  Int?
-    created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-    updated_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-    number_of_exercises_done     Int?     @default(0)
-    number_of_projects_submitted Int?     @default(0)
+model User {
+    user_id                  String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_name                String
+    email                    String            @unique
+    password                 String
+    github_username          String?
+    total_score              Int?              @default(0)
+    created_on               DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    updated_on               DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    number_of_articles_read  Int?              @default(0)
+    number_of_exercises_done Int?              @default(0)
+    number_of_submissions    Int?              @default(0)
+    user_rank                Int               @default(0)
+    batch                    Batch?            @relation(fields: [batch_id], references: [batch_id])
+    batch_id                 String?           @db.Uuid
+    track                    Track?            @relation(fields: [track_id], references: [track_id])
+    track_id                 String?           @db.Uuid
+    user_article             User_Article[]
+    User_Submission          User_Submission[]
+}
 
-    @@map("users")
+model Course {
+    course_id   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    course_name String
+    sections    Section[]
+    batches     Batch[]
+}
+
+model Section {
+    section_id                  String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    section_name                String
+    description                 String
+    number_of_exercises         Int          @default(0)
+    number_of_articles          Int          @default(0)
+    duration_in_minutes         Int          @default(0)
+    number_of_submissions       Int          @default(0)
+    number_of_section_materials Int          @default(0)
+    course                      Course?      @relation(fields: [course_id], references: [course_id])
+    course_id                   String?      @db.Uuid
+    articles                    Article[]
+    submissions                 Submission[]
+    created_on                  DateTime     @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model Article {
+    article_id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    article_name         String
+    article_time_in_mins Int            @default(0)
+    article_content      String         @db.Text
+    total_score          Int
+    section              Section?       @relation(fields: [section_id], references: [section_id])
+    section_id           String?        @db.Uuid
+    Links                Link[]
+    user_article         User_Article[]
+    created_on           DateTime       @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model Link {
+    link_id    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    link_name  String
+    link_url   String
+    Article    Article? @relation(fields: [article_id], references: [article_id])
+    article_id String?  @db.Uuid
+}
+
+model Submission {
+    submission_id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    submission_name        String
+    submission_description String
+    Section                Section?          @relation(fields: [section_id], references: [section_id])
+    section_id             String?           @db.Uuid
+    User_Submission        User_Submission[]
+    created_on             DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model User_Submission {
+    submission_linkmap_id String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user                  User       @relation(fields: [user_id], references: [user_id])
+    user_id               String     @db.Uuid
+    submission            Submission @relation(fields: [submission_id], references: [submission_id])
+    submission_id         String     @db.Uuid
+    submission_url        String
+    score                 Int?
+
+    @@unique([user_id, submission_id])
+}
+
+model Batch {
+    batch_id   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    batch_name String
+    user       User[]
+    courses    Course[]
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model Track {
+    track_id   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    track_name String
+    User       User[]
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model User_Article {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user       User     @relation(fields: [user_id], references: [user_id])
+    article    Article  @relation(fields: [article_id], references: [article_id])
+    user_id    String   @db.Uuid
+    article_id String   @db.Uuid
+    score      Int?
+    updated_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+
+    @@unique([user_id, article_id])
 }

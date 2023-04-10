@@ -1,0 +1,159 @@
+---
+import ExerciseSVG from "/assets/exercises.svg";
+import ProjectSVG from "/assets/projects.svg";
+import LeaderBoardSVG from "/assets/leaderboard.svg";
+import Tile from "./Tile.astro";
+import SectionCard from "./SectionCard";
+const response = await fetch(
+    `${
+        import.meta.env.PUBLIC_SERVER_URL
+    }/user-dashboard/f57566b2-fc3a-4c3e-82b2-af49b0a6a070`
+);
+const data = await response?.json();
+const ff = !data.error ? data : { userData: {}, topThreeUsersData: [] };
+const { userData, topThreeUsers, recentCourses } = ff;
+---
+
+<div class="dashboard">
+    <div class="dash-nav">
+        <div class="dash-rank">
+            <h2>Rank {userData?.user_rank}</h2>
+        </div>
+        <div class="dash-box">
+            <div class="img_div">
+                <img src={ExerciseSVG} alt="exercise-svg" />
+            </div>
+            <div class="dash-stat">
+                <h1>{userData?.number_of_exercises_done}</h1>
+                <span>Exercises</span>
+            </div>
+        </div>
+
+        <div class="dash-box">
+            <div class="img_div">
+                <img src={ProjectSVG} alt="exercise-svg" />
+            </div>
+            <div class="dash-stat">
+                <h1>{userData?.number_of_submissions}</h1>
+                <span>Submissions</span>
+            </div>
+        </div>
+    </div>
+    <h4>Jump right back in!</h4>
+    <div class="dash_body">
+        <div class="dash-sections">
+            {
+                recentCourses.map((courses) => {
+                    courses.article.section.first_article_id =
+                        courses.article_id;
+                    return <SectionCard section={courses.article.section} />;
+                })
+            }
+        </div>
+        <div class="leader-box">
+            <div class="leader-board-title">
+                Leaderboard <img src={LeaderBoardSVG} />
+            </div>
+            <div class="leader-board">
+                {
+                    topThreeUsers?.map((user) => {
+                        return <Tile user={user} />;
+                    })
+                }
+                <Tile user={userData} />
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dash-rank > h2 {
+        color: var(--font-color);
+        font-weight: 500;
+        font-size: 16px;
+        height: 100%;
+    }
+    .dash-stat > h1 {
+        font-weight: 500;
+        font-size: 24px;
+    }
+
+    .dash-stat > span {
+        font-weight: 400;
+        font-size: 16px;
+        color: #828282;
+    }
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    .dash-nav {
+        display: flex;
+        padding: 0 0 24px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    .dash-sections {
+        display: flex;
+        overflow: auto;
+        gap: 20px;
+        padding: 5px;
+    }
+    .dash_body {
+        display: flex;
+        gap: 16px;
+        justify-content: space-between;
+    }
+    .leader-box {
+        display: flex;
+        padding: 0 24px;
+        flex-direction: column;
+        gap: 10px;
+        height: 375px;
+        width: 800px;
+    }
+    .leader-board {
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+        flex: 1;
+        overflow-y: auto;
+        padding: 8px;
+    }
+    .leader-board-title {
+        font-weight: 500;
+        font-size: 16px;
+    }
+    .dash-rank {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+    }
+    .dash-box {
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+    .dash-rank,
+    .dash-box {
+        margin-right: 20px;
+    }
+    .dash-stat {
+        display: flex;
+        flex-direction: column;
+    }
+    .img_div {
+        padding: 15px;
+        border-radius: 50%;
+        background-color: #f2f3fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .img_div > img {
+        width: 20px;
+    }
+</style>

@@ -1,0 +1,56 @@
+---
+import Button from "../../components/Button/Button";
+import AdminCourseCard from "../../components/AdminCourseCard.astro";
+import ModalLayout from "../../layouts/ModalLayout.astro";
+import EditCourse from "../../components/EditCourse/EditCourse";
+const response = await fetch(
+    `${import.meta.env.PUBLIC_SERVER_URL}/admin/courses`
+);
+const resp = await response?.json();
+const data = !resp.error ? resp : [];
+---
+
+<ModalLayout title="Admin | Courses">
+    <div class="admin_dashboard_courses_container">
+        <div class="create_course_container">
+            <div class="header_title">Courses</div>
+            <Button text="Create Course" id={"open_modal"} />
+        </div>
+        <div class="courses_container">
+            {
+                data.map((course) => {
+                    return <AdminCourseCard course={course} />;
+                })
+            }
+        </div>
+    </div>
+    <div slot="modal_header_slot">Edit Course</div>
+    <div slot="modal_content_slot">
+        <EditCourse client:load />
+        <!-- <AddGame client:load /> -->
+    </div>
+    <div slot="modal_footer_slot" class="modal_footer">
+        <Button text="Close Modal" id={"close_modal"} />
+    </div>
+</ModalLayout>
+<!-- <EditCourse client:load /> -->
+<style>
+    .courses_container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .course {
+        flex: 1;
+        min-width: calc(100% / 3);
+        max-width: calc(100% / 3);
+    }
+    .create_course_container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 35px 0px 20px;
+        /* width: 90%; */
+    }
+    .create_course_container .header_title {
+        font-size: 24px;
+    }
+</style>

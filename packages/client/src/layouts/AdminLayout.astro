@@ -1,0 +1,39 @@
+---
+import TabsNav from "../components/TabsNav.astro";
+import MainLayout from "./MainLayout.astro";
+
+const { title } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<MainLayout title={title}>
+    <TabsNav slot="tabs">
+        <a
+            href="/admin"
+            class={`tab ${
+                currentPath === "/admin" ? "tab_selected" : "not-selected"
+            }`}
+        >
+            Home
+        </a>
+        <a
+            href="/admin/courses"
+            class={`tab ${
+                currentPath === "/admin/courses"
+                    ? "tab_selected"
+                    : "not-selected"
+            }`}
+        >
+            Courses
+        </a>
+        <a
+            href="/admin/users"
+            class={`tab ${
+                currentPath === "/admin/users" ? "tab_selected" : "not-selected"
+            }`}
+        >
+            Students
+        </a>
+    </TabsNav>
+    <slot />
+</MainLayout>

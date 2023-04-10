@@ -1,0 +1,226 @@
+---
+const { title } = Astro.props;
+import PlaygroundContent from "../components/PlaygroundContent.astro";
+import TabsNav from "../components/TabsNav.astro";
+import LinkSVG from "/assets/link.svg";
+import BookSVG from "/assets/book.svg";
+
+const { sectionId, elementId, type = "article" } = Astro.props;
+const response = await fetch(
+    `${
+        import.meta.env.PUBLIC_SERVER_URL
+    }/playground/${sectionId}/${type}/${elementId}`
+);
+const resp = await response?.json();
+const data = !resp.error ? resp : [];
+const getNextArticle = (all_articles: any[], articleId: any) => {
+    let next_article = "/";
+    all_articles?.forEach((article, i) => {
+        if (article?.article_id === elementId) {
+            if (i === all_articles.length - 1) {
+                return next_article;
+            }
+            next_article = all_articles[i + 1].article_id;
+        }
+    });
+    return next_article;
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Playground - {title}</title>
+    </head>
+    <body>
+        <div class="root">
+            <TabsNav>
+                <p class="left_title">Course Contents</p>
+                {
+                    data?.all_articles?.map((article: any) => {
+                        return (
+                            <a
+                                href={`/playground/${sectionId}/article/${article.article_id}`}
+                                class={`tab ${
+                                    elementId === article.article_id
+                                        ? "tab_selected"
+                                        : "not-selected"
+                                }`}
+                            >
+                                <div class="img-div">
+                                    <input
+                                        type="checkbox"
+                                        checked={!!article.done}
+                                    />
+                                </div>
+                                <div class="name-time">
+                                    <div>{article.article_name}</div>
+                                    <div>
+                                        <img src={BookSVG} alt="book-icon" />
+                                        <span>
+                                            {article.article_time_in_mins}
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        );
+                    })
+                }
+                {
+                    data?.all_submissions?.map((submission: any) => {
+                        return (
+                            <a
+                                href={`/playground/${sectionId}/submission/${submission.submission_id}`}
+                                class={`tab ${
+                                    elementId === submission.submission_id
+                                        ? "tab_selected"
+                                        : "not-selected"
+                                }`}
+                            >
+                                <div class="img-div">
+                                    <input type="checkbox" />
+                                </div>
+                                <div class="name-time">
+                                    <div>{submission.submission_name}</div>
+                                    <div>
+                                        <img src={BookSVG} alt="book-icon" />
+                                        <span>{"15 mins"}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        );
+                    })
+                }
+            </TabsNav>
+            <div class="content">
+                <PlaygroundContent
+                    element_content={data.clicked_element}
+                    next_element={getNextArticle(data?.all_articles, elementId)}
+                />
+            </div>
+            {
+                data.clicked_element.article_id && (
+                    <div class="right_box">
+                        <div class="right_box_title">Additional Links</div>
+
+                        {data?.links?.map((link) => {
+                            return (
+                                <div class="link_box">
+                                    <a target="_blank" href={link.link_url}>
+                                        <img src={LinkSVG} alt="" />
+                                    </a>
+                                    <div class="link_content">
+                                        <a
+                                            target="_blank"
+                                            href={link.link_url}
+                                            class="link_title"
+                                        >
+                                            {link.link_name}
+                                        </a>
+                                        <a
+                                            target="_blank"
+                                            href={link.link_url}
+                                            class="domain_text"
+                                        >
+                                            {link.link_url}
+                                        </a>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )
+            }
+        </div>
+    </body>
+</html>
+
+<style>
+    .root {
+        display: flex;
+        height: 100vh;
+    }
+    .content {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        background-color: #fdfbf6;
+        width: 50%;
+    }
+    .name-time > div:last-child {
+        font-weight: 400;
+        font-size: var(--font-size-sm);
+        color: var(--color-secondary-2);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .left_title.right_box_title {
+        color: var(--font-color);
+        font-weight: 500;
+    }
+    .right_box {
+        z-index: 10;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background: #ffffff;
+        box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
+        overflow: auto;
+    }
+    .right_box_title {
+        padding: 16px;
+    }
+    .img-div {
+        width: 16px;
+        height: 16px;
+        /* background-color: red; */
+    }
+    .link_box {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        padding: 14px 16px;
+    }
+    .link_content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .link_content > a:first-child {
+        font-weight: 500;
+        font-size: var(--font-size-md);
+        color: var(--font-color);
+    }
+    .link_content > a:last-child {
+        font-weight: 400;
+        font-size: var(--font-size-sm);
+        color: var(--color-secondary-2);
+    }
+    .link_box > *,
+    .link_content > * {
+        text-decoration: none;
+        color: black;
+    }
+    .link_box > a:first-child {
+        padding: 10px;
+        background-color: #f3fafa;
+        border-radius: 50%;
+    }
+    .link_box > a:last-child {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    input[type="checkbox"] {
+        pointer-events: none;
+    }
+</style>

@@ -1,0 +1,20 @@
+---
+import CourseSections from "../components/CourseSections";
+import Layout from "../layouts/Layout.astro";
+
+const { course } = Astro.params;
+const response = await fetch(
+  `${import.meta.env.PUBLIC_SERVER_URL}/landing/${course}`
+);
+const resp = await response?.json();
+const data = !resp.error ? resp : [];
+---
+
+<Layout
+  title={`Course - ${course}`}
+  courses={data.allCourses}
+  header_title={"Course"}
+  isSearch
+>
+  <CourseSections sections={data.sections} client:load />
+</Layout>

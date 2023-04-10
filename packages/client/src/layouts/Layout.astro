@@ -1,35 +1,35 @@
 ---
-export interface Props {
-	title: string;
-}
+import TabsNav from "../components/TabsNav.astro";
+import MainLayout from "./MainLayout.astro";
 
-const { title } = Astro.props;
+const { title, selected, courses } = Astro.props;
+const currentPath = Astro.url.pathname;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>
+<MainLayout title={title}>
+	<TabsNav slot="tabs">
+		<a
+			href="/"
+			class={`tab ${selected === "/" ? "tab_selected" : "not-selected"}`}
+		>
+			Home
+		</a>
+		{
+			courses?.map((course: any) => {
+				return (
+					<a
+						href={`/${course.course_id}`}
+						class={`tab ${
+							currentPath.split("/").pop() === course.course_id
+								? "tab_selected"
+								: "not-selected"
+						}`}
+					>
+						{course.course_name}
+					</a>
+				);
+			})
+		}
+	</TabsNav>
+	<slot />
+</MainLayout>

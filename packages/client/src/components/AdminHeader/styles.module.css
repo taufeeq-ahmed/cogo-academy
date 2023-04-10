@@ -1,0 +1,54 @@
+.admin_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #F2F3FA;
+}
+
+.all_students_details {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.number {
+    font-weight: 600;
+    font-size: 24px;
+    margin: 0px;
+}
+
+.icon_container {
+    width: 40px;
+    height: 40px;
+    background-color: #F2F3FA;
+    border: 1px solid #F2F3FA;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.all_students_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 10px 20px;
+}
+
+.stat_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome_text {
+    font-size: 24px;
+    font-weight: 600;
+}
