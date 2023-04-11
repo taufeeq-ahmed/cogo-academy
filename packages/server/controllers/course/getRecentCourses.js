@@ -22,7 +22,7 @@ const getRecentCoursesFromDB = async (params) => {
         uniqueSections.add(course.article.section.section_id);
         return !fl
     })
-    return filteredRecentCourses;
+    return filteredRecentCourses.slice(0, 2);
 };
 module.exports = getRecentCoursesFromDB;
 
