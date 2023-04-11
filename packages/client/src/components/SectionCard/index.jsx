@@ -4,7 +4,9 @@ import ArrowSVG from "/assets/arrow.svg"
 import LinkBtn from "../LinkBtn";
 import styles from './styles.module.css'
 
-const SectionCard = ({ section }) => {
+const SectionCard = ({ userData, section }) => {
+
+    console.log("section", section)
 
     const getLink = () => {
         let type = "article"
@@ -19,6 +21,18 @@ const SectionCard = ({ section }) => {
         }
         return `playground/${section?.section_id}/${type}/${link_id}`
     }
+
+    const getProgress = () => {
+        const denominator = section.number_of_articles + section.number_of_exercises + section.number_of_submissions
+
+        if (denominator === 0) {
+            // Return a default value or an error message if the denominator is zero
+            return 0 // or throw new Error('Denominator is zero')
+        }
+
+        return ((userData.number_of_articles_read + userData.number_of_exercises_done) / denominator) * 100
+    }
+
 
     return (
         <div className={styles.section}>
@@ -39,9 +53,9 @@ const SectionCard = ({ section }) => {
                 </div>
                 <div className={styles.section_progress}>
                     <div className={styles.progress_bar}>
-                        <div className={styles.progress}></div>
+                        <div className={styles.progress} style={{ width: getProgress() + '%' }}></div>
                     </div>
-                    <div className={styles.pill}>73%</div>
+                    <div className={styles.pill}>{getProgress()}%</div>
                 </div>
                 <div className={styles.section_footer}>
                     <div className={styles.data_boxes}>

@@ -51,7 +51,12 @@ const { userData, topThreeUsers, recentCourses } = ff;
                 recentCourses.map((courses) => {
                     courses.article.section.first_article_id =
                         courses.article_id;
-                    return <SectionCard section={courses.article.section} />;
+                    return (
+                        <SectionCard
+                            userData={userData}
+                            section={courses.article.section}
+                        />
+                    );
                 })
             }
         </div>
@@ -116,7 +121,7 @@ const { userData, topThreeUsers, recentCourses } = ff;
         flex-direction: column;
         gap: 10px;
         height: 375px;
-        width: 400px;
+        min-width: 400px;
     }
     .leader-board {
         display: flex;

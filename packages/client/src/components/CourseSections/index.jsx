@@ -17,7 +17,7 @@ const CourseSections = ({ sections, userData }) => {
             />
             <div className={styles.container_body}>
                 {sections?.filter((item) => item.section_name.toLowerCase().includes(query.toLowerCase())).map((sec) => {
-                    return <SectionCard section={sec} />;
+                    return <SectionCard userData={userData} section={sec} />;
                 })}
             </div>
         </>
