@@ -15,8 +15,7 @@ const addReadArticle = async (fastify) => {
                 }
             }
         )
-        console.log("rerhwwlnfkwlf", readArticleCount)
-        await updateUserInDB(req.params, { new_data: { number_of_articles_read: readArticleCount._count } })
+        await updateUserInDB(req.params, { new_data: { number_of_articles_read: readArticleCount._count, total_score: readArticleCount._count } })
         res.status(200).send(newReadArticle);
     });
 };

@@ -1,7 +1,7 @@
 
-const getRecentCoursesFromDB = require("../course/getRecentCourses");
+
 const getAllCoursesFromDB = require("../course/list");
-const getUserFromDB = require("../user/get");
+const getRecentSectionsFromDB = require("../section/getRecentSections");
 const getLeaderBoardByBatchFromDB = require("../user/leaderboard");
 
 const getUserDashboardFromDB = async (params, req) => {
@@ -9,8 +9,8 @@ const getUserDashboardFromDB = async (params, req) => {
     const allCourses = await getAllCoursesFromDB(params)
     const userData = req.user
     const topThreeUsers = await getLeaderBoardByBatchFromDB(params)
-    const recentCourses = await getRecentCoursesFromDB(params);
+    const recentSections = await getRecentSectionsFromDB(params);
 
-    return { allCourses, userData, topThreeUsers, recentCourses };
+    return { allCourses, userData, topThreeUsers, recentSections };
 };
 module.exports = getUserDashboardFromDB;

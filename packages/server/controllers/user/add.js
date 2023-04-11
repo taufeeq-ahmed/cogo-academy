@@ -1,11 +1,10 @@
 const { prisma } = require("../../helpers/db-client");
+const signUpUserToDB = require("../auth/signUp");
 
 const addUserToDB = async (data) => {
-    const userData = data;
+    console.log(data)
     try {
-        const newUser = await prisma.User.create({
-            data: userData
-        })
+        const newUser = await signUpUserToDB(data)
         return newUser;
     } catch (err) {
         console.log(err);

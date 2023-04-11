@@ -11,9 +11,9 @@ const AdminUserHeader = ({ userData }) => {
                 <div className={styles.name}>
                     {userData?.user_name}
                 </div>
-                <div className={styles.under_text}>
+                {/* <div className={styles.under_text}>
                     Rank {userData?.user_rank}
-                </div>
+                </div> */}
             </div>
             <div className="batch_number">
                 <div className={styles.number}>

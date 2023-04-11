@@ -17,7 +17,7 @@ const Header = ({ text, user, isSearch = false, query = "", setQuery = () => { }
 					</div>
 					<div className={styles.profile_details}>
 						<div className={styles.profile_name}>{user.user_name}</div>
-						<div className={styles.profile_rank}>Rank {user.user_rank}</div>
+						{/* <div className={styles.profile_rank}>Rank {user.user_rank}</div> */}
 					</div>
 					<a className={styles.logout_box} href="/logout">
 						<img src={LogoutSVG} alt="logout-icon" />
