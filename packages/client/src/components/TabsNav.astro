@@ -1,17 +1,17 @@
 ---
-import BrandLogo from "/assets/brand.svg"
-import '../styles/global.css'
+import BrandLogo from "/assets/brand.svg";
+import "../styles/global.css";
 ---
 
 <div class="tabs">
   <div class="brand-logo">
-    <a href="/"><img src={BrandLogo}  alt="brand-logo"/></a>
+    <a href="/"><img src={BrandLogo} alt="brand-logo" /></a>
   </div>
-  <slot/>
+  <slot />
 </div>
 
 <style>
-  .tabs{
+  .tabs {
     width: 16rem;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,18 @@ import '../styles/global.css'
     box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
     z-index: 10;
   }
-  .brand-logo{
+  .brand-logo {
     margin-bottom: 1.5rem;
+  }
+  @media (768px<=width<=1400px) {
+    .tabs {
+      width: 10rem;
+      padding: 1rem 0.75rem 0px 0.75rem;
+    }
+  }
+  @media (width<768px) {
+    .tabs {
+      display: none;
+    }
   }
 </style>

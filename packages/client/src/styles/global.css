@@ -71,6 +71,19 @@ h6 {
 
 .tab_selected {
   background-color: var(--color-primary);
+  border-radius: 6px;
   font-weight: 500;
   color: var(--font-color);
 }
+
+
+@media (min-width:768px){
+  
+}
+@media (min-width:1600px){
+  body{
+    width: 1400px;
+    margin: auto;
+  }
+}
+

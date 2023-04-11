@@ -11,18 +11,6 @@
     border-radius: 6px;
 }
 
-@media only screen and (max-width: 1200px) {
-    .section {
-        width: calc(100% / 2 - 30px);
-    }
-}
-
-@media only screen and (max-width: 920px) {
-    .section {
-        width: 100%;
-    }
-}
-
 .section_header {
     display: flex;
     justify-content: space-between;

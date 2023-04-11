@@ -6,28 +6,39 @@
 
 .header_right {
     display: flex;
+    justify-content: flex-end;
     gap: 16px;
+    width: 50%;
+    
 }
 
 .course_title {
     font-weight: 500;
     font-size: 24px;
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .profile_box {
     height: 40px;
     display: flex;
     align-items: center;
+    justify-content: end;
     gap: 5px;
+    width: 50%;
+    padding: 2rem;
+
 }
 
 .profile_name{
-    width: 100px;
+    width: 100%;
 }
 
 .profile_details {
     display: flex;
     flex-direction: column;
+    margin: 10px;
 }
 
 .profile_rank {
@@ -43,4 +54,36 @@
 
 .logout_box {
     cursor: pointer;
+}
+@media (768px<=width<=14000px){
+    .profile_box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+    .course_title{
+        font-size: 22px;
+    }
+}
+@media(width<768px){
+    .header{
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 0;
+    }
+    .header_right{
+        width:100%;
+    }
+    .profile_box{
+        width: 100%;
+        justify-content: center;
+    }
+    .course_title{
+        width: 100%;
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        font-size: 20px;
+    }
+    
 }

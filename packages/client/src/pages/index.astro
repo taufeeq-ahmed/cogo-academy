@@ -16,7 +16,7 @@ const data = await fetchData("user-dashboard", token);
 <DashLayout title="Home - Dashboard" selected={"/"} courses={data?.allCourses}>
   <Header
     slot="header"
-    text={`Welcome back ${data?.userData?.user_name}`}
+    text={`Welcome back ${data?.userData?.user_name} !`}
     user={data?.userData}
     client:load
   />
@@ -31,4 +31,5 @@ const data = await fetchData("user-dashboard", token);
     gap: 20px;
     padding: 5px;
   }
+  
 </style>
