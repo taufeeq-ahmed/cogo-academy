@@ -1,12 +1,14 @@
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 5px;
 }
 
 .header_right {
     display: flex;
     gap: 16px;
+    align-items: center;
 }
 
 .course_title {
@@ -18,11 +20,11 @@
     height: 40px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 15px;
 }
 
-.profile_name{
-    width: 100px;
+.profile_name {
+    width: max-content;
 }
 
 .profile_details {
