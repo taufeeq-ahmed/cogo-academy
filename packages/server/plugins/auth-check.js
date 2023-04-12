@@ -6,7 +6,8 @@ const PUBLIC_ROUTES = [
     '/users/register',
     '/invite_user',
     '/invited_user/:token',
-    '/accept_invite'
+    '/accept_invite',
+    '/user/add'
 ];
 
 const authCheckPlugin = async (fastify) => {

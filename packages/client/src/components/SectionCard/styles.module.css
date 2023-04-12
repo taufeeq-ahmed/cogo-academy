@@ -1,30 +1,46 @@
+@import url('../../styles/global.css');
+
 .section {
-    flex:1;
+    flex: 1;
     padding: 16px 24px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
     gap: 10px;
     min-width: 300px;
-    /* max-width: 350px; */
-    /* width: 400px; */
+    max-width: 350px;
     max-height: 380px;
     box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
     border-radius: 6px;
 }
-@media(768px<=width<=1400px){
-    .section{
-        max-width: 400px;
 
+@media only screen and (max-width: 600px) {
+    .section {
+        min-width: 80%;
     }
 }
 
-@media(width>1400px){
-    .section{
-        max-width: 380px;
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .section {
+        min-width: calc(100%/2 - 40px);
+        /* max-height: 350px; */
     }
 }
 
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .section {
+        min-width: calc(100%/3 - 40px);
+        /* max-height: 350px; */
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
 
 .section_header {
     display: flex;
@@ -99,6 +115,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
 .data_boxes {
@@ -116,4 +133,13 @@
 .data_box>span {
     font-size: var(--font-size-sm);
     color: var(--color-secondary-2);
+    white-space: nowrap;
+}
+
+.coming_soon {
+    font-size: 12px;
+    color: var(--color-secondary-2);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }
