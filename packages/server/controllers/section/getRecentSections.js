@@ -35,12 +35,13 @@ const getRecentSectionsFromDB = async (req) => {
             };
         }
         return null
-    })?.filter(section => section !== null)?.map((sec) => {
+    })?.map((sec) => {
+        if (!sec) return null
         return {
             ...sec,
             number_of_articles_read: uniqueElem.get(sec.section_id)
         }
-    });
+    }).filter(section => section !== null);
 
     console.log("--------------------")
     console.log(recentUserArticles)

@@ -26,12 +26,12 @@ model User {
     track_id                 String?           @db.Uuid
     user_article             User_Article[]
     User_Submission          User_Submission[]
-    admin                    Admin[]
+    // admin                    Admin[]
 }
 
-model Admin {
-    user User[]
-}
+// model Admin {
+//     user User[]
+// }
 
 model Course {
     course_id   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid

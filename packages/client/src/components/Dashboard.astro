@@ -59,9 +59,15 @@ const { userData, topThreeUsers, recentSections } = ff;
             </div>
             <div class="leader-board">
                 {
-                    topThreeUsers?.map((user) => {
-                        return <Tile user={user} />;
-                    })
+                    topThreeUsers
+                        // .sort(
+                        //     (user1, user2) =>
+                        //         user1.total_score < user2.total_score
+                        // )
+                        // // ?.slice(0, 3)
+                        ?.map((user) => {
+                            return <Tile user={user} />;
+                        })
                 }
                 {
                     topThreeUsers?.filter(
