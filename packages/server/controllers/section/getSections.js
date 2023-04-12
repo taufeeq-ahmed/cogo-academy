@@ -1,8 +1,6 @@
 const { prisma } = require("../../helpers/db-client");
 const getSectionByCourseIdFromDB = require("./getByCourseId");
 const getSectionsFromDB = async (params) => {
-
-
     const { user_id } = params
     const sections = await getSectionByCourseIdFromDB(params);
 
@@ -20,7 +18,6 @@ const getSectionsFromDB = async (params) => {
         },
     })
 
-    console.log("unsestsr", userArticles)
 
     const uniqueElem = new Map();
     const filteredRecentSections = userArticles && userArticles?.map((userArticle) => {
@@ -38,8 +35,6 @@ const getSectionsFromDB = async (params) => {
         return null
     })
 
-    console.log("unique elems", uniqueElem.entries())
-
 
     const newSections = sections?.map((sec) => {
         const { articles, submissions, ...section } = sec
@@ -51,7 +46,6 @@ const getSectionsFromDB = async (params) => {
             first_submission_id: firstSubmissionId,
         };
     }).map((sec) => {
-        console.log("----->", sec.section_id)
         return {
             ...sec,
             number_of_articles_read: uniqueElem.get(sec.section_id) || 0

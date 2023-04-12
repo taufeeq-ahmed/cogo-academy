@@ -2,7 +2,7 @@ const { prisma } = require("../../helpers/db-client");
 
 const getSectionByCourseIdFromDB = async (params) => {
     const { course_id } = params;
-    const sections = await prisma.Section.findMany({
+    const sections = await prisma.section.findMany({
         where: {
             course_id: course_id,
         },
@@ -20,9 +20,9 @@ const getSectionByCourseIdFromDB = async (params) => {
                 take: 1
             }
         },
-        orderBy: {
-            created_on: 'desc'
-        }
+        // orderBy: {
+        //     created_on: 'desc'
+        // }
     })
     return sections;
 };

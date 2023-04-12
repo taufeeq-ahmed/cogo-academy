@@ -8,6 +8,7 @@ if (!token) {
     return Astro.redirect("/signin");
 }
 const data = await fetchData("admin", token);
+if (!data) return Astro.redirect("/error");
 ---
 
 <AdminLayout title="Admin | Dashboard">

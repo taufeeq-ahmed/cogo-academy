@@ -12,14 +12,13 @@ const PUBLIC_ROUTES = [
 const authCheckPlugin = async (fastify) => {
     await fastify.addHook('preHandler', async (request, reply) => {
         const { routerPath } = request;
-        console.log(PUBLIC_ROUTES.includes(routerPath), routerPath)
+
         if (PUBLIC_ROUTES.includes(routerPath)) {
             return;
         }
         try {
-            const decoded = await request.jwtVerify(); // Verify and decode the JWT token
-            console.log("dec", decoded)
-            const user = await prisma.user.findFirst({
+            const decoded = await request.jwtVerify();
+            const user = await prisma.user.findFirstOrThrow({
                 where: {
                     email: decoded.email
                 },
@@ -28,10 +27,23 @@ const authCheckPlugin = async (fastify) => {
                     batch: true
                 }
             })
-            console.log("user", user)
-            request.user = user; // Add the decoded payload to the request object
+            request.user = user;
         } catch (err) {
-            throw new ForbiddenError('No permission to access this route'); // Throw an error if the token is invalid or missing
+            throw new ForbiddenError('No permission to access this route');
+        }
+
+        if (routerPath.startsWith('/admin')) {
+            try {
+                if (request.user.isAdmin) {
+                    return
+                }
+                else {
+                    throw 'Need to be an admin to access this route'
+                }
+            }
+            catch (err) {
+                throw new ForbiddenError(err);
+            }
         }
     });
     fastify.log.info('Loaded plugin auth-check');

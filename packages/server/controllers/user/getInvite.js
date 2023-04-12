@@ -9,7 +9,6 @@ const getInviteUser = async ({ params = {} }) => {
             token: token,
         }
     });
-    console.log("user", user)
     if (!user) {
         return ({ message: 'Invalid Invitation Link' });
     }

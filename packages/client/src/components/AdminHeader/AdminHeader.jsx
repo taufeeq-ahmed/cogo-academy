@@ -11,7 +11,7 @@ const AdminHeader = ({ data }) => {
         <div className={styles.admin_header}>
             <div className="admin_details">
                 <div className={styles.welcome_text}>
-                    Welcome Back {data.user.user_name} !
+                    Welcome Back {data?.user?.user_name} !
                 </div>
                 <div className="current_date">
                     {date}
@@ -33,7 +33,7 @@ const AdminHeader = ({ data }) => {
 
                     <div>
                         <div className={styles.number}>
-                            {data.batchCount}
+                            {data?.batchCount}
                         </div>
                         Batches
                     </div>
@@ -43,7 +43,7 @@ const AdminHeader = ({ data }) => {
 
                     <div>
                         <div className={styles.number}>
-                            {data.courseCount}
+                            {data?.courseCount}
                         </div>
                         Courses
                     </div>

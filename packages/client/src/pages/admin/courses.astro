@@ -10,6 +10,8 @@ if (!token) {
     return Astro.redirect("/signin");
 }
 const data = await fetchData(`admin/courses`, token);
+if (!data) return Astro.redirect("/error");
+
 ---
 
 <ModalLayout title="Admin | Courses">

@@ -24,7 +24,7 @@ const envToLogger = {
 
 const start = async () => {
     const fastify = Fastify({
-        logger: envToLogger["development"] ?? true,
+        logger: true,
         querystringParser: (str) => qs.parse(str),
     });
 

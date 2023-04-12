@@ -1,6 +1,13 @@
 ---
 import AddArticle from "../../../../components/AddArticle/AddArticle";
+import { fetchData } from "../../../../utils/common";
 const { sectionId } = Astro.params;
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const data = await fetchData("users/isadmin", token);
+if (!data) return Astro.redirect("/error");
 ---
 
 <AddArticle client:only sectionId={sectionId} />

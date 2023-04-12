@@ -5,6 +5,8 @@ const getLeaderBoardByBatchFromDB = require("../user/leaderboard")
 
 const getAdminPageDataFromDB = async (req) => {
 
+    // if (!req.user.isAdmin) return { message: "Erro not admin" }
+
     req.params.rank_lte = 5;
 
     const batches = await getAllBatchesFromDB(req.params)

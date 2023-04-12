@@ -43,10 +43,6 @@ const getRecentSectionsFromDB = async (req) => {
         }
     }).filter(section => section !== null);
 
-    console.log("--------------------")
-    console.log(recentUserArticles)
-    console.log("--------------------")
-
 
 
     return filteredRecentSections.slice(0, 2);
