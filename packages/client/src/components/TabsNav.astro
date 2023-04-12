@@ -31,6 +31,7 @@ import "../styles/global.css";
     padding: 1.25rem 1rem 0px 1rem;
     box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
     z-index: 10;
+    background-color: white;
   }
   .tabs-close {
     display: none;
@@ -68,6 +69,7 @@ import "../styles/global.css";
     .tabs {
       width: 10rem;
       padding: 1rem 0.75rem 0px 0.75rem;
+      position: fixed;
     }
     .brand-logo img {
       width: 6rem;
@@ -95,12 +97,13 @@ import "../styles/global.css";
   }
   @media (width<768px) {
     .tabs {
+      position: fixed;
     }
 
     .close-logo,
     .open-logo {
       margin: 0px 5px;
-      padding: 10px 0px;
+      padding: 13px 0px;
     }
     .open-logo img,
     .close-logo img {
@@ -123,10 +126,13 @@ import "../styles/global.css";
     openContentElement.style.display = "none";
     closeContentElement.style.display = "block";
     tabsElement.style.width = "4rem";
+    tabsElement.style.height = "";
   });
+  closeBtn.click();
   openBtn.addEventListener("click", () => {
     openContentElement.style.display = "block";
     closeContentElement.style.display = "none";
     tabsElement.style.width = "16rem";
+    tabsElement.style.height = "100vh";
   });
 </script>
