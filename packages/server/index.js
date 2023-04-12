@@ -8,13 +8,26 @@ const registerRoutes = require("./routes");
 
 const plugins = require('./plugins');
 
+const envToLogger = {
+    development: {
+        transport: {
+            target: 'pino-pretty',
+            options: {
+                translateTime: 'HH:MM:ss Z',
+                ignore: 'pid,hostname',
+            },
+        },
+    },
+    production: true,
+    test: false,
+}
+
 const start = async () => {
     const fastify = Fastify({
         logger: true,
         querystringParser: (str) => qs.parse(str),
     });
 
-    // fastify.register(require('./plugins/auth-plugin'))
 
     // cors
     fastify.register(cors, {

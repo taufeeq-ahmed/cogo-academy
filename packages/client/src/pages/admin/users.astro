@@ -1,14 +1,17 @@
 ---
 import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
+import { fetchData } from "../../utils/common";
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
 if (!token) {
   return Astro.redirect("/signin");
 }
+const data = await fetchData("users/isadmin", token);
+if (!data) return Astro.redirect("/error");
 ---
 
 <AdminLayout title="Admin | Students">
-    <div style={{ marginTop: "20px", display: "flex", height: "100vh" }}>
-        <TableStudents client:load />
-    </div>
+  <div style={{ marginTop: "20px", display: "flex", height: "100vh" }}>
+    <TableStudents client:load />
+  </div>
 </AdminLayout>

@@ -4,7 +4,7 @@ import ArrowSVG from "/assets/arrow.svg"
 import LinkBtn from "../LinkBtn";
 import styles from './styles.module.css'
 
-const SectionCard = ({ userData, section }) => {
+const SectionCard = ({ section }) => {
 
     console.log("section", section)
 
@@ -23,14 +23,25 @@ const SectionCard = ({ userData, section }) => {
     }
 
     const getProgress = () => {
-        const denominator = section.number_of_articles + section.number_of_exercises + section.number_of_submissions
+        const {
+            number_of_articles = 0,
+            number_of_exercises = 0,
+            number_of_submissions = 0,
+
+            number_of_articles_read = 0,
+            number_of_submissions_done = 0
+        } = section
+        const denominator = number_of_articles + number_of_exercises + number_of_submissions
 
         if (denominator === 0) {
-            // Return a default value or an error message if the denominator is zero
-            return 0 // or throw new Error('Denominator is zero')
+            return 0
         }
 
-        return ((userData.number_of_articles_read + userData.number_of_exercises_done) / denominator) * 100
+        const res = ((number_of_articles_read + number_of_submissions_done) / denominator) * 100
+
+        if (res >= 100) return 100
+
+        return res.toPrecision(2)
     }
 
 
@@ -70,7 +81,7 @@ const SectionCard = ({ userData, section }) => {
                     </div>
                     {(section.first_article_id || section.first_submission_id) ?
                         <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={getLink()} /> :
-                        <p style={{ fontSize: '12px' }}>Coming soon..</p>}
+                        <p className={styles.coming_soon}>Coming soon..</p>}
                 </div>
             </div>
         </div >

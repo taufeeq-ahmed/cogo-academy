@@ -18,15 +18,14 @@ export async function fetchData(url, token) {
                 authorization: `Bearer ${token}`
             }
         });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
         const data = await response.json();
+        if (!response.ok) {
+            const error = (data && data.message) || response.status;
+            throw new Error('Network response was not ok : ' + error);
+        }
         return data;
     } catch (error) {
-        console.error('Error:', error);
         return false
-        // Handle the error, such as by displaying an error message to the user
     }
 }
 

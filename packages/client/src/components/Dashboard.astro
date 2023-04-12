@@ -7,14 +7,14 @@ import Tile from "./Tile.astro";
 import SectionCard from "./SectionCard";
 const { data } = Astro.props;
 const ff = !data.error ? data : { userData: {}, topThreeUsersData: [] };
-const { userData, topThreeUsers, recentCourses } = ff;
+const { userData, topThreeUsers, recentSections } = ff;
 ---
 
 <div class="dashboard">
     <div class="dash-nav">
-        <div class="dash-rank">
-            <h2>Rank {userData?.user_rank}</h2>
-        </div>
+        <!-- <div class="dash-rank"> -->
+        <!-- <h2>Rank {userData?.user_rank}</h2> -->
+        <!-- </div> -->
         <div class="dash-box">
             <div class="img_div">
                 <img src={ExerciseSVG} alt="exercise-svg" />
@@ -48,15 +48,8 @@ const { userData, topThreeUsers, recentCourses } = ff;
     <div class="dash_body">
         <div class="dash-sections">
             {
-                recentCourses.map((courses) => {
-                    courses.article.section.first_article_id =
-                        courses.article_id;
-                    return (
-                        <SectionCard
-                            userData={userData}
-                            section={courses.article.section}
-                        />
-                    );
+                recentSections?.map((section) => {
+                    return <SectionCard section={section} client:load />;
                 })
             }
         </div>
@@ -69,11 +62,21 @@ const { userData, topThreeUsers, recentCourses } = ff;
             </div>
             <div class="leader-board">
                 {
-                    topThreeUsers?.map((user) => {
-                        return <Tile user={user} />;
-                    })
+                    topThreeUsers
+                        // .sort(
+                        //     (user1, user2) =>
+                        //         user1.total_score < user2.total_score
+                        // )
+                        // // ?.slice(0, 3)
+                        ?.map((user) => {
+                            return <Tile user={user} />;
+                        })
                 }
-                <Tile user={userData} />
+                {
+                    topThreeUsers?.filter(
+                        (user) => user.user_id === userData?.user_id
+                    ).length === 0 && <Tile user={userData} />
+                }
             </div>
         </div>
     </div>

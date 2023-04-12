@@ -6,6 +6,9 @@ const getAllCoursesWithDetailsFromDB = async () => {
             include: {
                 batches: true,
                 sections: true
+            },
+            orderBy: {
+                course_name: 'asc'
             }
         });
         return allCourses;

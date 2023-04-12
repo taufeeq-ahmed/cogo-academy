@@ -59,15 +59,17 @@ const getReadArticlesByUser = require("./user_article/getArticlesByUser");
 const signUpUser = require("./auth/signUp");
 const signInUser = require("./auth/signIn");
 
-const forgotPassword=require("./auth/forgotPassword");
+const forgotPassword = require("./auth/forgotPassword");
 const userInvitation = require("./user/invite");
 const getInvite = require("./user/getInvite");
 const acceptInviteUser = require("./user/acceptInvite");
+const isAdmin = require("./auth/isAdmin");
 const registerRoutes = async (fastify) => {
     const authRoutes = async (fastify) => {
         await signUpUser(fastify);
         await signInUser(fastify);
         await forgotPassword(fastify);
+        await isAdmin(fastify)
     }
     await authRoutes(fastify)
     const userRoutes = async (fastify) => {

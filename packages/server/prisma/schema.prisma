@@ -26,6 +26,7 @@ model User {
     track_id                 String?           @db.Uuid
     user_article             User_Article[]
     User_Submission          User_Submission[]
+    isAdmin                  Boolean           @default(false)
 }
 
 model Course {

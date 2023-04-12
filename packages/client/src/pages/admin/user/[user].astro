@@ -11,6 +11,9 @@ if (!token) {
     return Astro.redirect("/signin");
 }
 const data = await fetchData(`admin/user/${user}`, token);
+if (!data) return Astro.redirect("/error");
+
+
 const formatTableData = () => {
     const tableData = {
         head: ["Title", "Section", "Course", "Score", "Action"],

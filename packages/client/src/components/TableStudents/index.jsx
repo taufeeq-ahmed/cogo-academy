@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Table from '../Table/Table'
 import styles from './styles.module.css'
 import Dropdown from '../DropDown/Dropdown'
-import axios from 'axios'
 import instance from '../../utils/axios'
 
 const TableStudents = () => {
     const [tableData, setTableData] = useState({
-        head: ["Name", "Batch", "Track", "Exercises", "Projects", "Score", "Rank"],
-        rows: [
-        ],
+        head: ["Name", "Batch", "Track", "Articles", "Exercises", "Score", "Rank"],
+        rows: [],
     })
 
     const [batchOptions, setBatchOptions] = useState([])
@@ -61,7 +59,7 @@ const TableStudents = () => {
                         { link: `/admin/user/${user.user_id}`, name: user?.user_name },
                         { name: user?.batch?.batch_name },
                         { name: user?.track?.track_name },
-                        { name: user?.number_of_exercises_done },
+                        { name: user?.number_of_articles_read },
                         { name: user?.number_of_submissions },
                         { name: user?.total_score },
                         { name: user?.user_rank },

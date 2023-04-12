@@ -5,14 +5,15 @@ const getLeaderBoardByBatchFromDB = async (params) => {
     const leaderBoardData = await prisma.user.findMany({
         where: {
             batch_id: batch_id,
-            user_rank: {
-                lte: rank_lte
-            }
+            // user_rank: {
+            //     lte: rank_lte
+            // }
         },
         orderBy: {
-            user_rank: 'asc'
+            // user_rank: 'asc',
+            total_score: 'desc'
         },
-
+        take: rank_lte
     })
 
     return leaderBoardData;

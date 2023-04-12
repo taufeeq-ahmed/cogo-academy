@@ -20,7 +20,6 @@ const acceptInvite = async ({ data = {} }) => {
         }
     })
 
-    console.log("user", user)
 
 
     if (user) {
@@ -37,8 +36,6 @@ const acceptInvite = async ({ data = {} }) => {
         },
     })
 
-    console.log("new user", createuser)
-
 
     const deleteUserInvite = await prisma.userInvites.delete({
         where: {
@@ -46,7 +43,6 @@ const acceptInvite = async ({ data = {} }) => {
         }
     })
 
-    console.log("delete", deleteUserInvite)
 
     return createuser;
 };
