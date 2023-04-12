@@ -1,6 +1,6 @@
 ---
 import BrandLogo from "/assets/brand.svg";
-import GoBack from "/assets/goBack.svg";
+import MenuIcon from "/assets/menuIcon.svg";
 import "../styles/global.css";
 ---
 
@@ -11,14 +11,14 @@ import "../styles/global.css";
         <a href="/"><img src={BrandLogo} alt="brand-logo" /></a>
       </div>
       <div class="close-logo">
-        <img src={GoBack} alt="minimse-logo" class="close-btn" />
+        <img src={MenuIcon} alt="minimse-logo" class="close-btn" />
       </div>
     </div>
     <slot class="all-tabs" />
   </div>
   <div class="close-content">
     <div class="open-logo">
-      <img src={GoBack} alt="minimse-logo" class="open-btn" />
+      <img src={MenuIcon} alt="minimse-logo" class="open-btn" />
     </div>
   </div>
 </div>
@@ -92,7 +92,6 @@ import "../styles/global.css";
   @media (width<768px) {
     .tabs {
       position: fixed;
-      height: 100vh;
     }
 
     .close-logo,
