@@ -3,9 +3,10 @@ import Button from '../Button/Button'
 import CreateSection from '../CreateSection/CreateSection';
 import styles from './styles.module.css'
 import InputBox from '../InputBox/InputBox'
-
+import Dropdown from './Dropdown/Dropdown'
 
 const CreateCourse = () => {
+
     const [course, setCourse] = useState({
         course_name: '',
         sections_data: [
@@ -14,9 +15,8 @@ const CreateCourse = () => {
     });
     useEffect(() => {
         // alert(JSON.stringify(course))
-    }, [course])
+    }, [course]);
     const setSectionState = (section, index) => {
-
         setCourse((prev) => {
             const updatedSection = { ...prev.sections_data[index], ...section };
             const updatedCourse = prev;
@@ -56,14 +56,17 @@ const CreateCourse = () => {
     return (
         <form className={styles.edit_course}>
             <div className="course_deatils_inputs">
-                <label htmlFor="course_name"></label>
-                <InputBox
-                    placeholder={"Course Name"}
-                    style={{ fontSize: '16px' }}
-                    value={course?.course_name}
-                    name="course_name"
-                    setValue={handleCourseChange}
-                />
+                <div className="course_name">
+                    <div>Course Name</div>
+                    <InputBox
+                        placeholder={"Course Name"}
+                        style={{ fontSize: '16px' }}
+                        value={course?.course_name}
+                        name="course_name"
+                        setValue={handleCourseChange}
+                    />
+                </div>
+
             </div>
             <div className="sections_details">
                 {sectionElements}

@@ -11,7 +11,6 @@ const SignUp = ({ token, data }) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async (formData) => {
         formData.email = data;
-        // e.preventDefault();
         try {
             const response = await instance.post(`/accept_invite`,
                 { body: { ...formData, token } },

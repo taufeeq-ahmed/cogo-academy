@@ -4,6 +4,7 @@
     margin: 10px;
 }
 label{
+    margin-left: 10px;
     font-weight: 500;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -99,8 +100,8 @@ input{
     align-items: flex-end;
 }
 .section_details{
-    margin: 30px;
-    padding: 30px;
+
+    flex: 1;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
 }
@@ -111,4 +112,11 @@ input{
 .control_buttons{
     display: flex;
     justify-content: flex-end;
+}
+.sections_form{
+    border: 1px solid red;
+    flex: 1;
+}
+.course_details_input{
+    
 }

@@ -36,17 +36,7 @@ import "../styles/global.css";
   .tabs-close {
     display: none;
   }
-  .minimise-tabs {
-    width: 5rem;
-    display: flex;
-    flex-direction: column;
-    padding: 1.25rem 1rem 0px 1rem;
-    box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
-    z-index: 10;
-  }
-  .minimise-tabs div {
-    display: none !important;
-  }
+
   .tabs-header {
     display: flex;
   }
@@ -94,10 +84,15 @@ import "../styles/global.css";
     .close-logo img {
       width: 15px;
     }
+    .open-logo,
+    .close-logo {
+      display: none;
+    }
   }
   @media (width<768px) {
     .tabs {
       position: fixed;
+      height: 100vh;
     }
 
     .close-logo,
@@ -128,7 +123,7 @@ import "../styles/global.css";
     tabsElement.style.width = "4rem";
     tabsElement.style.height = "";
   });
-  closeBtn.click();
+  // closeBtn.click();
   openBtn.addEventListener("click", () => {
     openContentElement.style.display = "block";
     closeContentElement.style.display = "none";
