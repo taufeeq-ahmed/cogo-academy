@@ -48,7 +48,7 @@ const { userData, topThreeUsers, recentSections } = ff;
     <div class="dash_body">
         <div class="dash-sections">
             {
-                recentSections.map((section) => {
+                recentSections?.map((section) => {
                     return <SectionCard section={section} client:load />;
                 })
             }

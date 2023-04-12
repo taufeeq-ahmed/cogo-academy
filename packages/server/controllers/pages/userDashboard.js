@@ -9,7 +9,7 @@ const getUserDashboardFromDB = async (params, req) => {
     const allCourses = await getAllCoursesFromDB(params)
     const userData = req.user
     const topThreeUsers = await getLeaderBoardByBatchFromDB(params)
-    const recentSections = await getRecentSectionsFromDB(params);
+    const recentSections = await getRecentSectionsFromDB(req);
 
     return { allCourses, userData, topThreeUsers, recentSections };
 };
