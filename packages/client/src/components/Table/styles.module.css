@@ -32,3 +32,6 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+@media(768px<=width<=1400px){
+  
+}

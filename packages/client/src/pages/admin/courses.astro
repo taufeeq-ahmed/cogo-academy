@@ -18,7 +18,11 @@ if (!data) return Astro.redirect("/error");
     <div class="admin_dashboard_courses_container">
         <div class="create_course_container">
             <div class="header_title">Courses</div>
-            <Button text="Create Course" id={"open_modal"} />
+            <Button
+                text="Create Course"
+                id={"open_modal"}
+                className="create_course_button"
+            />
         </div>
         <div class="courses_container">
             {
@@ -55,5 +59,10 @@ if (!data) return Astro.redirect("/error");
     }
     .create_course_container .header_title {
         font-size: 24px;
+    }
+    @media (width<1400px) {
+        .create_course_button {
+            display: none !important;
+        }
     }
 </style>

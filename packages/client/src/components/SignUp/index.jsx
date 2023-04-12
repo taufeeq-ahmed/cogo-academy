@@ -38,7 +38,7 @@ const SignUp = ({ token, data }) => {
         <div className={styles.signup_container}>
             <div className={styles.heading}><p>Let's get started for free</p></div>
             <div className={styles.subheading}><p>create your account in one step</p></div>
-            <form className={styles.fm} onSubmit={handleSubmit} id="testForm">
+            <form className={styles.form} onSubmit={handleSubmit} id="testForm">
                 <div className={styles.section}>
                     <label htmlFor="full-name">Full Name</label>
                     <input
@@ -105,10 +105,10 @@ const SignUp = ({ token, data }) => {
                     />
                 </div>
                 <div className={styles.btn} >
-                    <button id="submit_btn" type="submit">Create Account</button>
+                    <button className={styles.submit_btn} type="submit">Create Account</button>
                 </div>
                 <div className={styles.bottom}>
-                    <span>already have an account?</span><a href="/signin">Log In</a>
+                    <div><span>Already have an account?</span><a href="/signin"> Log In</a></div>
                 </div>
             </form>
         </div>

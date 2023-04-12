@@ -1,4 +1,5 @@
 .admin_course_card {
+    /* flex: 1; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -9,6 +10,30 @@
     margin: 1rem;
     width: 30%;
 }
+
+@media(768<width<=1400px){
+    .admin_course_card{
+        width: 45%;
+    }
+    
+}
+@media(width<768px){
+    .admin_course_card{
+        width: 80%;
+    }
+    
+}
+@media (width<1400px) {
+    .edit_button{
+        display: none !important;
+    }
+    .delete_button{
+        display: none !important;
+        
+    }
+
+}
+
 .course_title {
     color: #221f20;
     font-weight: 500;
