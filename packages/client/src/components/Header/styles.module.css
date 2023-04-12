@@ -12,6 +12,7 @@
     gap: 16px;
     width: 50%;
     align-items: center;
+    
 }
 
 .course_title {
@@ -43,8 +44,8 @@
 
 }
 
-.profile_name {
-    width: max-content;
+.profile_name{
+    width: 100%;
 }
 
 .profile_details {
