@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     padding: 5px;
+    /* flex:1; */
 }
 
 .header_right {
@@ -18,15 +19,25 @@
     width: 50%;
     display: flex;
     justify-content: flex-start;
+    
 }
-
+.search_box{
+    width: 50%;
+    /* border:1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.search_box input{
+    max-width: 500px;
+}
 .profile_box {
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: end;
     gap: 5px;
-    width: 50%;
+    width: 60%;
     padding: 2rem;
 
 }
@@ -55,14 +66,19 @@
 .logout_box {
     cursor: pointer;
 }
-@media (768px<=width<=14000px){
+@media (768px<=width<1400px){
     .profile_box {
         display: flex;
         align-items: center;
         width: 100%;
+        justify-content: flex-end;
     }
+
     .course_title{
-        font-size: 22px;
+        font-size: 20px;
+    }
+    .header_right{
+        width: 50%;
     }
 }
 @media(width<768px){
@@ -71,7 +87,11 @@
         flex-direction: column-reverse;
         padding: 0;
     }
+    .search_box{
+        width: 100%;
+    }
     .header_right{
+
         width:100%;
     }
     .profile_box{

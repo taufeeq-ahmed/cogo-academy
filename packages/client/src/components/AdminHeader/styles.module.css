@@ -52,3 +52,47 @@
     font-size: 24px;
     font-weight: 600;
 }
+@media(width<=1400px){
+    .icon_container {
+        padding: 15px;
+    }
+    .icon{
+        width: 20px;
+        height: 20px;
+    }
+    .welcome_text{
+        font-size: 18px;
+    }
+    .admin_header{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+@media( width<768px){
+    .all_students_details{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+    }
+    .all_students_details .icon_container{
+        padding: 15px;
+    }
+    .all_students_details>.icon_container>img{
+        width: 20px;
+        height: 20px;
+    }
+    .number{
+        font-size: 18px;
+    }
+    .stat_box{
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+}

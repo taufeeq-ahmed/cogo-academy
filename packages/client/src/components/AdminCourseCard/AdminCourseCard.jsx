@@ -19,10 +19,10 @@ const AdminCourseCard = ({ course }) => {
                 {course.course_name}
                 <div className={styles.course_buttons}>
                     <div className="edit_button">
-                        <img src={Edit} alt="edit_button" onClick={toggleEditModal} />
+                        <img src={Edit} alt="edit_button" onClick={toggleEditModal} className={styles.edit_button} />
                     </div>
                     <div className="delete_button">
-                        <img src={Delete} alt="delete_button" onClick={toggleDeleteModal} />
+                        <img src={Delete} alt="delete_button" onClick={toggleDeleteModal} className={styles.delete_button} />
                     </div>
                 </div>
             </div>

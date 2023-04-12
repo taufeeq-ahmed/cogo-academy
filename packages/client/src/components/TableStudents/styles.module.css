@@ -46,3 +46,8 @@ th {
     overflow: auto;
     flex: 1
 }
+@media(width<768px){
+    .heading_text{
+        font-size: 16px;
+    }
+}

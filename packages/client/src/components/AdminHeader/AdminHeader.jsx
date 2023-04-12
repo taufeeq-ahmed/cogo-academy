@@ -24,28 +24,28 @@ const AdminHeader = ({ data }) => {
                         <div className={styles.number}>
                             {data.studentsCount}
                         </div>
-                        Students
+                        <div>Students</div>
                     </div>
 
                 </div>
                 <div className={styles.all_students_section}>
                     <div className={styles.icon_container}><img src={BatchesSVG} alt="batches" className={styles.icon} /></div>
 
-                    <div>
+                    <div className={styles.stat_box}>
                         <div className={styles.number}>
                             {data.batchCount}
                         </div>
-                        Batches
+                        <div>Batches</div>
                     </div>
                 </div>
                 <div className={styles.all_students_section}>
                     <div className={styles.icon_container}><img src={CoursesSVG} alt="profile" className={styles.icon} /></div>
 
-                    <div>
+                    <div className={styles.stat_box}>
                         <div className={styles.number}>
                             {data.courseCount}
                         </div>
-                        Courses
+                        <div>Courses</div>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,17 @@
 .container_body {
     display: flex;
+    justify-content: space-between;
+    /* padding: 10px; */
     flex-wrap: wrap;
     overflow: auto;
-    gap: 20px;
-    padding: 5px;
-  }
+    gap: 20px; 
+    flex:1;
+    /* padding: 0rem 2rem; */
+    /* border: 1px solid red; */
+
+}
+.section_cards{
+    display: flex;
+    /* border: 1px solid red; */
+    /* flex:1; */
+}

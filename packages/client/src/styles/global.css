@@ -64,6 +64,9 @@ h6 {
   gap: 10px;
   border-radius: 6px;
 }
+.hide-tab{
+  display: none;
+}
 
 .tab:hover {
   background-color: var(--color-primary);
@@ -75,8 +78,6 @@ h6 {
   font-weight: 500;
   color: var(--font-color);
 }
-
-
 @media (min-width:768px){
   
 }
@@ -86,4 +87,3 @@ h6 {
     margin: auto;
   }
 }
-

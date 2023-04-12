@@ -13,7 +13,7 @@ body {
 .signup_container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,7 +41,7 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
-.fm {
+.form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,7 +69,7 @@ label {
     align-items: center;
     padding: 0px 4px 0px 8px;
     gap: 2px;
-    width: 416px;
+    width: 390px;
     height: 40px;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
@@ -80,7 +80,7 @@ label {
     align-items: center;
     padding: 0px 4px 0px 8px;
     gap: 2px;
-    width: 416px;
+    width: 390px;
     height: 40px;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
@@ -95,7 +95,7 @@ label {
     border: none;
 }
 .bottom {
-    width: 416px;
+    width: 390px;
 }
 .bottom span {
     width: 171px;
@@ -109,7 +109,7 @@ button[type="submit"] {
     color: white;
     padding: 8px 16px;
     gap: 4px;
-    width: 416px;
+    width: 390px;
     height: 40px;
     background: #ee3425;
     border-radius: 6px;
@@ -129,4 +129,26 @@ button {
 }
 button[type="submit"]:hover {
     background-color: rgb(199, 125, 125);
+}
+.bottom{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+@media (max-width:768px){
+    .password_input{
+        width: 360px;
+    }
+    .text,.email{
+        width: 360px;
+    }
+    .btn{
+        width: 360px;
+    }
+    button[type="submit"] {
+        
+        width: 360px;
+        
+    }
+    
 }

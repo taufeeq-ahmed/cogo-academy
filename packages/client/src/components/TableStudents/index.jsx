@@ -95,7 +95,7 @@ const TableStudents = () => {
         <div className={styles.students_table}>
             <div className={styles.students_heading}>
                 <div className={styles.heading_text}>
-                    Students {tableData.rows.length} {loading && "Loading.."}
+                    Students ({tableData.rows.length}) {loading && "Loading.."}
                 </div>
                 <div className={styles.heading_inputs}>
                     <div style={{ padding: 16, width: 'fit-content' }}>

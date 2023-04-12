@@ -1,8 +1,8 @@
-
 .error {
   color: red;
   margin-top: 1rem;
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@
   justify-content: center;
   height: 60vh;
   margin-top: auto;
+
 }
 
 .heading {
@@ -152,11 +153,19 @@ button{
   width: 100%;
   margin-top: 12px;
 }
-@media (max-width: 768px) {
-  .signin_container {
-      height: auto;
+@media(768px<=width<=1400px){
+  .form{
+    padding: 20px;
   }
 
+}
+@media (width< 768px) {
+  .container {
+      height: auto;
+      padding: 20px;
+      /* border: 1px solid red; */
+  }
+  
   .heading {
       font-size: 18px;
       width: 100%;
