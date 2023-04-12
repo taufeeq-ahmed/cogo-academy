@@ -153,12 +153,7 @@ button{
   width: 100%;
   margin-top: 12px;
 }
-@media(768px<=width<=1400px){
-  .form{
-    padding: 20px;
-  }
 
-}
 @media (width< 768px) {
   .container {
       height: auto;

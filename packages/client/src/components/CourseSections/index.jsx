@@ -15,12 +15,10 @@ const CourseSections = ({ sections, userData }) => {
                 query={query}
                 setQuery={setQuery}
             />
-            <div className={styles.section_cards}>
-                <div className={styles.container_body}>
-                    {sections?.filter((item) => item.section_name.toLowerCase().includes(query.toLowerCase())).map((sec) => {
-                        return <SectionCard section={sec} />;
-                    })}
-                </div>
+            <div className={styles.container_body}>
+                {sections?.filter((item) => item.section_name.toLowerCase().includes(query.toLowerCase())).map((sec) => {
+                    return <SectionCard userData={userData} section={sec} />;
+                })}
             </div>
         </>
     )

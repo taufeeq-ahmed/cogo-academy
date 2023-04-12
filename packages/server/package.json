@@ -23,6 +23,7 @@
     "nodemailer": "^6.9.1",
     "postgres": "^3.3.3",
     "qs": "^6.11.0",
+    "react-hook-form": "^7.43.9",
     "uid-safe": "^2.1.5"
   },
   "devDependencies": {
