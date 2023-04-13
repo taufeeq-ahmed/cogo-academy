@@ -2,6 +2,9 @@ import LogoutSVG from "/assets/logout.svg";
 import styles from './styles.module.css'
 import SearchSVG from "/assets/search.svg";
 import InputBox from "../InputBox/InputBox";
+import LinkBtn from "../LinkBtn/index"
+import AdminSVG from '/assets/admin.svg'
+
 const Header = ({ text, user, isSearch = false, query = "", setQuery = () => { } }) => {
 	return (
 		<div className={styles.header}>
@@ -12,6 +15,12 @@ const Header = ({ text, user, isSearch = false, query = "", setQuery = () => { }
 				</div>
 			}
 			<div className={styles.header_right}>
+				{user.isAdmin && <LinkBtn text="Admin"
+					link={`/admin`}
+					btnStyle={{ padding: '10px' }}
+					icon={AdminSVG}
+					iconStyle={{ width: '16px' }}
+				/>}
 				<div className={styles.profile_box}>
 					<div className={styles.prof_pic}>
 						<img

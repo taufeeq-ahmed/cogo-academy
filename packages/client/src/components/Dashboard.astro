@@ -62,15 +62,9 @@ const { userData, topThreeUsers, recentSections } = ff;
             </div>
             <div class="leader-board">
                 {
-                    topThreeUsers
-                        // .sort(
-                        //     (user1, user2) =>
-                        //         user1.total_score < user2.total_score
-                        // )
-                        // // ?.slice(0, 3)
-                        ?.map((user) => {
-                            return <Tile user={user} />;
-                        })
+                    topThreeUsers?.map((user) => {
+                        return <Tile user={user} />;
+                    })
                 }
                 {
                     topThreeUsers?.filter(
@@ -246,7 +240,7 @@ const { userData, topThreeUsers, recentSections } = ff;
             margin: 10px;
         }
         .dashboard h4 {
-            margin-top: 20px;
+            margin: 20px 0px;
             font-weight: 500;
             font-size: 18px;
             margin-inline: auto;
@@ -256,11 +250,11 @@ const { userData, topThreeUsers, recentSections } = ff;
         }
         .dash-sections {
             width: 100%;
+            justify-content: center;
         }
         .leader-box {
             padding: 10px;
             width: 100%;
         }
-        .
     }
 </style>
