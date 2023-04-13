@@ -15,7 +15,7 @@ const Header = ({ text, user, isSearch = false, query = "", setQuery = () => { }
 				</div>
 			}
 			<div className={styles.header_right}>
-				{user.isAdmin && <LinkBtn text="Admin"
+				{user.isAdmin && <LinkBtn text="Admin Dashboard"
 					link={`/admin`}
 					btnStyle={{ padding: '10px' }}
 					icon={AdminSVG}

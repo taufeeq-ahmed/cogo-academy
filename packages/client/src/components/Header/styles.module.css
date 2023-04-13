@@ -35,12 +35,9 @@
     align-items: center;
     justify-content: end;
     gap: 5px;
-    padding: 2rem;
+    cursor: pointer;
 }
 
-.profile_name {
-    /* width: 100%; */
-}
 
 .profile_details {
     display: flex;
@@ -56,7 +53,6 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    cursor: pointer;
 }
 
 .logout_box {
