@@ -24,11 +24,14 @@ const Dropdown = ({
     isMulti,
     isSearchable,
     onChange,
-    styles
+    styles,
+    disabled = false,
+    value = null,
+    multiValues = []
 
 }) => {
     const [showMenu, setShowMenu] = useState(false);
-    const [selectedValue, setSelectedValue] = useState(isMulti ? [] : null);
+    const [selectedValue, setSelectedValue] = useState(isMulti ? multiValues : value);
     const [searchValue, setSearchValue] = useState("");
     const searchRef = useRef();
     const inputRef = useRef();
@@ -134,8 +137,8 @@ const Dropdown = ({
     };
 
     return (
-        <div className="dropdown-container" style={styles}>
-            <div ref={inputRef} onClick={handleInputClick} className="dropdown-input">
+        <div className={`dropdown-container ${disabled && 'disabled'}`} style={styles}>
+            <div ref={inputRef} onClick={disabled ? () => { } : handleInputClick} className="dropdown-input" >
                 <div className="dropdown-selected-value">{getDisplay()}</div>
                 <div className="dropdown-tools">
                     <div className="dropdown-tool">

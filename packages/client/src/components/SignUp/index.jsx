@@ -5,8 +5,20 @@ import eye from '/assets/eye.svg'
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import Dropdown from '../DropDown/Dropdown'
-
-const SignUp = ({ userData }) => {
+const defaultBatchOptions = [
+    { label: 'Batch 1', id: '123' },
+    { label: 'Batch 2', id: '124' },
+    { label: 'Batch 3', id: '125' },
+    { label: 'Batch 4', id: '126' },
+    { label: 'Batch 5', id: '127' },
+    { label: 'Batch 6', id: '128' }
+]
+const defaultTrackOptions = [
+    { label: 'React', id: '123' },
+    { label: 'Ruby', id: '124' },
+    { label: 'GO', id: '125' }
+]
+const SignUp = ({ userData, token }) => {
     useEffect(() => {
         alert(JSON.stringify(userData))
     }, [])
@@ -124,11 +136,24 @@ const SignUp = ({ userData }) => {
                     />
                     {errors.github_username && <span className={styles.error}>This field is required</span>}
                 </div>
-                <div className={styles.track}>
-                    <Dropdown options={[{ label: "batch1", value: 1 }, { label: "batch2", value: 2 }, { label: "batch3", value: 3 }]} placeHolder='Track' styles={{ width: '100%', border: 'none', fontSize: "13.33px" }} />
-                </div>
                 <div className={styles.batch}>
-                    <Dropdown isMulti options={[{ label: "batch1", value: 1 }, { label: "batch2", value: 2 }, { label: "batch3", value: 3 }]} placeHolder='Batchs' styles={{ width: '100%', border: 'none', fontSize: "13.33px" }} />
+                    <Dropdown
+                        isMulti
+                        disabled
+                        options={defaultBatchOptions}
+                        placeHolder={'Batches'}
+                        styles={{ flex: 1 }}
+                        multiValues={userData.batches}
+                    />
+                </div>
+                <div className={styles.track}>
+                    <Dropdown
+                        disabled
+                        value={{ label: 'React', id: '123' }}
+                        options={defaultTrackOptions}
+                        placeHolder={'Track'}
+                        styles={{ flex: 1 }}
+                    />
                 </div>
                 <div className={styles.btn} >
                     <button id="submit_btn" type="submit">Create Account</button>

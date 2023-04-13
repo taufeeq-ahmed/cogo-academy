@@ -8,12 +8,12 @@ function parseJwt(token) {
     return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
 }
 const userData = parseJwt(token);
-// const response = await fetch(
-//     `${import.meta.env.PUBLIC_SERVER_URL}/invited_user/${token}`
-// );
-// const data = await response?.json();
+userData.batches.map((batch) => {
+    batch.label = batch.batch_name;
+    batch.value = batch.batch_id;
+});
 ---
 
 <AuthLayout>
-    <SignUp userData={userData} client:load />
+    <SignUp userData={userData} token={token} client:load />
 </AuthLayout>
