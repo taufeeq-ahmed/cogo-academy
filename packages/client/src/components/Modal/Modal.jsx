@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from "./styles.module.css"
 import Button from '../Button/Button'
-const Modal = ({ isShowing, hide, children, heading }) => {
+const Modal = ({ isShowing, toggle, children, heading }) => {
     const modalClassName = `${styles.modal} ${isShowing ? 'is-active' : ''}`;
 
     return isShowing
         ? ReactDOM.createPortal(
             <div className={modalClassName}>
                 <div className={styles.modal_box}>
-                    <div className="modal-background" onClick={hide} />
+                    <div className="modal-background" onClick={toggle} />
                     <div className={styles.modal_header}>{heading}</div>
                     <div className={styles.modal_content}>{children}</div>
                     <div className={styles.modal_footer}>
-                        <Button onClick={hide} text='Close' />
+                        <Button onClick={toggle} text='Close' />
                     </div>
                 </div>
             </div>,
@@ -25,7 +25,7 @@ const Modal = ({ isShowing, hide, children, heading }) => {
 
 Modal.propTypes = {
     isShowing: PropTypes.bool.isRequired,
-    hide: PropTypes.func.isRequired,
+    toggle: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     heading: PropTypes.node.isRequired
 };

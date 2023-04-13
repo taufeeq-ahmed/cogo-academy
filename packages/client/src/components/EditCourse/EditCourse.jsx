@@ -42,7 +42,7 @@ const EditCourse = ({ course, show, toggle }) => {
     }
 
     return (
-        <Modal isShowing={show} hide={toggle} heading={'Edit'} >
+        <Modal isShowing={show} toggle={toggle} heading={'Edit'} >
             <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
                 <div className="course_deatils_inputs">
                     <InputBox

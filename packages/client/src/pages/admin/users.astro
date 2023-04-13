@@ -1,4 +1,7 @@
 ---
+import Button from "../../components/Button/Button";
+import InviteUser from "../../components/InviteUser/InviteUser";
+import Modal from "../../components/Modal/Modal";
 import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import { fetchData } from "../../utils/common";
@@ -11,7 +14,24 @@ if (!data) return Astro.redirect("/error");
 ---
 
 <AdminLayout title="Admin | Students">
-  <div style={{ marginTop: "20px", display: "flex", height: "100vh" }}>
-    <TableStudents client:load />
+  <div style={{ marginTop: "0px", height: "100vh" }}>
+    <div class="invite_user_component">
+      <InviteUser client:only />
+    </div>
+    <div class="users_details">
+      <TableStudents client:load />
+    </div>
   </div>
 </AdminLayout>
+
+<style>
+  .invite_user_component {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+</style>
+<script>
+  // const inviteUserButton = document.querySelector("#invite_user_button");
+  // inviteUserButton.addEventListener("click", () => {});
+</script>

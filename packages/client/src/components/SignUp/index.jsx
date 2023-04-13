@@ -3,14 +3,25 @@ import instance from '../../utils/axios';
 import styles from './styles.module.css'
 import eye from '/assets/eye.svg'
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-const SignUp = ({ token, data }) => {
+import { useEffect, useState } from 'react';
+
+const SignUp = ({ userData }) => {
+    useEffect(() => {
+        alert(JSON.stringify(userData))
+    }, [])
+    const { email, batches } = userData;
+
     const server = import.meta.env.PUBLIC_SERVER_URL;
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+        defaultValues: {
+            email: email,
+            batches: batches
+        }
+    });
     const onSubmit = async (formData) => {
-        formData.email = data;
+        formData.email = email;
         try {
             const response = await instance.post(`/accept_invite`,
                 { body: { ...formData, token } },
@@ -57,7 +68,7 @@ const SignUp = ({ token, data }) => {
                         className={styles.email}
                         id="email"
                         placeholder="Enter your Email "
-                        value={data}
+                        value={email}
                         disabled
                     />
                 </div>
