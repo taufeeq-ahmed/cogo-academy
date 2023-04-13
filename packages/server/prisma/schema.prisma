@@ -20,8 +20,7 @@ model User {
     number_of_exercises_done Int?              @default(0)
     number_of_submissions    Int?              @default(0)
     user_rank                Int?              @default(0)
-    batch                    Batch?            @relation(fields: [batch_id], references: [batch_id])
-    batch_id                 String?           @db.Uuid
+    batches                  Batch[]
     track                    Track?            @relation(fields: [track_id], references: [track_id])
     track_id                 String?           @db.Uuid
     user_article             User_Article[]
@@ -98,7 +97,7 @@ model User_Submission {
 model Batch {
     batch_id   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     batch_name String
-    user       User[]
+    users      User[]
     courses    Course[]
     created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 }

@@ -25,7 +25,7 @@ const authCheckPlugin = async (fastify) => {
                 },
                 include: {
                     track: true,
-                    batch: true
+                    batches: true
                 }
             })
             request.user = user;

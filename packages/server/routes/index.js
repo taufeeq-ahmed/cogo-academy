@@ -44,7 +44,7 @@ const deleteBatch = require("./batch/delete");
 const updateBatch = require("./batch/update");
 const getUserByBatch = require("./user/getByBatch");
 const getAdminCoursesPageData = require("./pages/adminCourses");
-const addCourseToBatch = require("./batch/addCoursesToBatch");
+const addCoursesToBatch = require("./batch/addCoursesToBatch");
 const getAdminStudentsPageData = require("./pages/adminStudents");
 const addTrack = require("./track/add");
 const getAllTracks = require("./track/list");
@@ -64,6 +64,7 @@ const userInvitation = require("./user/invite");
 const getInvite = require("./user/getInvite");
 const acceptInviteUser = require("./user/acceptInvite");
 const isAdmin = require("./auth/isAdmin");
+const addUsersToBatch = require("./batch/addUsersToBatch");
 const registerRoutes = async (fastify) => {
     const authRoutes = async (fastify) => {
         await signUpUser(fastify);
@@ -134,7 +135,8 @@ const registerRoutes = async (fastify) => {
         await getAllBatches(fastify)
         await updateBatch(fastify)
         await deleteBatch(fastify)
-        await addCourseToBatch(fastify)
+        await addCoursesToBatch(fastify)
+        await addUsersToBatch(fastify)
     }
     await batchRoutes(fastify)
     const trackRoutes = async (fastify) => {
