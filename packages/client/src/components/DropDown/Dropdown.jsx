@@ -23,7 +23,9 @@ const Dropdown = ({
     options,
     isMulti,
     isSearchable,
-    onChange
+    onChange,
+    styles
+
 }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [selectedValue, setSelectedValue] = useState(isMulti ? [] : null);
@@ -132,7 +134,7 @@ const Dropdown = ({
     };
 
     return (
-        <div className="dropdown-container">
+        <div className="dropdown-container" style={styles}>
             <div ref={inputRef} onClick={handleInputClick} className="dropdown-input">
                 <div className="dropdown-selected-value">{getDisplay()}</div>
                 <div className="dropdown-tools">

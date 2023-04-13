@@ -4,6 +4,7 @@ import styles from './styles.module.css'
 import eye from '/assets/eye.svg'
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import Dropdown from '../DropDown/Dropdown';
 const SignUp = ({ token, data }) => {
     const server = import.meta.env.PUBLIC_SERVER_URL;
     const [showPassword, setShowPassword] = useState(false);
@@ -111,6 +112,12 @@ const SignUp = ({ token, data }) => {
                         {...register("github_username", { required: true })}
                     />
                     {errors.github_username && <span className={styles.error}>This field is required</span>}
+                </div>
+                <div className={styles.track}>
+                    <Dropdown  options={[{ label: "batch1", value: 1 }, { label: "batch2", value: 2 }, { label: "batch3", value: 3 }]} placeHolder='Track' styles={{ width: '100%', border: 'none', fontSize: "13.33px" }} />
+                </div>
+                <div className={styles.batch}>
+                    <Dropdown isMulti options={[{ label: "batch1", value: 1 }, { label: "batch2", value: 2 }, { label: "batch3", value: 3 }]} placeHolder='Batchs' styles={{ width: '100%', border: 'none', fontSize: "13.33px" }} />
                 </div>
                 <div className={styles.btn} >
                     <button id="submit_btn" type="submit">Create Account</button>
