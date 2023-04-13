@@ -65,6 +65,7 @@ const getInvite = require("./user/getInvite");
 const acceptInviteUser = require("./user/acceptInvite");
 const isAdmin = require("./auth/isAdmin");
 const addUsersToBatch = require("./batch/addUsersToBatch");
+const getAdminBatchesPageData = require("./pages/adminBatches");
 const registerRoutes = async (fastify) => {
     const authRoutes = async (fastify) => {
         await signUpUser(fastify);
@@ -161,6 +162,7 @@ const registerRoutes = async (fastify) => {
         await getAdminStudentsPageData(fastify)
         await getAdminPageData(fastify);
         await getStudentProfilePageData(fastify)
+        await getAdminBatchesPageData(fastify)
     }
     await pageRoutes(fastify);
     // const authRoutes = async (fastify) => {

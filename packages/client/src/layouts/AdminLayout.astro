@@ -34,6 +34,16 @@ const currentPath = Astro.url.pathname;
         >
             Students
         </a>
+        <a
+            href="/admin/batches"
+            class={`tab ${
+                currentPath === "/admin/batches"
+                    ? "tab_selected"
+                    : "not-selected"
+            }`}
+        >
+        Batches
+        </a>
     </TabsNav>
     <slot />
 </MainLayout>

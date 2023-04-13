@@ -1,0 +1,66 @@
+---
+import Button from "../../components/Button/Button";
+import ModalLayout from "../../layouts/ModalLayout.astro";
+import AdminCourseCard from "../../components/AdminCourseCard/AdminCourseCard";
+import AddCourse from "../../components/AddCourse/AddCourse";
+import { fetchData } from "../../utils/common";
+import AdminBatchCard from "../../components/AdminBatchCard";
+const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const data = await fetchData(`admin/batches`, token);
+if (!data) return Astro.redirect("/error");
+---
+
+<ModalLayout title="Admin | Batches">
+    <div class="admin_dashboard_courses_container">
+        <div class="create_course_container">
+            <div class="header_title">Batches</div>
+            <Button
+                text="Create Batch"
+                id={"open_modal"}
+                className="create_course_button"
+            />
+        </div>
+        <div class="courses_container">
+            {
+                data?.map((batch) => {
+                    return <AdminBatchCard batch={batch} client:load />;
+                })
+            }
+        </div>
+    </div>
+    <!-- <div slot="modal_header_slot">Edit Course</div>
+    <div slot="modal_content_slot">
+        <AddCourse client:load />
+    </div>
+    <div slot="modal_footer_slot" class="modal_footer">
+        <Button text="Close Modal" id={"close_modal"} />
+    </div> -->
+</ModalLayout>
+<style>
+    .courses_container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .course {
+        flex: 1;
+        min-width: calc(100% / 3);
+        max-width: calc(100% / 3);
+    }
+    .create_course_container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 35px 0px 20px;
+        /* width: 90%; */
+    }
+    .create_course_container .header_title {
+        font-size: 24px;
+    }
+    @media (max-width: 900px) {
+        .create_course_button {
+            display: none !important;
+        }
+    }
+</style>
