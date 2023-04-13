@@ -1,7 +1,7 @@
 const addCoursesToBatchToDB = require("../../controllers/batch/addCoursesToBatch");
 
 
-const addCourseToBatch = async (fastify) => {
+const addCoursesToBatch = async (fastify) => {
     fastify.post("/batch/:batch_id/add_courses", async (req, res) => {
         try {
             const result = await addCoursesToBatchToDB(req.params, req.body);
@@ -11,4 +11,4 @@ const addCourseToBatch = async (fastify) => {
         }
     });
 };
-module.exports = addCourseToBatch;
+module.exports = addCoursesToBatch;

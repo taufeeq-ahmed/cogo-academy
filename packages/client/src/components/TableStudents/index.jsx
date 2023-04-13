@@ -114,7 +114,9 @@ const TableStudents = () => {
                     </div>
                 </div>
             </div>
-            <Table data={tableData} />
+            <div className={styles.table_container}>
+                <Table data={tableData} />
+            </div>
         </div>
     )
 }

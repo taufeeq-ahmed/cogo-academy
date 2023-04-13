@@ -19,16 +19,17 @@ const authCheckPlugin = async (fastify) => {
         }
         try {
             const decoded = await request.jwtVerify();
-            const user = await prisma.user.findFirstOrThrow({
+            const user = await prisma.user.findFirst({
                 where: {
                     email: decoded.email
                 },
                 include: {
                     track: true,
-                    batch: true
+                    batches: true
                 }
             })
             request.user = user;
+            console.log(user)
         } catch (err) {
             throw new ForbiddenError('No permission to access this route');
         }

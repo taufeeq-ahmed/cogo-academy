@@ -1,26 +1,15 @@
 ---
 import BrandLogo from "/assets/brand.svg";
-import GoBack from "/assets/goBack.svg";
 import "../styles/global.css";
 ---
 
-<div class="tabs">
-  <div class="open-content">
-    <div class="tabs-header">
-      <div class="brand-logo">
-        <a href="/"><img src={BrandLogo} alt="brand-logo" /></a>
-      </div>
-      <div class="close-logo">
-        <img src={GoBack} alt="minimse-logo" class="close-btn" />
-      </div>
-    </div>
-    <slot class="all-tabs" />
-  </div>
-  <div class="close-content">
-    <div class="open-logo">
-      <img src={GoBack} alt="minimse-logo" class="open-btn" />
+<div class="tabs" id="tabs">
+  <div class="tabs-header">
+    <div class="brand-logo">
+      <a href="/"><img src={BrandLogo} alt="brand-logo" /></a>
     </div>
   </div>
+  <slot class="all-tabs" />
 </div>
 
 <style>
@@ -29,12 +18,9 @@ import "../styles/global.css";
     display: flex;
     flex-direction: column;
     padding: 1.25rem 1rem 0px 1rem;
-    box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
+    box-shadow: 0px 8px 8px rgba(98, 127, 172, 0.2);
     z-index: 10;
     background-color: white;
-  }
-  .tabs-close {
-    display: none;
   }
 
   .tabs-header {
@@ -43,91 +29,33 @@ import "../styles/global.css";
   .brand-logo {
     margin-bottom: 1.5rem;
   }
-  .close-logo,
-  .open-logo {
-    margin: 5px 10px;
-    padding: 0rem 3rem;
-  }
-  .open-logo img,
-  .close-logo img {
-    width: 20px;
-  }
-  .close-content {
-    display: none;
-  }
-  @media (768px<=width<=1400px) {
+
+  @media (max-width: 768px) {
     .tabs {
-      width: 10rem;
-      padding: 1rem 0.75rem 0px 0.75rem;
       position: fixed;
+      padding: 1rem 0.75rem 0px 0.75rem;
+      height: 100vh;
+      display: none;
     }
-    .brand-logo img {
-      width: 6rem;
-    }
-    .close-logo,
-    .open-logo {
-      margin: 0px 0px;
-      padding: 0rem 0rem;
-    }
-    .open-logo img,
-    .close-logo img {
-      width: 15px;
-    }
-  }
-  @media (width>1400px) {
-    .close-logo,
-    .open-logo {
-      margin: 0px 0px;
-      padding: 0rem 0rem;
-    }
-    .open-logo img,
-    .close-logo img {
-      width: 15px;
-    }
-    .open-logo,
-    .close-logo {
+    .brand-logo {
       display: none;
     }
   }
-  @media (width<768px) {
-    .tabs {
-      position: fixed;
-      height: 100vh;
-    }
-
-    .close-logo,
-    .open-logo {
-      margin: 0px 5px;
-      padding: 13px 0px;
-    }
-    .open-logo img,
-    .close-logo img {
-      width: 15px;
+  @media (768px<=width<=1400px) {
+    .brand-logo img {
+      width: 6rem;
     }
   }
 </style>
 <script>
-  const openBtn = document.querySelector<HTMLElement>(".open-btn");
-  const closeBtn = document.querySelector<HTMLElement>(".close-btn");
-  const openContentElement =
-    document.querySelector<HTMLElement>(".open-content");
-  const closeContentElement =
-    document.querySelector<HTMLElement>(".close-content");
-  const tabsElement = document.querySelector<HTMLElement>(".tabs");
-  // tabsElement.classList.toggle("tabs");
-  // tabsElement.classList.toggle("tabs-close");
-
-  closeBtn.addEventListener("click", () => {
-    openContentElement.style.display = "none";
-    closeContentElement.style.display = "block";
-    tabsElement.style.width = "4rem";
-    tabsElement.style.height = "";
-  });
+  const openBtn = document.querySelector<HTMLElement>("#open-btn");
+  const openContent = document.querySelector<HTMLElement>("#tabs");
 
   openBtn.addEventListener("click", () => {
-    openContentElement.style.display = "block";
-    closeContentElement.style.display = "none";
-    tabsElement.style.width = "16rem";
-    tabsElement.style.height = "100vh";
+    if (openContent.style.display === "flex") {
+      openContent.style.display = "none";
+    } else {
+      openContent.style.display = "flex";
+    }
   });
 </script>

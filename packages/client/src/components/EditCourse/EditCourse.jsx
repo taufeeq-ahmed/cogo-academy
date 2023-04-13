@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Button from '../Button/Button'
-import CreateSection from '../CreateSection/CreateSection';
 import styles from './styles.module.css'
 import InputBox from '../InputBox/InputBox'
 import UploadSVG from '/assets/upload.svg'
@@ -9,6 +8,7 @@ import Modal from '../Modal/Modal';
 import LinkBtn from '../LinkBtn';
 import ArticlesList from '../ArticlesList/ArticlesList';
 import instance from '../../utils/axios';
+
 const EditCourse = ({ course, show, toggle }) => {
     const { sections, course_id, course_name } = course;
 

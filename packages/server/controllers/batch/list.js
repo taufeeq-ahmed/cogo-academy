@@ -4,7 +4,8 @@ const getAllBatchesFromDB = async () => {
     try {
         const allBatches = await prisma.batch.findMany({
             include: {
-                courses: true
+                courses: true,
+                users: true
             }
         });
         return allBatches;
