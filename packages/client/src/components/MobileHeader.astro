@@ -1,0 +1,38 @@
+---
+import MenuIcon from "/assets/menuIcon.svg";
+import BrandLogo from "/assets/brand.svg";
+---
+
+<div class="mobile-header">
+    <img src={MenuIcon} alt="minimse-logo" class="open-btn" id="open-btn" />
+    <div class="brand-box">
+        <a href="/"><img src={BrandLogo} alt="brand-logo" /></a>
+    </div>
+</div>
+
+<style>
+    .open-btn {
+        cursor: pointer;
+    }
+    .mobile-header {
+        position: sticky;
+        top: 0;
+        width: 100vw;
+        padding: 10px;
+        z-index: 12;
+        display: none;
+        box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+    }
+
+    .brand-box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+        .mobile-header {
+            display: flex;
+        }
+    }
+</style>

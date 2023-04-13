@@ -5,6 +5,8 @@ import TabsNav from "../components/TabsNav.astro";
 import LinkSVG from "/assets/link.svg";
 import BookSVG from "/assets/book.svg";
 import { fetchData } from "../utils/common";
+import MenuIcon from "/assets/menuIcon.svg";
+import MobileHeader from "../components/MobileHeader.astro";
 
 const { sectionId, elementId, type = "article" } = Astro.props;
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
@@ -47,6 +49,7 @@ const getNextArticle = (all_articles: any[]) => {
         <title>Playground - {title}</title>
     </head>
     <body>
+        <MobileHeader />
         <div class="root">
             <TabsNav>
                 <p class="left_title">Course Contents</p>
@@ -237,10 +240,9 @@ const getNextArticle = (all_articles: any[]) => {
     input[type="checkbox"] {
         pointer-events: none;
     }
-    @media(width<=768px){
-        .right_box{
+    @media (width<=768px) {
+        .right_box {
             display: none;
         }
     }
 </style>
-
