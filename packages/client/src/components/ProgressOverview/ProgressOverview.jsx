@@ -1,39 +1,38 @@
 import React from 'react'
 import { ResponsiveRadialBar } from '@cogoport/charts/radial-bar'
-import styles from "./styles.module.css"
-const data = [
-    {
-        "id": "Articles",
-        "data": [
-            {
-                "x": 142,
-                "y": 14
-            },
-
-        ]
-    },
-    {
-        "id": "Exercises",
-        "data": [
-            {
-                "x": 20,
-                "y": 1
-            },
-        ]
-    },
-    {
-        "id": "Projects",
-        "data": [
-            {
-                "x": 2,
-                "y": 0
-            },
-
-        ]
-    }
-]
-
+import styles from "./styles.module.css";
 const ProgressOverview = ({ progressData }) => {
+    const data = [
+        {
+            "id": "Articles",
+            "data": [
+                {
+                    "x": "Article",
+                    "y": Math.round((progressData.studentData.number_of_articles_read / 210) * 100)
+                },
+    
+            ]
+        },
+        {
+            "id": "Exercises",
+            "data": [
+                {
+                    "x": "Exercises",
+                    "y": Math.round((progressData.studentData.number_of_exercises_done / 32) * 100)
+                },
+            ]
+        },
+        {
+            "id": "Submissions",
+            "data": [
+                {
+                    "x": "Submission",
+                    "y": Math.round((progressData.studentData.number_of_submissions / 20) * 100)
+                },
+    
+            ]
+        }
+    ]
     return (
         <div className={styles.progress_overview} >
             <div style={{ width: '70%', }} >
