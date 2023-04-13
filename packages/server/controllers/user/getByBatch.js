@@ -5,11 +5,15 @@ const getUserByBatchFromDB = async (params) => {
     const usersByBatch = await prisma.User.findMany(
         {
             where: {
-                batch_id: batch_id
+                batches: {
+                    some: {
+                        batch_id: batch_id,
+                    },
+                },
             },
             include: {
                 track: true,
-                batch: true
+                batches: true
             }
         }
     )

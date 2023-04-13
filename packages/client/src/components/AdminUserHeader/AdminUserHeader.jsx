@@ -17,7 +17,7 @@ const AdminUserHeader = ({ userData }) => {
             </div>
             <div className="batch_number">
                 <div className={styles.number}>
-                    {userData?.batch?.batch_name}
+                    {userData?.batches?.[0]?.batch_name}
                 </div>
                 <div className={styles.under_text}>
                     Batch
