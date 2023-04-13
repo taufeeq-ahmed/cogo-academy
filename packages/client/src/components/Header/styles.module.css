@@ -24,10 +24,12 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    width: 400px;
 }
 
-.search_box input {
-    max-width: 500px;
+.search_box>div {
+    width: 100%;
+    padding: 0;
 }
 
 .profile_box {
@@ -77,6 +79,11 @@
 }
 
 @media(width<768px) {
+    .search_box {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
     .header {
         display: flex;
         flex-direction: column-reverse;

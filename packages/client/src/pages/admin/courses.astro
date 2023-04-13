@@ -11,7 +11,6 @@ if (!token) {
 }
 const data = await fetchData(`admin/courses`, token);
 if (!data) return Astro.redirect("/error");
-
 ---
 
 <ModalLayout title="Admin | Courses">
@@ -40,7 +39,6 @@ if (!data) return Astro.redirect("/error");
         <Button text="Close Modal" id={"close_modal"} />
     </div>
 </ModalLayout>
-<!-- <EditCourse client:load /> -->
 <style>
     .courses_container {
         display: flex;
@@ -60,7 +58,7 @@ if (!data) return Astro.redirect("/error");
     .create_course_container .header_title {
         font-size: 24px;
     }
-    @media (width<1400px) {
+    @media (max-width: 900px) {
         .create_course_button {
             display: none !important;
         }

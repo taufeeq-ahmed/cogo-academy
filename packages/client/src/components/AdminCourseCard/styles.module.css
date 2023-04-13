@@ -23,7 +23,7 @@
     }
     
 }
-@media (width<1400px) {
+@media (max-width:900px) {
     .edit_button{
         display: none !important;
     }

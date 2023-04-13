@@ -4,7 +4,7 @@
   position: relative;
   border-radius: 5px;
   cursor: pointer;
-  width: max-content;
+  min-width: max-content;
 }
 
 .dropdown-input {
@@ -72,9 +72,10 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-@media(width<768px){
- .dropdown-container{
-  width: 4rem;
-  font-size: 12px;
- }
+
+@media(width<768px) {
+  .dropdown-container {
+    width: 4rem;
+    font-size: 12px;
+  }
 }

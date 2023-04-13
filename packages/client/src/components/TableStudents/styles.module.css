@@ -1,30 +1,7 @@
-table {
-    width: 100%;
-}
-
-table,
-th,
-td {
-    /* border: 1px solid black; */
-    border-collapse: collapse;
-}
-
-th,
-td {
-    padding: 15px 50px;
-    text-align: center;
-}
-
-th {
-    background-color: #F2F3FA;
-    font-weight: 600;
-}
-
 .students_heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
 }
 
 .heading_text {
@@ -43,11 +20,16 @@ th {
 }
 
 .students_table {
-    overflow: auto;
-    flex: 1
+    flex: 1;
+    width: 100%;
 }
-@media(width<768px){
-    .heading_text{
+
+.table_container {
+    overflow-x: auto;
+}
+
+@media(width<768px) {
+    .heading_text {
         font-size: 16px;
     }
 }

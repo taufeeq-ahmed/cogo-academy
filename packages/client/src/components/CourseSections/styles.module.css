@@ -15,4 +15,5 @@
 
 .section_cards {
     display: flex;
+    margin-top: 20px;
 }

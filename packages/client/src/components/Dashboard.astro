@@ -96,7 +96,7 @@ const { userData, topThreeUsers, recentSections } = ff;
     .dashboard {
         display: flex;
         flex-direction: column;
-        /* gap: 15px; */
+        gap: 15px;
         width: 100%;
     }
     .dash-nav {
@@ -111,7 +111,6 @@ const { userData, topThreeUsers, recentSections } = ff;
         gap: 20px;
         padding: 5px;
         width: 60%;
-        /* border: 1px solid red; */
     }
     .dash_body {
         display: flex;
@@ -169,35 +168,16 @@ const { userData, topThreeUsers, recentSections } = ff;
     .img_div > img {
         width: 20px;
     }
-    @media (768px<=width<=1400px) {
-        .leader-box {
-            width: 50%;
-        }
-        .dash-sections {
-            width: 50%;
-        }
-        .dash-stat > h1 {
-            font-weight: 500;
-            font-size: 20px;
-        }
 
-        .dash-stat > span {
-            font-weight: 400;
-            font-size: 16px;
-            color: #828282;
+    @media (max-width: 1200px) {
+        .dash_body {
+            gap: 10px;
         }
-        .img_div > img {
-            width: 15px;
-        }
-        .img_div {
-            padding: 10px;
-        }
-        .dash-rank > h2 {
-            font-weight: 500;
-            font-size: 22px;
+        .section {
+            min-width: 300px;
         }
     }
-    @media (width<768px) {
+    @media (max-width: 768px) {
         .dash-nav {
             display: flex;
             flex-direction: column;
@@ -250,7 +230,6 @@ const { userData, topThreeUsers, recentSections } = ff;
         }
         .dash-sections {
             width: 100%;
-            justify-content: center;
         }
         .leader-box {
             padding: 10px;
