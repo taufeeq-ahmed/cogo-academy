@@ -6,9 +6,9 @@ const getAllCoursesByBatchFromDB = async (req) => {
         const allCourses = await prisma.course.findMany({
             where: {
                 batches: {
-                    some: {
+                    every: {
                         users: {
-                            some: {
+                            every: {
                                 user_id: user_id,
                             },
                         },

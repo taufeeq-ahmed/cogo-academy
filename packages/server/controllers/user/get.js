@@ -4,11 +4,7 @@ const getUserFromDB = async (params) => {
     const { user_id } = params;
     const user = await prisma.User.findUnique({
         where: {
-            batches: {
-                some: {
-                    batch_id: batch_id,
-                },
-            },
+            user_id: user_id,
         },
         include: {
             batches: true,
