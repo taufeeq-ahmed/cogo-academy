@@ -123,6 +123,12 @@ const SignUp = ({ userData }) => {
                     />
                     {errors.github_username && <span className={styles.error}>This field is required</span>}
                 </div>
+                <div className={styles.track}>
+                    <Dropdown  options={[{ label: "batch1", value: 1 }, { label: "batch2", value: 2 }, { label: "batch3", value: 3 }]} placeHolder='Track' styles={{ width: '100%', border: 'none', fontSize: "13.33px" }} />
+                </div>
+                <div className={styles.batch}>
+                    <Dropdown isMulti options={[{ label: "batch1", value: 1 }, { label: "batch2", value: 2 }, { label: "batch3", value: 3 }]} placeHolder='Batchs' styles={{ width: '100%', border: 'none', fontSize: "13.33px" }} />
+                </div>
                 <div className={styles.btn} >
                     <button id="submit_btn" type="submit">Create Account</button>
                 </div>
