@@ -3,6 +3,11 @@ table {
     width: 100%;
 }
 
+thead{
+    position: sticky;
+    top: 0;
+}
+
 table,
 th,
 td {

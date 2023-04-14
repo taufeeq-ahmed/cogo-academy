@@ -1,5 +1,4 @@
-.admin_course_card {
-    /* flex: 1; */
+.admin_batch_card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -12,13 +11,13 @@
 }
 
 @media(768<width<=1400px){
-    .admin_course_card{
+    .admin_batch_card{
         width: 45%;
     }
     
 }
 @media(width<768px){
-    .admin_course_card{
+    .admin_batch_card{
         width: 80%;
     }
     
@@ -34,7 +33,7 @@
 
 }
 
-.course_title {
+.batch_title {
     color: #221f20;
     font-weight: 500;
     font-size: 20px;
@@ -42,13 +41,13 @@
     justify-content: space-between;
     width: 100%;
 }
-.course_buttons {
+.batch_buttons {
     display: flex;
 }
-.course_buttons img {
+.batch_buttons img {
     margin: 10px;
 }
-.course_buttons img:hover {
+.batch_buttons img:hover {
     transform: scale(1.2);
     cursor: pointer;
 }

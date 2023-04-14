@@ -112,6 +112,7 @@ input{
 .control_buttons{
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
 }
 .sections_form{
    

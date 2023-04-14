@@ -7,28 +7,31 @@ import ProjectsSVG from '/assets/projects.svg'
 const AdminUserHeader = ({ userData }) => {
     return (
         <div className={styles.adminuser_header}>
-            <div className="name_rank">
-                <div className={styles.name}>
-                    {userData?.user_name}
-                </div>
-                {/* <div className={styles.under_text}>
+            <div className={styles.admin_leftcontent}>
+                <div>
+                    <div className={styles.name}>
+                        {userData?.user_name}
+                    </div>
+                    {/* <div className={styles.under_text}>
                     Rank {userData?.user_rank}
                 </div> */}
-            </div>
-            <div className="batch_number">
-                <div className={styles.number}>
-                    {userData?.batches?.[0]?.batch_name}
                 </div>
-                <div className={styles.under_text}>
-                    Batch
+                <div>
+                    <div className={styles.number}>
+                        {userData?.batches?.[0]?.batch_name}
+                    </div>
+                    <div className={styles.under_text}>
+                        Batch
+                    </div>
                 </div>
-            </div>
-            <div className="track_name">
-                <div className={styles.name}>
-                    {userData?.track?.track_name}
-                </div>
-                <div className={styles.under_text}>
-                    Track
+                <div>
+                    <div className={styles.name}>
+                        {/* {userData?.track?.track_name} */}
+                        Track 1
+                    </div>
+                    <div className={styles.under_text}>
+                        Track
+                    </div>
                 </div>
             </div>
             <div className={styles.icons_details}>

@@ -35,10 +35,10 @@ const ProgressOverview = ({ progressData }) => {
     ]
     return (
         <div className={styles.progress_overview} >
-            <div style={{ width: '70%', }} >
+            <div>
                 <div className={styles.progress_title}>Progress Overview</div>
                 <div className={styles.progress_overview_report}  >
-                    <div style={{ width: '60%', height: '85%', }}>
+                    <div className={styles.chart}>
                         <ResponsiveRadialBar
                             className={styles.responsive_radial_bar}
                             data={data}
