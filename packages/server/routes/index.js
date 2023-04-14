@@ -65,6 +65,8 @@ const getInvite = require("./user/getInvite");
 const acceptInviteUser = require("./user/acceptInvite");
 const isAdmin = require("./auth/isAdmin");
 const addUsersToBatch = require("./batch/addUsersToBatch");
+const deleteCourseFromBatch =require("./batch/deleteCourseFromBatch");
+const deleteUsersFromBatch = require("./batch/deleteUsersToBatch");
 const registerRoutes = async (fastify) => {
     const authRoutes = async (fastify) => {
         await signUpUser(fastify);
@@ -137,6 +139,8 @@ const registerRoutes = async (fastify) => {
         await deleteBatch(fastify)
         await addCoursesToBatch(fastify)
         await addUsersToBatch(fastify)
+        await deleteCourseFromBatch(fastify)
+        await deleteUsersFromBatch(fastify)
     }
     await batchRoutes(fastify)
     const trackRoutes = async (fastify) => {
