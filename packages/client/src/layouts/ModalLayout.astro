@@ -5,7 +5,7 @@ const { title } = Astro.props;
 
 <AdminLayout title={title}>
     <slot />
-    <dialog id="modal" style={{ width: "60vw" }}>
+    <dialog id="modal">
         <div class="modal_header">
             <slot name="modal_header_slot" />
         </div>
@@ -21,6 +21,8 @@ const { title } = Astro.props;
 <style>
     #modal {
         max-width: 70%;
+        min-width: 40%;
+        width: fit-content;
         border: 1px solid white;
         border-radius: 6px;
         padding: 0px;

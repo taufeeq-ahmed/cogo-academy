@@ -1,22 +1,41 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from "./styles.module.css"
 import Button from '../Button/Button'
 import InputBox from '../InputBox/InputBox'
-import { useForm, useFieldArray, } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import instance from '../../utils/axios'
 
-const AddBatch = () => {
 
-    const { register, handleSubmit } = useForm({});
+
+const AddBatch = ({ courses }) => {
+
+    const { register, handleSubmit, control } = useForm({
+        defaultValues: {
+            batch_name: '',
+            // courses: courses
+        }
+    });
+    // const {
+    //     fields,
+    //     append,
+    //     prepend,
+    //     remove,
+    //     swap,
+    //     move,
+    //     insert,
+    //     replace
+    // } = useFieldArray({
+    //     control,
+    //     name: "courses"
+    // });
+
 
     const onSubmit = async (data) => {
-        console.log("dasdosaidoiasjoi", data)
-        try {
-            // await instance.post(`/course/add-with-sections`, data)
-        } catch (err) {
-            alert(err)
-        }
+        // const courses = data.courses.filter((c) => c.selected === true);
+        // alert(JSON.stringify(data));
+        await instance.post('batch',data);
     }
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -28,6 +47,16 @@ const AddBatch = () => {
                 register={register}
                 registerQuery={"batch_name"}
             />
+            {/* {
+                fields.map((item, index) => {
+                    return (
+                        <div className={styles.check_course}>
+                            <input type='checkbox' value={item.value} {...register(`courses.${index}.selected`)} />
+                            <span>{item.course_name}</span>
+                        </div>
+                    )
+                })
+            } */}
             <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} />
 
         </form>
