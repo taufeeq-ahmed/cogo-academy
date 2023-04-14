@@ -1,8 +1,12 @@
 ---
 import AddArticle from "../../../../components/AddArticle/AddArticle";
-import { fetchData } from "../../../../utils/common";
+import { fetchData, parseCookie } from "../../../../utils/common";
 const { sectionId } = Astro.params;
-const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
 if (!token) {
     return Astro.redirect("/signin");
 }

@@ -1,10 +1,14 @@
 ---
 import Button from "../../components/Button/Button";
 import ModalLayout from "../../layouts/ModalLayout.astro";
-import { fetchData } from "../../utils/common";
+import { fetchData, parseCookie } from "../../utils/common";
 import AdminBatchCard from "../../components/AdminBatchCard";
 import AddBatch from "../../components/AddBatch";
-const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
 if (!token) {
     return Astro.redirect("/signin");
 }
