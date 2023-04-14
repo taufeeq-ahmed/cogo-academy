@@ -100,4 +100,9 @@
         height: 65%;
         width: 65%;
     }
+
+    .progress_details {
+        margin: 0;
+        margin-left: 15px;
+    }
 }

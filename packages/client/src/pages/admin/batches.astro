@@ -1,10 +1,9 @@
 ---
 import Button from "../../components/Button/Button";
 import ModalLayout from "../../layouts/ModalLayout.astro";
-import AdminCourseCard from "../../components/AdminCourseCard/AdminCourseCard";
-import AddCourse from "../../components/AddCourse/AddCourse";
 import { fetchData } from "../../utils/common";
 import AdminBatchCard from "../../components/AdminBatchCard";
+import AddBatch from "../../components/AddBatch";
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
 if (!token) {
     return Astro.redirect("/signin");
@@ -31,13 +30,13 @@ if (!data) return Astro.redirect("/error");
             }
         </div>
     </div>
-    <!-- <div slot="modal_header_slot">Edit Course</div>
+    <div slot="modal_header_slot">Edit Course</div>
     <div slot="modal_content_slot">
-        <AddCourse client:load />
+        <AddBatch client:load />
     </div>
     <div slot="modal_footer_slot" class="modal_footer">
         <Button text="Close Modal" id={"close_modal"} />
-    </div> -->
+    </div>
 </ModalLayout>
 <style>
     .courses_container {
