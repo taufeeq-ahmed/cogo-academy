@@ -38,20 +38,30 @@ const EditArticle = ({ article }) => {
         setText(article_content);
     }, [])
     return (
-        <div className="add_article">
+        <div className={styles.add_article_container}>
             <form className={styles.inputs}>
-                <InputBox
-                    register={register}
-                    registerQuery='article_name'
-                    placeholder='Article Name'
+                <div
+                    className={styles.input_box_container}
+                >
+                    <label htmlFor="">Article Name</label>
+                    <InputBox
+                        register={register}
+                        registerQuery='article_name'
+                        placeholder='Article Name'
 
-                />
-                <InputBox
-                    register={register}
-                    registerQuery='article_time_in_mins'
-                    placeholder='Article Time In Minutes'
-                    type='number'
-                />
+                    />
+                </div>
+                <div
+                    className={styles.input_box_container}
+                >
+                    <label htmlFor="">Article Name</label>
+                    <InputBox
+                        register={register}
+                        registerQuery='article_time_in_mins'
+                        placeholder='Article Time In Minutes'
+                        type='number'
+                    />
+                </div>
             </form>
             <div className={styles.editor}>
                 <RichTextEditor
@@ -61,7 +71,7 @@ const EditArticle = ({ article }) => {
 
             </div>
             <div className={styles.submit_article}>
-                <Button text='Save Article' onClick={handleSubmit(updateArticle)} />
+                <Button btnStyle={{ margin: "10px 0" }} text='Save Article' onClick={handleSubmit(updateArticle)} />
             </div>
         </div>
 
