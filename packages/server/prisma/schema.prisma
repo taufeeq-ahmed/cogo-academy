@@ -133,6 +133,5 @@ model UserInvites {
     email      String   @unique
     token      String
     created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-
     @@unique([email, token])
 }

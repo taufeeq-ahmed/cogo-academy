@@ -14,7 +14,7 @@ const CreateCourse = () => {
         ]
     });
     useEffect(() => {
-        // alert(JSON.stringify(course))
+
     }, [course]);
     const setSectionState = (section, index) => {
         setCourse((prev) => {
@@ -34,7 +34,7 @@ const CreateCourse = () => {
     const handleCourseChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        // alert("The name : " + name + " adn value is :" + value)
+
         setCourse((prev) => {
             const ele = { ...prev, [name]: value }
             // courseDetails = { ...courseData, ...ele }
@@ -44,13 +44,13 @@ const CreateCourse = () => {
     }
     const handleAddSection = () => {
         const newSection = { section_name: '', section_description: '', section_banner: '' };
-        // alert(JSON.stringify(course))
+
         setCourse((prev) => {
             const oldCourse = prev;
             oldCourse.sections_data.push(newSection);
             return { ...oldCourse };
         })
-        // alert(JSON.stringify(course))
+
 
     }
     return (

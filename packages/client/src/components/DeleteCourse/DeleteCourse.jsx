@@ -9,7 +9,7 @@ const DeleteCourse = ({ course = { course_name: 'HTML', }, show, toggle }) => {
 
     return (
         <div className='delete_course'>
-            <Modal isShowing={show} hide={toggle} heading={'Delete'} >
+            <Modal isShowing={show} toggle={toggle} heading={'Delete'} >
                 <h3>Are you Sure you want to delete {course.course_name} ?</h3>
                 <Button text='Delete' onClick={handleDeleteCourse} />
             </Modal>

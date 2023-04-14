@@ -12,8 +12,11 @@ const batch = cookies?.batch;
 if (!token) {
     return Astro.redirect("/signin");
 }
+
 const data = await fetchData(`admin/batches`, token);
 if (!data) return Astro.redirect("/error");
+
+const allCourses = await fetchData("course/list", token);
 ---
 
 <ModalLayout title="Admin | Batches">
@@ -29,14 +32,20 @@ if (!data) return Astro.redirect("/error");
         <div class="courses_container">
             {
                 data?.map((batch) => {
-                    return <AdminBatchCard batch={batch} client:load />;
+                    return (
+                        <AdminBatchCard
+                            batch={batch}
+                            client:load
+                            courses={allCourses}
+                        />
+                    );
                 })
             }
         </div>
     </div>
-    <div slot="modal_header_slot">Edit Course</div>
+    <div slot="modal_header_slot">Add Batch</div>
     <div slot="modal_content_slot">
-        <AddBatch client:load />
+        <AddBatch client:load courses={allCourses} />
     </div>
     <div slot="modal_footer_slot" class="modal_footer">
         <Button text="Close Modal" id={"close_modal"} />

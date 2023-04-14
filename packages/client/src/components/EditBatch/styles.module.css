@@ -1,0 +1,7 @@
+.check_courses{
+    display: flex;
+    margin: 10px 0px;
+}
+.check_course{
+    margin-right: 10px;
+}

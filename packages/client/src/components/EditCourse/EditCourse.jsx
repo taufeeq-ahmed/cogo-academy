@@ -34,7 +34,7 @@ const EditCourse = ({ course, show, toggle }) => {
     });
 
     const onSubmit = async (data) => {
-        alert(JSON.stringify(data));
+
         await instance.patch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
             new_data: data
         })
@@ -42,7 +42,7 @@ const EditCourse = ({ course, show, toggle }) => {
     }
 
     return (
-        <Modal isShowing={show} hide={toggle} heading={'Edit'} >
+        <Modal isShowing={show} toggle={toggle} heading={'Edit'} >
             <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
                 <div className="course_deatils_inputs">
                     <InputBox

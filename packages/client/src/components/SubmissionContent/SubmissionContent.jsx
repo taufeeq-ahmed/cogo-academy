@@ -11,7 +11,7 @@ const SubmissionContent = ({ submissionContent, github_username = "sumit" }) => 
         setURL(e.target.value);
     }
     const handleUrlSubmit = () => {
-        alert("hello")
+
         instance.post(`/submission-link-map/add`,
             {
                 "user_id": 'ff9f9d31-3321-43da-b8b2-00063e87abd3',

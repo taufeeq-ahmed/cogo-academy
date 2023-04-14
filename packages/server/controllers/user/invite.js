@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const uid = require('uid-safe');
+var jwt = require('jsonwebtoken');
 const { prisma } = require("../../helpers/db-client");
 
 AWS.config.update({
@@ -7,8 +8,10 @@ AWS.config.update({
 	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_SES,
 	region: 'ap-south-1',
 });
-const inviteUser = async ({ params = {} }) => {
-	const { email } = params;
+const inviteUser = async (params = {}, body = {}) => {
+	console.log("The bod is :", body)
+	const { email, batches } = body;
+	console.log("email is ", email)
 	const user = await prisma.User.findFirst({
 		where: {
 			email: email,
@@ -19,7 +22,11 @@ const inviteUser = async ({ params = {} }) => {
 		return ({ message: 'User with entered email already exists' });
 	}
 
-	const token = await uid(18);
+	const payload = {
+		email: email,
+		batches: batches
+	}
+	const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
 	const invitationrequest = await prisma.userInvites.create({
 		data: {
 			token: token,

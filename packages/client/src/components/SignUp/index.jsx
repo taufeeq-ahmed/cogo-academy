@@ -3,18 +3,41 @@ import instance from '../../utils/axios';
 import styles from './styles.module.css'
 import eye from '/assets/eye.svg'
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-const SignUp = ({ token, data }) => {
+import { useEffect, useState } from 'react';
+import Dropdown from '../DropDown/Dropdown'
+const defaultBatchOptions = [
+    { label: 'Batch 1', id: '123' },
+    { label: 'Batch 2', id: '124' },
+    { label: 'Batch 3', id: '125' },
+    { label: 'Batch 4', id: '126' },
+    { label: 'Batch 5', id: '127' },
+    { label: 'Batch 6', id: '128' }
+]
+const defaultTrackOptions = [
+    { label: 'React', id: '123' },
+    { label: 'Ruby', id: '124' },
+    { label: 'GO', id: '125' }
+]
+const SignUp = ({ userData, token }) => {
+    useEffect(() => {
+
+    }, [])
+    const { email, batches } = userData;
+
     const server = import.meta.env.PUBLIC_SERVER_URL;
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+        defaultValues: {
+            email: email,
+            batches: batches
+        }
+    });
     const onSubmit = async (formData) => {
-        formData.email = data;
+
+
         try {
-            const response = await instance.post(`/accept_invite`,
-                { body: { ...formData, token } },
-            );
+            const response = await instance.post(`/accept_invite`, { ...formData, token });
 
             if (response.status === 200) {
                 window.location.href = `/signin`;
@@ -57,7 +80,7 @@ const SignUp = ({ token, data }) => {
                         className={styles.email}
                         id="email"
                         placeholder="Enter your Email "
-                        value={data}
+                        value={email}
                         disabled
                     />
                 </div>
@@ -112,6 +135,25 @@ const SignUp = ({ token, data }) => {
                     />
                     {errors.github_username && <span className={styles.error}>This field is required</span>}
                 </div>
+                <div className={styles.batch}>
+                    <Dropdown
+                        isMulti
+                        disabled
+                        options={defaultBatchOptions}
+                        placeHolder={'Batches'}
+                        styles={{ flex: 1 }}
+                        multiValues={userData.batches}
+                    />
+                </div>
+                {/* <div className={styles.track}>
+                    <Dropdown
+                        disabled
+                        value={{ label: 'React', id: '123' }}
+                        options={defaultTrackOptions}
+                        placeHolder={'Track'}
+                        styles={{ flex: 1 }}
+                    />
+                </div> */}
                 <div className={styles.btn} >
                     <button id="submit_btn" type="submit">Create Account</button>
                 </div>

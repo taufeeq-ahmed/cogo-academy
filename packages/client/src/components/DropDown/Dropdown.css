@@ -1,9 +1,18 @@
 .dropdown-container {
   text-align: left;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   position: relative;
   border-radius: 5px;
   cursor: pointer;
+  max-width: 600px;
+  margin: 0px;
+  color: #00000085;
+  font-size: 14px;
+  
+
+}
+.disabled{
+  background-color: #e0e0e0;
   min-width: max-content;
 }
 
@@ -25,6 +34,7 @@
   max-height: 150px;
   background-color: #fff;
   z-index: 99;
+
 }
 
 .dropdown-item {
@@ -54,7 +64,9 @@
   display: flex;
   align-items: center;
 }
-
+.disabled .dropdown-tag-item{
+  background-color: #9f9f9f;
+}
 .dropdown-tag-close {
   display: flex;
   align-items: center;

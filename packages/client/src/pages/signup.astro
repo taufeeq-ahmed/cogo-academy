@@ -1,5 +1,4 @@
 ---
-
 import AuthLayout from "../layouts/AuthLayout.astro";
 
 import SignUp from "../components/SignUp";
@@ -10,8 +9,9 @@ const response = await fetch(
     `${import.meta.env.PUBLIC_SERVER_URL}/invited_user/${token}`
 );
 const data = await response?.json();
+console.log("Data on signup is :", data);
 ---
 
 <AuthLayout>
-    <SignUp token={token} data={data.email} client:load />
+    <SignUp token={token} userData={data} client:load />
 </AuthLayout>
