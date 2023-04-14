@@ -20,7 +20,7 @@ const defaultTrackOptions = [
 ]
 const SignUp = ({ userData, token }) => {
     useEffect(() => {
-        alert(JSON.stringify(userData))
+
     }, [])
     const { email, batches } = userData;
 
@@ -34,11 +34,10 @@ const SignUp = ({ userData, token }) => {
         }
     });
     const onSubmit = async (formData) => {
-        formData.email = email;
+
+
         try {
-            const response = await instance.post(`/accept_invite`,
-                { body: { ...formData, token } },
-            );
+            const response = await instance.post(`/accept_invite`, { ...formData, token });
 
             if (response.status === 200) {
                 window.location.href = `/signin`;
@@ -146,7 +145,7 @@ const SignUp = ({ userData, token }) => {
                         multiValues={userData.batches}
                     />
                 </div>
-                <div className={styles.track}>
+                {/* <div className={styles.track}>
                     <Dropdown
                         disabled
                         value={{ label: 'React', id: '123' }}
@@ -154,7 +153,7 @@ const SignUp = ({ userData, token }) => {
                         placeHolder={'Track'}
                         styles={{ flex: 1 }}
                     />
-                </div>
+                </div> */}
                 <div className={styles.btn} >
                     <button id="submit_btn" type="submit">Create Account</button>
                 </div>

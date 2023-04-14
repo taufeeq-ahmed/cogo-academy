@@ -5,18 +5,28 @@ import Modal from "../../components/Modal/Modal";
 import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import { fetchData } from "../../utils/common";
+import instance from "../../utils/axios";
 const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
 if (!token) {
   return Astro.redirect("/signin");
 }
 const data = await fetchData("users/isadmin", token);
 if (!data) return Astro.redirect("/error");
+
+const batches = await fetchData("batch/list/only-batches", token);
+
+const batchOptions = batches.map((batch) => {
+  return {
+    label: batch.batch_name,
+    value: batch.batch_id,
+  };
+});
 ---
 
 <AdminLayout title="Admin | Students">
   <div style={{ marginTop: "0px", height: "100vh" }}>
     <div class="invite_user_component">
-      <InviteUser client:only />
+      <InviteUser client:only batchOptions={batchOptions} token={token} />
     </div>
     <div class="users_details">
       <TableStudents client:load />
@@ -31,7 +41,3 @@ if (!data) return Astro.redirect("/error");
     align-items: center;
   }
 </style>
-<script>
-  // const inviteUserButton = document.querySelector("#invite_user_button");
-  // inviteUserButton.addEventListener("click", () => {});
-</script>

@@ -34,7 +34,7 @@ const EditCourse = ({ course, show, toggle }) => {
     });
 
     const onSubmit = async (data) => {
-        alert(JSON.stringify(data));
+
         await instance.patch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
             new_data: data
         })

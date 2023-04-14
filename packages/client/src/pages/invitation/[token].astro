@@ -4,14 +4,11 @@ import AuthLayout from "../../layouts/AuthLayout.astro";
 import { fetchData } from "../../utils/common";
 
 const { token } = Astro.params;
+
 function parseJwt(token) {
     return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
 }
 const userData = parseJwt(token);
-userData.batches.map((batch) => {
-    batch.label = batch.batch_name;
-    batch.value = batch.batch_id;
-});
 ---
 
 <AuthLayout>

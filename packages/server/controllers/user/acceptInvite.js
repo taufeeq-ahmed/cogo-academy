@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 const { prisma } = require('../../helpers/db-client');
 
-const acceptInvite = async ({ data = {} }) => {
-    const { user_name: userName, email, password, github_username: gitUserName, token } = data.body;
+const acceptInvite = async (data = {}) => {
+    const { user_name, email, password, github_username, token, batches } = data;
 
     const check = await prisma.userInvites.findUnique({
         where: {
@@ -29,11 +29,17 @@ const acceptInvite = async ({ data = {} }) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const createuser = await prisma.user.create({
         data: {
-            user_name: userName,
-            email: email,
+            user_name,
+            email,
             password: hashedPassword,
-            github_username: gitUserName,
+            github_username,
+            batches: {
+                connect: batches.map((b) => {
+                    return { batch_id: b.batch_id };
+                }),
+            }
         },
+
     })
 
 

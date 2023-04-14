@@ -17,10 +17,10 @@ const EditArticle = ({ article }) => {
         }
     });
 
-    const onSubmit = async data => { alert(JSON.stringify(data)) };
+    const onSubmit = async data => { };
 
     const updateArticle = async (data) => {
-        alert(JSON.stringify(data))
+
         try {
             await instance.patch(`/article/${article_id}`, {
                 new_data: {
@@ -31,7 +31,7 @@ const EditArticle = ({ article }) => {
                 }
             })
         } catch (err) {
-            alert(err)
+
         }
     }
     useEffect(() => {

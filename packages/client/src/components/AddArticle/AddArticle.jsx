@@ -10,10 +10,10 @@ import instance from '../../utils/axios';
 const AddArticle = ({ sectionId }) => {
 
     const { register, handleSubmit } = useForm();
-    const onSubmit = async data => { alert(JSON.stringify(data)) };
+    const onSubmit = async data => {  };
     const [text, setText] = useState('');
     const addArticle = async (data) => {
-        alert(JSON.stringify(data))
+
         try {
             await instance.post(`/article/${sectionId}/add`, {
                 article_name: data.article_name,
@@ -23,7 +23,7 @@ const AddArticle = ({ sectionId }) => {
             })
 
         } catch (err) {
-            alert(err)
+
         }
     }
 

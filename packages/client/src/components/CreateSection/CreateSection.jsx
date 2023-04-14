@@ -14,7 +14,7 @@ const CreateSection = ({ sectionData = {}, sendSectionUp, index }) => {
         sendSectionUp(section, index);
     }, [section])
     const handleSectionChange = async (e) => {
-        // alert(e.target.name + " hello " + e.target.value);
+
         const name = e.target.name;
         const value = e.target.value;
 

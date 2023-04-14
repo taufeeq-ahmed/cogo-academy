@@ -5,30 +5,28 @@ import DropDown from '../DropDown/Dropdown'
 import Button from '../Button/Button';
 import styles from './styles.module.css'
 import { set, useForm } from 'react-hook-form'
+import instance from '../../utils/axios'
 
-const defaultBatchOptions = [
-    { label: 'Batch 1', id: '123' },
-    { label: 'Batch 2', id: '124' },
-    { label: 'Batch 3', id: '125' },
-    { label: 'Batch 4', id: '126' },
-    { label: 'Batch 5', id: '127' },
-    { label: 'Batch 6', id: '128' }
-]
 const defaultTrackOptions = [
     { label: 'React', id: '123' },
     { label: 'Ruby', id: '124' },
     { label: 'GO', id: '125' }
 ]
 
-const defaultInvite = {
+const defaultInviteData = {
     email: '',
     batches: [],
     track: ''
 }
 
-const InviteUser = ({ batches = defaultBatchOptions, tracks = defaultTrackOptions }) => {
+const InviteUser = ({ batchOptions, token }) => {
 
-    const [inviteData, setInviteData] = useState(defaultInvite);
+    const [inviteData, setInviteData] = useState(defaultInviteData);
+    const [email, setEmail] = useState('');
+    const [batches, setBatches] = useState([]);
+
+
+
     // const { register, handleSubmit } = useForm({
     //     defaultValues: {
     //         email: '',
@@ -41,13 +39,18 @@ const InviteUser = ({ batches = defaultBatchOptions, tracks = defaultTrackOption
 
 
 
-    useEffect(() => {
-        // setBatches(defaultBatchOptions);
-        // setTracks(defaultTrackOptions);
-    }, []);
 
-    const sendInvite = () => {
-        alert(JSON.stringify(inviteData));
+
+    const sendInvite = async () => {
+        const { email, batches: batchesData } = inviteData;
+        const invitation = {
+            email,
+            batches: batchesData.map((batch) => {
+                return { ...batch, batch_id: batch.value }
+            })
+        }
+
+        const resp = await instance.post('invite_user', invitation)
     }
 
 
@@ -70,11 +73,11 @@ const InviteUser = ({ batches = defaultBatchOptions, tracks = defaultTrackOption
                     />
                     <label htmlFor="batches">Batches</label>
                     <DropDown
-                        options={batches}
+                        options={batchOptions}
                         placeHolder={'Batches '}
                         isMulti
                         isSearchable
-                        onChange={(data) => { setInviteData({ ...inviteData, batches: data }) }}
+                        onChange={(data) => { setInviteData({ ...inviteData, batches: data }); }}
 
                     // register={register}
                     // registerQuery={'batches'}

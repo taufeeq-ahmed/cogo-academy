@@ -28,11 +28,11 @@ const AddCourse = () => {
     });
 
     const onSubmit = async (data) => {
-        // alert(JSON.stringify(data))
+
         try {
             await instance.post(`/course/add-with-sections`, data)
         } catch (err) {
-            alert(err)
+
         }
     }
 

@@ -121,4 +121,4 @@ const TableStudents = () => {
     )
 }
 
-export default TableStudents
+export default TableStudents;

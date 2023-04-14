@@ -39,7 +39,9 @@ const addSubmissionLinkMap = require("./user_submission/add");
 const getAdminPageData = require("./pages/admin");
 const addBatch = require("./batch/add");
 const getBatch = require("./batch/get");
-const getAllBatches = require("./batch/list");
+const getAllBatches = require("./batch/list")
+
+const getAllBatchesWithoutDetails = require("./batch/listWithoutDetails");
 const deleteBatch = require("./batch/delete");
 const updateBatch = require("./batch/update");
 const getUserByBatch = require("./user/getByBatch");
@@ -138,6 +140,7 @@ const registerRoutes = async (fastify) => {
         await deleteBatch(fastify)
         await addCoursesToBatch(fastify)
         await addUsersToBatch(fastify)
+        await getAllBatchesWithoutDetails(fastify);
     }
     await batchRoutes(fastify)
     const trackRoutes = async (fastify) => {
