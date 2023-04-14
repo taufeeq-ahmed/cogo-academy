@@ -16,7 +16,7 @@ const addReadArticleToDB = async (req) => {
         create: {
             user_id: user_id,
             article_id: article_id,
-            score: 45,
+            score: 1,
         }
     })
     return newReadArticle

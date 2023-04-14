@@ -5,13 +5,13 @@ const { prisma } = require("../../helpers/db-client");
 
 const addReadArticle = async (fastify) => {
     fastify.post("/user_article/:article_id/add", async (req, res) => {
-        const newReadArticle = await addReadArticleToDB(req);
         req.params.user_id = req.user.user_id
+        const newReadArticle = await addReadArticleToDB(req);
         const readArticleCount = await prisma.user_Article.aggregate(
             {
                 _count: true,
                 where: {
-                    user_id: req.user.user_id
+                    user_id: req.user.user_id,
                 }
             }
         )
