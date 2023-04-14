@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import react from "@astrojs/react";
+import node from '@astrojs/node';
 
 // import dotenv from 'dotenv'
 
@@ -13,6 +14,9 @@ const server = process.env.PUBLIC_SERVER_URL;
 export default defineConfig({
   output: 'server',
   integrations: [react()],
+  adapter: node({
+    mode: 'standalone'
+  }),
   define: {
     'process.env': process.env
   }
