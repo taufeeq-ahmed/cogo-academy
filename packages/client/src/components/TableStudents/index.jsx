@@ -3,6 +3,8 @@ import Table from '../Table/Table'
 import styles from './styles.module.css'
 import Dropdown from '../DropDown/Dropdown'
 import instance from '../../utils/axios'
+import InputBox from '../InputBox/InputBox'
+import SearchSVG from "/assets/search.svg";
 
 const TableStudents = () => {
     const [tableData, setTableData] = useState({
@@ -15,6 +17,7 @@ const TableStudents = () => {
     const [track, setTrack] = useState('');
     const [batch, setBatch] = useState('');
     const [loading, setLoading] = useState(true)
+    const [query, setQuery] = useState("")
 
     const getQueryParams = () => {
         const queryParams = {
@@ -110,7 +113,8 @@ const TableStudents = () => {
                             onChange={handleTrackChange}
                         />
                     </div>
-                    <div style={{ padding: 16, width: 'fit-content' }}>
+                    <div style={{ padding: 16, width: 'fit-content' }} className={styles.search_box} >
+                        <InputBox icon={SearchSVG} type={"text"} value={query} setValue={(e) => setQuery(e.target.value)} placeholder={'Search for Users'} />
                     </div>
                 </div>
             </div>

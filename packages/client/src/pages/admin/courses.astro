@@ -4,8 +4,12 @@ import ModalLayout from "../../layouts/ModalLayout.astro";
 import EditCourse from "../../components/EditCourse/EditCourse";
 import AdminCourseCard from "../../components/AdminCourseCard/AdminCourseCard";
 import AddCourse from "../../components/AddCourse/AddCourse";
-import { fetchData } from "../../utils/common";
-const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+import { fetchData, parseCookie } from "../../utils/common";
+
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
 if (!token) {
     return Astro.redirect("/signin");
 }

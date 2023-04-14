@@ -4,15 +4,15 @@ import PlaygroundContent from "../components/PlaygroundContent.astro";
 import TabsNav from "../components/TabsNav.astro";
 import LinkSVG from "/assets/link.svg";
 import BookSVG from "/assets/book.svg";
-import { fetchData } from "../utils/common";
+import { fetchData, parseCookie } from "../utils/common";
 import MenuIcon from "/assets/menuIcon.svg";
 import MobileHeader from "../components/MobileHeader.astro";
 
 const { sectionId, elementId, type = "article" } = Astro.props;
-const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
-if (!token) {
-    return Astro.redirect("/signin");
-}
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
 const data = await fetchData(
     `playground/${sectionId}/${type}/${elementId}`,
     token

@@ -44,7 +44,6 @@ const getCoursesDoneFromDB = async (params) => {
     }));
 
     return result
-    return coursesDone
 
 }
 module.exports = getCoursesDoneFromDB;

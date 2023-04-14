@@ -1,0 +1,23 @@
+---
+import BatchSelect from "../components/BatchSelect";
+import MainLayout from "../layouts/MainLayout.astro";
+import { fetchData, parseCookie } from "../utils/common";
+
+// const batches = [
+//     { batch_id: "dsa", batch_name: "Batch 1" },
+//     { batch_id: "dsffdsfga", batch_name: "Batch 2" },
+// ];
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const batches = await fetchData(`batch/list/byuser`, token);
+console.log("-------------");
+console.log(batches);
+---
+
+<MainLayout>
+    <BatchSelect batches={batches} client:load />
+</MainLayout>

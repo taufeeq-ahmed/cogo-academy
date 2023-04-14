@@ -1,8 +1,12 @@
 ---
 import TableStudents from "../../components/TableStudents";
 import AdminLayout from "../../layouts/AdminLayout.astro";
-import { fetchData } from "../../utils/common";
-const token = Astro?.request?.headers?.get("cookie")?.split("=")[1];
+import { fetchData, parseCookie } from "../../utils/common";
+
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
 if (!token) {
   return Astro.redirect("/signin");
 }

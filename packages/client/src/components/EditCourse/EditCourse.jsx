@@ -53,61 +53,61 @@ const EditCourse = ({ course, show, toggle }) => {
                         registerQuery={"course_name"}
                     />
                 </div>
-                <ul style={{ listStyle: 'none' }}>
+                <div style={{ listStyle: 'none', padding: "0", display: "flex", flexDirection: "column", gap: "15px" }}>
                     {fields.map((item, index) => {
 
                         return (
-                            <li key={item.id}>
-                                <div className={styles.section_details}>
-                                    {/* <Button type="button" onClick={() => remove(index)} text='X' /> */}
-                                    <div className={styles.section_data}>
-                                        <div className={styles.section_name}>
-                                            <label htmlFor="section_name" >Section Name</label>
-                                            <InputBox
-                                                placeholder='Section Name'
-                                                name='section_name'
-                                                style={{ fontSize: '16px' }}
-                                                register={register}
-                                                registerQuery={`sections.${index}.section_name`}
-                                            />
-                                        </div>
-                                        <div className={styles.section_banner}>
-                                            <input
-                                                type="file"
-                                                id="file_input"
-                                                className={styles.file_input}
-                                                hidden
-                                            // value={section.section_banner}
-                                            // name='section_banner'
-                                            // setValue={handleSectionChange} 
-                                            />
-                                            <label htmlFor="file_input" className={styles.upload_button}>
-                                                <img src={UploadSVG} alt="upload_icon" />
-                                                Browse To Upload Image
-                                            </label>
-                                        </div>
+                            // <li key={item.id}>
+                            <div className={styles.section_details}>
+                                {/* <Button type="button" onClick={() => remove(index)} text='X' /> */}
+                                <div className={styles.section_data}>
+                                    <div className={styles.section_name}>
+                                        <label htmlFor="section_name" >Section Name</label>
+                                        <InputBox
+                                            placeholder='Section Name'
+                                            name='section_name'
+                                            style={{ fontSize: '16px' }}
+                                            register={register}
+                                            registerQuery={`sections.${index}.section_name`}
+                                        />
                                     </div>
-                                    <label htmlFor="section_description">Section Description</label>
-                                    <InputBox
-                                        textarea
-                                        placeholder='Section Description'
-                                        rows={6}
-                                        name='section_description'
-                                        style={{ fontSize: '16px' }}
-                                        register={register}
-                                        // value={section.section_description}
-                                        registerQuery={`sections.${index}.description`}
-                                    />
-
-                                    <ArticlesList sectionId={item.section_id} />
-                                    <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} btnStyle={{ fontSize: '20px' }} />
+                                    <div className={styles.section_banner}>
+                                        <input
+                                            type="file"
+                                            id="file_input"
+                                            className={styles.file_input}
+                                            hidden
+                                        // value={section.section_banner}
+                                        // name='section_banner'
+                                        // setValue={handleSectionChange} 
+                                        />
+                                        <label htmlFor="file_input" className={styles.upload_button}>
+                                            <img src={UploadSVG} alt="upload_icon" />
+                                            Browse To Upload Image
+                                        </label>
+                                    </div>
                                 </div>
+                                <label htmlFor="section_description">Section Description</label>
+                                <InputBox
+                                    textarea
+                                    placeholder='Section Description'
+                                    rows={6}
+                                    name='section_description'
+                                    style={{ fontSize: '16px' }}
+                                    register={register}
+                                    // value={section.section_description}
+                                    registerQuery={`sections.${index}.description`}
+                                />
 
-                            </li>
+                                <ArticlesList sectionId={item.section_id} />
+                                <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} btnStyle={{ fontSize: '20px' }} />
+                            </div>
+
+                            // </li>
 
                         );
                     })}
-                </ul>
+                </div>
                 <div className={styles.control_buttons}>
                     <Button
                         text="+ Add Section"
