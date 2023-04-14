@@ -62,7 +62,6 @@ label {
 }
 
 .email,
-.select,
 .text {
     display: flex;
     flex-direction: row;
