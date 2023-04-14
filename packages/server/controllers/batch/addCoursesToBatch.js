@@ -8,10 +8,8 @@ const addCoursesToBatchToDB = async (params, body) => {
             batch_id: batch_id
         },
         data: {
-            courses: {
-                set: courses,
-            }
-        },
+            courses:  courses,
+        }
     })
     return result;
 };
