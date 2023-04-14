@@ -9,30 +9,45 @@ import Modal from '../Modal/Modal';
 
 const EditBatch = ({ allCourses, show, toggle, batch }) => {
 
+    const batchCoursesIds = batch.courses.map((b) => {
+        return b.course_id
+    });
+    let prefillCourses = []
+    prefillCourses = (batchCoursesIds.length != 0) ? (
+        allCourses.map((course) => {
+            if (batchCoursesIds.includes(course.course_id)) {
+                course.selected = true;
+            }
+            return course;
+        })
+    ) : (
+        allCourses
+    )
+
+
     const { register, handleSubmit, control } = useForm({
         defaultValues: {
             batch_name: batch.batch_name,
-            courses: allCourses
+            courses: prefillCourses
         }
     });
     const {
-        fields,
-        append,
-        prepend,
-        remove,
-        swap,
-        move,
-        insert,
-        replace
+        fields
     } = useFieldArray({
         control,
         name: "courses"
     });
 
+
     const onSubmit = async (data) => {
+        alert(JSON.stringify(batchCoursesIds));
+        alert(JSON.stringify(prefillCourses));
+
         const courses = data.courses.filter((c) => c.selected === true);
-        alert(JSON.stringify(courses));
-        await instance.post('batch', data);
+        data.courses = courses;
+        alert(JSON.stringify(data));
+        await instance.patch(`/batch/${batch.batch_id}`, { new_data: { batch_name: data.batch_name } });
+        // await instance.post(`/batch/${batch.batch_id}/add_courses`, data);
     }
 
 
@@ -60,7 +75,6 @@ const EditBatch = ({ allCourses, show, toggle, batch }) => {
                     }
                 </div>
                 <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} />
-
             </form>
         </Modal >
     )

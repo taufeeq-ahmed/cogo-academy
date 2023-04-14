@@ -8,7 +8,11 @@ const addCoursesToBatchToDB = async (params, body) => {
             batch_id: batch_id
         },
         data: {
-            courses:  courses,
+            courses: {
+                set: courses.map((c) => {
+                    return { course_id: c.course_id };
+                })
+            }
         }
     })
     return result;
