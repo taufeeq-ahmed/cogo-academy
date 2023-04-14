@@ -6,11 +6,19 @@
     border-bottom: 1px solid #F2F3FA;
 }
 
+.admin_leftcontent {
+    display: flex;
+    gap: 10px;
+}
+
+.admin_leftcontent>div {
+    margin: 10px;
+}
 
 .name,
 .number {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .exercises_icon_container,
@@ -22,6 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
 }
 
 .under_text {
@@ -43,11 +52,28 @@
 .projects_number {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    margin: 10px 20px;
+    gap: 10px;
+    margin: 10px;
 }
 
 .icons_details {
     display: flex;
+}
+
+
+@media (max-width:900px) {
+    .adminuser_header {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+@media (max-width:600px) {
+
+    .exercises_icon_container,
+    .articles_icon_container,
+    .projects_icon_container {
+        display: none;
+    }
 }

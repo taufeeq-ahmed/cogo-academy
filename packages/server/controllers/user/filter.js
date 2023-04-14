@@ -4,11 +4,13 @@ const getFilteredUsersFromDB = async (query) => {
     const { q, batch_id, track_id } = query
     const filteredUsers = await prisma.user.findMany({
         where: {
-            batches: {
-                some: {
-                    batch_id: batch_id,
-                },
-            },
+            ...(batch_id && {
+                batches: {
+                    some: {
+                        batch_id: batch_id,
+                    },
+                }
+            }),
             track_id: track_id,
             user_name: {
                 contains: q,

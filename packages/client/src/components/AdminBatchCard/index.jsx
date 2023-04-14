@@ -11,14 +11,14 @@ const AdminBatchCard = ({ batch }) => {
     const toggleEditModal = () => setEditOpen(!editOpen);
 
     return (
-        <div className={styles.admin_course_card}>
-            <div className={styles.course_title}>
+        <div className={styles.admin_batch_card}>
+            <div className={styles.batch_title}>
                 {batch.batch_name}
-                <div className={styles.course_buttons}>
-                    <div className="edit_button">
+                <div className={styles.batch_buttons}>
+                    <div className={styles.edit_button}>
                         <img src={Edit} alt="edit_button" onClick={toggleEditModal} className={styles.edit_button} />
                     </div>
-                    <div className="delete_button">
+                    <div className={styles.delete_button}>
                         <img src={Delete} alt="delete_button" onClick={toggleDeleteModal} className={styles.delete_button} />
                     </div>
                 </div>

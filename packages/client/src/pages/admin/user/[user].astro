@@ -13,7 +13,6 @@ if (!token) {
 const data = await fetchData(`admin/user/${user}`, token);
 if (!data) return Astro.redirect("/error");
 
-
 const formatTableData = () => {
     const tableData = {
         head: ["Title", "Section", "Course", "Score", "Action"],
@@ -34,8 +33,9 @@ const formatTableData = () => {
 <AdminLayout title="Admin | User Profile Page">
     <AdminUserHeader client:load userData={data.studentData} />
     <ProgressOverview client:load progressData={data} />
-    <Table data={formatTableData()} />
-    <!-- <EditCourse client:load /> -->
+    <div style={{ overflowX: "auto", marginTop: "40px", minHeight: "200px " }}>
+        <Table data={formatTableData()} />
+    </div>
 </AdminLayout>
 
 <style></style>

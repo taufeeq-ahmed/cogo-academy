@@ -6,6 +6,29 @@
 
 .progress_overview>div:last-child {
     flex: 1;
+    min-width: 200px;
+}
+
+.progress_box {
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+.progress_box:nth-child(1) {
+    border-left: 5px solid red;
+}
+
+.progress_box:nth-child(2) {
+    border-left: 5px solid blue;
+}
+
+.progress_box:nth-child(3) {
+    border-left: 5px solid green;
+}
+
+.chart {
+    height: 85%;
+    width: 65%;
 }
 
 .progress_overview_report {
@@ -21,6 +44,7 @@
 .progress_details {
     margin: 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 15px;
@@ -59,4 +83,21 @@
     font-weight: 400;
     display: flex;
     justify-content: space-between;
+}
+
+@media (max-width:600px) {
+    .progress_overview {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .progress_overview_report {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .chart {
+        height: 65%;
+        width: 65%;
+    }
 }
