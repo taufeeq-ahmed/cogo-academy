@@ -11,16 +11,18 @@ const getFilteredUsersFromDB = async (query) => {
                     },
                 }
             }),
-            track_id: track_id,
+            ...(track_id && {
+                track_id: track_id
+            }),
             user_name: {
                 contains: q,
                 mode: 'insensitive'
             }
         },
-        include: {
-            track: true,
-            batches: true
-        },
+        // include: {
+        //     track: true,
+        //     batches: true
+        // },
         orderBy: {
             user_rank: 'asc'
         },

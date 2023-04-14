@@ -5,7 +5,8 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-    const token = document?.cookie?.split(';')?.find(cookie => cookie?.startsWith('cogoacademytoken='))?.split('=')[1];
+    console.log("cookies", document?.cookie?.split(';'))
+    const token = document?.cookie?.split(';')?.find(cookie => cookie?.trim()?.startsWith('cogoacademytoken='))?.split('=')[1];
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
