@@ -39,7 +39,7 @@ const start = async () => {
 
     // jwt
     fastify.register(require('@fastify/jwt'), {
-        secret: 'supersecret'
+        secret: process.env.JWT_SECRET
     })
 
     // connect to database
