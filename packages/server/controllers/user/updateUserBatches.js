@@ -1,7 +1,7 @@
 const { prisma } = require("../../helpers/db-client");
 
-const updateUserBatchesDB = async (data, user) => {
-    const { user_id } = user
+const updateUserBatchesDB = async (data, params) => {
+    const { user_id } = params
     const { batches } = data
     try {
         const newUser = await prisma.user.update({

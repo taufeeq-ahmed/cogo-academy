@@ -5,7 +5,7 @@ import instance from '../../utils/axios'
 import Modal from '../Modal/Modal';
 
 
-const EditBatchStudent = ({ batches, allBatches, show, toggle }) => {
+const EditBatchStudent = ({ userData, batches, allBatches, show, toggle }) => {
 
     console.log("--s-d-asd-asd-sa-dsa-d-asd")
     console.log(batches)
@@ -55,7 +55,7 @@ const EditBatchStudent = ({ batches, allBatches, show, toggle }) => {
         }).filter(b => b !== null);
         alert(JSON.stringify(batches));
 
-        await instance.post(`/user/update_batches`, { batches });
+        await instance.post(`/user/${userData.user_id}/update_batches`, { batches });
         // await instance.post(`/batch/${batch.batch_id}/add_courses`, data);
     }
 
