@@ -9,20 +9,22 @@ import Modal from '../Modal/Modal';
 
 const EditBatch = ({ allCourses, show, toggle, batch }) => {
 
+    console.log("sadosapj", batch)
+
     const batchCoursesIds = batch.courses.map((b) => {
         return b.course_id
     });
     let prefillCourses = []
-    prefillCourses = (batchCoursesIds.length != 0) ? (
-        allCourses.map((course) => {
-            if (batchCoursesIds.includes(course.course_id)) {
-                course.selected = true;
-            }
-            return course;
-        })
-    ) : (
-        allCourses
-    )
+    prefillCourses = allCourses.map((course) => {
+        if (batchCoursesIds.includes(course.course_id)) {
+            course.selected = true;
+        }
+        else {
+            course.selected = false
+        }
+        return course;
+    })
+
 
 
     const { register, handleSubmit, control } = useForm({
@@ -40,13 +42,17 @@ const EditBatch = ({ allCourses, show, toggle, batch }) => {
 
 
     const onSubmit = async (data) => {
-        alert(JSON.stringify(batchCoursesIds));
-        alert(JSON.stringify(prefillCourses));
 
-        const courses = data.courses.filter((c) => c.selected === true);
-        data.courses = courses;
+        const courses = data.courses.map((c) => {
+            if (c.selected === true) {
+                return {
+                    course_id: c.course_id
+                }
+            }
+            return null
+        }).filter(c => c !== null);
         alert(JSON.stringify(data));
-        await instance.patch(`/batch/${batch.batch_id}`, { new_data: { batch_name: data.batch_name } });
+        await instance.post(`/batch/${batch.batch_id}/add_courses`, { new_data: { batch_name: data.batch_name, courses: courses } });
         // await instance.post(`/batch/${batch.batch_id}/add_courses`, data);
     }
 

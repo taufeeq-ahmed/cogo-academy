@@ -1,7 +1,10 @@
 const { prisma } = require("../../helpers/db-client");
 const addCoursesToBatchToDB = async (params, body) => {
     const { batch_id } = params;
-    const { courses } = body;
+    const { courses } = body.new_data;
+
+    console.log("---------------------")
+    console.log(courses)
 
     const result = await prisma.batch.update({
         where: {
@@ -9,11 +12,9 @@ const addCoursesToBatchToDB = async (params, body) => {
         },
         data: {
             courses: {
-                set: courses.map((c) => {
-                    return { course_id: c.course_id };
-                })
+                set: courses,
             }
-        }
+        },
     })
     return result;
 };
