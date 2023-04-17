@@ -11,18 +11,24 @@ const getSectionByCourseIdFromDB = async (params) => {
                 select: {
                     article_id: true
                 },
+                orderBy: {
+                    created_on: 'asc'
+                },
                 take: 1
             },
             submissions: {
                 select: {
                     submission_id: true
                 },
+                orderBy: {
+                    created_on: 'asc'
+                },
                 take: 1
             }
         },
-        // orderBy: {
-        //     created_on: 'desc'
-        // }
+        orderBy: {
+            created_on: 'asc'
+        }
     })
     return sections;
 };

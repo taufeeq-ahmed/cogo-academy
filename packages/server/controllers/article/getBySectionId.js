@@ -13,7 +13,7 @@ const getArticlesBySectionIdFromDB = async (params) => {
             user_article: true
         },
         orderBy: {
-            article_name: 'asc'
+            created_on: 'asc'
         }
     })
 
