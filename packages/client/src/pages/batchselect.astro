@@ -14,8 +14,6 @@ if (!token) {
     return Astro.redirect("/signin");
 }
 const batches = await fetchData(`batch/list/byuser`, token);
-console.log("-------------");
-console.log(batches);
 ---
 
 <MainLayout>

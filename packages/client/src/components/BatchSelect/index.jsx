@@ -8,7 +8,8 @@ const BatchSelect = ({ batches }) => {
     const [selectedBatch, setSelectedBatch] = useState(null)
 
     useEffect(() => {
-        selectedBatch !== null && (document.cookie = `batch=${batches[parseInt(selectedBatch)].batch_id}`)
+        const expires = new Date(Date.now() + 60 * 60 * 1000); // Cookie expires in 1 hour
+        selectedBatch !== null && (document.cookie = `batch=${batches[parseInt(selectedBatch)].batch_id};  expires=${expires.toUTCString()}; path=/`)
     }, [selectedBatch, batches])
 
     const handleClick = (idx) => {
