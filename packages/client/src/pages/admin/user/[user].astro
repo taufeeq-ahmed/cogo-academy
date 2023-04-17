@@ -35,7 +35,11 @@ const formatTableData = () => {
 ---
 
 <AdminLayout title="Admin | User Profile Page">
-    <AdminUserHeader client:load userData={data.studentData} />
+    <AdminUserHeader
+        client:load
+        userData={data.studentData}
+        allBatches={data.allBatches}
+    />
     <ProgressOverview client:load progressData={data} />
     <div style={{ overflowX: "auto", marginTop: "40px", minHeight: "200px " }}>
         <Table data={formatTableData()} />

@@ -12,7 +12,7 @@
 }
 
 .admin_leftcontent>div {
-    margin: 10px;
+    padding: 10px;
 }
 
 .name,
@@ -33,8 +33,17 @@
     padding: 10px;
 }
 
+.batch_edit_btn {
+    padding: 0 5px;
+    cursor: pointer;
+}
+
 .under_text {
     color: #828282;
+}
+
+.number {
+    display: inline;
 }
 
 .icon {
@@ -59,6 +68,7 @@
 .icons_details {
     display: flex;
 }
+
 
 
 @media (max-width:900px) {
