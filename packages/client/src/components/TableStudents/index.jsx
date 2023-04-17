@@ -60,7 +60,7 @@ const TableStudents = () => {
                     console.log("user", user)
                     const newUser = [
                         { link: `/admin/user/${user.user_id}`, name: user?.user_name },
-                        { name: user?.batch?.batch_name },
+                        { name: user?.batches.map((b) => b.batch_name).toString() },
                         { name: user?.track?.track_name },
                         { name: user?.number_of_articles_read },
                         { name: user?.number_of_submissions },
