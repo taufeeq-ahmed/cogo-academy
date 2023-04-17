@@ -12,7 +12,7 @@ if (!token) {
 }
 const { course } = Astro.params;
 
-const data = await fetchData(`landing/${course}`, token);
+const data = await fetchData(`landing/${course}?batch_id=${batch}`, token);
 ---
 
 <Layout
