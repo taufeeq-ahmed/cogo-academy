@@ -72,7 +72,7 @@ const SectionCard = ({ section }) => {
                     <div className={styles.data_boxes}>
                         <div className={styles.data_box}>
                             <img src={LessonsSVG} alt="lessons-icon" />
-                            <span>{section.number_of_section_materials} lessons</span>
+                            <span>{section.number_of_articles + section.number_of_exercises + section.number_of_submissions} lessons</span>
                         </div>
                         <div className={styles.data_box}>
                             <img src={ClockSVG} alt="clock-icon" />
