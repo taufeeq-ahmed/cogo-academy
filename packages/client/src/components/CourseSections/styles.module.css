@@ -3,7 +3,6 @@
     padding: 10px;
     flex-wrap: wrap;
     overflow: auto;
-    /* gap: 20px; */
     flex: 1;
 }
 
