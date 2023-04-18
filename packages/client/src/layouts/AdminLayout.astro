@@ -4,6 +4,7 @@ import MainLayout from "./MainLayout.astro";
 import home from "../../public/assets/home.svg"
 import course from "../../public/assets/course.svg"
 import profile from "../../public/assets/profileadmin.svg"
+import logout from "../../public/assets/logout.svg"
 const { title } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
@@ -46,6 +47,21 @@ const currentPath = Astro.url.pathname;
         >
         <img src={profile}/> Batches
         </a>
+        <div class="profile_box">
+            <div class="prof_pic">
+                <img
+                    src="https://source.unsplash.com/random"
+                    alt="profile-pic"
+                />
+            </div>
+            <div class="profile_details">
+                <div class="profile_name">Shivom</div>
+                {/* <div className={styles.profile_rank}>Rank {user.user_rank}</div> */}
+            </div>
+            <a class="logout_box" href="/logout">
+                <img src={logout} alt="logout-icon" />
+            </a>
+        </div>
     </TabsNav>
     <slot />
 </MainLayout>
@@ -55,4 +71,36 @@ const currentPath = Astro.url.pathname;
         align-items: center;
 
     }
+    .profile_box {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+.prof_pic>img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.profile_name {
+    white-space: nowrap;
+}
+.logout_box {
+    cursor: pointer;
+}
+.profile_name {
+    white-space: nowrap;
+}
+
+
+.profile_details {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    cursor: pointer;
+}
 </style>

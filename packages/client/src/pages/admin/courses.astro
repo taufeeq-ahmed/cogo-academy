@@ -4,7 +4,7 @@ import ModalLayout from "../../layouts/ModalLayout.astro";
 import AdminCourseCard from "../../components/AdminCourseCard/AdminCourseCard";
 import AddCourse from "../../components/AddCourse/AddCourse";
 import { fetchData, parseCookie } from "../../utils/common";
-
+import cross from "/assets/cross.svg";
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
 
 const token = cookies?.cogoacademytoken;
@@ -34,12 +34,15 @@ if (!data) return Astro.redirect("/error");
             }
         </div>
     </div>
-    <div slot="modal_header_slot">Add Course</div>
+    <div slot="modal_header_slot" class="close_btn">
+        <span>Add Course</span>
+        <div class="btn"><img src={cross} id={"close_modal"} /></div>
+    </div>
     <div slot="modal_content_slot">
         <AddCourse client:load />
     </div>
     <div slot="modal_footer_slot" class="modal_footer">
-        <Button text="Close Modal" id={"close_modal"} />
+        <!-- <Button text="Close Modal" id={"close_modal"} /> -->
     </div>
 </ModalLayout>
 <style>
@@ -60,6 +63,15 @@ if (!data) return Astro.redirect("/error");
     }
     .create_course_container .header_title {
         font-size: 24px;
+    }
+    .close_btn{
+        display: flex;
+    justify-content: space-between;
+    }
+    .btn {
+        display: flex;
+        justify-content: end;
+        cursor: pointer;
     }
     @media (max-width: 900px) {
         .create_course_button {

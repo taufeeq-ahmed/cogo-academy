@@ -4,7 +4,8 @@ import ModalLayout from "../../layouts/ModalLayout.astro";
 import { fetchData, parseCookie } from "../../utils/common";
 import AdminBatchCard from "../../components/AdminBatchCard";
 import AddBatch from "../../components/AddBatch";
-
+// import cross from "../../public/assets/cross.svg";
+import cross from "/assets/cross.svg"
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
 
 const token = cookies?.cogoacademytoken;
@@ -43,12 +44,15 @@ const allCourses = await fetchData("course/list", token);
             }
         </div>
     </div>
-    <div slot="modal_header_slot">Add Batch</div>
+    <div slot="modal_header_slot" class="close_btn">
+        <span>Add Course</span>
+        <div class="btn"><img src={cross} id={"close_modal"}></div>
+    </div>
     <div slot="modal_content_slot">
         <AddBatch client:load courses={allCourses} />
     </div>
     <div slot="modal_footer_slot" class="modal_footer">
-        <Button text="Close Modal" id={"close_modal"} />
+        <!-- <Button text="Close Modal" id={"close_modal"} /> -->
     </div>
 </ModalLayout>
 <style>
@@ -66,6 +70,13 @@ const allCourses = await fetchData("course/list", token);
         justify-content: space-between;
         padding: 0px 35px 0px 20px;
         /* width: 90%; */
+    }
+    .close_btn{
+        display: flex;
+        justify-content: space-between;
+    }
+    .btn{
+        cursor: pointer;
     }
     .create_course_container .header_title {
         font-size: 24px;
