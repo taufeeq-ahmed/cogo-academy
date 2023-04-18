@@ -4,7 +4,7 @@
     margin: 10px;
 }
 label{
-    margin-left: 10px;
+    margin-left: auto;
     font-weight: 500;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -18,7 +18,7 @@ input{
     border-radius: 6px;
 }
 .section_banner{
-    width: 40%;
+    width: 100%;
     
 }
 .section_name{
@@ -57,11 +57,11 @@ input{
     font-weight: 500;
 }
 
-label{
+/* label{
     font-weight: 500;
     margin-top: 5px;
     margin-bottom: 5px;
-}
+} */
 input{
     margin:10px;
 }
@@ -70,12 +70,8 @@ input{
     border: 1px solid #E0E0E0;
     border-radius: 6px;
 }
-.section_banner{
-    width: 40%;
-    
-}
 .section_name{
-    width: 60%;
+    width: 100%;
 }
 .upload_button{
     display: flex;
@@ -104,6 +100,8 @@ input{
     flex: 1;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
+    width: 100%;
+    margin-left: auto;
 }
 .add_section_button{
     font-size: 16px;
@@ -120,4 +118,6 @@ input{
 }
 .course_name{
     padding-right:20px ;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }

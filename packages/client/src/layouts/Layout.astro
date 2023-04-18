@@ -1,6 +1,7 @@
 ---
 import TabsNav from "../components/TabsNav.astro";
 import MainLayout from "./MainLayout.astro";
+import home from "../../public/assets/home.svg"
 
 const { title, selected, courses } = Astro.props;
 const currentPath = Astro.url.pathname;
@@ -12,7 +13,7 @@ const currentPath = Astro.url.pathname;
 			href="/"
 			class={`tab ${selected === "/" ? "tab_selected" : "not-selected"}`}
 		>
-			Home
+		<img src={home}>	Home
 		</a>
 		{
 			courses?.map((course: any) => {

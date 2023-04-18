@@ -44,12 +44,13 @@ const EditCourse = ({ course, show, toggle }) => {
     return (
         <Modal isShowing={show} toggle={toggle} heading={'Edit'} >
             <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
-                <div className="course_deatils_inputs">
+                <div className="course_deatils_inputs"> 
                     <InputBox
                         placeholder={"Course Name"}
                         style={{ fontSize: '16px' }}
                         name="course_name"
                         register={register}
+                        style_box={{marginTop:"5px", marginBottom:"5px" , maxWidth: 'none'}}
                         registerQuery={"course_name"}
                     />
                 </div>
@@ -63,6 +64,7 @@ const EditCourse = ({ course, show, toggle }) => {
                         name="image_url"
                         type="url"
                         register={register}
+                        style_box={{marginTop:"5px", marginBottom:"20px", maxWidth: 'none'}}
                         registerQuery={"image_url"}
                     />
                 </div>
@@ -81,6 +83,7 @@ const EditCourse = ({ course, show, toggle }) => {
                                             name='section_name'
                                             style={{ fontSize: '16px' }}
                                             register={register}
+                                            style_box={{marginTop:"5px", marginBottom:"5px", maxWidth: 'none'}}
                                             registerQuery={`sections.${index}.section_name`}
                                         />
                                     </div>
@@ -94,6 +97,7 @@ const EditCourse = ({ course, show, toggle }) => {
                                     name='section_description'
                                     style={{ fontSize: '16px' }}
                                     register={register}
+                                    style_box={{marginTop:"5px", marginBottom:"5px", maxWidth: 'none'}}
                                     // value={section.section_description}
                                     registerQuery={`sections.${index}.description`}
                                 />

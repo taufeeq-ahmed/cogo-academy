@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from "./styles.module.css"
 
-const InputBox = ({ icon = '', value, setValue = () => { }, placeholder, textarea = false, style = {}, rows = 6, name, register = () => { }, registerQuery = '', type, ...rest }) => {
+const InputBox = ({ icon = '', value, setValue = () => { }, placeholder, textarea = false, style = {}, style_box={}, rows = 6, name, register = () => { }, registerQuery = '', type, ...rest }) => {
     return (
-        <div className={styles.input_box}>
+        <div className={styles.input_box} style={style_box}>
             {icon !== '' && <img src={icon} alt="search-icon" />}
             {(textarea) ? (
                 <textarea

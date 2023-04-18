@@ -44,26 +44,28 @@ const AddCourse = () => {
                     <label htmlFor="course_name">Course Name</label>
                     <InputBox
                         placeholder={"Course Name"}
-                        style={{ fontSize: '16px' }}
+                        style={{ fontSize: '16px', marginTop: "5px"}}
                         name="course_name"
                         register={register}
+                        style_box={{marginTop:"5px", marginBottom:"5px"}}
                         registerQuery={"course_name"}
                     />
                 </div>
             </div>
             <div className={styles.section_banner}>
-                    <label htmlFor="file_input" className={styles.upload_label}>
-                        Upload Image link
-                    </label>
-                    <InputBox
-                        placeholder={"Enter Image url"}
-                        style={{ fontSize: '16px' }}
-                        name="image_url"
-                        // type="url"
-                        register={register}
-                        registerQuery={"image_url"}
-                    />
-                </div>
+                <label htmlFor="file_input" className={styles.upload_label}>
+                    Upload Image link
+                </label>
+                <InputBox
+                    placeholder={"Enter Image url"}
+                    style={{ fontSize: '16px' }}
+                    name="image_url"
+                    // type="url"
+                    register={register}
+                    style_box={{marginTop:"5px", marginBottom:"20px"}}
+                    registerQuery={"image_url"}
+                />
+            </div>
             {fields.map((item, index) => {
                 return (
 
@@ -77,6 +79,7 @@ const AddCourse = () => {
                                     name='section_name'
                                     style={{ fontSize: '16px' }}
                                     register={register}
+                                    style_box={{marginTop:"5px", marginBottom:"5px"}}
                                     registerQuery={`sections.${index}.section_name`}
                                 />
                             </div>
@@ -90,6 +93,7 @@ const AddCourse = () => {
                             style={{ fontSize: '16px' }}
                             register={register}
                             // value={section.section_description}
+                            style_box={{marginTop:"5px", marginBottom:"5px"}}
                             registerQuery={`sections.${index}.description`}
                         />
 
