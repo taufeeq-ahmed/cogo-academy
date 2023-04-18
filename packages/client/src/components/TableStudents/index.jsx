@@ -18,6 +18,7 @@ const TableStudents = () => {
     const [batch, setBatch] = useState('');
     const [loading, setLoading] = useState(true)
     const [query, setQuery] = useState("")
+    const [debounce, setDebounce] = useState(false)
 
     const getQueryParams = () => {
         const queryParams = {
@@ -29,8 +30,19 @@ const TableStudents = () => {
         if (track !== '') {
             queryParams["track_id"] = track
         }
+        if (query !== '') {
+            queryParams["q"] = query
+        }
         return queryParams
     }
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            clearTable()
+            setDebounce(x => !x)
+        }, 600)
+        return () => clearTimeout(timer)
+    }, [query])
 
     useEffect(() => {
         setLoading(true)
@@ -73,7 +85,7 @@ const TableStudents = () => {
                 setLoading(false)
             })
             .catch((err) => console.log(err))
-    }, [batch, track])
+    }, [batch, track, debounce])
 
     const clearTable = () => {
         setTableData({
