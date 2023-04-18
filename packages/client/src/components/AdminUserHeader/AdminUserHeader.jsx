@@ -35,8 +35,7 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                 </div>
                 <div>
                     <div className={styles.name}>
-                        {/* {userData?.track?.track_name} */}
-                        Track 1
+                        {userData?.track?.track_name || "No Track"}
                     </div>
                     <div className={styles.under_text}>
                         Track
@@ -50,7 +49,7 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                     </div>
                     <div className={styles.icon_text}>
                         <div className={styles.number}>
-                            {userData?.number_of_exercises_done}
+                            {userData?.number_of_exercises_done || 0}
                         </div>
                         <div className={styles.under_text}>
                             Exercises
@@ -63,7 +62,7 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                     </div>
                     <div className={styles.icon_text}>
                         <div className={styles.number}>
-                            {userData?.number_of_articles_read}
+                            {userData?.number_of_articles_read || 0}
                         </div>
                         <div className={styles.under_text}>
                             Articles
@@ -76,7 +75,7 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                     </div>
                     <div className={styles.icon_text}>
                         <div className={styles.number}>
-                            {userData?.number_of_submissions}
+                            {userData?.number_of_submissions || 0}
                         </div>
                         <div className={styles.under_text}>
                             Submissions

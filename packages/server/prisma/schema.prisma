@@ -8,24 +8,21 @@ datasource db {
 }
 
 model User {
-    user_id                  String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user_name                String
-    email                    String            @unique
-    password                 String
-    github_username          String?
-    total_score              Int?              @default(0)
-    created_on               DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
-    updated_on               DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
-    number_of_articles_read  Int?              @default(0)
-    number_of_exercises_done Int?              @default(0)
-    number_of_submissions    Int?              @default(0)
-    user_rank                Int?              @default(0)
-    batches                  Batch[]
-    track                    Track?            @relation(fields: [track_id], references: [track_id])
-    track_id                 String?           @db.Uuid
-    user_article             User_Article[]
-    User_Submission          User_Submission[]
-    isAdmin                  Boolean           @default(false)
+    user_id         String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_name       String
+    email           String            @unique
+    password        String
+    github_username String?
+    total_score     Int?              @default(0)
+    created_on      DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    updated_on      DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    user_rank       Int?              @default(0)
+    batches         Batch[]
+    track           Track?            @relation(fields: [track_id], references: [track_id])
+    track_id        String?           @db.Uuid
+    user_article    User_Article[]
+    User_Submission User_Submission[]
+    isAdmin         Boolean           @default(false)
 }
 
 model Course {
@@ -36,19 +33,15 @@ model Course {
 }
 
 model Section {
-    section_id                  String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    section_name                String
-    description                 String
-    number_of_exercises         Int          @default(0)
-    number_of_articles          Int          @default(0)
-    duration_in_minutes         Int          @default(0)
-    number_of_submissions       Int          @default(0)
-    number_of_section_materials Int          @default(0)
-    course                      Course?      @relation(fields: [course_id], references: [course_id])
-    course_id                   String?      @db.Uuid
-    articles                    Article[]
-    submissions                 Submission[]
-    created_on                  DateTime     @default(dbgenerated("now()")) @db.Timestamptz(3)
+    section_id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    section_name        String
+    description         String
+    duration_in_minutes Int          @default(0)
+    course              Course?      @relation(fields: [course_id], references: [course_id])
+    course_id           String?      @db.Uuid
+    articles            Article[]
+    submissions         Submission[]
+    created_on          DateTime     @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
 model Article {
@@ -133,5 +126,6 @@ model UserInvites {
     email      String   @unique
     token      String
     created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+
     @@unique([email, token])
 }

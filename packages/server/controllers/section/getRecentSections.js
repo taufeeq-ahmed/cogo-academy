@@ -32,6 +32,7 @@ const getRecentSectionsFromDB = async (req) => {
             return {
                 ...section,
                 first_article_id: userArticle?.article_id,
+                number_of_articles: articles.length,
             };
         }
         return null
