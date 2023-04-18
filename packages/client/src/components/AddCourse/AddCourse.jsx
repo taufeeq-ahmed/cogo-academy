@@ -51,7 +51,19 @@ const AddCourse = () => {
                     />
                 </div>
             </div>
-
+            <div className={styles.section_banner}>
+                    <label htmlFor="file_input" className={styles.upload_label}>
+                        Upload Image link
+                    </label>
+                    <InputBox
+                        placeholder={"Enter Image url"}
+                        style={{ fontSize: '16px' }}
+                        name="image_url"
+                        // type="url"
+                        register={register}
+                        registerQuery={"image_url"}
+                    />
+                </div>
             {fields.map((item, index) => {
                 return (
 
@@ -67,21 +79,6 @@ const AddCourse = () => {
                                     register={register}
                                     registerQuery={`sections.${index}.section_name`}
                                 />
-                            </div>
-                            <div className={styles.section_banner}>
-                                <input
-                                    type="file"
-                                    id="file_input"
-                                    className={styles.file_input}
-                                    hidden
-                                // value={section.section_banner}
-                                // name='section_banner'
-                                // setValue={handleSectionChange} 
-                                />
-                                <label htmlFor="file_input" className={styles.upload_button}>
-                                    <img src={UploadSVG} alt="upload_icon" />
-                                    Browse To Upload Image
-                                </label>
                             </div>
                         </div>
                         <label htmlFor="section_description">Section Description</label>

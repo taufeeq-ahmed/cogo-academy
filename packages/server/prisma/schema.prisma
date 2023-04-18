@@ -33,6 +33,7 @@ model Course {
     course_name String
     sections    Section[]
     batches     Batch[]
+    image_url   String @default("")
 }
 
 model Section {
