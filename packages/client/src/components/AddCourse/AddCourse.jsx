@@ -31,6 +31,7 @@ const AddCourse = () => {
 
         try {
             await instance.post(`/course/add-with-sections`, data)
+            window.location.href=('/admin/courses');
         } catch (err) {
 
         }
@@ -49,6 +50,7 @@ const AddCourse = () => {
                         register={register}
                         style_box={{marginTop:"5px", marginBottom:"5px"}}
                         registerQuery={"course_name"}
+                        required
                     />
                 </div>
             </div>
@@ -64,6 +66,7 @@ const AddCourse = () => {
                     register={register}
                     style_box={{marginTop:"5px", marginBottom:"20px"}}
                     registerQuery={"image_url"}
+                    required
                 />
             </div>
             {fields.map((item, index) => {
@@ -81,6 +84,7 @@ const AddCourse = () => {
                                     register={register}
                                     style_box={{marginTop:"5px", marginBottom:"5px"}}
                                     registerQuery={`sections.${index}.section_name`}
+                                    required
                                 />
                             </div>
                         </div>
@@ -95,6 +99,7 @@ const AddCourse = () => {
                             // value={section.section_description}
                             style_box={{marginTop:"5px", marginBottom:"5px"}}
                             registerQuery={`sections.${index}.description`}
+                            required
                         />
 
 

@@ -34,6 +34,7 @@ model Course {
     sections    Section[]
     batches     Batch[]
     image_url   String @default("")
+    isActive    Boolean @default(false)
 }
 
 model Section {

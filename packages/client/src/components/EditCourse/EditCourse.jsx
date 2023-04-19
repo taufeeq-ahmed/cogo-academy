@@ -38,6 +38,7 @@ const EditCourse = ({ course, show, toggle }) => {
         await instance.patch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
             new_data: data
         })
+        window.location.href='/admin/courses';
 
     }
 
