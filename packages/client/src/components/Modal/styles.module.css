@@ -34,6 +34,8 @@
     padding: 15px;
     /* margin: 10px; */
     border-bottom: 2px solid #F2F3FA;
+    display: flex;
+    justify-content: space-between;
 }
 .modal_footer{
     padding: 5px;
@@ -48,4 +50,7 @@
     max-height: calc(70vh - 30px);
     overflow: auto;
    
+}
+.btn{
+    cursor: pointer;
 }

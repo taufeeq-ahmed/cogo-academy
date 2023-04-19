@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from "./styles.module.css"
 import Button from '../Button/Button'
+import cross from '../../../public/assets/cross.svg';
 const Modal = ({ isShowing, toggle, children, heading }) => {
     const modalClassName = `${styles.modal} ${isShowing ? 'is-active' : ''}`;
 
@@ -11,10 +12,13 @@ const Modal = ({ isShowing, toggle, children, heading }) => {
             <div className={modalClassName}>
                 <div className={styles.modal_box}>
                     <div className="modal-background" onClick={toggle} />
-                    <div className={styles.modal_header}>{heading}</div>
+                    <div className={styles.modal_header}>
+                        <span>{heading}</span>
+                        <div className={styles.btn}><img src={cross} onClick={toggle} text='Close' /></div>
+                    </div>
                     <div className={styles.modal_content}>{children}</div>
                     <div className={styles.modal_footer}>
-                        <Button onClick={toggle} text='Close' />
+                        {/* <Button onClick={toggle} text='Close' /> */}
                     </div>
                 </div>
             </div>,

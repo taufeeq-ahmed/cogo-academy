@@ -44,13 +44,28 @@ const EditCourse = ({ course, show, toggle }) => {
     return (
         <Modal isShowing={show} toggle={toggle} heading={'Edit'} >
             <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
-                <div className="course_deatils_inputs">
+                <div className="course_deatils_inputs"> 
                     <InputBox
                         placeholder={"Course Name"}
                         style={{ fontSize: '16px' }}
                         name="course_name"
                         register={register}
+                        style_box={{marginTop:"5px", marginBottom:"5px" , maxWidth: 'none'}}
                         registerQuery={"course_name"}
+                    />
+                </div>
+                <div className={styles.section_banner}>
+                    <label htmlFor="file_input" className={styles.upload_label}>
+                        Upload Image link
+                    </label>
+                    <InputBox
+                        placeholder={"Enter Image url"}
+                        style={{ fontSize: '16px' }}
+                        name="image_url"
+                        type="url"
+                        register={register}
+                        style_box={{marginTop:"5px", marginBottom:"20px", maxWidth: 'none'}}
+                        registerQuery={"image_url"}
                     />
                 </div>
                 <div style={{ listStyle: 'none', padding: "0", display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -68,24 +83,11 @@ const EditCourse = ({ course, show, toggle }) => {
                                             name='section_name'
                                             style={{ fontSize: '16px' }}
                                             register={register}
+                                            style_box={{marginTop:"5px", marginBottom:"5px", maxWidth: 'none'}}
                                             registerQuery={`sections.${index}.section_name`}
                                         />
                                     </div>
-                                    <div className={styles.section_banner}>
-                                        <input
-                                            type="file"
-                                            id="file_input"
-                                            className={styles.file_input}
-                                            hidden
-                                        // value={section.section_banner}
-                                        // name='section_banner'
-                                        // setValue={handleSectionChange} 
-                                        />
-                                        <label htmlFor="file_input" className={styles.upload_button}>
-                                            <img src={UploadSVG} alt="upload_icon" />
-                                            Browse To Upload Image
-                                        </label>
-                                    </div>
+
                                 </div>
                                 <label htmlFor="section_description">Section Description</label>
                                 <InputBox
@@ -95,6 +97,7 @@ const EditCourse = ({ course, show, toggle }) => {
                                     name='section_description'
                                     style={{ fontSize: '16px' }}
                                     register={register}
+                                    style_box={{marginTop:"5px", marginBottom:"5px", maxWidth: 'none'}}
                                     // value={section.section_description}
                                     registerQuery={`sections.${index}.description`}
                                 />
