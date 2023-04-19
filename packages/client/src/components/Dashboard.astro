@@ -20,7 +20,7 @@ const { userData, topThreeUsers, recentSections } = ff;
                 <img src={ExerciseSVG} alt="exercise-svg" />
             </div>
             <div class="dash-stat">
-                <h1>{userData?.number_of_exercises_done}</h1>
+                <h1>{userData?.number_of_exercises_done || 0}</h1>
                 <span>Exercises</span>
             </div>
         </div>
@@ -29,7 +29,7 @@ const { userData, topThreeUsers, recentSections } = ff;
                 <img src={LessonSVG} alt="lesson-svg" />
             </div>
             <div class="dash-stat">
-                <h1>{userData?.number_of_articles_read}</h1>
+                <h1>{userData?.number_of_articles_read || 0}</h1>
                 <span>Articles</span>
             </div>
         </div>
@@ -39,7 +39,7 @@ const { userData, topThreeUsers, recentSections } = ff;
                 <img src={ProjectSVG} alt="exercise-svg" />
             </div>
             <div class="dash-stat">
-                <h1>{userData?.number_of_submissions}</h1>
+                <h1>{userData?.number_of_submissions || 0}</h1>
                 <span>Submissions</span>
             </div>
         </div>
@@ -49,7 +49,13 @@ const { userData, topThreeUsers, recentSections } = ff;
         <div class="dash-sections">
             {
                 recentSections?.map((section) => {
-                    return <SectionCard section={section} client:load />;
+                    return (
+                        <SectionCard
+                            dash={true}
+                            section={section}
+                            client:load
+                        />
+                    );
                 })
             }
         </div>
@@ -110,8 +116,12 @@ const { userData, topThreeUsers, recentSections } = ff;
         overflow: auto;
         gap: 20px;
         padding: 5px;
-        width: 60%;
     }
+
+    .section_item {
+        background-color: red;
+    }
+
     .dash_body {
         display: flex;
         justify-content: space-between;
@@ -172,9 +182,6 @@ const { userData, topThreeUsers, recentSections } = ff;
     @media (max-width: 1200px) {
         .dash_body {
             gap: 10px;
-        }
-        .section {
-            min-width: 300px;
         }
     }
     @media (max-width: 768px) {

@@ -4,7 +4,7 @@ import ArrowSVG from "/assets/arrow.svg"
 import LinkBtn from "../LinkBtn";
 import styles from './styles.module.css'
 
-const SectionCard = ({ section }) => {
+const SectionCard = ({ section, dash = false }) => {
 
     console.log("section", section)
 
@@ -46,42 +46,44 @@ const SectionCard = ({ section }) => {
 
 
     return (
-        <div className={styles.section}>
-            <div className={styles.imgDiv}>
-                <img
-                    src="https://source.unsplash.com/random"
-                    alt="profile-pic"
-                />
-            </div>
-            <div className={styles.section_content}>
-                <div className={styles.section_header}>
-                    <span>{section.section_name}</span>
+        <div className={dash ? styles.dash_section : styles.section_item}>
+            <div className={styles.section}>
+                <div className={styles.imgDiv}>
+                    <img
+                        src="https://source.unsplash.com/random"
+                        alt="profile-pic"
+                    />
                 </div>
-                <div className={styles.section_body}>
-                    <p>
-                        {section.description}
-                    </p>
-                </div>
-                <div className={styles.section_progress}>
-                    <div className={styles.progress_bar}>
-                        <div className={styles.progress} style={{ width: getProgress() + '%' }}></div>
+                <div className={styles.section_content}>
+                    <div className={styles.section_header}>
+                        <span>{section.section_name}</span>
                     </div>
-                    <div className={styles.pill}>{getProgress()}%</div>
-                </div>
-                <div className={styles.section_footer}>
-                    <div className={styles.data_boxes}>
-                        <div className={styles.data_box}>
-                            <img src={LessonsSVG} alt="lessons-icon" />
-                            <span>{section.number_of_articles + section.number_of_exercises + section.number_of_submissions} lessons</span>
-                        </div>
-                        <div className={styles.data_box}>
-                            <img src={ClockSVG} alt="clock-icon" />
-                            <span>{section.duration_in_minutes} Minutes</span>
-                        </div>
+                    <div className={styles.section_body}>
+                        <p>
+                            {section.description}
+                        </p>
                     </div>
-                    {(section.first_article_id || section.first_submission_id) ?
-                        <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={getLink()} /> :
-                        <p className={styles.coming_soon}>Coming soon..</p>}
+                    <div className={styles.section_progress}>
+                        <div className={styles.progress_bar}>
+                            <div className={styles.progress} style={{ width: getProgress() + '%' }}></div>
+                        </div>
+                        <div className={styles.pill}>{getProgress()}%</div>
+                    </div>
+                    <div className={styles.section_footer}>
+                        <div className={styles.data_boxes}>
+                            <div className={styles.data_box}>
+                                <img src={LessonsSVG} alt="lessons-icon" />
+                                <span>{(section?.number_of_articles || 0) + (section?.number_of_exercises || 0) + (section?.number_of_submissions || 0)} lessons</span>
+                            </div>
+                            <div className={styles.data_box}>
+                                <img src={ClockSVG} alt="clock-icon" />
+                                <span>{section?.duration_in_minutes} Minutes</span>
+                            </div>
+                        </div>
+                        {(section.first_article_id || section.first_submission_id) ?
+                            <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={getLink()} /> :
+                            <p className={styles.coming_soon}>Coming soon..</p>}
+                    </div>
                 </div>
             </div>
         </div >

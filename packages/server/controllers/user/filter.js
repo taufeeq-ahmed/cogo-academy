@@ -21,7 +21,12 @@ const getFilteredUsersFromDB = async (query) => {
         },
         include: {
             track: true,
-            batches: true
+            batches: true,
+            _count: {
+                select: {
+                    user_article: true
+                }
+            }
         },
         orderBy: {
             user_rank: 'asc'
@@ -29,7 +34,16 @@ const getFilteredUsersFromDB = async (query) => {
 
     })
 
-    return filteredUsers;
+    const users = filteredUsers.map((user) => {
+        return {
+            ...user,
+            number_of_articles_read: user._count.user_article
+        }
+    })
+
+
+
+    return users;
 
 }
 module.exports = getFilteredUsersFromDB;

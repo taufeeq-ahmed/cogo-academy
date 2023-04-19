@@ -19,6 +19,7 @@ const TableStudents = () => {
     const [loading, setLoading] = useState(true)
     const [query, setQuery] = useState("")
     const [debounce, setDebounce] = useState(false)
+    const [isMounted, setIsMounted] = useState(false)
 
     const getQueryParams = () => {
         const queryParams = {
@@ -31,12 +32,16 @@ const TableStudents = () => {
             queryParams["track_id"] = track
         }
         if (query !== '') {
-            queryParams["q"] = query
+            queryParams["q"] = query.trim()
         }
         return queryParams
     }
 
     useEffect(() => {
+        if (!isMounted) {
+            setIsMounted(true)
+            return
+        }
         const timer = setTimeout(() => {
             clearTable()
             setDebounce(x => !x)
@@ -74,14 +79,14 @@ const TableStudents = () => {
                         { link: `/admin/user/${user.user_id}`, name: user?.user_name },
                         { name: user?.batches.map((b) => b.batch_name).toString() },
                         { name: user?.track?.track_name },
-                        { name: user?.number_of_articles_read },
-                        { name: user?.number_of_submissions },
+                        { name: user?.number_of_articles_read || 0 },
+                        { name: user?.number_of_exercises || 0 },
                         { name: user?.total_score },
                         { name: user?.user_rank },
                     ]
                     return newUser
                 })
-                setTableData({ head: [...tableData.head], rows: [...tableData.rows, ...newData] })
+                setTableData({ head: [...tableData.head], rows: [...tableData.rows, ...[...newData]] })
                 setLoading(false)
             })
             .catch((err) => console.log(err))
@@ -89,7 +94,7 @@ const TableStudents = () => {
 
     const clearTable = () => {
         setTableData({
-            head: ["Name", "Batch", "Track", "Exercises", "Projects", "Score", "Rank"],
+            head: ["Name", "Batch", "Track", "Articles", "Exercises", "Score", "Rank"],
             rows: []
         })
     }

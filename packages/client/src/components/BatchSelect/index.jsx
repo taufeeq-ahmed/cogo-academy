@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./styles.module.css"
-import ArrowSVG from "/assets/arrow.svg";
-import LinkBtn from "../LinkBtn/index"
 
 const BatchSelect = ({ batches }) => {
 
     const [selectedBatch, setSelectedBatch] = useState(null)
+    const [isMounted, setIsMounted] = useState(false)
 
     useEffect(() => {
         const expires = new Date(Date.now() + 60 * 60 * 1000); // Cookie expires in 1 hour
         selectedBatch !== null && (document.cookie = `batch=${batches[parseInt(selectedBatch)].batch_id};  expires=${expires.toUTCString()}; path=/`)
+        if (isMounted) {
+            window.location.href = "/"
+        }
+        setIsMounted(true)
     }, [selectedBatch, batches])
 
     const handleClick = (idx) => {
@@ -32,9 +35,6 @@ const BatchSelect = ({ batches }) => {
                         );
                     })
                 }
-            </div>
-            <div style={{ marginTop: "20px" }}>
-                <LinkBtn text="Go Home" icon={ArrowSVG} iconPlacement='right' btnStyle={{ padding: "10px" }} link={"/"} />
             </div>
         </div >
     )

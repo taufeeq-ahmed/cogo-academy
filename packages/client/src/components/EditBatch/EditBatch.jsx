@@ -51,8 +51,11 @@ const EditBatch = ({ allCourses, show, toggle, batch }) => {
             }
             return null
         }).filter(c => c !== null);
-        alert(JSON.stringify(data));
-        await instance.post(`/batch/${batch.batch_id}/add_courses`, { new_data: { batch_name: data.batch_name, courses: courses } });
+        await instance.post(`/batch/${batch.batch_id}/add_courses`, { new_data: { batch_name: data.batch_name, courses: courses } })
+            .then(() => {
+                alert("Edited the Batch")
+                window.location.href = window.location.pathname
+            })
         // await instance.post(`/batch/${batch.batch_id}/add_courses`, data);
     }
 

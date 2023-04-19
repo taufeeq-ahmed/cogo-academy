@@ -8,9 +8,9 @@ const ProgressOverview = ({ progressData }) => {
             "data": [
                 {
                     "x": "Article",
-                    "y": Math.round((progressData.studentData.number_of_articles_read / 210) * 100)
+                    "y": Math.round(((progressData?.studentData?.number_of_articles_read || 0) / 210) * 100)
                 },
-    
+
             ]
         },
         {
@@ -18,7 +18,7 @@ const ProgressOverview = ({ progressData }) => {
             "data": [
                 {
                     "x": "Exercises",
-                    "y": Math.round((progressData.studentData.number_of_exercises_done / 32) * 100)
+                    "y": Math.round(((progressData?.studentData?.number_of_exercises_done || 0) / 32) * 100)
                 },
             ]
         },
@@ -27,9 +27,9 @@ const ProgressOverview = ({ progressData }) => {
             "data": [
                 {
                     "x": "Submission",
-                    "y": Math.round((progressData.studentData.number_of_submissions / 20) * 100)
+                    "y": Math.round(((progressData?.studentData?.number_of_submissions || 0) / 20) * 100)
                 },
-    
+
             ]
         }
     ]
@@ -69,7 +69,7 @@ const ProgressOverview = ({ progressData }) => {
                     <div className={styles.progress_details}>
                         <div className={styles.progress_box}>
                             <div className={styles.number}>
-                                {progressData.studentData.number_of_articles_read} / 210
+                                {(progressData?.studentData?.number_of_articles_read || 0)} / 210
                             </div>
                             <div className={styles.text}>
                                 Articles
@@ -77,7 +77,7 @@ const ProgressOverview = ({ progressData }) => {
                         </div>
                         <div className={styles.progress_box}>
                             <div className={styles.number}>
-                                {progressData.studentData.number_of_exercises_done} / 32
+                                {(progressData?.studentData?.number_of_exercises_done || 0)} / 32
                             </div>
                             <div className={styles.text}>
                                 Exercises
@@ -85,7 +85,7 @@ const ProgressOverview = ({ progressData }) => {
                         </div>
                         <div className={styles.progress_box}>
                             <div className={styles.number}>
-                                {progressData.studentData.number_of_submissions} / 20
+                                {(progressData?.studentData?.number_of_submissions || 0)} / 20
                             </div>
                             <div className={styles.text}>
                                 Submissions
@@ -99,7 +99,7 @@ const ProgressOverview = ({ progressData }) => {
                     Course Overview
                 </div>
                 <ol className={styles.user_courses}>
-                    {progressData.coursesDone.map((c) => {
+                    {progressData?.coursesDone.map((c) => {
                         return <li className={styles.course_title}><div><span>{c.course_name}</span><span> {c.total_score}</span></div></li>
                     })}
                 </ol>

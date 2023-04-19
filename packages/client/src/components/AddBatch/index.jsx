@@ -12,28 +12,16 @@ const AddBatch = ({ courses }) => {
     const { register, handleSubmit, control } = useForm({
         defaultValues: {
             batch_name: '',
-            // courses: courses
         }
     });
-    // const {
-    //     fields,
-    //     append,
-    //     prepend,
-    //     remove,
-    //     swap,
-    //     move,
-    //     insert,
-    //     replace
-    // } = useFieldArray({
-    //     control,
-    //     name: "courses"
-    // });
 
 
     const onSubmit = async (data) => {
-        // const courses = data.courses.filter((c) => c.selected === true);
-        // alert(JSON.stringify(data));
-        await instance.post('batch',data);
+        await instance.post('batch', data)
+            .then(() => {
+                alert("Created the batch")
+                window.location.href = window.location.pathname
+            })
     }
 
 
@@ -47,16 +35,6 @@ const AddBatch = ({ courses }) => {
                 register={register}
                 registerQuery={"batch_name"}
             />
-            {/* {
-                fields.map((item, index) => {
-                    return (
-                        <div className={styles.check_course}>
-                            <input type='checkbox' value={item.value} {...register(`courses.${index}.selected`)} />
-                            <span>{item.course_name}</span>
-                        </div>
-                    )
-                })
-            } */}
             <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} />
 
         </form>

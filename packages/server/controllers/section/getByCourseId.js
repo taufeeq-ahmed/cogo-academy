@@ -14,7 +14,6 @@ const getSectionByCourseIdFromDB = async (params) => {
                 orderBy: {
                     created_on: 'asc'
                 },
-                take: 1
             },
             submissions: {
                 select: {
@@ -23,7 +22,6 @@ const getSectionByCourseIdFromDB = async (params) => {
                 orderBy: {
                     created_on: 'asc'
                 },
-                take: 1
             }
         },
         orderBy: {

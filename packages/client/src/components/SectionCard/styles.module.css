@@ -1,46 +1,42 @@
 @import url('../../styles/global.css');
 
 .section {
-    flex: 1;
     padding: 16px 24px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
     gap: 10px;
-    /* min-width: 300px; */
-    max-width: 300px;
-    max-height: 380px;
     box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
     border-radius: 6px;
+    max-height: 380px;
 }
 
-@media only screen and (max-width: 600px) {
-    .section {
-        /* min-width: 80%; */
+.section_item {
+    padding: 10px;
+}
+
+.dash_section {
+    flex: 1;
+}
+
+@media(min-width: 40rem) {
+    .section_item {
+        width: 50%;
     }
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .section {
-        /* min-width: calc(100%/2 - 40px); */
-        /* max-height: 350px; */
+@media(min-width: 64rem) {
+    .section_item {
+        width: 33.3333%;
     }
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    .section {
-        /* min-width: calc(100%/3 - 40px); */
-        /* max-height: 350px; */
+@media(max-width:40rem) {
+    .section_item {
+        width: 80%;
     }
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
 
 .section_header>span {
     white-space: nowrap;

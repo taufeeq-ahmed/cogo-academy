@@ -1,0 +1,9 @@
+.toast {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    background-color: red;
+    width: 200px;
+    height: 50px;
+    z-index: 20;
+}

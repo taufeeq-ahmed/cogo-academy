@@ -41,7 +41,7 @@ const formatTableData = () => {
         allBatches={data.allBatches}
     />
     <ProgressOverview client:load progressData={data} />
-    <div style={{ overflowX: "auto", marginTop: "40px", minHeight: "200px " }}>
+    <div style={{ marginTop: "40px" }}>
         <Table data={formatTableData()} />
     </div>
 </AdminLayout>

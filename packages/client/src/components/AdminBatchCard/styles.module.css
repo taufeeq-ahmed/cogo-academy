@@ -10,25 +10,28 @@
     width: 30%;
 }
 
-@media(768<width<=1400px){
-    .admin_batch_card{
+@media(768<width<=1400px) {
+    .admin_batch_card {
         width: 45%;
     }
-    
+
 }
-@media(width<768px){
-    .admin_batch_card{
+
+@media(width<768px) {
+    .admin_batch_card {
         width: 80%;
     }
-    
+
 }
+
 @media (max-width:900px) {
-    .edit_button{
+    .edit_button {
         display: none !important;
     }
-    .delete_button{
+
+    .delete_button {
         display: none !important;
-        
+
     }
 
 }
@@ -41,12 +44,21 @@
     justify-content: space-between;
     width: 100%;
 }
+
+.batch_title>span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .batch_buttons {
     display: flex;
 }
+
 .batch_buttons img {
     margin: 10px;
 }
+
 .batch_buttons img:hover {
     transform: scale(1.2);
     cursor: pointer;

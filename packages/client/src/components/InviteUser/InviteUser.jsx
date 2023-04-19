@@ -51,6 +51,10 @@ const InviteUser = ({ batchOptions, token }) => {
         }
 
         const resp = await instance.post('invite_user', invitation)
+            .then(() => {
+                alert("Invited User")
+                window.location.replace(window.location.pathname)
+            })
     }
 
 
