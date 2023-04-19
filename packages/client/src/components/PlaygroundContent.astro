@@ -1,6 +1,4 @@
 ---
-import Button from "./Button/Button";
-import EditorComponent from "./CodeEditor";
 import ContentBody from "./ContentBody";
 import LinkBtn from "./LinkBtn";
 import ArrowSVG from "/assets/arrow.svg";
@@ -17,22 +15,11 @@ const { element_content, next_element } = Astro.props;
         link={"back"}
     />
 </div>
-<div class="code_editor">
-    <EditorComponent client:load />
-</div>
-<div style={{ display: "flex", justifyContent: "flex-end" }}>
-    <Button
-        client:load
-        text={"Submit"}
-        btnStyles={{ backgroundColor: "black", color: "white" }}
-        onClick={() => {}}
-    />
-</div>
-<!-- <ContentBody
+<ContentBody
     element_content={element_content}
     next_element={next_element}
     client:load
-/> -->
+/>
 
 <style>
     .content-body {

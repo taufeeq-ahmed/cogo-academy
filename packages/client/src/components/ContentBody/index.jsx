@@ -5,6 +5,7 @@ import { useState } from 'react'
 import ArticleContent from '../ArticleContent/ArticleContent'
 import Button from '../Button/Button'
 import SubmissionContent from '../SubmissionContent/SubmissionContent'
+import EditorComponent from "../CodeEditor/index"
 import styles from './styles.module.css'
 import instance from '../../utils/axios'
 
@@ -26,19 +27,29 @@ const ContentBody = ({ element_content, next_element }) => {
     }, [])
 
     const handleMarkAsDone = () => {
-
-        instance.post(`/user_article/${element_content.article_id}/add`)
-            .then(() => window.location.href = next_element)
-            .catch((err) => console.log("error", err))
+        if (element_content?.article_id) {
+            instance.post(`/user_article/${element_content?.article_id}/add`)
+                .then(() => window.location.href = next_element)
+                .catch((err) => console.log("error", err))
+        }
+        else if (element_content?.submission_id) {
+            console.log("submitted")
+        }
+        else {
+            console.log("subdsaidaso")
+        }
     }
     let contentElement;
 
-    if (element_content.article_id) {
+    if (element_content?.article_id) {
         const content = element_content.article_content;
         contentElement = <ArticleContent htmlContent={content} />
-    } else if (element_content.submission_id) {
+    } else if (element_content?.submission_id) {
         const content = element_content;
         contentElement = <SubmissionContent submissionContent={content} />
+    }
+    else {
+        contentElement = <EditorComponent code={element_content.prefilled_code} language={element_content.language} />
     }
 
     return (
@@ -47,7 +58,16 @@ const ContentBody = ({ element_content, next_element }) => {
                 {contentElement}
             </div>
             <div className={styles.content_footer}>
-                <Button onClick={handleMarkAsDone} btnStyle={{ backgroundColor: element_content.done ? 'green' : '' }} disabled={disabled} text={element_content.done ? "Completed" : "Mark As Complete"} />
+                <Button onClick={handleMarkAsDone}
+                    btnStyle={{ backgroundColor: element_content.done ? 'green' : '' }}
+                    disabled={disabled}
+                    text={
+                        element_content.done
+                            ?
+                            "Completed"
+                            : "Mark As Complete"
+                    }
+                />
             </div>
         </>
     )

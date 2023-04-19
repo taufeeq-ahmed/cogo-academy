@@ -5,9 +5,8 @@ import TabsNav from "../components/TabsNav.astro";
 import LinkSVG from "/assets/link.svg";
 import BookSVG from "/assets/book.svg";
 import { fetchData, parseCookie } from "../utils/common";
-import MenuIcon from "/assets/menuIcon.svg";
 import MobileHeader from "../components/MobileHeader.astro";
-import Toast from "../components/Toast";
+import TestCaseLayout from "../components/CodeEditorLayout/TestCaseLayout";
 
 const { sectionId, elementId, type = "article" } = Astro.props;
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
@@ -19,26 +18,16 @@ const data = await fetchData(
     token
 );
 
-const getNextArticle = (all_articles: any[]) => {
-    const elements_list = all_articles.map((element) => {
-        if (element?.article_id)
-            return { id: element?.article_id, type: "article" };
-        return { id: element?.submission_id, type: "submission" };
-    });
-    console.log(elements_list);
-    let next_element = "/";
-    elements_list?.forEach((element, i) => {
-        if (element?.id === elementId) {
-            if (i === elements_list.length - 1) {
-                return next_element;
-            }
-            next_element = `/playground/${sectionId}/${
-                elements_list[i + 1]?.type
-            }/${elements_list[i + 1]?.id}`;
-        }
-    });
-    return next_element;
-};
+console.log("playground", data);
+const testcases = data?.clicked_element?.test_cases.map((t) => t.text);
+// [
+//     "You should have 2 p elements with Kitty Ipsum text.",
+//     "Each of your p elements should have a closing tag.",
+//     "Your code should have one main element.",
+//     "The main element should have two paragraph elements as children.",
+// ];
+const instructions = data?.instruction;
+const content = "Console";
 ---
 
 <!DOCTYPE html>
@@ -55,12 +44,12 @@ const getNextArticle = (all_articles: any[]) => {
             <TabsNav>
                 <p class="left_title">Course Contents</p>
                 {
-                    data?.all_articles?.map((article: any) => {
+                    data?.all_elements?.map((element: any) => {
                         return (
                             <a
-                                href={`/playground/${sectionId}/article/${article.article_id}`}
+                                href={`/playground/${sectionId}/${element.element_type}/${element.element_id}`}
                                 class={`tab ${
-                                    elementId === article.article_id
+                                    elementId === element.element_id
                                         ? "tab_selected"
                                         : "not-selected"
                                 }`}
@@ -68,41 +57,16 @@ const getNextArticle = (all_articles: any[]) => {
                                 <div class="img-div">
                                     <input
                                         type="checkbox"
-                                        checked={!!article.done}
+                                        checked={!!element.done}
                                     />
                                 </div>
                                 <div class="name-time">
-                                    <div>{article.article_name}</div>
+                                    <div>{element.element_name}</div>
                                     <div>
                                         <img src={BookSVG} alt="book-icon" />
                                         <span>
-                                            {article.article_time_in_mins}
+                                            {element.element_time_in_mins}
                                         </span>
-                                    </div>
-                                </div>
-                            </a>
-                        );
-                    })
-                }
-                {
-                    data?.all_submissions?.map((submission: any) => {
-                        return (
-                            <a
-                                href={`/playground/${sectionId}/submission/${submission.submission_id}`}
-                                class={`tab ${
-                                    elementId === submission.submission_id
-                                        ? "tab_selected"
-                                        : "not-selected"
-                                }`}
-                            >
-                                <div class="img-div">
-                                    <input type="checkbox" />
-                                </div>
-                                <div class="name-time">
-                                    <div>{submission.submission_name}</div>
-                                    <div>
-                                        <img src={BookSVG} alt="book-icon" />
-                                        <span>{"15 mins"}</span>
                                     </div>
                                 </div>
                             </a>
@@ -112,43 +76,55 @@ const getNextArticle = (all_articles: any[]) => {
             </TabsNav>
             <div class="content">
                 <PlaygroundContent
-                    element_content={data.clicked_element}
-                    next_element={getNextArticle([
-                        ...data?.all_articles,
-                        ...data?.all_submissions,
-                    ])}
+                    element_content={data?.clicked_element}
+                    next_element={data?.clicked_element?.next_element}
                 />
             </div>
             {
-                data.clicked_element.article_id && (
+                (
                     <div class="right_box">
-                        <div class="right_box_title">Additional Links</div>
-
-                        {data?.links?.map((link) => {
-                            return (
-                                <div class="link_box">
-                                    <a target="_blank" href={link.link_url}>
-                                        <img src={LinkSVG} alt="" />
-                                    </a>
-                                    <div class="link_content">
-                                        <a
-                                            target="_blank"
-                                            href={link.link_url}
-                                            class="link_title"
-                                        >
-                                            {link.link_name}
-                                        </a>
-                                        <a
-                                            target="_blank"
-                                            href={link.link_url}
-                                            class="domain_text"
-                                        >
-                                            {link.link_url}
-                                        </a>
-                                    </div>
+                        {data?.clicked_element?.exercise_id ? (
+                            <TestCaseLayout
+                                testcases={testcases}
+                                instructions={instructions}
+                                content={content}
+                                client:only
+                            />
+                        ) : (
+                            <>
+                                <div class="right_box_title">
+                                    Additional Links
                                 </div>
-                            );
-                        })}
+                                {data?.links?.map((link) => {
+                                    return (
+                                        <div class="link_box">
+                                            <a
+                                                target="_blank"
+                                                href={link.link_url}
+                                            >
+                                                <img src={LinkSVG} alt="" />
+                                            </a>
+                                            <div class="link_content">
+                                                <a
+                                                    target="_blank"
+                                                    href={link.link_url}
+                                                    class="link_title"
+                                                >
+                                                    {link.link_name}
+                                                </a>
+                                                <a
+                                                    target="_blank"
+                                                    href={link.link_url}
+                                                    class="domain_text"
+                                                >
+                                                    {link.link_url}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </>
+                        )}
                     </div>
                 )
             }
