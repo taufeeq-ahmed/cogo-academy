@@ -1,3 +1,8 @@
+.delete_user{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
 .adminuser_header {
     display: flex;
     justify-content: space-between;
