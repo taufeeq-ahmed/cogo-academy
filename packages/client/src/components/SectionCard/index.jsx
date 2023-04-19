@@ -4,7 +4,7 @@ import ArrowSVG from "/assets/arrow.svg"
 import LinkBtn from "../LinkBtn";
 import styles from './styles.module.css'
 
-const SectionCard = ({ section }) => {
+const SectionCard = ({ section, dash = false }) => {
 
     console.log("section", section)
 
@@ -46,7 +46,7 @@ const SectionCard = ({ section }) => {
 
 
     return (
-        <div className={styles.section_item}>
+        <div className={dash ? styles.dash_section : styles.section_item}>
             <div className={styles.section}>
                 <div className={styles.imgDiv}>
                     <img
