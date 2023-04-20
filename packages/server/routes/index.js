@@ -69,8 +69,8 @@ const isAdmin = require("./auth/isAdmin");
 const addUsersToBatch = require("./batch/addUsersToBatch");
 const getAdminBatchesPageData = require("./pages/adminBatches");
 const getAllBatchesFromUser = require("./batch/getByUser");
-const updateUserBatches = require("./user/updateUserBatches")
-
+const updateUserBatches = require("./user/updateUserBatches");
+const updateStatusCourse = require("./course/updateStatus");
 
 const registerRoutes = async (fastify) => {
     const authRoutes = async (fastify) => {
@@ -105,6 +105,7 @@ const registerRoutes = async (fastify) => {
         await getAllCourses(fastify);
         await updateCourse(fastify);
         await deleteCourse(fastify);
+        await updateStatusCourse(fastify);
     }
     await courseRoutes(fastify);
     const articleRoutes = async (fastify) => {
