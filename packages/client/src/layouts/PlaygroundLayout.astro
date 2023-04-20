@@ -20,13 +20,7 @@ const data = await fetchData(
 
 console.log("playground", data);
 const testcases = data?.clicked_element?.test_cases?.map((t) => t.text);
-// [
-//     "You should have 2 p elements with Kitty Ipsum text.",
-//     "Each of your p elements should have a closing tag.",
-//     "Your code should have one main element.",
-//     "The main element should have two paragraph elements as children.",
-// ];
-const instructions = data?.instruction;
+const instructions = data?.clicked_element?.instruction;
 const content = "Console";
 ---
 

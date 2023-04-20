@@ -6,6 +6,7 @@ const getLinksByArticleIdFromDB = require("../link/getByArticleId");
 const getSubmissionFromDB = require("../submission/get");
 const getSubmissionBySectionIdFromDB = require("../submission/getBySectionId");
 const getReadArticleFromDB = require("../user_article/get");
+const getUserExerciseFromDB = require("../user_exercise/get");
 
 const getPlaygroundDataFromDB = async (req) => {
     console.log("userrrrrrrr", req.user)
@@ -59,9 +60,7 @@ const getPlaygroundDataFromDB = async (req) => {
         })
 
     const idx = all_elements.findIndex((elem) => elem.element_id === element_id)
-    console.log("sadsadas", idx, all_elements.length - 1, idx === all_elements.length - 1)
     const next_element = (idx !== all_elements.length - 1) ? `/playground/${section_id}/${all_elements[idx + 1].element_type}/${all_elements[idx + 1].element_id}` : "/"
-    console.log("lkaslkdsalkjdaskld", next_element)
 
     if (type === 'article') {
         params.article_id = element_id;
@@ -81,7 +80,11 @@ const getPlaygroundDataFromDB = async (req) => {
     else {
         params.exercise_id = element_id
         const clicked_element = await getExerciseFromDB(params);
-        clicked_element.done = false
+        const userExercise = await getUserExerciseFromDB(params)
+        clicked_element.done = userExercise?.status || false
+        if (userExercise?.code && userExercise?.code !== "") {
+            clicked_element.prefilled_code = userExercise?.code
+        }
         clicked_element.next_element = next_element
         return { all_elements, clicked_element, user: req.user };
     }

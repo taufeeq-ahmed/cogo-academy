@@ -11,6 +11,12 @@ import instance from '../../utils/axios'
 
 const ContentBody = ({ element_content, next_element }) => {
     const [disabled, setDisabled] = useState(true)
+    const [code, setCode] = useState(element_content?.prefilled_code)
+
+    console.log(element_content)
+
+
+
     const contentRef = useRef()
     useEffect(() => {
         if (contentRef.current.scrollHeight < screen.height) {
@@ -36,20 +42,32 @@ const ContentBody = ({ element_content, next_element }) => {
             console.log("submitted")
         }
         else {
-            console.log("subdsaidaso")
+            instance.post(`/user_exercise/${element_content?.exercise_id}/add`, {
+                code: code
+            })
+                .then((resp) => {
+                    console.log(resp.data)
+                    // window.location.href = next_element
+                })
+                .catch(err => console.log(err))
         }
     }
+
+    const onCodeChange = (code) => {
+        setCode(code)
+    }
+
     let contentElement;
 
     if (element_content?.article_id) {
         const content = element_content.article_content;
         contentElement = <ArticleContent htmlContent={content} />
     } else if (element_content?.submission_id) {
-        const content = element_content;
+        const content = element_content.submission_content;
         contentElement = <SubmissionContent submissionContent={content} />
     }
     else {
-        contentElement = <EditorComponent code={element_content.prefilled_code} language={element_content.language} />
+        contentElement = <EditorComponent onChange={onCodeChange} code={code} language={element_content.language} />
     }
 
     return (

@@ -105,6 +105,8 @@ model User_Exercise {
     user        User     @relation(fields: [user_id], references: [user_id])
     exercise    Exercise @relation(fields: [exercise_id], references: [exercise_id])
     score       Int?
+    code        String?
+    status      Boolean   @default(false)
     updated_on  DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
     user_id     String   @db.Uuid
     exercise_id String   @db.Uuid

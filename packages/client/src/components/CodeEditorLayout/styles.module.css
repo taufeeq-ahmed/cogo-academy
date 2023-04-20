@@ -23,6 +23,7 @@
 
 .instruction {
     padding: 15px;
+    flex: 1;
 }
 
 .btn_div {

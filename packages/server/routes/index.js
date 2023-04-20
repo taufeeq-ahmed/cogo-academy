@@ -73,6 +73,8 @@ const updateUserBatches = require("./user/updateUserBatches");
 const addExerciseToSection = require("./exercise/add");
 const getExercise = require("./exercise/get");
 const getAllExerciesBySection = require("./exercise/list");
+const addUserExercise = require("./user_exercise/add");
+const getUserExercise = require("./user_exercise/get");
 
 
 const registerRoutes = async (fastify) => {
@@ -172,6 +174,11 @@ const registerRoutes = async (fastify) => {
         await getReadArticlesByUser(fastify)
     }
     await userArticleRoutes(fastify)
+    const userExerciseRoutes = async (fastify) => {
+        await addUserExercise(fastify)
+        await getUserExercise(fastify)
+    }
+    await userExerciseRoutes(fastify)
     const pageRoutes = async (fastify) => {
         await getLandingPageData(fastify);
         await getUserDashboardData(fastify);
