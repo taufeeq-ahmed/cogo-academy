@@ -70,7 +70,10 @@ const addUsersToBatch = require("./batch/addUsersToBatch");
 const getAdminBatchesPageData = require("./pages/adminBatches");
 const getAllBatchesFromUser = require("./batch/getByUser");
 const updateUserBatches = require("./user/updateUserBatches");
-const updateStatusCourse = require("./course/updateStatus");
+const addExerciseToSection = require("./exercise/add");
+const getExercise = require("./exercise/get");
+const getAllExerciesBySection = require("./exercise/list");
+
 
 const registerRoutes = async (fastify) => {
     const authRoutes = async (fastify) => {
@@ -116,6 +119,12 @@ const registerRoutes = async (fastify) => {
         await getArticlesBySectionId(fastify);
     }
     await articleRoutes(fastify);
+    const exerciseRoutes = async (fastify) => {
+        await addExerciseToSection(fastify)
+        await getExercise(fastify)
+        await getAllExerciesBySection(fastify)
+    }
+    await exerciseRoutes(fastify)
     const linkRoutes = async (fastify) => {
         await addLink(fastify);
         await getLink(fastify);

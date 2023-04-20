@@ -21,8 +21,9 @@ model User {
     track           Track?            @relation(fields: [track_id], references: [track_id])
     track_id        String?           @db.Uuid
     user_article    User_Article[]
-    User_Submission User_Submission[]
+    user_submission User_Submission[]
     isAdmin         Boolean           @default(false)
+    user_exercise   User_Exercise[]
 }
 
 model Course {
@@ -43,6 +44,7 @@ model Section {
     course_id           String?      @db.Uuid
     articles            Article[]
     submissions         Submission[]
+    exercises           Exercise[]
     created_on          DateTime     @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
@@ -77,6 +79,52 @@ model Submission {
     created_on             DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
+model Exercise {
+    exercise_id    String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    exercise_name  String
+    instruction    String
+    language       String
+    prefilled_code String
+    test_cases     TestCase[]
+    section        Section?        @relation(fields: [section_id], references: [section_id])
+    section_id     String?         @db.Uuid
+    user_exercise  User_Exercise[]
+    created_on     DateTime        @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model TestCase {
+    test_case_id String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    text         String
+    input        String
+    output       String
+    exercise     Exercise @relation(fields: [exercise_id], references: [exercise_id])
+    exercise_id  String   @db.Uuid
+}
+
+model User_Exercise {
+    id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user        User     @relation(fields: [user_id], references: [user_id])
+    exercise    Exercise @relation(fields: [exercise_id], references: [exercise_id])
+    score       Int?
+    updated_on  DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+    user_id     String   @db.Uuid
+    exercise_id String   @db.Uuid
+
+    @@unique([user_id, exercise_id])
+}
+
+model User_Article {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user       User     @relation(fields: [user_id], references: [user_id])
+    article    Article  @relation(fields: [article_id], references: [article_id])
+    user_id    String   @db.Uuid
+    article_id String   @db.Uuid
+    score      Int?
+    updated_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+
+    @@unique([user_id, article_id])
+}
+
 model User_Submission {
     submission_linkmap_id String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     user                  User       @relation(fields: [user_id], references: [user_id])
@@ -102,18 +150,6 @@ model Track {
     track_name String
     User       User[]
     created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-}
-
-model User_Article {
-    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user       User     @relation(fields: [user_id], references: [user_id])
-    article    Article  @relation(fields: [article_id], references: [article_id])
-    user_id    String   @db.Uuid
-    article_id String   @db.Uuid
-    score      Int?
-    updated_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-
-    @@unique([user_id, article_id])
 }
 
 model UserAuth {

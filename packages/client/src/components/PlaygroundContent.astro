@@ -2,7 +2,6 @@
 import ContentBody from "./ContentBody";
 import LinkBtn from "./LinkBtn";
 import ArrowSVG from "/assets/arrow.svg";
-
 const { element_content, next_element } = Astro.props;
 ---
 
@@ -41,5 +40,9 @@ const { element_content, next_element } = Astro.props;
     .content-body,
     .content-header {
         padding: 24px 24px 0 24px;
+    }
+    .code_editor {
+        padding: 0 24px;
+        margin-bottom: 24px;
     }
 </style>
