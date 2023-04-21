@@ -10,7 +10,7 @@ import instance from "../../utils/axios";
 const PlaygroundContent = ({ data }) => {
     console.log("dasdsadas", data)
     const { clicked_element: element_content } = data
-    const { next_element } = element_content?.next_element
+    const { next_element } = element_content
     const { links } = data
     const instructions = data?.clicked_element?.instruction;
     const content = "Console";
