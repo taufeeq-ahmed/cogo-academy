@@ -40,20 +40,20 @@ const addExerciseDoneToDB = async (req) => {
         }
     })
 
-    console.log(exercise)
+    console.log(exercise.test_cases)
 
     const CODE_FOLDER = "code";
 
 
     try {
         fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.py"), code);
-        const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + JSON.stringify(exercise.test_cases));
+        const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
 
-        return proc.toString()
+        return proc
     } catch (error) {
         console.log("Error: ", error);
 
-        return error
+        return []
 
         // return res.send("An error occurred.");
     }

@@ -7,9 +7,8 @@ import Button from '../Button/Button'
 import SubmissionContent from '../SubmissionContent/SubmissionContent'
 import EditorComponent from "../CodeEditor/index"
 import styles from './styles.module.css'
-import instance from '../../utils/axios'
 
-const ContentBody = ({ element_content, next_element }) => {
+const ContentBody = ({ element_content, handleMarkAsDone }) => {
     const [disabled, setDisabled] = useState(true)
     const [code, setCode] = useState(element_content?.prefilled_code)
 
@@ -31,27 +30,6 @@ const ContentBody = ({ element_content, next_element }) => {
         contentRef.current.addEventListener("scroll", handleScroll);
         return () => contentRef.current.removeEventListener("scroll", handleScroll);
     }, [])
-
-    const handleMarkAsDone = () => {
-        if (element_content?.article_id) {
-            instance.post(`/user_article/${element_content?.article_id}/add`)
-                .then(() => window.location.href = next_element)
-                .catch((err) => console.log("error", err))
-        }
-        else if (element_content?.submission_id) {
-            console.log("submitted")
-        }
-        else {
-            instance.post(`/user_exercise/${element_content?.exercise_id}/add`, {
-                code: code
-            })
-                .then((resp) => {
-                    console.log(resp.data)
-                    // window.location.href = next_element
-                })
-                .catch(err => console.log(err))
-        }
-    }
 
     const onCodeChange = (code) => {
         setCode(code)
@@ -76,7 +54,7 @@ const ContentBody = ({ element_content, next_element }) => {
                 {contentElement}
             </div>
             <div className={styles.content_footer}>
-                <Button onClick={handleMarkAsDone}
+                <Button onClick={() => handleMarkAsDone(code)}
                     btnStyle={{ backgroundColor: element_content.done ? 'green' : '' }}
                     disabled={disabled}
                     text={

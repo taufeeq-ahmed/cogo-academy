@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '../Button/Button'
 
 import styles from './styles.module.css'
 import Instruction from './Instruction';
-import Canvas from './Canvas';
 import TestCase from './TestCase';
+import ConsoleTab from './ConsoleTab';
+
 const TestCaseLayout = ({ testcases, instructions, content }) => {
     const [activeButton, setActiveButton] = useState(0);
     const buttonStyle = { backgroundColor: "white", color: "black", justifyContent: "center" }
@@ -12,13 +13,13 @@ const TestCaseLayout = ({ testcases, instructions, content }) => {
         backgroundColor: "red",
         color: "white",
     };
-    const txt = ["Instructions", "Canvas", "Test Cases"];
+    const txt = ["Instructions", "Console", "Test Cases"];
     const render = () => {
         switch (activeButton) {
             case 0:
                 return <Instruction instruction={instructions} />
             case 1:
-                return <Canvas content={content} />
+                return <ConsoleTab content={content} />
             default:
                 return <TestCase testcases={testcases} />
         }
