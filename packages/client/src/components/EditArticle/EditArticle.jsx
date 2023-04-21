@@ -30,6 +30,7 @@ const EditArticle = ({ article }) => {
                     total_score: 1
                 }
             })
+            window.location.href='/admin/courses';
         } catch (err) {
 
         }

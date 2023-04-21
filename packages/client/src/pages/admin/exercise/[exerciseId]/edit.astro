@@ -1,0 +1,20 @@
+---
+import EditExercise from "../../../../components/EditExercise";
+import AdminLayout from "../../../../layouts/AdminLayout.astro";
+import { fetchData, parseCookie } from "../../../../utils/common";
+const { exerciseId } = Astro.params;
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const exercise = await fetchData(`exercise/${exerciseId}`, token);
+if (!exercise) return Astro.redirect("/error");
+console.log(exercise);
+---
+
+<AdminLayout>
+    <EditExercise client:load exercise={exercise} />
+</AdminLayout>

@@ -12,7 +12,6 @@ if (!token) {
 const article = await fetchData(`article/${articleId}`, token);
 if (!article) return Astro.redirect("/error");
 
-console.log("aricle", article);
 ---
 
 <EditArticle client:only article={article} />

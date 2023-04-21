@@ -7,8 +7,7 @@ import { useForm, useFieldArray, } from 'react-hook-form';
 import instance from '../../utils/axios'
 import Button from '../Button/Button'
 const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { label: 'JAVASCRIPT', id: '132' }, { label: 'SQL', id: '234' }, { label: 'PYTHON', id: '324' }, { label: 'RUBY', id: '342' }];
-
-const AddExercise = ({ sectionId }) => {
+const EditExercise=({exercise})=>{
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
             sections: [{ text: '', input: '', output: '' }]
@@ -29,12 +28,12 @@ const AddExercise = ({ sectionId }) => {
         control,
         name: "test_cases"
     });
-
+console.log(exercise);
     const onSubmit = async (data) => {
         data.language = selectedLanguage;
         data.prefilled_code = code;
         try {
-            await instance.post(`/exercise/${sectionId}/add`, data)
+            await instance.patch(`/exercise/${exercise.exercise_id}`, data)
             window.location.href = ('/admin/courses');
         } catch (err) {
 
@@ -43,8 +42,7 @@ const AddExercise = ({ sectionId }) => {
     const codeHandler=(code)=>{
         setcode(code);
     }
-    console.log("fghfhfhj", sectionId);
-    return (
+    return(
         <form className={styles.edit_exercise} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.container}>
                 <div className={styles.box}>
@@ -153,4 +151,4 @@ const AddExercise = ({ sectionId }) => {
         </form>
     )
 }
-export default AddExercise;
+export default EditExercise;

@@ -8,7 +8,7 @@ import Modal from '../Modal/Modal';
 import LinkBtn from '../LinkBtn';
 import ArticlesList from '../ArticlesList/ArticlesList';
 import instance from '../../utils/axios';
-
+import ExerciseList from '../ExerciseList'
 const EditCourse = ({ course, show, toggle }) => {
     const { sections, course_id, course_name } = course;
 
@@ -105,6 +105,8 @@ const EditCourse = ({ course, show, toggle }) => {
 
                                 <ArticlesList sectionId={item.section_id} />
                                 <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} btnStyle={{ fontSize: '20px' }} />
+                                <ExerciseList sectionId={item.section_id} />
+                                <LinkBtn text=' + Add Exercise' link={`/admin/exercise/${item.section_id}/add`} btnStyle={{ fontSize: '20px' }} />
                             </div>
 
                             // </li>

@@ -83,8 +83,8 @@ model Exercise {
     exercise_id    String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     exercise_name  String
     instruction    String
-    language       String
-    prefilled_code String
+    language       String 
+    prefilled_code String 
     test_cases     TestCase[]
     section        Section?        @relation(fields: [section_id], references: [section_id])
     section_id     String?         @db.Uuid
