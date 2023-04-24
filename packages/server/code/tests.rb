@@ -11,20 +11,13 @@ def test_code
         expected[test_case['test_case_id']] = test_case['output']
     end
 
-    # test_cases.each do |k,v|
-    #     puts "#{k}:#{v}"
-    # end
-
-
     passed_test_cases = 0
     result = []
 
     test_cases.keys.each do |id|
         begin
             code_result = solution(eval(test_cases[id]))
-            puts code_result
-            puts expected[id]
-            if code_result == expected[id]
+            if code_result.to_i == expected[id].to_i
                 passed_test_cases += 1
                 result.append(id)
             end
@@ -33,15 +26,6 @@ def test_code
         end
     end
 
-    # status = 'false'
-    # if passed_test_cases == test_cases.length
-    #     status = 'true'
-    # end
-
-    # resDict = {
-    #     'status' => status,
-    #     'result' => result
-    # }
     puts result.to_json
     end
 

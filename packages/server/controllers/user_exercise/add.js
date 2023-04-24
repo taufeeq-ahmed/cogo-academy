@@ -18,6 +18,7 @@ const addExerciseDoneToDB = async (req) => {
                 }
             },
             update: {
+                code: code
             },
             create: {
                 user_id: user_id,
