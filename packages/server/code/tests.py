@@ -26,7 +26,15 @@ def test_code():
         except:
             result.append("error")
 
-    print(result)
+    # status =  "false"
+    # if passed_test_cases == len(test_cases):
+    #     status = "true"
+    # resDict = {
+    #     status: status,
+    #     result : result 
+    # }
+    # print(resDict)
+    print(json.dumps(result))
 
     
 test_code()

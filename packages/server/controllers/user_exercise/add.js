@@ -44,18 +44,34 @@ const addExerciseDoneToDB = async (req) => {
 
     const CODE_FOLDER = "code";
 
+    if (exercise.language === "ruby") {
+        console.log("-----------------")
+        console.log("RUBY")
+        try {
+            fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.rb"), code);
+            const proc = exec("ruby " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.rb ") + "'" + JSON.stringify(exercise.test_cases) + "'");
 
-    try {
-        fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.py"), code);
-        const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
+            return proc
+        } catch (error) {
+            console.log("Error: ", error);
 
-        return proc
-    } catch (error) {
-        console.log("Error: ", error);
+            return []
+        }
+    }
 
-        return []
+    else if (exercise.language === "python") {
+        console.log("-----------------")
+        console.log("PYTHON")
+        try {
+            fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.py"), code);
+            const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
 
-        // return res.send("An error occurred.");
+            return proc
+        } catch (error) {
+            console.log("Error: ", error);
+
+            return []
+        }
     }
 
 };

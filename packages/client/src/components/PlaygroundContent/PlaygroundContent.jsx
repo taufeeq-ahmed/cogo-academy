@@ -32,7 +32,8 @@ const PlaygroundContent = ({ data }) => {
                 code: code
             })
                 .then((resp) => {
-                    const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
+                    // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
+                    const resultLst = resp?.data
                     setTestCases((lst) => {
                         return lst.map((item) => {
                             const status = resultLst.includes(item.test_case_id) ? true : false
