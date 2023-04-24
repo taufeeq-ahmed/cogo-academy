@@ -1,0 +1,48 @@
+.box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.edit_exercise{
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px;
+    width: 70%;
+}
+label{
+    margin-left: auto;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.dropdown{
+    width: 20%;
+}
+.exercise_name {
+    margin-left: auto;
+    width: 50%;
+}
+.instructions{
+    width: auto;
+}
+.codeeditor{
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+.testcase_details{
+    margin-bottom: 20px;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    width: 100%;
+}
+.control_buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+}

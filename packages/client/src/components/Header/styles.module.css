@@ -38,8 +38,7 @@
 .profile_box {
     display: flex;
     align-items: center;
-    justify-content: end;
-    gap: 5px;
+    justify-content: center;
 }
 
 .profile_name {
@@ -57,7 +56,9 @@
 .profile_rank {
     font-size: var(--font-size-md);
 }
-
+.prof_pic{
+    margin-top: 4px;
+}
 .prof_pic>img {
     width: 36px;
     height: 36px;
@@ -67,6 +68,7 @@
 
 .logout_box {
     cursor: pointer;
+    margin-top: 7px;
 }
 
 @media (768px<=width<1400px) {

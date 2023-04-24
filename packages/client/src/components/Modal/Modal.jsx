@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import styles from "./styles.module.css"
 import Button from '../Button/Button'
-import cross from '../../../public/assets/cross.svg';
+import cross from '/assets/cross.svg';
 const Modal = ({ isShowing, toggle, children, heading }) => {
     const modalClassName = `${styles.modal} ${isShowing ? 'is-active' : ''}`;
 

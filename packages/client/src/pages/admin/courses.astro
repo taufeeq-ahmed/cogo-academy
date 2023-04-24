@@ -28,7 +28,7 @@ if (!data) return Astro.redirect("/error");
         </div>
         <div class="courses_container">
             {
-                data?.map((course) => {
+               data?.map((course) => {
                     return <AdminCourseCard course={course} client:load />;
                 })
             }

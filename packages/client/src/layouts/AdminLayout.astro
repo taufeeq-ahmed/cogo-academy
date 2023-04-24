@@ -1,23 +1,23 @@
 ---
 import TabsNav from "../components/TabsNav.astro";
 import MainLayout from "./MainLayout.astro";
-import home from "../../public/assets/home.svg"
-import course from "../../public/assets/course.svg"
-import profile from "../../public/assets/profileadmin.svg"
-import logout from "../../public/assets/logout.svg"
+import home from "/assets/home.svg";
+import course from "/assets/course.svg";
+import profile from "/assets/Profileadmin.svg";
+import logout from "/assets/logout.svg";
 const { title } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
 <MainLayout title={title}>
     <TabsNav slot="tabs">
-            <a
+        <a
             href="/admin"
             class={`tab ${
                 currentPath === "/admin" ? "tab_selected" : "not-selected"
             }`}
         >
-        <img src={home}/> Home
+            <img src={home} /> Home
         </a>
         <a
             href="/admin/courses"
@@ -27,7 +27,7 @@ const currentPath = Astro.url.pathname;
                     : "not-selected"
             }`}
         >
-        <img src={course}/> Courses
+            <img src={course} /> Courses
         </a>
         <a
             href="/admin/users"
@@ -35,7 +35,7 @@ const currentPath = Astro.url.pathname;
                 currentPath === "/admin/users" ? "tab_selected" : "not-selected"
             }`}
         >
-        <img src={profile}/> Students
+            <img src={profile} /> Students
         </a>
         <a
             href="/admin/batches"
@@ -45,7 +45,7 @@ const currentPath = Astro.url.pathname;
                     : "not-selected"
             }`}
         >
-        <img src={profile}/> Batches
+            <img src={profile} /> Batches
         </a>
         <div class="profile_box">
             <div class="prof_pic">
@@ -56,51 +56,62 @@ const currentPath = Astro.url.pathname;
             </div>
             <div class="profile_details">
                 <div class="profile_name">Shivom</div>
-                {/* <div className={styles.profile_rank}>Rank {user.user_rank}</div> */}
+                {
+                    /* <div className={styles.profile_rank}>Rank {user.user_rank}</div> */
+                }
             </div>
-            <a class="logout_box" href="/logout">
-                <img src={logout} alt="logout-icon" />
-            </a>
+            <div class="out_box">
+                <a class="logout_box" href="/logout">
+                    <img src={logout} alt="logout-icon" />
+                </a>
+            </div>
         </div>
     </TabsNav>
     <slot />
 </MainLayout>
 <style>
-    .home{
-        display:flex;
+    .home {
+        display: flex;
         align-items: center;
-
     }
     .profile_box {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
-.prof_pic>img {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-.profile_name {
-    white-space: nowrap;
-}
-.logout_box {
-    cursor: pointer;
-}
-.profile_name {
-    white-space: nowrap;
-}
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 20px;
+        margin-left: 20px;
+    }
+    .out_box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 05px;
+    }
+    .profile_pic{
+        margin-top: 5px;
+    }
+    .prof_pic > img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .profile_name {
+        white-space: nowrap;
+    }
+    .logout_box {
+        cursor: pointer;
+    }
+    .profile_name {
+        white-space: nowrap;
+    }
 
-
-.profile_details {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    cursor: pointer;
-}
+    .profile_details {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        cursor: pointer;
+    }
 </style>
