@@ -8,9 +8,13 @@ import instance from '../../utils/axios'
 import Button from '../Button/Button'
 const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { label: 'JAVASCRIPT', id: '132' }, { label: 'SQL', id: '234' }, { label: 'PYTHON', id: '324' }, { label: 'RUBY', id: '342' }];
 const EditExercise=({exercise})=>{
+    const { test_cases, exercise_name, prefilled_code, language}=exercise;
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
-            sections: [{ text: '', input: '', output: '' }]
+            test_cases: test_cases,
+            exercise_name:exercise_name,
+            prefilled_code:prefilled_code,
+            language:language
         }
     });
     const [selectedLanguage, setSelectedLanguage] = useState('');
@@ -33,7 +37,7 @@ console.log(exercise);
         data.language = selectedLanguage;
         data.prefilled_code = code;
         try {
-            await instance.patch(`/exercise/${exercise.exercise_id}`, data)
+            await instance.patch(`/exercise/${exercise.exercise_id}/update`, data)
             window.location.href = ('/admin/courses');
         } catch (err) {
 
@@ -57,6 +61,7 @@ console.log(exercise);
                             name="language"
                             register={register}
                             registerQuery={"language"}
+                            value={language}
                         />
                     </div>
                     <div className={styles.exercise_name}>
@@ -85,7 +90,7 @@ console.log(exercise);
                 {/* </div> */}
                 <div className={styles.codeeditor}>
                     <label > Enter Code </label>
-                    <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler}/>
+                    <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler} value={"bcdjsdsdfdfddfgg"}/>
                 </div>
                 {fields.map((item, index) => {
                     return (
@@ -145,7 +150,7 @@ console.log(exercise);
                             })
                         }
                     />
-                    <Button text=' Submit ' type='submit' />
+                    <Button text=' Update ' type='submit' />
                 </div>
             </div>
         </form>
