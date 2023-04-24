@@ -11,7 +11,7 @@ const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { 
 const AddExercise = ({ sectionId }) => {
     const { register, control, handleSubmit, reset, watch } = useForm({
         defaultValues: {
-            sections: [{ text: '', input: '', output: '' }]
+            test_cases: [{ text: '', input: '', output: '' }]
         }
     });
     const [selectedLanguage, setSelectedLanguage] = useState('');
