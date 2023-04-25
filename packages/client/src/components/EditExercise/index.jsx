@@ -1,5 +1,5 @@
 import react, { useState } from "react";
-// import EditorComponent from "../CodeEditor";
+import EditorComponent from "../CodeEditor";
 import { RichTextEditor } from '@mantine/rte';
 import Dropdown from '../DropDown/Dropdown';
 import InputBox from "../InputBox/InputBox";
@@ -89,8 +89,12 @@ const EditExercise = ({ exercise }) => {
                     <label>Instructions</label>
                     <RichTextEditor
                         value={text}
-                        onChange={setText} />
-                    register={register}
+                        onChange={setText}
+                        register={register}
+                        registerQuery={"instruction"}
+                        placeholder={"instructions"}
+                        required
+                    />
                     {/* <ControlledRTEditor id='rte' name='instruction'/> */}
                     {/* </div> */}
                     <div className={styles.codeeditor}>
