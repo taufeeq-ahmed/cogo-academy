@@ -12,9 +12,10 @@ const PlaygroundContent = ({ data }) => {
     const { next_element } = element_content
     const { links } = data
     const instructions = data?.clicked_element?.instruction;
-    const content = "Console";
+
 
     const [testCases, setTestCases] = useState(data?.clicked_element?.test_cases)
+    const [content, setcontent] = useState()
 
 
     const handleMarkAsDone = (code) => {
@@ -32,7 +33,8 @@ const PlaygroundContent = ({ data }) => {
             })
                 .then((resp) => {
                     // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
-                    const resultLst = resp?.data
+                    const resultLst = resp?.data?.passed_testcase
+
                     setTestCases((lst) => {
                         return lst.map((item) => {
                             const status = resultLst.includes(item.test_case_id) ? true : false
@@ -42,6 +44,7 @@ const PlaygroundContent = ({ data }) => {
                             }
                         })
                     })
+                    setcontent( JSON.stringify(resp?.data?.result))
                     // window.location.href = next_element
                 })
                 .catch(err => console.log(err))

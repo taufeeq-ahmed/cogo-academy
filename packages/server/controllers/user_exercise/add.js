@@ -78,7 +78,6 @@ const addExerciseDoneToDB = async (req) => {
         console.log("SQL")
         try {
            const res=testcode({code:code,exercise:exercise})
-           console.log(res);
            return res
            
 
