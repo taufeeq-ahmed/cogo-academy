@@ -29,7 +29,6 @@ const authCheckPlugin = async (fastify) => {
                 }
             })
             request.user = user;
-            console.log(user)
         } catch (err) {
             throw new ForbiddenError('No permission to access this route');
         }

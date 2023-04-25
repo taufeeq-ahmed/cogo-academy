@@ -4,6 +4,7 @@ const addCoursesToBatchToDB = async (params, body) => {
     const { courses } = body.new_data;
 
 
+
     const result = await prisma.batch.update({
         where: {
             batch_id: batch_id
