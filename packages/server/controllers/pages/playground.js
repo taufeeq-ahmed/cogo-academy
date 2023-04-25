@@ -9,7 +9,6 @@ const getReadArticleFromDB = require("../user_article/get");
 const getUserExerciseFromDB = require("../user_exercise/get");
 
 const getPlaygroundDataFromDB = async (req) => {
-    console.log("userrrrrrrr", req.user)
     const { params } = req
 
     const { section_id, type, element_id } = params

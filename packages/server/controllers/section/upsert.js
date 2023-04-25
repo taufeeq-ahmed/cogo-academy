@@ -3,7 +3,6 @@ const { prisma } = require("../../helpers/db-client");
 const upsertSectionInDB = async (params, data) => {
     const { section_id } = params;
     const { section } = data;
-    console.log(params);
     const upsertedSection = await prisma.Section.upsert({
         where: {
             section_id: section_id || '0022d48c-8e1b-46b0-b783-66c42f1f349c'

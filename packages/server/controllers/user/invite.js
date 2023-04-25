@@ -9,9 +9,8 @@ AWS.config.update({
 	region: 'ap-south-1',
 });
 const inviteUser = async (params = {}, body = {}) => {
-	console.log("The bod is :", body)
 	const { email, batches } = body;
-	console.log("email is ", email)
+
 	const user = await prisma.User.findFirst({
 		where: {
 			email: email,
