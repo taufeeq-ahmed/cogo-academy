@@ -18,7 +18,7 @@ const EditorComponent = ({ onChange,
                 language={language || 'html'}
                 value={code}
                 theme={theme}
-                defaultValue={code}
+                // defaultValue={code}
                 onChange={(value) => handleEditorChange(value)}
             />
         </div>
