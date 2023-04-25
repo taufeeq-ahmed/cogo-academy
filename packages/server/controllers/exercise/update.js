@@ -1,8 +1,6 @@
 const { prisma } = require("../../helpers/db-client");
 const updateExercisesInDB = async (params, data) => {
     const { exercise_id } = params;
-    console.log("----------------------------------------------------")
-    console.log(data);
     const { language, exercise_name, instruction, prefilled_code, test_cases } = data;
     const updateExercise = await prisma.exercise.update({
         where: {

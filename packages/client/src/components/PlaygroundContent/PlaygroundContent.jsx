@@ -16,6 +16,7 @@ const PlaygroundContent = ({ data }) => {
     const content = "Console";
 
     const [testCases, setTestCases] = useState(data?.clicked_element?.test_cases)
+    const [activeTab, setActiveTab] = useState(0)
 
 
     const handleMarkAsDone = (code) => {
@@ -28,11 +29,11 @@ const PlaygroundContent = ({ data }) => {
             console.log("submitted")
         }
         else {
+            setActiveTab(2)
             instance.post(`/user_exercise/${element_content?.exercise_id}/add`, {
                 code: code
             })
                 .then((resp) => {
-                    // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
                     const resultLst = resp?.data
                     setTestCases((lst) => {
                         return lst.map((item) => {
@@ -43,7 +44,6 @@ const PlaygroundContent = ({ data }) => {
                             }
                         })
                     })
-                    // window.location.href = next_element
                 })
                 .catch(err => console.log(err))
         }
@@ -77,6 +77,7 @@ const PlaygroundContent = ({ data }) => {
                             testcases={testCases}
                             instructions={instructions}
                             content={content}
+                            activeTab={activeTab}
                         />
                     ) : (
                         <>

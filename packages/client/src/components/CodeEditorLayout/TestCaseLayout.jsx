@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../Button/Button'
 
 import styles from './styles.module.css'
@@ -6,8 +6,11 @@ import Instruction from './Instruction';
 import TestCase from './TestCase';
 import ConsoleTab from './ConsoleTab';
 
-const TestCaseLayout = ({ testcases, instructions, content }) => {
-    const [activeButton, setActiveButton] = useState(0);
+const TestCaseLayout = ({ testcases, instructions, content, activeTab }) => {
+    const [activeButton, setActiveButton] = useState(activeTab);
+    useEffect(() => {
+        setActiveButton(activeTab)
+    }, [activeTab])
     const buttonStyle = { backgroundColor: "white", color: "black", justifyContent: "center" }
     const activeButtonStyle = {
         backgroundColor: "red",

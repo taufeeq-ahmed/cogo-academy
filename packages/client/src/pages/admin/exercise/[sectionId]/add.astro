@@ -3,8 +3,6 @@ import AdminLayout from "../../../../layouts/AdminLayout.astro";
 import { fetchData, parseCookie } from "../../../../utils/common";
 import AddExercise from "../../../../components/AddExercise";
 const { sectionId } = Astro.params;
-console.log("dsakdjsaidosadijsalkdjaslkdjsadlkasjdlkasj");
-console.log(sectionId);
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
 
 const token = cookies?.cogoacademytoken;

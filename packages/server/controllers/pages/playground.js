@@ -9,7 +9,6 @@ const getReadArticleFromDB = require("../user_article/get");
 const getUserExerciseFromDB = require("../user_exercise/get");
 
 const getPlaygroundDataFromDB = async (req) => {
-    console.log("userrrrrrrr", req.user)
     const { params } = req
 
     const { section_id, type, element_id } = params
@@ -34,7 +33,7 @@ const getPlaygroundDataFromDB = async (req) => {
         const { user_exercise, ...exer } = exercise
         return {
             ...exer,
-            done: user_exercise.find((uE) => uE.user_id === user_id) ? true : false
+            done: user_exercise.find((uE) => uE.user_id === user_id)?.done ? true : false
         }
     })
 

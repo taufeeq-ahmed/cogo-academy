@@ -3,8 +3,6 @@ const addCoursesToBatchToDB = async (params, body) => {
     const { batch_id } = params;
     const { courses } = body.new_data;
 
-    console.log("---------------------")
-    console.log(courses)
 
     const result = await prisma.batch.update({
         where: {
