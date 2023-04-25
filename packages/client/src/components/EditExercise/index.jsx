@@ -95,7 +95,7 @@ console.log(prefilled_code);
                 {/* </div> */}
                 <div className={styles.codeeditor}>
                     <label > Enter Code </label>
-                    <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler} code={prefilled_code}/>
+                    {/* <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler} code={prefilled_code}/> */}
                 </div>
                 {fields.map((item, index) => {
                     return (

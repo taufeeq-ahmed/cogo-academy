@@ -103,11 +103,11 @@ const AddExercise = ({ sectionId }) => {
                     registerQuery={"instruction"}
                     placeholder={"instructions"}
                     required /> */}
-                    <ControlledRTEditor id='rte' name='instruction'/>
+                    <ControlledRTEditor id='rte' name='instruction' />
                     {/* </div> */}
                     <div className={styles.codeeditor}>
                         <label > Enter Code </label>
-                        <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler} />
+                        {/* <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler} /> */}
                     </div>
                     {fields.map((item, index) => {
                         return (
