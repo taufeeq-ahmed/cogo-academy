@@ -1,24 +1,29 @@
 import react, { useState } from "react";
 import EditorComponent from "../CodeEditor";
+import { RichTextEditor } from '@mantine/rte';
 import Dropdown from '../DropDown/Dropdown';
 import InputBox from "../InputBox/InputBox";
 import styles from './styles.module.css'
-import { useForm, useFieldArray, } from 'react-hook-form';
+import { useForm, useFieldArray, FormProvider, } from 'react-hook-form';
 import instance from '../../utils/axios'
 import Button from '../Button/Button'
+import ControlledRTEditor from "../RichTextEditor/ControlledRTEditor";
 const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { label: 'JAVASCRIPT', id: '132' }, { label: 'SQL', id: '234' }, { label: 'PYTHON', id: '324' }, { label: 'RUBY', id: '342' }];
 const EditExercise=({exercise})=>{
-    const { test_cases, exercise_name, prefilled_code, language}=exercise;
-    const { register, control, handleSubmit, reset, watch } = useForm({
+    const { test_cases, exercise_name, prefilled_code, language, instruction}=exercise;
+    const methods = useForm({
         defaultValues: {
             test_cases: test_cases,
             exercise_name:exercise_name,
             prefilled_code:prefilled_code,
-            language:language
+            language:language,
+            instruction:instruction
         }
     });
+    const { register, control, handleSubmit, reset, watch }= methods;
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [code, setcode]=useState('');
+    const [text, setText] = useState('');
     const {
         fields,
         append,
@@ -33,21 +38,25 @@ const EditExercise=({exercise})=>{
         name: "test_cases"
     });
 console.log(exercise);
+console.log(prefilled_code);
     const onSubmit = async (data) => {
+        console.log(data)
         data.language = selectedLanguage;
         data.prefilled_code = code;
         try {
             await instance.patch(`/exercise/${exercise.exercise_id}/update`, data)
-            window.location.href = ('/admin/courses');
+            // window.location.href = ('/admin/courses');
         } catch (err) {
 
         }
     }
     const codeHandler=(code)=>{
+        console.log(code);
         setcode(code);
     }
     return(
-        <form className={styles.edit_exercise} onSubmit={handleSubmit(onSubmit)}>
+        <FormProvider {...methods}>
+            <form className={styles.edit_exercise} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.container}>
                 <div className={styles.box}>
                     <div className={styles.dropdown}>
@@ -78,19 +87,15 @@ console.log(exercise);
                 </div>
                 {/* <div className={styles.instructions}> */}
                     <label>Instructions</label>
-                    <InputBox textarea
-                        placeholder={"Instructions"}
-                        style={{ fontSize: '16px', marginTop: "5px" }}
-                        name="instruction"
-                        register={register}
-                        style_box={{marginTop:"5px", marginBottom:"5px", maxWidth: 'none'}}
-                        registerQuery={"instruction"}
-                        max-width="none"
-                        required />
+                    {/* <RichTextEditor
+                    value={text}
+                    onChange={setText}/>
+                    register={register} */}
+                    <ControlledRTEditor id='rte' name='instruction'/>
                 {/* </div> */}
                 <div className={styles.codeeditor}>
                     <label > Enter Code </label>
-                    <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler} value={"bcdjsdsdfdfddfgg"}/>
+                    <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler} code={prefilled_code}/>
                 </div>
                 {fields.map((item, index) => {
                     return (
@@ -154,6 +159,7 @@ console.log(exercise);
                 </div>
             </div>
         </form>
+        </FormProvider>
     )
 }
 export default EditExercise;
