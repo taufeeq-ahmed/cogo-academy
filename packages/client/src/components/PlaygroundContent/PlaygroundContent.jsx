@@ -8,7 +8,6 @@ import styles from './styles.module.css'
 import instance from "../../utils/axios";
 
 const PlaygroundContent = ({ data }) => {
-    console.log("dasdsadas", data)
     const { clicked_element: element_content } = data
     const { next_element } = element_content
     const { links } = data

@@ -2,8 +2,7 @@ const { prisma } = require("../../helpers/db-client");
 const updateBatchInDB = async (params, data) => {
     const { batch_id } = params;
     const { new_data } = data;
-    console.log("-----------")
-    console.log(new_data)
+
     const updateBatch = await prisma.batch.update({
         where: {
             batch_id: batch_id

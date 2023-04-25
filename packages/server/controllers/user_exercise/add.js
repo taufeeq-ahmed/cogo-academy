@@ -2,6 +2,7 @@ const { prisma } = require("../../helpers/db-client");
 const fs = require('fs');
 const exec = require('child_process').execSync;
 const path = require('path');
+const testcode=require('../../code/tests-sql')
 
 const addExerciseDoneToDB = async (req) => {
     const { user_id } = req.user
@@ -41,13 +42,12 @@ const addExerciseDoneToDB = async (req) => {
         }
     })
 
-    console.log(exercise.test_cases)
 
     const CODE_FOLDER = "code";
 
     if (exercise.language === "ruby") {
-        console.log("-----------------")
-        console.log("RUBY")
+   
+
         try {
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.rb"), code);
             const proc = exec("ruby " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.rb ") + "'" + JSON.stringify(exercise.test_cases) + "'");
@@ -61,13 +61,27 @@ const addExerciseDoneToDB = async (req) => {
     }
 
     else if (exercise.language === "python") {
-        console.log("-----------------")
-        console.log("PYTHON")
+
+
         try {
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.py"), code);
             const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
 
             return proc
+        } catch (error) {
+            console.log("Error: ", error);
+
+            return []
+        }
+    } else if (exercise.language === "SQL") {
+
+        console.log("SQL")
+        try {
+           const res=testcode({code:code,exercise:exercise})
+           console.log(res);
+           return res
+           
+
         } catch (error) {
             console.log("Error: ", error);
 
