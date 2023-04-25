@@ -1,6 +1,6 @@
 import react, { useState } from "react";
-import EditorComponent from "../CodeEditor";
-import { RichTextEditor } from '@mantine/rte';
+// import EditorComponent from "../CodeEditor";
+// import { RichTextEditor } from '@mantine/rte';
 import Dropdown from '../DropDown/Dropdown';
 import InputBox from "../InputBox/InputBox";
 import styles from './styles.module.css'

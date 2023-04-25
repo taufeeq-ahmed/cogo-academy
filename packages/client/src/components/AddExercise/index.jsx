@@ -1,13 +1,13 @@
 import react, { useState } from "react";
-import EditorComponent from "../CodeEditor";
-import { RichTextEditor } from '@mantine/rte';
+// import EditorComponent from "../CodeEditor";
+// import { RichTextEditor } from '@mantine/rte';
 import Dropdown from '../DropDown/Dropdown';
 import InputBox from "../InputBox/InputBox";
 import styles from './styles.module.css'
 import { useForm, useFieldArray, FormProvider, } from 'react-hook-form';
 import instance from '../../utils/axios'
 import Button from '../Button/Button'
-import JoditEditor from "jodit-react";
+// import JoditEditor from "jodit-react";
 import ControlledRTEditor from "../RichTextEditor/ControlledRTEditor";
 const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { label: 'JAVASCRIPT', id: '132' }, { label: 'SQL', id: '234' }, { label: 'PYTHON', id: '324' }, { label: 'RUBY', id: '342' }];
 
