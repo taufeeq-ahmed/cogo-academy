@@ -3,7 +3,7 @@ import EditorComponent from "../CodeEditor";
 import { RichTextEditor } from '@mantine/rte';
 import Dropdown from '../DropDown/Dropdown';
 import InputBox from "../InputBox/InputBox";
-import styles from './styles.module.css'
+import styles from './styles.css'
 import { useForm, useFieldArray, FormProvider, } from 'react-hook-form';
 import instance from '../../utils/axios'
 import Button from '../Button/Button'
@@ -57,7 +57,7 @@ const AddExercise = ({ sectionId }) => {
             <form className={styles.edit_exercise} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.container}>
                     <div className={styles.box}>
-                        <div className={styles.dropdown}>
+                        <div className="dropdown">
                             <label> Select Language</label>
                             <Dropdown placeHolder={'Language'}
                                 onChange={(selectedOption) => {
