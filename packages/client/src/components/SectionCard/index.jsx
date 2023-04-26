@@ -50,7 +50,7 @@ const SectionCard = ({ section, dash = false }) => {
             <div className={styles.section}>
                 <div className={styles.imgDiv}>
                     <img
-                        src="https://source.unsplash.com/random"
+                        src={section.image_url || "https://source.unsplash.com/random"}
                         alt="profile-pic"
                     />
                 </div>

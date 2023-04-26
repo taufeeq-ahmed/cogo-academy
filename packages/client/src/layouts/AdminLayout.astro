@@ -67,7 +67,9 @@ const currentPath = Astro.url.pathname;
             </div>
         </div>
     </TabsNav>
-    <slot />
+    <div style={{ marginTop: "1.25rem" }}>
+        <slot />
+    </div>
 </MainLayout>
 <style>
     .home {

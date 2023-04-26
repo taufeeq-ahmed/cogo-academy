@@ -60,7 +60,7 @@ const PlaygroundContent = ({ data }) => {
                         icon={ArrowSVG}
                         iconPlacement="left"
                         text="Back to course"
-                        link={"back"}
+                        link={"/" + element_content.course_id}
                     />
                 </div>
                 <ContentBody
