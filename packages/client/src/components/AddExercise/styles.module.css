@@ -1,31 +1,39 @@
-.box{
+@import url('../../styles/global.css');
+
+.box {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.edit_exercise{
+
+.edit_exercise {
     border-radius: 6px;
     padding: 10px;
     margin: 10px;
     width: 70%;
 }
-label{
+
+label {
     margin-left: auto;
     font-weight: 500;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.dropdown{
+
+.dropdown {
     width: 20%;
 }
+
 .exercise_name {
     margin-left: auto;
     width: 50%;
 }
-.instructions{
+
+.instructions {
     width: auto;
 }
-.codeeditor{
+
+.codeeditor {
     width: 100%;
     margin-bottom: 20px;
     border: 1px solid #e0e0e0;
@@ -33,14 +41,15 @@ label{
     margin-top: 20px;
 }
 
-.testcase_details{
+.testcase_details {
     margin-bottom: 20px;
     padding: 30px;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
     width: 100%;
 }
-.control_buttons{
+
+.control_buttons {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
