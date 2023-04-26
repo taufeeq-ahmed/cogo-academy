@@ -50,7 +50,23 @@ const addExerciseDoneToDB = async (req) => {
         try {
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.rb"), code);
             const proc = exec("ruby " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.rb ") + "'" + JSON.stringify(exercise.test_cases) + "'");
-            const res=String.fromCharCode(...proc)
+            const res=JSON.parse(String.fromCharCode(...proc))
+            
+            if (res.length === exercise.test_cases.length) {
+                await prisma.user_Exercise.update({
+                    where: {
+                        user_id_exercise_id: {
+                            user_id: user_id,
+                            exercise_id: exercise_id
+                        }
+                    },
+                    data: {
+                        done: true,
+                        score: 1,
+                    }
+                })
+            }
+            
             return {passed_testcase:res,result:""}
         } catch (error) {
             console.log("Error: ", error);
@@ -67,7 +83,23 @@ const addExerciseDoneToDB = async (req) => {
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.py"), code);
             const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
 
-            const res=String.fromCharCode(...proc)
+            const res=JSON.parse(String.fromCharCode(...proc))
+
+
+            if (res.length === exercise.test_cases.length) {
+                await prisma.user_Exercise.update({
+                    where: {
+                        user_id_exercise_id: {
+                            user_id: user_id,
+                            exercise_id: exercise_id
+                        }
+                    },
+                    data: {
+                        done: true,
+                        score: 1,
+                    }
+                })
+            }
             return {passed_testcase:res,result:""}
         } catch (error) {
             console.log("Error: ", error);
@@ -76,14 +108,30 @@ const addExerciseDoneToDB = async (req) => {
     } else if (exercise.language === "SQL") {
 
         try {
-           const res=testcode({code:code,exercise:exercise})
-           
+           const res=await testcode({code:code,exercise:exercise})
+           console.log(res,"res");
+           if (res.passed_testcase.length === exercise.test_cases.length) {
+
+            await prisma.user_Exercise.update({
+                where: {
+                    user_id_exercise_id: {
+                        user_id: user_id,
+                        exercise_id: exercise_id
+                    }
+                },
+                data: {
+                    done: true,
+                    score: 1,
+                }
+            })
+        }
+
            return res
 
         } catch (error) {
             console.log("Error: ", error);
 
-            return []
+            return {passed_testcase:[],result:""}
         }
     }
 

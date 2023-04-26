@@ -1,2 +1,2 @@
-def solution(a):
-    return max(a)
+def solution(s):
+    return max(s)
