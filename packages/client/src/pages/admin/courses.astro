@@ -16,7 +16,7 @@ const data = await fetchData(`admin/courses`, token);
 if (!data) return Astro.redirect("/error");
 ---
 
-<ModalLayout title="Admin | Courses">
+<ModalLayout title="Admin | Courses" user={data.user}>
     <div class="admin_dashboard_courses_container">
         <div class="create_course_container">
             <div class="header_title">Courses</div>
@@ -28,7 +28,7 @@ if (!data) return Astro.redirect("/error");
         </div>
         <div class="courses_container">
             {
-               data?.map((course) => {
+                data?.courses?.map((course) => {
                     return <AdminCourseCard course={course} client:load />;
                 })
             }
@@ -64,9 +64,9 @@ if (!data) return Astro.redirect("/error");
     .create_course_container .header_title {
         font-size: 24px;
     }
-    .close_btn{
+    .close_btn {
         display: flex;
-    justify-content: space-between;
+        justify-content: space-between;
     }
     .btn {
         display: flex;
