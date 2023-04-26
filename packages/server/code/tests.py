@@ -25,7 +25,7 @@ def test_code():
                 passed_test_cases += 1
                 result.append(id)
         except:
-            result.append("error")
+            result.append("")
 
     # status =  "false"
     # if passed_test_cases == len(test_cases):

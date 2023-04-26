@@ -7,6 +7,7 @@ import styles from './styles.module.css'
 import { useForm, useFieldArray, FormProvider, } from 'react-hook-form';
 import instance from '../../utils/axios'
 import Button from '../Button/Button'
+import ControlledRTEditor from "../RTEditor/ControlledRTEditor";
 // import ControlledRTEditor from "../RichTextEditor/ControlledRTEditor";
 const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { label: 'JAVASCRIPT', id: '132' }, { label: 'SQL', id: '234' }, { label: 'PYTHON', id: '324' }, { label: 'RUBY', id: '342' }];
 const EditExercise = ({ exercise }) => {
@@ -87,15 +88,15 @@ const EditExercise = ({ exercise }) => {
                     </div>
                     {/* <div className={styles.instructions}> */}
                     <label>Instructions</label>
-                    <RichTextEditor
+                    {/* <RichTextEditor
                         value={text}
                         onChange={setText}
                         register={register}
                         registerQuery={"instruction"}
                         placeholder={"instructions"}
                         required
-                    />
-                    {/* <ControlledRTEditor id='rte' name='instruction'/> */}
+                    /> */}
+                    <ControlledRTEditor id='rte' name='instruction'/>
                     {/* </div> */}
                     <div className={styles.codeeditor}>
                         <label > Enter Code </label>
