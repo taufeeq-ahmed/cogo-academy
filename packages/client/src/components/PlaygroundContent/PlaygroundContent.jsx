@@ -16,7 +16,7 @@ const PlaygroundContent = ({ data }) => {
 
     const [testCases, setTestCases] = useState(data?.clicked_element?.test_cases)
     const [activeTab, setActiveTab] = useState(0)
-    const [content, setcontent] = useState()
+    const [content, setcontent] = useState("")
 
 
     const handleMarkAsDone = (code) => {
@@ -35,6 +35,7 @@ const PlaygroundContent = ({ data }) => {
             })
                 .then((resp) => {
                     // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
+                    console.log(resp,"hello");
                     const resultLst = resp?.data?.passed_testcase
 
                     setTestCases((lst) => {

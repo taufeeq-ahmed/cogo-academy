@@ -50,12 +50,12 @@ const addExerciseDoneToDB = async (req) => {
         try {
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.rb"), code);
             const proc = exec("ruby " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.rb ") + "'" + JSON.stringify(exercise.test_cases) + "'");
-
-            return proc
+            const res=String.fromCharCode(...proc)
+            return {passed_testcase:res,result:""}
         } catch (error) {
             console.log("Error: ", error);
 
-            return []
+            return {passed_testcase:[],result:""}
         }
     }
 
@@ -63,22 +63,22 @@ const addExerciseDoneToDB = async (req) => {
 
 
         try {
+
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.py"), code);
             const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
 
-            return proc
+            const res=String.fromCharCode(...proc)
+            return {passed_testcase:res,result:""}
         } catch (error) {
             console.log("Error: ", error);
-
-            return []
+            return {passed_testcase:[],result:""}
         }
     } else if (exercise.language === "SQL") {
 
-        console.log("SQL")
         try {
            const res=testcode({code:code,exercise:exercise})
-           return res
            
+           return res
 
         } catch (error) {
             console.log("Error: ", error);
@@ -140,11 +140,11 @@ const addExerciseDoneToDB = async (req) => {
                 })
             }
 
-            return result
+            return {passed_testcase:result,result:""}
         } catch (error) {
             console.log("Error: ", error);
 
-            return []
+            return {passed_testcase:[],result:""}
         }
     }
 
