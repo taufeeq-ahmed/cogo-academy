@@ -1,2 +1,2 @@
 def solution(arr):
-    return max(arr)
+    return min(arr)

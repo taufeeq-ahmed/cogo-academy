@@ -20,15 +20,26 @@ if (!data) return Astro.redirect("/error");
 const formatTableData = () => {
     const tableData = {
         head: ["Title", "Section", "Course", "Score", "Action"],
-        rows: data.readArticles.map((article) => {
-            const newArticle = [
-                { name: article?.article?.article_name },
-                { name: article?.article?.section?.section_name },
-                { name: article?.article?.section?.course?.course_name },
-                { name: article?.score },
-            ];
-            return newArticle;
-        }),
+        rows: [
+            ...data.readArticles.map((article) => {
+                const newArticle = [
+                    { name: article?.article?.article_name },
+                    { name: article?.article?.section?.section_name },
+                    { name: article?.article?.section?.course?.course_name },
+                    { name: article?.score || 0 },
+                ];
+                return newArticle;
+            }),
+            ...data.exercises.map((exercise) => {
+                const newArticle = [
+                    { name: exercise?.exercise?.exercise_name },
+                    { name: exercise?.exercise?.section?.section_name },
+                    { name: exercise?.exercise?.section?.course?.course_name },
+                    { name: exercise?.score || 0 },
+                ];
+                return newArticle;
+            }),
+        ],
     };
     return tableData;
 };

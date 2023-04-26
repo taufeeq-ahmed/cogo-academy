@@ -7,6 +7,7 @@ def test_code():
     a = json.loads(sys.argv[1])
 
     test_cases = {}
+
     expected = {}
     for test_case in a:
         test_cases[test_case['test_case_id']] = eval(test_case['input'])
