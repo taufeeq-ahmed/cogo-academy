@@ -7,6 +7,11 @@ const getSectionByCourseIdFromDB = async (params) => {
             course_id: course_id,
         },
         include: {
+            course: {
+                select: {
+                    image_url: true,
+                }
+            },
             articles: {
                 select: {
                     article_id: true
@@ -22,6 +27,14 @@ const getSectionByCourseIdFromDB = async (params) => {
                 orderBy: {
                     created_on: 'asc'
                 },
+            },
+            exercises: {
+                select: {
+                    exercise_id: true
+                },
+                orderBy: {
+                    created_on: 'asc'
+                }
             }
         },
         orderBy: {

@@ -4,7 +4,7 @@ import ModalLayout from "../../layouts/ModalLayout.astro";
 import { fetchData, parseCookie } from "../../utils/common";
 import AdminBatchCard from "../../components/AdminBatchCard";
 import AddBatch from "../../components/AddBatch";
-import cross from "/assets/cross.svg"
+import cross from "/assets/cross.svg";
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
 
 const token = cookies?.cogoacademytoken;
@@ -19,7 +19,7 @@ if (!data) return Astro.redirect("/error");
 const allCourses = await fetchData("course/list", token);
 ---
 
-<ModalLayout title="Admin | Batches">
+<ModalLayout title="Admin | Batches" user={data.user}>
     <div class="admin_dashboard_courses_container">
         <div class="create_course_container">
             <div class="header_title">Batches</div>
@@ -31,7 +31,7 @@ const allCourses = await fetchData("course/list", token);
         </div>
         <div class="courses_container">
             {
-                data?.map((batch) => {
+                data?.batches?.map((batch) => {
                     return (
                         <AdminBatchCard
                             batch={batch}
@@ -45,7 +45,7 @@ const allCourses = await fetchData("course/list", token);
     </div>
     <div slot="modal_header_slot" class="close_btn">
         <span>Add Course</span>
-        <div class="btn"><img src={cross} id={"close_modal"}></div>
+        <div class="btn"><img src={cross} id={"close_modal"} /></div>
     </div>
     <div slot="modal_content_slot">
         <AddBatch client:load courses={allCourses} />
@@ -70,11 +70,11 @@ const allCourses = await fetchData("course/list", token);
         padding: 0px 35px 0px 20px;
         /* width: 90%; */
     }
-    .close_btn{
+    .close_btn {
         display: flex;
         justify-content: space-between;
     }
-    .btn{
+    .btn {
         cursor: pointer;
     }
     .create_course_container .header_title {

@@ -12,10 +12,11 @@ const PlaygroundContent = ({ data }) => {
     const { next_element } = element_content
     const { links } = data
     const instructions = data?.clicked_element?.instruction;
-    const content = "Console";
+
 
     const [testCases, setTestCases] = useState(data?.clicked_element?.test_cases)
     const [activeTab, setActiveTab] = useState(0)
+    const [content, setcontent] = useState("")
 
 
     const handleMarkAsDone = (code) => {
@@ -33,7 +34,10 @@ const PlaygroundContent = ({ data }) => {
                 code: code
             })
                 .then((resp) => {
-                    const resultLst = resp?.data
+                    // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
+                    console.log(resp,"hello");
+                    const resultLst = resp?.data?.passed_testcase
+
                     setTestCases((lst) => {
                         return lst.map((item) => {
                             const status = resultLst.includes(item.test_case_id) ? true : false
@@ -43,6 +47,8 @@ const PlaygroundContent = ({ data }) => {
                             }
                         })
                     })
+                    setcontent( JSON.stringify(resp?.data?.result))
+                    // window.location.href = next_element
                 })
                 .catch(err => console.log(err))
         }
@@ -60,7 +66,7 @@ const PlaygroundContent = ({ data }) => {
                         icon={ArrowSVG}
                         iconPlacement="left"
                         text="Back to course"
-                        link={"back"}
+                        link={"/" + element_content.course_id}
                     />
                 </div>
                 <ContentBody

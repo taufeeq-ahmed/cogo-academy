@@ -15,7 +15,7 @@ const data = await fetchData("admin", token);
 if (!data) return Astro.redirect("/error");
 ---
 
-<AdminLayout title="Admin | Dashboard">
+<AdminLayout title="Admin | Dashboard" user={data.user} >
     <AdminHeader data={data} />
     <TableStudents client:load />
 </AdminLayout>

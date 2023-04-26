@@ -13,6 +13,11 @@ const getRecentSectionsFromDB = async (req) => {
                 include: {
                     section: {
                         include: {
+                            course: {
+                                select: {
+                                    image_url: true,
+                                }
+                            },
                             articles: true,
                         }
                     }
@@ -20,6 +25,9 @@ const getRecentSectionsFromDB = async (req) => {
             }
         },
     })
+
+
+    //get the image from the course table and add it to the sections based on the course that is related to the sections
 
     const uniqueElem = new Map();
     const filteredRecentSections = recentUserArticles && recentUserArticles?.map((userArticle) => {
@@ -33,6 +41,7 @@ const getRecentSectionsFromDB = async (req) => {
                 ...section,
                 first_article_id: userArticle?.article_id,
                 number_of_articles: articles.length,
+                image_url: section.course.image_url
             };
         }
         return null

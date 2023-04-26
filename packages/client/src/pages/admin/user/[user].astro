@@ -15,32 +15,44 @@ if (!token) {
     return Astro.redirect("/signin");
 }
 const data = await fetchData(`admin/user/${user}`, token);
+const { studentData, user: userData } = data;
 if (!data) return Astro.redirect("/error");
 
 const formatTableData = () => {
     const tableData = {
         head: ["Title", "Section", "Course", "Score", "Action"],
-        rows: data.readArticles.map((article) => {
-            const newArticle = [
-                { name: article?.article?.article_name },
-                { name: article?.article?.section?.section_name },
-                { name: article?.article?.section?.course?.course_name },
-                { name: article?.score },
-            ];
-            return newArticle;
-        }),
+        rows: [
+            ...studentData.readArticles.map((article) => {
+                const newArticle = [
+                    { name: article?.article?.article_name },
+                    { name: article?.article?.section?.section_name },
+                    { name: article?.article?.section?.course?.course_name },
+                    { name: article?.score || 0 },
+                ];
+                return newArticle;
+            }),
+            ...studentData.exercises.map((exercise) => {
+                const newArticle = [
+                    { name: exercise?.exercise?.exercise_name },
+                    { name: exercise?.exercise?.section?.section_name },
+                    { name: exercise?.exercise?.section?.course?.course_name },
+                    { name: exercise?.score || 0 },
+                ];
+                return newArticle;
+            }),
+        ],
     };
     return tableData;
 };
 ---
 
-<AdminLayout title="Admin | User Profile Page">
+<AdminLayout title="Admin | User Profile Page" user={userData}>
     <AdminUserHeader
         client:load
-        userData={data.studentData}
-        allBatches={data.allBatches}
+        userData={studentData.studentData}
+        allBatches={studentData.allBatches}
     />
-    <ProgressOverview client:load progressData={data} />
+    <ProgressOverview client:load progressData={studentData} />
     <div style={{ marginTop: "40px" }}>
         <Table data={formatTableData()} />
     </div>

@@ -54,7 +54,7 @@ const TableStudents = () => {
         instance.get(`admin/users`, {
             params: getQueryParams()
         })
-            .then((res) => res.data)
+            .then((res) => res.data?.students)
             .then((data) => {
                 setTrackOptions([
                     { value: '', label: 'Select Track' },
