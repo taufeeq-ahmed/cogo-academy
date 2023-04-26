@@ -4,6 +4,7 @@ import { RichTextEditor } from '@mantine/rte';
 import Dropdown from '../DropDown/Dropdown';
 import InputBox from "../InputBox/InputBox";
 import './styles.css'
+import"../DropDown/Dropdown.css"
 import { useForm, useFieldArray, FormProvider, } from 'react-hook-form';
 import instance from '../../utils/axios'
 import Button from '../Button/Button'
