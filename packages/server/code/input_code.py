@@ -1,2 +1,2 @@
-def solution(arr):
-    return max(arr)
+def solution(s):
+    return max(s)
