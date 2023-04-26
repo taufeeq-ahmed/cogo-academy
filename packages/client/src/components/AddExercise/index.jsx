@@ -104,7 +104,7 @@ const AddExercise = ({ sectionId }) => {
                     registerQuery={"instruction"}
                     placeholder={"instructions"}
                     required /> */}
-                    <ControlledRTEditor id='rte' name='instruction' />
+                    <ControlledRTEditor  id='rte' name='instruction' />
                     {/* </div> */}
                     <div className={styles.codeeditor}>
                         <label > Enter Code </label>

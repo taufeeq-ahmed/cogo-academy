@@ -14,4 +14,4 @@ if (!article) return Astro.redirect("/error");
 
 ---
 
-<EditArticle client:load article={article} />
+<EditArticle client:only article={article} />
