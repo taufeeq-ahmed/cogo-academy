@@ -15,6 +15,7 @@ const PlaygroundContent = ({ data }) => {
 
 
     const [testCases, setTestCases] = useState(data?.clicked_element?.test_cases)
+    const [activeTab, setActiveTab] = useState(0)
     const [content, setcontent] = useState()
 
 
@@ -28,6 +29,7 @@ const PlaygroundContent = ({ data }) => {
             console.log("submitted")
         }
         else {
+            setActiveTab(2)
             instance.post(`/user_exercise/${element_content?.exercise_id}/add`, {
                 code: code
             })
@@ -79,6 +81,7 @@ const PlaygroundContent = ({ data }) => {
                             testcases={testCases}
                             instructions={instructions}
                             content={content}
+                            activeTab={activeTab}
                         />
                     ) : (
                         <>

@@ -33,7 +33,7 @@ const getPlaygroundDataFromDB = async (req) => {
         const { user_exercise, ...exer } = exercise
         return {
             ...exer,
-            done: user_exercise.find((uE) => uE.user_id === user_id) ? true : false
+            done: user_exercise.find((uE) => uE.user_id === user_id)?.done ? true : false
         }
     })
 

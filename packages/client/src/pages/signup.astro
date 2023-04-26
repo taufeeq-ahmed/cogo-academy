@@ -9,7 +9,6 @@ const response = await fetch(
     `${import.meta.env.PUBLIC_SERVER_URL}/invited_user/${token}`
 );
 const data = await response?.json();
-console.log("Data on signup is :", data);
 ---
 
 <AuthLayout>

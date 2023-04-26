@@ -48,6 +48,12 @@ const ContentBody = ({ element_content, handleMarkAsDone }) => {
         contentElement = <EditorComponent onChange={onCodeChange} code={code} language={element_content.language} />
     }
 
+    // const getText = () => {
+    //     if (element_content?.article_id) {
+    //         return
+    //     }
+    // }
+
     return (
         <>
             <div ref={contentRef} className={styles.content_body} >
@@ -58,10 +64,15 @@ const ContentBody = ({ element_content, handleMarkAsDone }) => {
                     btnStyle={{ backgroundColor: element_content.done ? 'green' : '' }}
                     disabled={disabled}
                     text={
-                        element_content.done
-                            ?
-                            "Completed"
-                            : "Mark As Complete"
+                        element_content?.exercise_id ?
+                            (element_content.done
+                                ?
+                                "Completed"
+                                : "Submit") :
+                            (element_content.done
+                                ?
+                                "Completed"
+                                : "Mark As Complete")
                     }
                 />
             </div>

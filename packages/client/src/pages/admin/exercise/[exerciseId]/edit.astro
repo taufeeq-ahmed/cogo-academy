@@ -12,7 +12,6 @@ if (!token) {
 }
 const exercise = await fetchData(`exercise/${exerciseId}`, token);
 if (!exercise) return Astro.redirect("/error");
-console.log(exercise);
 ---
 
 <AdminLayout>
