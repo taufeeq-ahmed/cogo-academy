@@ -52,7 +52,7 @@ const AddExercise = ({ sectionId }) => {
     const codeHandler = (code) => {
         setcode(code);
     }
-    console.log("fghfhfhj", sectionId);
+
     return (
         <FormProvider {...methods}>
             <form className="edit_exercise" onSubmit={handleSubmit(onSubmit)}>

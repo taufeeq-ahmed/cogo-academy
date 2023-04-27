@@ -39,7 +39,7 @@ const EditArticle = ({ article }) => {
         setText(article_content);
     }, [])
     return (
-        <div className='add_article_container'>
+        <div className="add_article_container">
             <form className="inputs">
                 <div
                     className="input_box_container"
@@ -64,14 +64,14 @@ const EditArticle = ({ article }) => {
                     />
                 </div>
             </form>
-            <div className={styles.editor}>
+            <div className="editor">
                 <RichTextEditor
                     value={text}
                     onChange={setText}
                 />
 
             </div>
-            <div className={styles.submit_article}>
+            <div className="submit_article">
                 <Button btnStyle={{ margin: "10px 0" }} text='Save Article' onClick={handleSubmit(updateArticle)} />
             </div>
         </div>
