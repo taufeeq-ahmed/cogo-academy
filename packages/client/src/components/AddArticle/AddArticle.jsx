@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { RichTextEditor } from '@mantine/rte';
-import './styles.css'
+
 import Button from '../Button/Button'
 import InputBox from '../InputBox/InputBox'
 import { useForm } from 'react-hook-form'
 import instance from '../../utils/axios';
+import './styles.css'
 
 
 const AddArticle = ({ sectionId }) => {

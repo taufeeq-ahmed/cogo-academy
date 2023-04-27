@@ -1,5 +1,6 @@
 ---
 import EditArticle from "../../../../components/EditArticle/EditArticle";
+import AdminLayout from "../../../../layouts/AdminLayout.astro";
 import { fetchData, parseCookie } from "../../../../utils/common";
 const { articleId } = Astro.params;
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
@@ -13,5 +14,6 @@ const article = await fetchData(`article/${articleId}`, token);
 if (!article) return Astro.redirect("/error");
 
 ---
-
-<EditArticle client:only article={article} />
+<AdminLayout>
+    <EditArticle client:only article={article} />
+</AdminLayout>
