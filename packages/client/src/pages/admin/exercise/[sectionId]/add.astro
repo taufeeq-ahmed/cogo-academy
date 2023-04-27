@@ -6,10 +6,11 @@ const { sectionId } = Astro.params;
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
 
 const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch
 if (!token) {
     return Astro.redirect("/signin");
 }
-const data = await fetchData("users/isadmin", token);
+const data = await fetchData("users/isadmin", token, batch);
 if (!data) return Astro.redirect("/error");
 ---
 

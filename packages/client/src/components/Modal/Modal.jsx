@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import styles from "./styles.module.css"
 import Button from '../Button/Button'
 import cross from '/assets/cross.svg';
-const Modal = ({ isShowing, toggle, children, heading }) => {
+const Modal = ({ isShowing, toggle, children, heading, handleSubmit = null, submitText = "Submit" }, modalStyles) => {
     const modalClassName = `${styles.modal} ${isShowing ? 'is-active' : ''}`;
 
     return isShowing
         ? ReactDOM.createPortal(
-            <div className={modalClassName}>
-                <div className={styles.modal_box}>
+            <div className={modalClassName}  >
+                <div className={styles.modal_box} style={modalStyles}>
                     <div className="modal-background" onClick={toggle} />
                     <div className={styles.modal_header}>
                         <span>{heading}</span>
@@ -18,7 +18,7 @@ const Modal = ({ isShowing, toggle, children, heading }) => {
                     </div>
                     <div className={styles.modal_content}>{children}</div>
                     <div className={styles.modal_footer}>
-                        {/* <Button onClick={toggle} text='Close' /> */}
+                        {handleSubmit !== null && <Button onClick={handleSubmit} text={submitText} />}
                     </div>
                 </div>
             </div>,

@@ -1,7 +1,6 @@
 const { prisma } = require("../../helpers/db-client");
 
 const getAllCoursesByBatchFromDB = async (req) => {
-    const { user_id } = req.user
     const { batch_id } = req.query
 
     try {
@@ -10,11 +9,6 @@ const getAllCoursesByBatchFromDB = async (req) => {
                 batches: {
                     some: {
                         batch_id: batch_id
-                        // users: {
-                        //     some: {
-                        //         user_id: user_id,
-                        //     }
-                        // },
                     }
                 },
             },

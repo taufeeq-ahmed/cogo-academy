@@ -13,7 +13,8 @@ const token = cookies?.cogoacademytoken;
 const batch = cookies?.batch;
 const data = await fetchData(
     `playground/${sectionId}/${type}/${elementId}`,
-    token
+    token,
+    batch
 );
 ---
 

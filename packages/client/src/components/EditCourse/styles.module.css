@@ -8,14 +8,14 @@
 .edit_course .input_box{
     max-width: none;
 }
-label{
+/* label{
     font-weight: 500;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 input{
     margin:10px;
-}
+} */
 .file_input{
     background-color: white;
     border: 1px solid #E0E0E0;

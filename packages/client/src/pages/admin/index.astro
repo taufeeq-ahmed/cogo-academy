@@ -11,11 +11,11 @@ const batch = cookies?.batch;
 if (!token) {
     return Astro.redirect("/signin");
 }
-const data = await fetchData("admin", token);
+const data = await fetchData("admin", token, batch);
 if (!data) return Astro.redirect("/error");
 ---
 
-<AdminLayout title="Admin | Dashboard" user={data.user} >
+<AdminLayout title="Admin | Dashboard" user={data?.user} >
     <AdminHeader data={data} />
     <TableStudents client:load />
 </AdminLayout>

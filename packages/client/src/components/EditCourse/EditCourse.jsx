@@ -22,12 +22,6 @@ const EditCourse = ({ course, show, toggle }) => {
     const {
         fields,
         append,
-        prepend,
-        remove,
-        swap,
-        move,
-        insert,
-        replace
     } = useFieldArray({
         control,
         name: "sections"
@@ -38,20 +32,20 @@ const EditCourse = ({ course, show, toggle }) => {
         await instance.patch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
             new_data: data
         })
-        window.location.href='/admin/courses';
+        window.location.href = '/admin/courses';
 
     }
 
     return (
-        <Modal isShowing={show} toggle={toggle} heading={'Edit'} >
-            <form className={styles.edit_course} onSubmit={handleSubmit(onSubmit)}>
-                <div className="course_deatils_inputs"> 
+        <Modal isShowing={show} toggle={toggle} heading={'Edit'} handleSubmit={handleSubmit(onSubmit)} submitText='Submit' modalStyles={{ width: "50%", background: "red" }} >
+            <form className={styles.edit_course}>
+                <div className="course_deatils_inputs">
                     <InputBox
                         placeholder={"Course Name"}
                         style={{ fontSize: '16px' }}
                         name="course_name"
                         register={register}
-                        style_box={{marginTop:"5px", marginBottom:"5px" , maxWidth: 'none'}}
+                        style_box={{ marginTop: "5px", marginBottom: "5px", maxWidth: 'none' }}
                         registerQuery={"course_name"}
                     />
                 </div>
@@ -65,7 +59,7 @@ const EditCourse = ({ course, show, toggle }) => {
                         name="image_url"
                         type="url"
                         register={register}
-                        style_box={{marginTop:"5px", marginBottom:"20px", maxWidth: 'none'}}
+                        style_box={{ marginTop: "5px", marginBottom: "20px", maxWidth: 'none' }}
                         registerQuery={"image_url"}
                     />
                 </div>
@@ -84,7 +78,7 @@ const EditCourse = ({ course, show, toggle }) => {
                                             name='section_name'
                                             style={{ fontSize: '16px' }}
                                             register={register}
-                                            style_box={{marginTop:"5px", marginBottom:"5px", maxWidth: 'none'}}
+                                            style_box={{ marginTop: "5px", marginBottom: "5px", maxWidth: 'none' }}
                                             registerQuery={`sections.${index}.section_name`}
                                         />
                                     </div>
@@ -98,7 +92,7 @@ const EditCourse = ({ course, show, toggle }) => {
                                     name='section_description'
                                     style={{ fontSize: '16px' }}
                                     register={register}
-                                    style_box={{marginTop:"5px", marginBottom:"5px", maxWidth: 'none'}}
+                                    style_box={{ marginTop: "5px", marginBottom: "5px", maxWidth: 'none' }}
                                     // value={section.section_description}
                                     registerQuery={`sections.${index}.description`}
                                 />
@@ -130,7 +124,7 @@ const EditCourse = ({ course, show, toggle }) => {
                             })
                         }
                     />
-                    <Button text=' Submit ' type='submit' />
+                    {/* <Button text=' Submit ' type='submit' /> */}
                 </div>
             </form>
         </Modal>

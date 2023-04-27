@@ -14,7 +14,7 @@ const batch = cookies?.batch;
 if (!token) {
     return Astro.redirect("/signin");
 }
-const data = await fetchData(`admin/user/${user}`, token);
+const data = await fetchData(`admin/user/${user}`, token, batch);
 const { studentData, user: userData } = data;
 if (!data) return Astro.redirect("/error");
 

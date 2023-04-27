@@ -53,16 +53,19 @@ const EditBatchStudent = ({ userData, batches, allBatches, show, toggle }) => {
             }
             return null
         }).filter(b => b !== null);
-        alert(JSON.stringify(batches));
 
-        await instance.post(`/user/${userData.user_id}/update_batches`, { batches });
+        await instance.post(`/user/${userData.user_id}/update_batches`, { batches })
+            .then(() => {
+                alert("Updated Batches")
+                window.location.href = window.location.pathname
+            })
         // await instance.post(`/batch/${batch.batch_id}/add_courses`, data);
     }
 
 
     return (
-        <Modal isShowing={show} toggle={toggle} heading={'Edit'} >
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <Modal isShowing={show} toggle={toggle} heading={'Edit'} handleSubmit={handleSubmit(onSubmit)} submitText="Submit" >
+            <form>
                 <div className={styles.check_batches}>
                     {
                         fields.map((item, index) => {
@@ -75,7 +78,7 @@ const EditBatchStudent = ({ userData, batches, allBatches, show, toggle }) => {
                         })
                     }
                 </div>
-                <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} />
+                {/* <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} /> */}
             </form>
         </Modal >
     )

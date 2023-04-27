@@ -1,9 +1,25 @@
 const { prisma } = require("../../helpers/db-client");
+const getUserFromDB = require("../user/get");
 const getRecentSectionsFromDB = async (req) => {
     const { user_id } = req.user
+    const { batch_id } = req.params
+    const user = await getUserFromDB({ user_id })
     const recentUserArticles = await prisma.user_Article.findMany({
         where: {
-            user_id: user_id
+            user: {
+                user_id: user_id,
+            },
+            article: {
+                section: {
+                    course: {
+                        batches: {
+                            some: {
+                                batch_id: batch_id
+                            }
+                        }
+                    }
+                }
+            }
         },
         orderBy: {
             updated_on: 'desc'
