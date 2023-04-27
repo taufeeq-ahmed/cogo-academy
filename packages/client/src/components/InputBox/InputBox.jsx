@@ -1,13 +1,13 @@
 import React from 'react'
-import styles from "./styles.module.css"
+import "./styles.css"
 
 const InputBox = ({ icon = '', value, setValue = () => { }, placeholder, textarea = false, style = {}, style_box={}, rows = 6, name, register = () => { }, registerQuery = '', type, ...rest }) => {
     return (
-        <div className={styles.input_box} style={style_box}>
+        <div className="input_box" style={style_box}>
             {icon !== '' && <img src={icon} alt="search-icon" />}
             {(textarea) ? (
                 <textarea
-                    className={styles.input_textarea}
+                    className="input_textarea"
                     type="text"
                     id="textarea-bar"
                     placeholder={placeholder}
@@ -21,7 +21,7 @@ const InputBox = ({ icon = '', value, setValue = () => { }, placeholder, textare
                 />
             ) : (
                 <input
-                    className={styles.input}
+                    className="input"
                     type={type}
                     id="input-bar"
                     placeholder={placeholder}

@@ -31,36 +31,41 @@ const data = await fetchData(
         <div class="root">
             <TabsNav>
                 <p class="left_title">Course Contents</p>
-                {
-                    data?.all_elements?.map((element: any) => {
-                        return (
-                            <a
-                                href={`/playground/${sectionId}/${element.element_type}/${element.element_id}`}
-                                class={`tab ${
-                                    elementId === element.element_id
-                                        ? "tab_selected"
-                                        : "not-selected"
-                                }`}
-                            >
-                                <div class="img-div">
-                                    <input
-                                        type="checkbox"
-                                        checked={!!element.done}
-                                    />
-                                </div>
-                                <div class="name-time">
-                                    <div>{element.element_name}</div>
-                                    <div>
-                                        <img src={BookSVG} alt="book-icon" />
-                                        <span>
-                                            {element.element_time_in_mins}
-                                        </span>
+                <div class="scrollable_nav">
+                    {
+                        data?.all_elements?.map((element: any) => {
+                            return (
+                                <a
+                                    href={`/playground/${sectionId}/${element.element_type}/${element.element_id}`}
+                                    class={`tab ${
+                                        elementId === element.element_id
+                                            ? "tab_selected"
+                                            : "not-selected"
+                                    }`}
+                                >
+                                    <div class="img-div">
+                                        <input
+                                            type="checkbox"
+                                            checked={!!element.done}
+                                        />
                                     </div>
-                                </div>
-                            </a>
-                        );
-                    })
-                }
+                                    <div class="name-time">
+                                        <div>{element.element_name}</div>
+                                        <div>
+                                            <img
+                                                src={BookSVG}
+                                                alt="book-icon"
+                                            />
+                                            <span>
+                                                {element.element_time_in_mins}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            );
+                        })
+                    }
+                </div>
             </TabsNav>
             <PlaygroundContent data={data} client:load />
         </div>
@@ -86,5 +91,8 @@ const data = await fetchData(
     }
     input[type="checkbox"] {
         pointer-events: none;
+    }
+    .scrollable_nav {
+        overflow: scroll;
     }
 </style>

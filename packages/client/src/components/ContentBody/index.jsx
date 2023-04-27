@@ -42,7 +42,7 @@ const ContentBody = ({ element_content, handleMarkAsDone }) => {
         contentElement = <ArticleContent htmlContent={content} />
     } else if (element_content?.submission_id) {
         const content = element_content.submission_content;
-        contentElement = <SubmissionContent submissionContent={content} />
+        contentElement = <SubmissionContent submissionContent={element_content} />
     }
     else {
         contentElement = <EditorComponent onChange={onCodeChange} code={code} language={element_content.language} />
