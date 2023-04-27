@@ -3,7 +3,8 @@ import EditorComponent from "../CodeEditor";
 import { RichTextEditor } from '@mantine/rte';
 import Dropdown from '../DropDown/Dropdown';
 import InputBox from "../InputBox/InputBox";
-import styles from './styles.module.css'
+import './styles.css'
+
 import { useForm, useFieldArray, FormProvider, } from 'react-hook-form';
 import instance from '../../utils/axios'
 import Button from '../Button/Button'
@@ -51,13 +52,13 @@ const AddExercise = ({ sectionId }) => {
     const codeHandler = (code) => {
         setcode(code);
     }
-    console.log("fghfhfhj", sectionId);
+
     return (
         <FormProvider {...methods}>
-            <form className={styles.edit_exercise} onSubmit={handleSubmit(onSubmit)}>
-                <div className={styles.container}>
-                    <div className={styles.box}>
-                        <div className={styles.dropdown}>
+            <form className="edit_exercise" onSubmit={handleSubmit(onSubmit)}>
+                <div className="container">
+                    <div className="box">
+                        <div className="dropdown">
                             <label> Select Language</label>
                             <Dropdown placeHolder={'Language'}
                                 onChange={(selectedOption) => {
@@ -70,7 +71,7 @@ const AddExercise = ({ sectionId }) => {
                                 registerQuery={"language"}
                             />
                         </div>
-                        <div className={styles.exercise_name}>
+                        <div className="exercise_name">
                             <label>Exercise Name</label>
                             <InputBox
                                 placeholder={"Exercise Name"}
@@ -82,7 +83,7 @@ const AddExercise = ({ sectionId }) => {
                                 required />
                         </div>
                     </div>
-                    {/* <div className={styles.instructions}> */}
+                    {/* <div className={instructions}> */}
                     <label>Instructions</label>
                     {/* <InputBox textarea
                             placeholder={"Instructions"}
@@ -104,15 +105,15 @@ const AddExercise = ({ sectionId }) => {
                     registerQuery={"instruction"}
                     placeholder={"instructions"}
                     required /> */}
-                    <ControlledRTEditor id='rte' name='instruction' />
+                    <ControlledRTEditor  id='rte' name='instruction' />
                     {/* </div> */}
-                    <div className={styles.codeeditor}>
+                    <div className="codeeditor">
                         <label > Enter Code </label>
                         <EditorComponent height={'60vh'} register={register} registerQuery={"prefilled_code"} name={"prefilled_code"} onChange={codeHandler} />
                     </div>
                     {fields.map((item, index) => {
                         return (
-                            <div className={styles.testcase_details}>
+                            <div className="testcase_details">
                                 TestCase {index + 1}
                                 <div>
                                     <div>
@@ -152,7 +153,7 @@ const AddExercise = ({ sectionId }) => {
                             </div>
                         );
                     })}
-                    <div className={styles.control_buttons}>
+                    <div className="control_buttons">
                         <Button
                             text="+ Add TestCase"
                             onClick={() => {

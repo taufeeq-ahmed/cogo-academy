@@ -1,7 +1,9 @@
 const { prisma } = require("../../helpers/db-client");
 
-const getLeaderBoardByBatchFromDB = async (params) => {
-    const { batch_id, rank_lte } = params
+const getLeaderBoardByBatchFromDB = async (params, query) => {
+    const { rank_lte } = params
+    const { batch_id } = query
+
     const leaderBoardData = await prisma.user.findMany({
         where: {
             batches: {
@@ -9,12 +11,8 @@ const getLeaderBoardByBatchFromDB = async (params) => {
                     batch_id: batch_id,
                 },
             },
-            // user_rank: {
-            //     lte: rank_lte
-            // }
         },
         orderBy: {
-            // user_rank: 'asc',
             total_score: 'desc'
         },
         take: rank_lte

@@ -14,9 +14,8 @@ const DeleteBatch = ({ batch, show, toggle }) => {
 
     return (
         <div>
-            <Modal isShowing={show} toggle={toggle} heading={'Delete'} >
-                <h3>Are you Sure you want to delete {batch?.batch_name} ?</h3>
-                <Button text='Delete' onClick={handleDelete} />
+            <Modal isShowing={show} toggle={toggle} heading={'Delete'} handleSubmit={handleDelete} submitText='Delete' >
+                <p>Are you sure you want to delete {batch?.batch_name} ?</p>
             </Modal>
         </div>
     )

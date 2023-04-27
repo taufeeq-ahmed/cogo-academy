@@ -4,7 +4,9 @@ import ModalLayout from "../../layouts/ModalLayout.astro";
 import { fetchData, parseCookie } from "../../utils/common";
 import AdminBatchCard from "../../components/AdminBatchCard";
 import AddBatch from "../../components/AddBatch";
-import cross from "/assets/cross.svg"
+import cross from "/assets/cross.svg";
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import BatchesPage from "../../components/BatchesPage/BatchesPage";
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
 
 const token = cookies?.cogoacademytoken;
@@ -13,76 +15,22 @@ if (!token) {
     return Astro.redirect("/signin");
 }
 
-const data = await fetchData(`admin/batches`, token);
+const data = await fetchData(`admin/batches`, token, batch);
 if (!data) return Astro.redirect("/error");
 
-const allCourses = await fetchData("course/list", token);
+const allCourses = await fetchData("course/list", token, batch);
 ---
 
-<ModalLayout title="Admin | Batches">
-    <div class="admin_dashboard_courses_container">
-        <div class="create_course_container">
-            <div class="header_title">Batches</div>
-            <Button
-                text="Create Batch"
-                id={"open_modal"}
-                className="create_course_button"
-            />
-        </div>
-        <div class="courses_container">
-            {
-                data?.map((batch) => {
-                    return (
-                        <AdminBatchCard
-                            batch={batch}
-                            client:load
-                            courses={allCourses}
-                        />
-                    );
-                })
-            }
-        </div>
-    </div>
-    <div slot="modal_header_slot" class="close_btn">
+<AdminLayout title="Admin | Batches" user={data.user}>
+    <BatchesPage allCourses={allCourses} batches={data?.batches} client:load />
+    <!-- <div slot="modal_header_slot" class="close_btn">
         <span>Add Course</span>
-        <div class="btn"><img src={cross} id={"close_modal"}></div>
+        <div class="btn"><img src={cross} id={"close_modal"} /></div>
     </div>
     <div slot="modal_content_slot">
         <AddBatch client:load courses={allCourses} />
     </div>
     <div slot="modal_footer_slot" class="modal_footer">
-        <!-- <Button text="Close Modal" id={"close_modal"} /> -->
-    </div>
-</ModalLayout>
-<style>
-    .courses_container {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .course {
-        flex: 1;
-        min-width: calc(100% / 3);
-        max-width: calc(100% / 3);
-    }
-    .create_course_container {
-        display: flex;
-        justify-content: space-between;
-        padding: 0px 35px 0px 20px;
-        /* width: 90%; */
-    }
-    .close_btn{
-        display: flex;
-        justify-content: space-between;
-    }
-    .btn{
-        cursor: pointer;
-    }
-    .create_course_container .header_title {
-        font-size: 24px;
-    }
-    @media (max-width: 900px) {
-        .create_course_button {
-            display: none !important;
-        }
-    }
-</style>
+        <Button text="Close Modal" id={"close_modal"} />
+    </div> -->
+</AdminLayout>

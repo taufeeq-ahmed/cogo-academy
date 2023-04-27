@@ -18,8 +18,8 @@
     border: 1px solid #F2F3FA;
     border-radius: 6px;
     /* width: fit-content; */
-    height: fit-content;
-    width: fit-content;
+    /* height: fit-content;
+    width: fit-content; */
     min-width: 40%;
     max-width: 70%;
     
@@ -49,7 +49,6 @@
     padding: 10px 20px ;
     max-height: calc(70vh - 30px);
     overflow: auto;
-   
 }
 .btn{
     cursor: pointer;

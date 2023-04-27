@@ -1,6 +1,8 @@
 ---
 import AddArticle from "../../../../components/AddArticle/AddArticle";
 import { fetchData, parseCookie } from "../../../../utils/common";
+import AdminLayout from "../../../../layouts/AdminLayout.astro";
+
 const { sectionId } = Astro.params;
 
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
@@ -10,8 +12,9 @@ const batch = cookies?.batch;
 if (!token) {
     return Astro.redirect("/signin");
 }
-const data = await fetchData("users/isadmin", token);
+const data = await fetchData("users/isadmin", token, batch);
 if (!data) return Astro.redirect("/error");
 ---
-
+<AdminLayout>
 <AddArticle client:only sectionId={sectionId} />
+</AdminLayout>

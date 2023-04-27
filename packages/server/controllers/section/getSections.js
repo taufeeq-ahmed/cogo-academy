@@ -45,6 +45,7 @@ const getSectionsFromDB = async (params) => {
             first_article_id: firstArticleId,
             first_submission_id: firstSubmissionId,
             number_of_articles: articles.length,
+            image_url: sec.course.image_url
         };
     }).map((sec) => {
         return {

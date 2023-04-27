@@ -61,8 +61,8 @@ const EditBatch = ({ allCourses, show, toggle, batch }) => {
 
 
     return (
-        <Modal isShowing={show} toggle={toggle} heading={'Edit'} >
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <Modal isShowing={show} toggle={toggle} heading={'Edit'} handleSubmit={handleSubmit(onSubmit)} submitText='Submit' >
+            <form>
                 <label htmlFor="batch_name">Batch Name</label>
                 <InputBox
                     placeholder={"Batch Name"}
@@ -83,7 +83,7 @@ const EditBatch = ({ allCourses, show, toggle, batch }) => {
                         })
                     }
                 </div>
-                <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} />
+                {/* <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} /> */}
             </form>
         </Modal >
     )

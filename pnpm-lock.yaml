@@ -61,9 +61,12 @@ importers:
       jodit-react:
         specifier: ^1.3.39
         version: 1.3.39(react-dom@18.2.0)(react@18.2.0)
+<<<<<<< HEAD
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
+=======
+>>>>>>> a0904ce09bdf036982d48a8433369ff93afea158
       monaco-editor:
         specifier: '>=0.25.0 <1.0.0'
         version: 0.37.1

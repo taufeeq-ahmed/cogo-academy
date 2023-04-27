@@ -47,7 +47,10 @@ const PlaygroundContent = ({ data, user }) => {
                 code: code
             })
                 .then((resp) => {
-                    const resultLst = resp?.data
+                    // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
+                    console.log(resp,"hello");
+                    const resultLst = resp?.data?.passed_testcase
+
                     setTestCases((lst) => {
                         return lst.map((item) => {
                             const status = resultLst.includes(item.test_case_id) ? true : false
@@ -57,7 +60,9 @@ const PlaygroundContent = ({ data, user }) => {
                             }
                         })
                     })
-                })  
+                    setcontent( JSON.stringify(resp?.data?.result))
+                    // window.location.href = next_element
+                })
                 .catch(err => console.log(err))
                 .finally(() => {
                     setBtnLoading(false);
@@ -79,7 +84,7 @@ const PlaygroundContent = ({ data, user }) => {
                         icon={ArrowSVG}
                         iconPlacement="left"
                         text="Back to course"
-                        link={"back"}
+                        link={"/" + element_content.course_id}
                     />
                 </div>
                 <ContentBody

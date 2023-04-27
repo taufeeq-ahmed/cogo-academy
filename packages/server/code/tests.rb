@@ -22,7 +22,7 @@ def test_code
                 result.append(id)
             end
         rescue
-            result.append('error')
+            result.append('')
         end
     end
 
