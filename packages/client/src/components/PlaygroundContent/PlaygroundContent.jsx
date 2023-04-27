@@ -80,7 +80,7 @@ const PlaygroundContent = ({ data }) => {
                     ) : (
                         <>
                             <div className={styles.right_box_title}>Additional Links</div>
-                            {links.map((link) => {
+                            {links?.map((link) => {
                                 return (
                                     <div className={styles.link_box}>
                                         <a target="_blank" href={link.link_url}>

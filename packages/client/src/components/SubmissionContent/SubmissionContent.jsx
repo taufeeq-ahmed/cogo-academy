@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import axios from 'axios';
 import instance from '../../utils/axios';
-const SubmissionContent = ({ submissionContent, github_username = "sumit" }) => {
+const SubmissionContent = ({ submissionContent, github_username }) => {
 
     const { submission_name, submission_description, submission_url, submission_id } = submissionContent;
     const [url, setURL] = useState(submission_url);
