@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./styles.css"
+import "./styles.css"
 
 const InputBox = ({ icon = '', value, setValue = () => { }, placeholder, textarea = false, style = {}, style_box={}, rows = 6, name, register = () => { }, registerQuery = '', type, ...rest }) => {
     return (
