@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RichTextEditor } from '@mantine/rte';
-import styles from './styles.module.css'
+import './styles.css'
 import Button from '../Button/Button'
 import InputBox from '../InputBox/InputBox'
 import { useForm } from 'react-hook-form'
@@ -29,10 +29,10 @@ const AddArticle = ({ sectionId }) => {
     }
 
     return (
-        <div className={styles.edit_article_container}>
-            <form className={styles.inputs}>
+        <div className="edit_article_container">
+            <form className="inputs">
                 <div
-                    className={styles.input_box_container}
+                    className="input_box_container"
                 >
                     <label htmlFor="">Article Name</label>
                     <InputBox
@@ -43,7 +43,7 @@ const AddArticle = ({ sectionId }) => {
                     />
                 </div>
                 <div
-                    className={styles.input_box_container}
+                    className="input_box_container"
                 >
                     <label htmlFor="">Time to read</label>
                     <InputBox
@@ -55,14 +55,14 @@ const AddArticle = ({ sectionId }) => {
                 </div>
 
             </form>
-            <div className={styles.editor}>
+            <div className="editor">
                 <RichTextEditor
                     value={text}
                     onChange={setText}
                 />
 
             </div>
-            <div className={styles.submit_article}>
+            <div className="submit_article">
                 <Button btnStyle={{ margin: "10px 0" }} text='Save Article' onClick={handleSubmit(addArticle)} />
             </div>
         </div>

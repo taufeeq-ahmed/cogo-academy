@@ -1,39 +1,32 @@
 @import url('../../styles/global.css');
-
-.box {
+.box{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-
-.edit_exercise {
+.edit_exercise{
     border-radius: 6px;
     padding: 10px;
     margin: 10px;
     width: 70%;
 }
-
-label {
+label{
     margin-left: auto;
     font-weight: 500;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
-.dropdown {
+.dropdown{
     width: 20%;
 }
-
 .exercise_name {
     margin-left: auto;
     width: 50%;
 }
-
-.instructions {
+.instructions{
     width: auto;
 }
-
-.codeeditor {
+.codeeditor{
     width: 100%;
     margin-bottom: 20px;
     border: 1px solid #e0e0e0;
@@ -41,20 +34,20 @@ label {
     margin-top: 20px;
 }
 
-.testcase_details {
+.testcase_details{
     margin-bottom: 20px;
     padding: 30px;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
     width: 100%;
 }
-
-.control_buttons {
+.control_buttons{
     display: flex;
     justify-content: flex-end;
     gap: 10px;
 
 }
+
 .dropdown-container {
     text-align: left;
     border: 1px solid var(--border-color);
@@ -146,7 +139,7 @@ label {
       font-size: 12px;
     }
   }
-  @import url('../../styles/global.css');
+
 
 .input_box {
     display: flex;
@@ -178,39 +171,36 @@ label {
     padding: 10px;
     font-family: var(--font-family);
 }
-
-@import url('../../styles/global.css');
-
 .btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 7px 12px 7px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    width: max-content;
-    height: min-content;
-    gap: 5px;
-    background-color: #EE3425;
-    color: white;
-    font-weight: 500;
-    font-size: 12px;
-    border: none;
-    outline: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 7px 12px 7px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: max-content;
+  height: min-content;
+  gap: 5px;
+  background-color: #EE3425;
+  color: white;
+  font-weight: 500;
+  font-size: 12px;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .disabled_btn {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .btn:hover {
-    background: red;
+  background: red;
 }
 
 .btn:active {
-    background-color: #828282;
+  background-color: #828282;
 }
