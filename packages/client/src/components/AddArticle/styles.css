@@ -25,7 +25,6 @@
     margin: 0 auto;
     margin-top: 40px;
 }
-@import url('../../styles/global.css');
 
 .btn {
     display: flex;
@@ -60,7 +59,6 @@
 .btn:active {
     background-color: #828282;
 }
-@import url('../../styles/global.css');
 
 .input_box {
     display: flex;
@@ -184,3 +182,4 @@
       font-size: 12px;
     }
   }
+  
