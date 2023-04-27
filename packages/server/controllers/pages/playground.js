@@ -18,6 +18,13 @@ const getPlaygroundDataFromDB = async (req) => {
     params.user_id = user_id
 
     const all_submissions = await getSubmissionBySectionIdFromDB(params);
+    const newAllSubmissions = all_submissions.map((submission) => {
+        const { user_submission, ...subs } = submission;
+        return {
+            ...subs,
+            done: user_submission.find((uS) => uS.user_id === user_id) ? true : false
+        }
+    })
 
     const all_articles = await getArticlesBySectionIdFromDB(params);
     const newAllArticles = all_articles.map((article) => {
@@ -43,7 +50,7 @@ const getPlaygroundDataFromDB = async (req) => {
         else return "exercise"
     }
 
-    const all_elements = [...newAllArticles, ...all_submissions, ...newAllExercises]
+    const all_elements = [...newAllArticles, ...newAllSubmissions, ...newAllExercises]
         // .sort((a,b)=>{
         //     return new Date(a.created_on) > new Date(b.created_on)
         // })
@@ -85,6 +92,7 @@ const getPlaygroundDataFromDB = async (req) => {
             clicked_element.prefilled_code = userExercise?.code
         }
         clicked_element.next_element = next_element
+        console.log(all_elements)
         return { all_elements, clicked_element, user: req.user };
     }
 

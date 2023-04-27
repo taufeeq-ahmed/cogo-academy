@@ -9,7 +9,7 @@ import instance from "../../utils/axios";
 
 
 
-const PlaygroundContent = ({ data }) => {
+const PlaygroundContent = ({ data, user }) => {
     const { clicked_element: element_content } = data
     const { next_element } = element_content
     const { links } = data
@@ -21,16 +21,22 @@ const PlaygroundContent = ({ data }) => {
     const [activeTab, setActiveTab] = useState(0)
     const [code, setCode] = useState(element_content.prefilled_code);
     const [content, setContent] = useState(code);
-
+    const delay = ms => new Promise(res => setTimeout(res, ms));
     useEffect(() => {
         setContent(code);
     }, [code])
 
-    const handleMarkAsDone = (code) => {
+    const handleMarkAsDone = async (code, setBtnLoading) => {
+
+        setBtnLoading(true);
+        // await delay(1000);
         if (element_content?.article_id) {
             instance.post(`/user_article/${element_content?.article_id}/add`)
                 .then(() => window.location.href = next_element)
                 .catch((err) => console.log("error", err))
+                .finally(() => {
+                    setBtnLoading(false);
+                })
         }
         else if (element_content?.submission_id) {
             console.log("submitted")
@@ -51,9 +57,14 @@ const PlaygroundContent = ({ data }) => {
                             }
                         })
                     })
-                })
+                })  
                 .catch(err => console.log(err))
+                .finally(() => {
+                    setBtnLoading(false);
+                })
+        
         }
+
     }
 
 
@@ -76,9 +87,10 @@ const PlaygroundContent = ({ data }) => {
                     next_element={next_element}
                     handleMarkAsDone={handleMarkAsDone}
                     updateCanvas={setCode}
+                    user={user}
                 />
             </div>
-            <div className={styles.right_box}>
+            <div className={`${styles.right_box} `}>
                 {
                     element_content?.exercise_id ? (
                         <TestCaseLayout
@@ -91,8 +103,8 @@ const PlaygroundContent = ({ data }) => {
                         />
                     ) : (
                         <>
-                            <div className={styles.right_box_title}>Additional Links</div>
-                            {links.map((link) => {
+                            {(links) && <div className={styles.right_box_title}>Additional Links</div>}
+                            {links?.map((link) => {
                                 return (
                                     <div className={styles.link_box}>
                                         <a target="_blank" href={link.link_url}>

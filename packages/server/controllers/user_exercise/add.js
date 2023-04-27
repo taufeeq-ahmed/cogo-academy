@@ -165,7 +165,7 @@ const addExerciseDoneToDB = async (req) => {
 
             const result = []
             let passed_test_cases = 0;
-            // console.log(expectedArray, 'expexted')
+            console.log(expectedArray, 'expexted');
             expectedArray.map((exp) => {
                 try {
                     const htmlString = code;

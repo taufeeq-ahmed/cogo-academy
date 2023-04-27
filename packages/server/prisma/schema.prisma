@@ -75,7 +75,7 @@ model Submission {
     submission_description String
     Section                Section?          @relation(fields: [section_id], references: [section_id])
     section_id             String?           @db.Uuid
-    User_Submission        User_Submission[]
+    user_submission        User_Submission[]
     created_on             DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
