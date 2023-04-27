@@ -2,21 +2,29 @@ import TestCaseLayout from "../CodeEditorLayout/TestCaseLayout";
 import ContentBody from "../ContentBody";
 import ArrowSVG from "/assets/arrow.svg";
 import LinkSVG from "/assets/link.svg";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LinkBtn from "../LinkBtn"
 import styles from './styles.module.css'
 import instance from "../../utils/axios";
+
+
 
 const PlaygroundContent = ({ data }) => {
     const { clicked_element: element_content } = data
     const { next_element } = element_content
     const { links } = data
     const instructions = data?.clicked_element?.instruction;
-    const content = "Console";
+    const language = data?.clicked_element?.language;
+
 
     const [testCases, setTestCases] = useState(data?.clicked_element?.test_cases)
     const [activeTab, setActiveTab] = useState(0)
+    const [code, setCode] = useState(element_content.prefilled_code);
+    const [content, setContent] = useState(code);
 
+    useEffect(() => {
+        setContent(code);
+    }, [code])
 
     const handleMarkAsDone = (code) => {
         if (element_content?.article_id) {
@@ -67,16 +75,19 @@ const PlaygroundContent = ({ data }) => {
                     element_content={element_content}
                     next_element={next_element}
                     handleMarkAsDone={handleMarkAsDone}
+                    updateCanvas={setCode}
                 />
             </div>
             <div className={styles.right_box}>
                 {
                     element_content?.exercise_id ? (
                         <TestCaseLayout
+
                             testcases={testCases}
                             instructions={instructions}
                             content={content}
                             activeTab={activeTab}
+                            language={language}
                         />
                     ) : (
                         <>

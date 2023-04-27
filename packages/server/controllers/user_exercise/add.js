@@ -2,8 +2,9 @@ const { prisma } = require("../../helpers/db-client");
 const fs = require('fs');
 const exec = require('child_process').execSync;
 const path = require('path');
-const testcode=require('../../code/tests-sql')
-
+const testcode = require('../../code/tests-sql')
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
 const addExerciseDoneToDB = async (req) => {
     const { user_id } = req.user
     const { exercise_id } = req.params;
@@ -45,7 +46,7 @@ const addExerciseDoneToDB = async (req) => {
     const CODE_FOLDER = "code";
 
     if (exercise.language === "ruby") {
-   
+
 
         try {
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.rb"), code);
@@ -60,8 +61,6 @@ const addExerciseDoneToDB = async (req) => {
     }
 
     else if (exercise.language === "python") {
-
-
         try {
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.py"), code);
             const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
@@ -76,10 +75,10 @@ const addExerciseDoneToDB = async (req) => {
 
         console.log("SQL")
         try {
-           const res=testcode({code:code,exercise:exercise})
-           console.log(res);
-           return res
-           
+            const res = testcode({ code: code, exercise: exercise })
+            console.log(res);
+            return res
+
 
         } catch (error) {
             console.log("Error: ", error);
@@ -144,11 +143,69 @@ const addExerciseDoneToDB = async (req) => {
             return result
         } catch (error) {
             console.log("Error: ", error);
+            return []
+        }
+    }
 
+    else if (exercise.language === "html") {
+
+        try {
+            // fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.js"), code);
+            // const proc = exec("node " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.js ") + "'" + JSON.stringify(exercise.test_cases) + "'");
+
+            const expectedArray = []
+
+            exercise.test_cases.forEach(testcase => {
+                const expected = {}
+                expected["test_case_id"] = testcase["test_case_id"];
+                expected["output"] = testcase["output"];
+                expectedArray.push(expected);
+            });
+
+
+            const result = []
+            let passed_test_cases = 0;
+            // console.log(expectedArray, 'expexted')
+            expectedArray.map((exp) => {
+                try {
+                    const htmlString = code;
+                    const func = eval(exp.output);
+
+                    if (func) {
+                        passed_test_cases += 1
+                        console.log(exp.test_case_id);
+                        result.push(exp.test_case_id);
+                    }
+                } catch (err) {
+                    console.log(err)
+                }
+            })
+
+            console.log("results", result)
+
+            if (passed_test_cases === exercise.test_cases.length) {
+                await prisma.user_Exercise.update({
+                    where: {
+                        user_id_exercise_id: {
+                            user_id: user_id,
+                            exercise_id: exercise_id
+                        }
+                    },
+                    data: {
+                        done: true,
+                        score: 1,
+                    }
+                })
+            }
+            console.log(result)
+            return result
+        } catch (error) {
+            console.log("Error: ", error);
             return []
         }
     }
 
 };
+
 module.exports = addExerciseDoneToDB;
 

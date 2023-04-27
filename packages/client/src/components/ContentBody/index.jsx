@@ -8,13 +8,11 @@ import SubmissionContent from '../SubmissionContent/SubmissionContent'
 import EditorComponent from "../CodeEditor/index"
 import styles from './styles.module.css'
 
-const ContentBody = ({ element_content, handleMarkAsDone }) => {
+const ContentBody = ({ element_content, handleMarkAsDone, updateCanvas }) => {
     const [disabled, setDisabled] = useState(true)
     const [code, setCode] = useState(element_content?.prefilled_code)
 
     console.log(element_content)
-
-
 
     const contentRef = useRef()
     useEffect(() => {
@@ -33,6 +31,7 @@ const ContentBody = ({ element_content, handleMarkAsDone }) => {
 
     const onCodeChange = (code) => {
         setCode(code)
+        updateCanvas(code);
     }
 
     let contentElement;
