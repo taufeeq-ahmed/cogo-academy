@@ -3,10 +3,10 @@ import Button from '../Button/Button'
 
 import styles from './styles.module.css'
 import InputBox from '../InputBox/InputBox'
-import UploadSVG from '/assets/upload.svg'
 import { useForm, useFieldArray, } from 'react-hook-form';
 import instance from '../../utils/axios'
 import Modal from '../Modal/Modal'
+import cross from '/assets/cross.svg';
 
 const AddCourse = ({ show, toggle }) => {
     const { register, control, handleSubmit, reset, watch } = useForm({
@@ -23,14 +23,21 @@ const AddCourse = ({ show, toggle }) => {
     });
 
     const onSubmit = async (data) => {
-
         try {
             await instance.post(`/course/add-with-sections`, data)
             window.location.href = ('/admin/courses');
         } catch (err) {
-
+            console.log(err)
         }
     }
+
+
+    const handleRemoveSection = (index) => {
+        reset((values) => ({
+            ...values,
+            sections: values.sections.filter((_, i) => i !== index),
+        }));
+    };
 
 
     return (
@@ -63,6 +70,9 @@ const AddCourse = ({ show, toggle }) => {
                 {fields.map((_, index) => {
                     return (
                         <div className={styles.section_details}>
+                            <div className={styles.remove_section} onClick={() => handleRemoveSection(index)} >
+                                <img src={cross} text='Close' />
+                            </div>
                             <p className={styles.section_name}>Section {index + 1}</p>
                             <div className={styles.section_details_box}>
                                 <div className={styles.section_name}>

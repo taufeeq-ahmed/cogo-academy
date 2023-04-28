@@ -2,20 +2,17 @@ import React from 'react'
 import Button from '../Button/Button'
 import styles from './styles.module.css'
 import InputBox from '../InputBox/InputBox'
-import UploadSVG from '/assets/upload.svg'
 import { useForm, useFieldArray, } from 'react-hook-form';
 import Modal from '../Modal/Modal';
-import LinkBtn from '../LinkBtn';
-import ArticlesList from '../ArticlesList/ArticlesList';
 import instance from '../../utils/axios';
-import ExerciseList from '../ExerciseList'
-import AddCourse from '../AddCourse/AddCourse'
+import cross from '/assets/cross.svg';
 const EditCourse = ({ course, show, toggle }) => {
-    const { sections, course_id, course_name } = course;
+    const { sections, course_id, course_name, image_url } = course;
 
     const { register, control, handleSubmit, reset } = useForm({
         defaultValues: {
             course_name: course_name,
+            image_url: image_url,
             sections: sections
         }
     });
@@ -29,13 +26,18 @@ const EditCourse = ({ course, show, toggle }) => {
     });
 
     const onSubmit = async (data) => {
-
         await instance.patch(`${import.meta.env.PUBLIC_SERVER_URL}/course/${course_id}`, {
             new_data: data
         })
         window.location.href = '/admin/courses';
-
     }
+
+    const handleRemoveSection = (index) => {
+        reset((values) => ({
+            ...values,
+            sections: values.sections.filter((_, i) => i !== index),
+        }));
+    };
 
     return (
         <Modal size='big' isShowing={show} toggle={toggle} heading={'Edit Course'} handleSubmit={handleSubmit(onSubmit)} submitText="Edit Course" >
@@ -67,6 +69,9 @@ const EditCourse = ({ course, show, toggle }) => {
                 {fields.map((_, index) => {
                     return (
                         <div className={styles.section_details}>
+                            {index > sections.length - 1 && <div className={styles.remove_section} onClick={() => handleRemoveSection(index)} >
+                                <img src={cross} text='Close' />
+                            </div>}
                             <p className={styles.section_name}>Section {index + 1}</p>
                             <div className={styles.section_details_box}>
                                 <div className={styles.section_name}>
@@ -111,9 +116,10 @@ const EditCourse = ({ course, show, toggle }) => {
                         btnType="secondary"
                         text="Reset"
                         onClick={() =>
-                            reset({
-                                sections: []
-                            })
+                            reset(values => ({
+                                ...values,
+                                sections: [...sections]
+                            }))
                         }
                     />
                 </div>

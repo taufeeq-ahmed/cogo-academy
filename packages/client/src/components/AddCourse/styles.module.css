@@ -7,15 +7,6 @@
     flex: 1;
 }
 
-label {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    color: #4F4F4F;
-    line-height: 21px;
-}
-
 .edit_course {
     border-radius: 6px;
     display: flex;
@@ -27,6 +18,7 @@ label {
     padding: 16px 24px;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
+    position: relative;
 }
 
 .section_details_box {
@@ -99,4 +91,19 @@ label {
     padding-right: 20px;
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+.remove_section {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+    cursor: pointer;
 }
