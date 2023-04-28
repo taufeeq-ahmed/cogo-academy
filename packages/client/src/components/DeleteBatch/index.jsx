@@ -1,7 +1,8 @@
 import React from 'react'
-import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import instance from '../../utils/axios';
+import styles from "./styles.module.css"
+
 const DeleteBatch = ({ batch, show, toggle }) => {
 
     const handleDelete = () => {
@@ -15,7 +16,7 @@ const DeleteBatch = ({ batch, show, toggle }) => {
     return (
         <div>
             <Modal isShowing={show} toggle={toggle} heading={'Delete'} handleSubmit={handleDelete} submitText='Delete' >
-                <p>Are you sure you want to delete {batch?.batch_name} ?</p>
+                <p style={{ margin: 0 }}>Are you sure you want to delete {batch?.batch_name} ?</p>
             </Modal>
         </div>
     )

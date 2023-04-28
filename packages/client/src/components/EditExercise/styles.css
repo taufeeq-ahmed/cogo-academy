@@ -54,7 +54,6 @@ label{
     position: relative;
     border-radius: 5px;
     cursor: pointer;
-    max-width: 600px;
     margin: 0px;
     color: #00000085;
     font-size: 14px;
@@ -144,11 +143,9 @@ label{
 .input_box {
     display: flex;
     align-items: center;
-    padding: 0.5rem;
     border: 1px solid var(--border-color);
     color: var(--border-color);
     border-radius: 6px;
-    max-width: 600px;
     font-family: var(--font-family);
 }
 
@@ -162,6 +159,8 @@ label{
     border: none;
     font-family: var(--font-family);
     width: 100%;
+    padding: 8px 12px;
+  border-radius: 6px;
 }
 
 .input_textarea {

@@ -9,6 +9,7 @@ import LinkBtn from '../LinkBtn';
 import ArticlesList from '../ArticlesList/ArticlesList';
 import instance from '../../utils/axios';
 import ExerciseList from '../ExerciseList'
+import AddCourse from '../AddCourse/AddCourse'
 const EditCourse = ({ course, show, toggle }) => {
     const { sections, course_id, course_name } = course;
 
@@ -37,79 +38,69 @@ const EditCourse = ({ course, show, toggle }) => {
     }
 
     return (
-        <Modal isShowing={show} toggle={toggle} heading={'Edit'} handleSubmit={handleSubmit(onSubmit)} submitText='Submit' modalStyles={{ width: "50%", background: "red" }} >
-            <form className={styles.edit_course}>
-                <div className="course_deatils_inputs">
-                    <InputBox
-                        placeholder={"Course Name"}
-                        style={{ fontSize: '16px' }}
-                        name="course_name"
-                        register={register}
-                        style_box={{ marginTop: "5px", marginBottom: "5px", maxWidth: 'none' }}
-                        registerQuery={"course_name"}
-                    />
+        <Modal size='big' isShowing={show} toggle={toggle} heading={'Edit Course'} handleSubmit={handleSubmit(onSubmit)} submitText="Edit Course" >
+            <form className={styles.edit_course} >
+                <div className={styles.course_deatils_inputs}>
+                    <div className={styles.course_details_box}>
+                        <label htmlFor="course_name">Course Name</label>
+                        <InputBox
+                            placeholder={"Course Name"}
+                            style={{ fontSize: '16px' }}
+                            name="course_name"
+                            register={register}
+                            registerQuery={"course_name"}
+                            required
+                        />
+                    </div>
+                    <div className={styles.course_details_box}>
+                        <label htmlFor="file_input">Upload Image link</label>
+                        <InputBox
+                            placeholder={"Enter Image url"}
+                            style={{ fontSize: '16px' }}
+                            name="image_url"
+                            register={register}
+                            registerQuery={"image_url"}
+                            required
+                        />
+                    </div>
                 </div>
-                <div className={styles.section_banner}>
-                    <label htmlFor="file_input" className={styles.upload_label}>
-                        Upload Image link
-                    </label>
-                    <InputBox
-                        placeholder={"Enter Image url"}
-                        style={{ fontSize: '16px' }}
-                        name="image_url"
-                        type="url"
-                        register={register}
-                        style_box={{ marginTop: "5px", marginBottom: "20px", maxWidth: 'none' }}
-                        registerQuery={"image_url"}
-                    />
-                </div>
-                <div style={{ listStyle: 'none', padding: "0", display: "flex", flexDirection: "column", gap: "15px" }}>
-                    {fields.map((item, index) => {
-
-                        return (
-                            // <li key={item.id}>
-                            <div className={styles.section_details}>
-                                {/* <Button type="button" onClick={() => remove(index)} text='X' /> */}
-                                <div className={styles.section_data}>
-                                    <div className={styles.section_name}>
-                                        <label htmlFor="section_name" >Section Name</label>
-                                        <InputBox
-                                            placeholder='Section Name'
-                                            name='section_name'
-                                            style={{ fontSize: '16px' }}
-                                            register={register}
-                                            style_box={{ marginTop: "5px", marginBottom: "5px", maxWidth: 'none' }}
-                                            registerQuery={`sections.${index}.section_name`}
-                                        />
-                                    </div>
-
+                {fields.map((_, index) => {
+                    return (
+                        <div className={styles.section_details}>
+                            <p className={styles.section_name}>Section {index + 1}</p>
+                            <div className={styles.section_details_box}>
+                                <div className={styles.section_name}>
+                                    <label htmlFor="section_name" >Section Name</label>
+                                    <InputBox
+                                        placeholder='Section Name'
+                                        name='section_name'
+                                        style={{ fontSize: '16px' }}
+                                        register={register}
+                                        registerQuery={`sections.${index}.section_name`}
+                                        required
+                                    />
                                 </div>
-                                <label htmlFor="section_description">Section Description</label>
-                                <InputBox
-                                    textarea
-                                    placeholder='Section Description'
-                                    rows={6}
-                                    name='section_description'
-                                    style={{ fontSize: '16px' }}
-                                    register={register}
-                                    style_box={{ marginTop: "5px", marginBottom: "5px", maxWidth: 'none' }}
-                                    // value={section.section_description}
-                                    registerQuery={`sections.${index}.description`}
-                                />
-
-                                <ArticlesList sectionId={item.section_id} />
-                                <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} btnStyle={{ fontSize: '20px' }} />
-                                <ExerciseList sectionId={item.section_id} />
-                                <LinkBtn text=' + Add Exercise' link={`/admin/exercise/${item.section_id}/add`} btnStyle={{ fontSize: '20px' }} />
+                                <div>
+                                    <label htmlFor="section_description">Section Description</label>
+                                    <InputBox
+                                        textarea
+                                        placeholder='Section Description'
+                                        rows={6}
+                                        name='section_description'
+                                        style={{ fontSize: '16px' }}
+                                        register={register}
+                                        registerQuery={`sections.${index}.description`}
+                                        required
+                                    />
+                                </div>
                             </div>
+                        </div>
+                    );
+                })}
 
-                            // </li>
-
-                        );
-                    })}
-                </div>
                 <div className={styles.control_buttons}>
                     <Button
+                        btnType="secondary"
                         text="+ Add Section"
                         onClick={() => {
                             append({ section_name: '', description: '' });
@@ -117,18 +108,20 @@ const EditCourse = ({ course, show, toggle }) => {
                     />
 
                     <Button
+                        btnType="secondary"
                         text="Reset"
                         onClick={() =>
                             reset({
-                                section: []
+                                sections: []
                             })
                         }
                     />
-                    {/* <Button text=' Submit ' type='submit' /> */}
                 </div>
+
             </form>
-        </Modal>
+        </Modal >
     )
+
 }
 
 export default EditCourse;

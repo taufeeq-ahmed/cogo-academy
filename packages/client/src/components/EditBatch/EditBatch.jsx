@@ -83,7 +83,6 @@ const EditBatch = ({ allCourses, show, toggle, batch }) => {
                         })
                     }
                 </div>
-                {/* <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} /> */}
             </form>
         </Modal >
     )

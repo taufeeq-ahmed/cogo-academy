@@ -14,16 +14,19 @@ const ArticlesList = ({ sectionId }) => {
 
     }, [])
     return (
-        <div className='articles' style={{ display: 'flex' }}>
-            {
-                articles?.map((article) =>
-                    <LinkBtn text={article.article_name}
-                        link={`/admin/article/${article.article_id}/edit`}
-                        btnStyle={{ fontSize: '13px', 'backgroundColor': '#F3FAFA', padding: '10px', fontSize: 14, margin: 10 }}
-                        key={article.article_id}
-                    />
-                )
-            }
+        <div>
+            <p>Articles</p>
+            <div style={{ display: 'flex', gap: '15px', margin: "10px 0" }}>
+                {
+                    articles?.map((article) =>
+                        <LinkBtn text={article.article_name}
+                            link={`/admin/article/${article.article_id}/edit`}
+                            btnStyle={{ fontSize: '13px', 'backgroundColor': '#F3FAFA', padding: '10px', fontSize: 14 }}
+                            key={article.article_id}
+                        />
+                    )
+                }
+            </div>
         </div>
     )
 }

@@ -16,7 +16,7 @@ const DeleteCourse = ({ course = { course_name: 'HTML', }, show, toggle }) => {
 
     return (
         <Modal isShowing={show} toggle={toggle} heading={'Delete'} handleSubmit={handleDeleteCourse} submitText='Deactivate' >
-            <p>Are you sure you want to delete {course.course_name} ?</p>
+            <p>Are you sure you want to deactivate {course.course_name} ?</p>
         </Modal>
     )
 }

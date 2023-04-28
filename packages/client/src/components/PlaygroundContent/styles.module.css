@@ -12,7 +12,7 @@
     width: 50%;
 }
 
-.content_footer {
+/* .content_footer {
     position: sticky;
     bottom: 0;
     left: 0;
@@ -22,7 +22,7 @@
     padding: 16px 24px 16px 24px;
     background-color: white;
     box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-}
+} */
 
 .content_body,
 .content_header {

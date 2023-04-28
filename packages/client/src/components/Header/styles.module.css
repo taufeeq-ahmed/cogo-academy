@@ -35,6 +35,10 @@
     padding: 0;
 }
 
+.search_box>div>input {
+    padding-left: 0px;
+}
+
 .profile_box {
     display: flex;
     align-items: center;
@@ -56,9 +60,11 @@
 .profile_rank {
     font-size: var(--font-size-md);
 }
-.prof_pic{
+
+.prof_pic {
     margin-top: 4px;
 }
+
 .prof_pic>img {
     width: 36px;
     height: 36px;

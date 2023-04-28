@@ -35,7 +35,6 @@ const AddBatch = ({ show, toggle }) => {
                     register={register}
                     registerQuery={"batch_name"}
                 />
-                {/* <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} /> */}
             </form>
         </Modal>
     )
