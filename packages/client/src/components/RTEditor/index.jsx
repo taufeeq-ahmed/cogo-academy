@@ -1,5 +1,4 @@
 import JoditEditor from 'jodit-react';
-// import dynamic from 'next/dynamic';
 import React, { useRef, useMemo } from 'react';
 function RTEditor({ value, onChange }) {
 	const editor = useRef(null);

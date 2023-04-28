@@ -17,7 +17,7 @@ if (!batch) {
   return Astro.redirect("/batchselect");
 }
 
-const data = await fetchData(`user-dashboard?batch_id=${batch}`, token);
+const data = await fetchData(`user-dashboard`, token, batch);
 ---
 
 <DashLayout title="Home - Dashboard" selected={"/"} courses={data?.allCourses}>

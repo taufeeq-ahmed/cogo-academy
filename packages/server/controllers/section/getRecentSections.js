@@ -1,9 +1,25 @@
 const { prisma } = require("../../helpers/db-client");
+const getUserFromDB = require("../user/get");
 const getRecentSectionsFromDB = async (req) => {
     const { user_id } = req.user
+    const { batch_id } = req.params
+    const user = await getUserFromDB({ user_id })
     const recentUserArticles = await prisma.user_Article.findMany({
         where: {
-            user_id: user_id
+            user: {
+                user_id: user_id,
+            },
+            article: {
+                section: {
+                    course: {
+                        batches: {
+                            some: {
+                                batch_id: batch_id
+                            }
+                        }
+                    }
+                }
+            }
         },
         orderBy: {
             updated_on: 'desc'
@@ -13,6 +29,11 @@ const getRecentSectionsFromDB = async (req) => {
                 include: {
                     section: {
                         include: {
+                            course: {
+                                select: {
+                                    image_url: true,
+                                }
+                            },
                             articles: true,
                         }
                     }
@@ -20,6 +41,9 @@ const getRecentSectionsFromDB = async (req) => {
             }
         },
     })
+
+
+    //get the image from the course table and add it to the sections based on the course that is related to the sections
 
     const uniqueElem = new Map();
     const filteredRecentSections = recentUserArticles && recentUserArticles?.map((userArticle) => {
@@ -33,6 +57,7 @@ const getRecentSectionsFromDB = async (req) => {
                 ...section,
                 first_article_id: userArticle?.article_id,
                 number_of_articles: articles.length,
+                image_url: section.course.image_url
             };
         }
         return null

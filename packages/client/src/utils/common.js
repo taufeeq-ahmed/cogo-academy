@@ -12,11 +12,13 @@ export const getNextArticle1 = (all_articles, articleId) => {
 }
 
 export async function fetchData(url, token) {
+    console.log("---das-das-dsa-d-asd-as-d-asd-asd-as-")
+
     try {
         const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${url}`, {
             headers: {
                 authorization: `Bearer ${token}`
-            }
+            },
         });
         const data = await response.json();
         if (!response.ok) {

@@ -1,3 +1,4 @@
+const { prisma } = require("../../helpers/db-client");
 const getArticleFromDB = require("../article/get");
 const getArticlesBySectionIdFromDB = require("../article/getBySectionId");
 const getExerciseFromDB = require("../exercise/get");
@@ -13,11 +14,32 @@ const getPlaygroundDataFromDB = async (req) => {
 
     const { section_id, type, element_id } = params
 
+    const { course: { course_id } } = await prisma.section.findFirst({
+        where: {
+            section_id: section_id
+        }
+        ,
+        include: {
+            course: {
+                select: {
+                    course_id: true
+                }
+            }
+        }
+    })
+
     const { user_id } = req.user
 
     params.user_id = user_id
 
     const all_submissions = await getSubmissionBySectionIdFromDB(params);
+    const newAllSubmissions = all_submissions.map((submission) => {
+        const { user_submission, ...subs } = submission;
+        return {
+            ...subs,
+            done: user_submission.find((uS) => uS.user_id === user_id) ? true : false
+        }
+    })
 
     const all_articles = await getArticlesBySectionIdFromDB(params);
     const newAllArticles = all_articles.map((article) => {
@@ -33,7 +55,7 @@ const getPlaygroundDataFromDB = async (req) => {
         const { user_exercise, ...exer } = exercise
         return {
             ...exer,
-            done: user_exercise.find((uE) => uE.user_id === user_id) ? true : false
+            done: user_exercise.find((uE) => uE.user_id === user_id)?.done ? true : false
         }
     })
 
@@ -43,7 +65,7 @@ const getPlaygroundDataFromDB = async (req) => {
         else return "exercise"
     }
 
-    const all_elements = [...newAllArticles, ...all_submissions, ...newAllExercises]
+    const all_elements = [...newAllArticles, ...newAllSubmissions, ...newAllExercises]
         // .sort((a,b)=>{
         //     return new Date(a.created_on) > new Date(b.created_on)
         // })
@@ -67,6 +89,7 @@ const getPlaygroundDataFromDB = async (req) => {
         const userArticle = await getReadArticleFromDB(params);
         clicked_element.done = userArticle ? true : false
         clicked_element.next_element = next_element
+        clicked_element.course_id = course_id
         const links = await getLinksByArticleIdFromDB(clicked_element);
         return { all_elements, clicked_element, links, user: req.user };
     } else if (type === 'submission') {
@@ -74,6 +97,7 @@ const getPlaygroundDataFromDB = async (req) => {
         const clicked_element = await getSubmissionFromDB(params);
         clicked_element.done = false
         clicked_element.next_element = next_element
+        clicked_element.course_id = course_id
         return { all_elements, clicked_element, user: req.user };
     }
     else {
@@ -81,10 +105,12 @@ const getPlaygroundDataFromDB = async (req) => {
         const clicked_element = await getExerciseFromDB(params);
         const userExercise = await getUserExerciseFromDB(params)
         clicked_element.done = userExercise?.status || false
+        clicked_element.course_id = course_id
         if (userExercise?.code && userExercise?.code !== "") {
             clicked_element.prefilled_code = userExercise?.code
         }
         clicked_element.next_element = next_element
+        console.log(all_elements)
         return { all_elements, clicked_element, user: req.user };
     }
 

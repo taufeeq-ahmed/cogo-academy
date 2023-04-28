@@ -6,13 +6,13 @@ const { exerciseId } = Astro.params;
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
 
 const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
 
 if (!token) {
     return Astro.redirect("/signin");
 }
-const exercise = await fetchData(`exercise/${exerciseId}`, token);
+const exercise = await fetchData(`exercise/${exerciseId}`, token, batch);
 if (!exercise) return Astro.redirect("/error");
-console.log(exercise);
 ---
 
 <AdminLayout>

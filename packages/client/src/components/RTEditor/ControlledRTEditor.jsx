@@ -1,6 +1,6 @@
 import React from 'react';
 import { useController, useFormContext } from 'react-hook-form';
-import RTEditor from './index';
+import RTEditor from '.';
 
 function ControlledRTEditor({
 	name,

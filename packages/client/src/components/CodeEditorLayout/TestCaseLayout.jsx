@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../Button/Button'
 
 import styles from './styles.module.css'
@@ -6,20 +6,27 @@ import Instruction from './Instruction';
 import TestCase from './TestCase';
 import ConsoleTab from './ConsoleTab';
 
-const TestCaseLayout = ({ testcases, instructions, content }) => {
-    const [activeButton, setActiveButton] = useState(0);
+const TestCaseLayout = ({ testcases, instructions, content, activeTab, language = 'python' }) => {
+    const [activeButton, setActiveButton] = useState(activeTab);
+    useEffect(() => {
+        setActiveButton(activeTab)
+    }, [activeTab])
     const buttonStyle = { backgroundColor: "white", color: "black", justifyContent: "center" }
     const activeButtonStyle = {
         backgroundColor: "red",
         color: "white",
     };
-    const txt = ["Instructions", "Console", "Test Cases"];
+    let txt = ["Instructions", "Console", "Test Cases"];
+    if (language == 'html') {
+        txt = ["Instructions", "Canvas", "Test Cases"];
+    }
     const render = () => {
         switch (activeButton) {
             case 0:
                 return <Instruction instruction={instructions} />
             case 1:
-                return <ConsoleTab content={content} />
+                if (language === 'html') return <ConsoleTab content={content} canvas />
+                else return <ConsoleTab content={content} />
             default:
                 return <TestCase testcases={testcases} />
         }
