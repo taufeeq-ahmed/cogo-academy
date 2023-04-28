@@ -5,24 +5,37 @@ import ArticlesSVG from '/assets/articles.svg'
 import ProjectsSVG from '/assets/projects.svg'
 import EditSVG from "/assets/edit.svg";
 import EditBatchStudent from '../EditBatchStudent'
+import EditStudent from '../EditStudent '
 import Button from '../Button/Button'
 import instance from '../../utils/axios';
 const AdminUserHeader = ({ userData, allBatches }) => {
 
     const [editOpen, setEditOpen] = useState(false);
+    const [editstudent, setEditstudent] = useState(false);
     const toggleEditModal = () => setEditOpen(!editOpen);
+    const toggleEdistudenttModal = () => setEditstudent(!editstudent);
+    const edithandler=()=>{
+        setEditstudent(true)
+    }
     const deletehandler = async () => {
-        const response = await instance.delete(`/user/${userData.user_id}`)
-        if (response.status === 200)
-            window.location.href = `/admin`
-        else {
-            alert("Something went wrong");
+        const cnf=window.confirm("are you sure to delete")
+        if(cnf){
+            const response = await instance.delete(`/user/${userData.user_id}`)
+            if (response.status === 200)
+                window.location.href = `/admin`
+            else {
+                alert("Something went wrong");
+            }
         }
+    
 
     }
     return (
         <div>
-            <div className={styles.delete_user}><Button text='Delete User' onClick={deletehandler} /></div>
+            <div className={styles.delete_user}>
+            <Button text='Edit User' onClick={edithandler} />
+            <Button text='Delete User' onClick={deletehandler} />
+            </div>
             <div className={styles.adminuser_header}>
                 <div className={styles.admin_leftcontent}>
                     <div>
@@ -95,6 +108,7 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                     </div>
                 </div>
                 <EditBatchStudent userData={userData} batches={userData.batches} show={editOpen} toggle={toggleEditModal} allBatches={allBatches} />
+                <EditStudent userData={userData}  show={editstudent} toggle={toggleEdistudenttModal} />
             </div>
         </div>
     )
