@@ -1,5 +1,6 @@
 ---
 import AddArticle from "../../../../components/AddArticle/AddArticle";
+import AdminLayout from "../../../../layouts/AdminLayout.astro";
 import { fetchData, parseCookie } from "../../../../utils/common";
 const { sectionId } = Astro.params;
 
@@ -14,4 +15,6 @@ const data = await fetchData("users/isadmin", token);
 if (!data) return Astro.redirect("/error");
 ---
 
-<AddArticle client:only sectionId={sectionId} />
+<AdminLayout>
+    <AddArticle client:only sectionId={sectionId} />
+</AdminLayout>

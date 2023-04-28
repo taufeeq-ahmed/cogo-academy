@@ -53,7 +53,7 @@ model Article {
     article_name         String
     article_time_in_mins Int
     article_content      String         @db.Text
-    total_score          Int
+    total_score          Int            @default(1)
     section              Section?       @relation(fields: [section_id], references: [section_id])
     section_id           String?        @db.Uuid
     Links                Link[]
