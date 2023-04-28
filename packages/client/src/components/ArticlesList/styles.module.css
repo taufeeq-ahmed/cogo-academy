@@ -1,26 +1,26 @@
-.exercise_list {
+.articles_list {
     white-space: nowrap;
     overflow: auto;
 }
 
-.exercise_list>a {
+.articles_list>a {
     margin: 0 10px;
     display: inline-flex;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    background-color: #FEF3E9 !important;
+    background-color: #F2F3FA !important;
 }
 
-.exercise_list>a:first-of-type {
+.articles_list>a:first-of-type {
     margin-left: 0;
 }
 
-.exercise_list>a:last-of-type {
+.articles_list>a:last-of-type {
     margin-right: 0;
 }
 
-.existing_exercises>p {
+.existing_articles>p {
     margin: 0;
 }

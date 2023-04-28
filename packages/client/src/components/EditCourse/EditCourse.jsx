@@ -6,6 +6,10 @@ import { useForm, useFieldArray, } from 'react-hook-form';
 import Modal from '../Modal/Modal';
 import instance from '../../utils/axios';
 import cross from '/assets/cross.svg';
+import LinkBtn from '../LinkBtn';
+import ArticlesList from "../ArticlesList/ArticlesList"
+import ExerciseList from '../ExerciseList';
+
 const EditCourse = ({ course, show, toggle }) => {
     const { sections, course_id, course_name, image_url } = course;
 
@@ -66,7 +70,7 @@ const EditCourse = ({ course, show, toggle }) => {
                         />
                     </div>
                 </div>
-                {fields.map((_, index) => {
+                {fields.map((item, index) => {
                     return (
                         <div className={styles.section_details}>
                             {index > sections.length - 1 && <div className={styles.remove_section} onClick={() => handleRemoveSection(index)} >
@@ -98,6 +102,21 @@ const EditCourse = ({ course, show, toggle }) => {
                                         required
                                     />
                                 </div>
+                                {
+                                    index < sections.length && (
+                                        <>
+                                            <div>
+                                                <div className={styles.articles_list_box}>
+                                                    <ArticlesList sectionId={item.section_id} />
+                                                    <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} />
+                                                </div>
+                                                <div className={styles.exercises_list_box}>
+                                                    <ExerciseList sectionId={item.section_id} />
+                                                    <LinkBtn text=' + Add Exercise' link={`/admin/exercise/${item.section_id}/add`} />
+                                                </div>
+                                            </div></>
+                                    )
+                                }
                             </div>
                         </div>
                     );

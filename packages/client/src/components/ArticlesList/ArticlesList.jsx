@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import LinkBtn from '../LinkBtn';
 import instance from '../../utils/axios';
+import styles from "./styles.module.css"
+
+
 const ArticlesList = ({ sectionId }) => {
     const [articles, setArticles] = useState([]);
     useEffect(() => {
@@ -14,9 +17,9 @@ const ArticlesList = ({ sectionId }) => {
 
     }, [])
     return (
-        <div>
-            <p>Articles</p>
-            <div style={{ display: 'flex', gap: '15px', margin: "10px 0" }}>
+        <div className={styles.existing_articles}>
+            <p>Articles : </p>
+            <div className={styles.articles_list}>
                 {
                     articles?.map((article) =>
                         <LinkBtn text={article.article_name}

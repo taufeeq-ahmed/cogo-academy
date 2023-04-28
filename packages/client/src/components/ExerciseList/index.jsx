@@ -16,9 +16,9 @@ const ExerciseList = ({ sectionId }) => {
 
     }, [])
     return (
-        <div>
+        <div className={styles.existing_exercises}>
             <p>Exercises:</p>
-            <div className={styles.exercise_list} style={{ display: 'flex', margin: "10px 0" }}>
+            <div className={styles.exercise_list} >
                 {
                     exercise && exercise?.map((exercise) =>
                         <LinkBtn text={exercise.exercise_name}
