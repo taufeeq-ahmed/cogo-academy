@@ -108,7 +108,7 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                     </div>
                 </div>
                 <EditBatchStudent userData={userData} batches={userData.batches} show={editOpen} toggle={toggleEditModal} allBatches={allBatches} />
-                <EditStudent userData={userData}  show={editstudent} toggle={toggleEdistudenttModal} />
+                <EditStudent userData={userData} show={editstudent} toggle={toggleEdistudenttModal} />
             </div>
         </div>
     )

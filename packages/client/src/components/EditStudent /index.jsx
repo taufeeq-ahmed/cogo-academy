@@ -9,74 +9,74 @@ const EditStudent = ({ userData, show, toggle }) => {
 
     console.log(userData)
 
-
-    const batchIdList = batches.map((b) => {
-        return b.batch_id
-    })
+    const { email, user_name ,github_username,isAdmin} = userData;
 
 
-    const { register, handleSubmit, control } = useForm({
+    const { register, handleSubmit ,formState: { errors } } = useForm({
         defaultValues: {
-            batches: allBatches.map((b) => {
-                if (batchIdList.includes(b.batch_id)) {
-                    return {
-                        ...b,
-                        selected: true
-                    }
-                }
-                else {
-                    return {
-                        ...b,
-                        selected: false
-                    }
-                }
-            })
+            email: email,
+            user_name:user_name,
+            github_username:github_username,
+            isAdmin:isAdmin
         }
     });
-    const {
-        fields
-    } = useFieldArray({
-        control,
-        name: "batches"
-    });
+
 
 
     const onSubmit = async (data) => {
-
-        const batches = data.batches.map((b) => {
-            if (b.selected === true) {
-                return {
-                    batch_id: b.batch_id
-                }
-            }
-            return null
-        }).filter(b => b !== null);
-
-        await instance.post(`/user/${userData.user_id}/update_batches`, { batches })
-            .then(() => {
-                alert("Updated Batches")
-                window.location.href = window.location.pathname
-            })
-        // await instance.post(`/batch/${batch.batch_id}/add_courses`, data);
+        console.log(data,"data");
+        data.isAdmin = (data.isAdmin.toLowerCase() === 'true');
+        await instance.patch(`/user/${userData.user_id}`, { new_data:data })
+        .then(() => {
+            alert("Updated users")
+            window.location.href = window.location.pathname
+        })
     }
 
 
     return (
         <Modal isShowing={show} toggle={toggle} heading={'Edit'} handleSubmit={handleSubmit(onSubmit)} submitText="Submit" >
-            <form>
-                <div className={styles.check_batches}>
-                    {
-                        fields.map((item, index) => {
-                            return (
-                                <div className={styles.check_batches}>
-                                    <input type='checkbox' value={item.value} {...register(`batches.${index}.selected`)} />
-                                    <span>{item.batch_name}</span>
-                                </div>
-                            )
-                        })
-                    }
+           <form className={styles.form} id="testForm">
+                <div className={styles.section}>
+                    <label htmlFor="full-name">Full Name</label>
+                    <input
+                        type="text"
+                        className={styles.text}
+                        placeholder="Enter your Full Name"
+                        name="user_name"
+                        {...register("user_name", { required: true })}
+                    />
+                    {errors.user_name && <span className={styles.error}>This field is required</span>}
                 </div>
-                {/* <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} /> */}
+                <div className={styles.section}>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        className={styles.email}
+                        id="email"
+                        placeholder="Enter your Email "
+                        {...register("email", { required: true })}
+                        disabled
+                    />
+                </div>
+                <div className={styles.section}>
+                    <label htmlFor="github_username">Git Username</label>
+                    <input
+                        type="text"
+                        className={styles.email}
+                        id="github_username"
+                        placeholder="Enter your Git Username "
+                        {...register("github_username", { required: true })}
+                    />
+                </div>
+                <div className={styles.section}>
+                    <label htmlFor="isAdmin">Is Admin</label>
+                    <input
+                        className={styles.email}
+                        id="isAdmin"
+                        {...register("isAdmin")}
+                    />
+                </div>
             </form>
         </Modal >
     )
