@@ -11,11 +11,11 @@ export const getNextArticle1 = (all_articles, articleId) => {
     return next_article
 }
 
-export async function fetchData(url, token, batch = null) {
+export async function fetchData(url, token) {
     console.log("---das-das-dsa-d-asd-as-d-asd-asd-as-")
-    console.log(batch)
+
     try {
-        const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${url}?batch_id=${batch}`, {
+        const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${url}`, {
             headers: {
                 authorization: `Bearer ${token}`
             },

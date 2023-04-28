@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles.css'
+import styles from './styles.module.css'
 
 
 const Button = ({ text = '', btnStyle = {}, disabled = false, onClick = () => { }, id, className = "", type = 'button', loading = false }) => {
