@@ -146,7 +146,7 @@ label {
       font-size: 12px;
     }
   }
-  @import url('../../styles/global.css');
+
 
 .input_box {
     display: flex;
@@ -178,9 +178,6 @@ label {
     padding: 10px;
     font-family: var(--font-family);
 }
-
-@import url('../../styles/global.css');
-
 .btn {
     display: flex;
     flex-direction: row;

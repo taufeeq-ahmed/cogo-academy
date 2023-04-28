@@ -1,11 +1,11 @@
 import React from 'react'
-import styles from './styles.module.css'
+import './styles.css'
 
 
 const Button = ({ text = '', btnStyle = {}, disabled = false, onClick = () => { }, id, className = "", type = 'button', loading = false }) => {
   if (loading) disabled = true;
   return (
-    <button onClick={onClick} disabled={disabled} className={`${className} ${styles.btn} ${disabled ? styles.disabled_btn : ""}`} style={btnStyle} id={id} type={type} >
+    <button onClick={onClick} disabled={disabled} className={`${className} btn ${disabled ? "disabled_btn" : ""}`} style={btnStyle} id={id} type={type} >
       {
         (loading) ? (
           <>
