@@ -108,7 +108,7 @@ const EditArticle = ({ article }) => {
                                 </div>
                             );
                         })}
-                        <div className='btn'> 
+                        <div className='button'> 
                         <div>
                         <Button
                             text="+ Add Additional link"

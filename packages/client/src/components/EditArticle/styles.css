@@ -22,7 +22,7 @@
     margin-bottom: 20px;
     margin-top: 10px;
 }
-.btn{
+.button{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
