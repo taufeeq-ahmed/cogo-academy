@@ -105,7 +105,7 @@ const EditCourse = ({ course, show, toggle }) => {
                                 {
                                     index < sections.length && (
                                         <>
-                                            <div>
+                                            <div className={styles.list_box}>
                                                 <div className={styles.articles_list_box}>
                                                     <ArticlesList sectionId={item.section_id} />
                                                     <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} />

@@ -132,3 +132,9 @@ label {
     color: #4F4F4F;
     line-height: 21px;
 }
+
+.list_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
