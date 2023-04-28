@@ -10,10 +10,11 @@ const batch = cookies?.batch;
 if (!token) {
     return Astro.redirect("/signin");
 }
-const article = await fetchData(`article/${articleId}`, token, batch);
+const article = await fetchData(`article/${articleId}`, token);
+console.log(article);
 if (!article) return Astro.redirect("/error");
-
 ---
+
 <AdminLayout>
     <EditArticle client:only article={article} />
 </AdminLayout>
