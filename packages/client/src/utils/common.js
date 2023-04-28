@@ -12,8 +12,7 @@ export const getNextArticle1 = (all_articles, articleId) => {
 }
 
 export async function fetchData(url, token, batch = null) {
-    console.log("---das-das-dsa-d-asd-as-d-asd-asd-as-")
-    console.log(batch)
+
     try {
         const response = await fetch(`${import.meta.env.PUBLIC_SERVER_URL}/${url}?batch_id=${batch}`, {
             headers: {

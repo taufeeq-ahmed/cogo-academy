@@ -11,7 +11,8 @@ const getSubmissionLinkMapFromDB = async (params) => {
             ]
         }
     })
-    return map;
+
+    return map[0];
 };
 module.exports = getSubmissionLinkMapFromDB;
 

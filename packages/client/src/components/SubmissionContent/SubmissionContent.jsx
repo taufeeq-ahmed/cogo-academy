@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import axios from 'axios';
 import instance from '../../utils/axios';
-const SubmissionContent = ({ submissionContent, github_username }) => {
-
+const SubmissionContent = ({ submissionContent, user }) => {
+    const { user_id, github_username } = user;
     const { submission_name, submission_description, submission_url, submission_id } = submissionContent;
     const [url, setURL] = useState(submission_url);
 
@@ -11,12 +11,14 @@ const SubmissionContent = ({ submissionContent, github_username }) => {
         setURL(e.target.value);
     }
     const handleUrlSubmit = () => {
-
-        instance.post(`/submission-link-map/add`,
+        // alert(user_id)
+        // alert(submission_id)
+        // alert(`https://github.com/${github_username}/${url}`)
+        instance.post(`user_submission/add`,
             {
-                "user_id": 'ff9f9d31-3321-43da-b8b2-00063e87abd3',
-                "submission_id": submission_id,
-                "submission_url": `https://github.com/${github_username}/${url}`
+                user_id: user_id,
+                submission_id: submission_id,
+                submission_url: `https://github.com/${github_username}/${url}`
             },
         )
             .then((res) => {
@@ -44,7 +46,7 @@ const SubmissionContent = ({ submissionContent, github_username }) => {
                     onChange={(e) => handleUrlInput(e)}
 
                 />
-                <button className={styles.submission_url_btn} onClick={handleUrlSubmit}>save</button>
+                {/* <button className={styles.submission_url_btn} onClick={handleUrlSubmit}>save</button> */}
             </div>
         </div>
     )

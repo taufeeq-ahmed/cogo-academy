@@ -24,7 +24,7 @@ const EditExercise = ({ exercise }) => {
     });
     const { register, control, handleSubmit, reset, watch } = methods;
     const [selectedLanguage, setSelectedLanguage] = useState('');
-    const [code, setcode] = useState('');
+    const [code, setcode] = useState({prefilled_code});
     const [text, setText] = useState('');
     const {
         fields,
@@ -40,8 +40,7 @@ const EditExercise = ({ exercise }) => {
         name: "test_cases"
     });
     const onSubmit = async (data) => {
-        console.log(data)
-        data.language = selectedLanguage;
+        data.language = language;
         data.prefilled_code = code;
         try {
             await instance.patch(`/exercise/${exercise.exercise_id}/update`, data)
@@ -60,16 +59,18 @@ const EditExercise = ({ exercise }) => {
                     <div className="box">
                         <div className="dropdown">
                             <label> Select Language</label>
-                            <Dropdown placeHolder={'Language'}
-                                onChange={(selectedOption) => {
-                                    setSelectedLanguage(selectedOption.label);
-                                }}
-                                options={languages}
+                            <InputBox 
+                            // placeHolder={'Language'}
+                                // onChange={(selectedOption) => {
+                                //     setSelectedLanguage(selectedOption.label);
+                                // }}
+                                // options={languages}
                                 styles={{ flex: 1 }}
                                 name="language"
                                 register={register}
                                 registerQuery={"language"}
                                 value={language}
+                                disabled
                             />
                         </div>
                         <div className="exercise_name">
