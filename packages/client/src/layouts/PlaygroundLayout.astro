@@ -15,7 +15,7 @@ const data = await fetchData(
     `playground/${sectionId}/${type}/${elementId}`,
     token
 );
-const { userData } = await fetchData(`user-dashboard?batch_id=${batch}`, token);
+const { userData } = await fetchData(`user-dashboard`, token, batch);
 const { user_id } = userData;
 
 if (data.clicked_element.submission_id) {
