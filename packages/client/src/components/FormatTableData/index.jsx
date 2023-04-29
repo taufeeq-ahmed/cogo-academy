@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import Table from '../Table/Table';
 const FormatTable = ({ studentData }) => {
-
+    console.log("...........--------------------")
     console.log("daslkndasld", studentData)
 
     const [showModal, setshowModal] = useState(false);
-    const reportHandler = () => {
+    const [exe, setexercise] = useState("");
+    const reportHandler = (exercise) => {
         setshowModal(true);
+        setexercise(exercise);
     }
     const closeModalHandler = () => {
         setshowModal(false);
@@ -22,7 +25,7 @@ const FormatTable = ({ studentData }) => {
                         { name: article?.article?.section?.section_name },
                         { name: article?.article?.section?.course?.course_name },
                         { name: article?.score || 0 },
-                        { name: <button onClick={reportHandler}>Report</button> },
+                        // { name: <button onClick={reportHandler}>Report</button> },
                     ];
                     return newArticle;
                 }),
@@ -32,7 +35,7 @@ const FormatTable = ({ studentData }) => {
                         { name: exercise?.exercise?.section?.section_name },
                         { name: exercise?.exercise?.section?.course?.course_name },
                         { name: exercise?.score || 0 },
-                        { name: <button onClick={reportHandler}>Report</button> },
+                        { name: <Button onClick={() => reportHandler(exercise)} text={'Report'} /> },
                     ];
                     return newArticle;
                 }),
@@ -43,13 +46,13 @@ const FormatTable = ({ studentData }) => {
     return (
         <>
             <Table data={formatTableData()} />
-            {/* <Modal
+            <Modal
                 isShowing={showModal}
                 heading={"Code"}
                 toggle={closeModalHandler}
                 submitText={"Close"} >
-                {studentData?.exercise?.prefilled_code}
-            </Modal> */}
+                {exe?.code}
+            </Modal>
         </>
     )
 }
