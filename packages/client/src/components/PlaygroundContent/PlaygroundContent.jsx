@@ -49,7 +49,7 @@ const PlaygroundContent = ({ data, user }) => {
                     // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
                     console.log(resp, "hello");
                     const resultLst = resp?.data?.passed_testcase
-                    alert(JSON.stringify(resp?.data))
+
                     setTestCases((lst) => {
                         return lst.map((item) => {
                             const status = resultLst?.includes(item.test_case_id) ? true : false
@@ -140,5 +140,4 @@ const PlaygroundContent = ({ data, user }) => {
         </>
     )
 }
-
 export default PlaygroundContent
