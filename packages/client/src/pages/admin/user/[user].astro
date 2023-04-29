@@ -1,5 +1,6 @@
 ---
 import AdminUserHeader from "../../../components/AdminUserHeader/AdminUserHeader";
+import FormatTable from "../../../components/FormatTableData";
 import ProgressOverview from "../../../components/ProgressOverview/ProgressOverview";
 import Table from "../../../components/Table/Table";
 import AdminLayout from "../../../layouts/AdminLayout.astro";
@@ -18,41 +19,33 @@ const data = await fetchData(`admin/user/${user}`, token, batch);
 const { studentData, user: userData } = data;
 if (!data) return Astro.redirect("/error");
 
-const formatTableData = () => {
-    const tableData = {
-        head: ["Title", "Section", "Course", "Score", "Action"],
-        rows: [
-            ...studentData.readArticles.map((article) => {
-                const newArticle = [
-                    { name: article?.article?.article_name },
-                    { name: article?.article?.section?.section_name },
-                    { name: article?.article?.section?.course?.course_name },
-                    { name: article?.score || 0 },
-                ];
-                return newArticle;
-            }),
-            ...studentData.submissions.map((submission) => {
-                const newArticle = [
-                    { name: submission?.submission?.submission_name },
-                    { name: submission?.submission?.section?.section_name },
-                    { name: submission?.submission?.section?.course?.course_name },
-                    { name: submission?.score || 0 },
-                ];
-                return newArticle;
-            }),
-            ...studentData.exercises.map((exercise) => {
-                const newExercise = [
-                    { name: exercise?.exercise?.exercise_name },
-                    { name: exercise?.exercise?.section?.section_name },
-                    { name: exercise?.exercise?.section?.course?.course_name },
-                    { name: exercise?.score || 0 },
-                ];
-                return newExercise;
-            }),
-        ],
-    };
-    return tableData;
-};
+// const formatTableData = () => {
+//     const tableData = {
+//         head: ["Title", "Section", "Course", "Score", "Action"],
+//         rows: [
+//             ...studentData.readArticles.map((article) => {
+//                 const newArticle = [
+//                     { name: article?.article?.article_name },
+//                     { name: article?.article?.section?.section_name },
+//                     { name: article?.article?.section?.course?.course_name },
+//                     { name: article?.score || 0 },
+//                     // { name: <button>Report</button> },
+//                 ];
+//                 return newArticle;
+//             }),
+//             ...studentData.exercises.map((exercise) => {
+//                 const newArticle = [
+//                     { name: exercise?.exercise?.exercise_name },
+//                     { name: exercise?.exercise?.section?.section_name },
+//                     { name: exercise?.exercise?.section?.course?.course_name },
+//                     { name: exercise?.score || 0 },
+//                 ];
+//                 return newArticle;
+//             }),
+//         ],
+//     };
+//     return tableData;
+// };
 ---
 
 <AdminLayout title="Admin | User Profile Page" user={userData}>
@@ -63,7 +56,8 @@ const formatTableData = () => {
     />
     <ProgressOverview client:load progressData={studentData} />
     <div style={{ marginTop: "40px" }}>
-        <Table data={formatTableData()} />
+        <!-- <Table data={formatTableData()} client:load /> -->
+        <FormatTable studentData={studentData} client:only />
     </div>
 </AdminLayout>
 
