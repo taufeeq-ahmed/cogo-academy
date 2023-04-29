@@ -81,6 +81,15 @@ h6 {
   color: var(--font-color);
 }
 
+label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  color: #4f4f4f;
+}
+
 @media (min-width:768px) {}
 
 @media (min-width:1600px) {

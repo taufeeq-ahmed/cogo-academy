@@ -11,6 +11,9 @@ const getAllBatchesFromUserFromDB = async (req) => {
                     }
                 }
             },
+            orderBy: {
+                batch_name: 'asc'
+            }
         });
         return allBatches;
     } catch (err) {

@@ -27,8 +27,16 @@ const getUserFromDB = async (params) => {
         }
     })
 
+    const submissionsDone = await prisma.user_Submission.aggregate({
+        _count: true,
+        where: {
+            user_id: user_id,
+        }
+    })
+
     user.number_of_articles_read = readArticleCount._count
     user.number_of_exercises_done = exercisesDone._count
+    user.number_of_submissions_done = submissionsDone._count
 
     return user;
 };
