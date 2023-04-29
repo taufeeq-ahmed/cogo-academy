@@ -59,7 +59,6 @@ const InviteUser = ({ batchOptions, token }) => {
                         isSearchable
                         onChange={(data) => { setInviteData({ ...inviteData, batches: data }); }}
                     />
-                    {/* <Button text='Send invite' onClick={sendInvite} /> */}
                 </div>
             </Modal>
         </form>

@@ -11,6 +11,7 @@ html {
 
 * {
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 h1,
@@ -64,7 +65,8 @@ h6 {
   gap: 10px;
   border-radius: 6px;
 }
-.hide-tab{
+
+.hide-tab {
   display: none;
 }
 
@@ -78,11 +80,11 @@ h6 {
   font-weight: 500;
   color: var(--font-color);
 }
-@media (min-width:768px){
-  
-}
-@media (min-width:1600px){
-  body{
+
+@media (min-width:768px) {}
+
+@media (min-width:1600px) {
+  body {
     width: 1400px;
     margin: auto;
   }

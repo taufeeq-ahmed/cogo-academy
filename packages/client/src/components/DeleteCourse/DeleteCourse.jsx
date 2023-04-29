@@ -1,6 +1,5 @@
 import React from 'react'
 import instance from '../../utils/axios';
-import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import styles from './styles.module.css'
 const DeleteCourse = ({ course = { course_name: 'HTML', }, show, toggle }) => {
@@ -15,9 +14,9 @@ const DeleteCourse = ({ course = { course_name: 'HTML', }, show, toggle }) => {
     }
 
     return (
-        <Modal isShowing={show} toggle={toggle} heading={'Delete'} handleSubmit={handleDeleteCourse} submitText='Deactivate' >
-            <p>Are you sure you want to delete {course.course_name} ?</p>
-        </Modal>
+        <Modal isShowing={show} toggle={toggle} heading={'Deactivate Course'} handleSubmit={handleDeleteCourse} submitText='Deactivate' >
+            <p style={{ margin: "0" }}>Are you sure you want to deactivate {course.course_name} ?</p>
+        </Modal >
     )
 }
 

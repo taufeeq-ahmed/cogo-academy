@@ -1,7 +1,36 @@
-.check_courses{
+@import url('../../styles/global.css');
+
+.check_courses {
     display: flex;
     margin: 10px 0px;
+    flex-direction: column;
 }
-.check_course{
-    margin-right: 10px;
+
+.check_courses>p {
+    margin: 0;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #4F4F4F;
+    line-height: 21px;
+}
+
+.check_course {
+    z-index: 0;
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    user-select: none;
+}
+
+.check_courses_box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Span */
+.check_course>span {
+    padding: 8px;
 }

@@ -78,7 +78,6 @@ const EditBatchStudent = ({ userData, batches, allBatches, show, toggle }) => {
                         })
                     }
                 </div>
-                {/* <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} /> */}
             </form>
         </Modal >
     )

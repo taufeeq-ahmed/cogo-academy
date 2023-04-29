@@ -9,7 +9,6 @@ const getAdminPageDataFromDB = async (req) => {
 
     const batches = await getAllBatchesFromDB(req.params)
     const tracks = await getAllTracksFromDB(req.params)
-    // req.params.batch_id = req.user?.batches?.[0]?.batch_id
     const leaderBoardByBatchData = await getLeaderBoardByBatchFromDB(req.params, req.query)
     const studentsCount = await prisma.user.count()
     const batchCount = await prisma.batch.count()

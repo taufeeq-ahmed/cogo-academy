@@ -1,55 +1,71 @@
-.modal{
-    
-    position: absolute;
-    top:0px;
+.modal {
+    position: fixed;
+    top: 0px;
     left: 0px;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0,0,0,0.4);
-    /* border: 1px solid red; */
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.modal_box{
+
+label {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: #4F4F4F;
+    line-height: 21px;
+}
+
+.modal_box {
     background: white;
     font-family: "PT Sans", sans-serif;
     border: 1px solid #F2F3FA;
     border-radius: 6px;
-    /* width: fit-content; */
-    /* height: fit-content;
-    width: fit-content; */
-    min-width: 40%;
     max-width: 70%;
-    
     max-height: 90%;
-    
-    margin: auto;
-    
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    position: relative;
 }
-.modal_header{
-    font-size: 22px;
+
+.modal_big {
+    width: 50%;
+}
+
+.modal_small {
+    width: 30%;
+}
+
+.modal_header {
+    font-family: 'Poppins';
+    font-size: 20px;
     font-weight: 600;
     padding: 15px;
-    /* margin: 10px; */
     border-bottom: 2px solid #F2F3FA;
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
-.modal_footer{
-    padding: 5px;
+
+.modal_footer {
+    padding: 16px 24px;
     border-top: 1px solid #F2F3FA;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-
+    position: relative;
 }
-.modal_content{
-    padding: 10px 20px ;
+
+.modal_content {
     max-height: calc(70vh - 30px);
     overflow: auto;
+    position: relative;
 }
-.btn{
+
+.cls_btn {
     cursor: pointer;
+    padding: 0 16px;
 }

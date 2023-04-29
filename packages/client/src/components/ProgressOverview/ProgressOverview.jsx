@@ -4,30 +4,30 @@ import styles from "./styles.module.css";
 const ProgressOverview = ({ progressData }) => {
     const data = [
         {
-            "id": "Articles",
-            "data": [
+            id: "Articles",
+            data: [
                 {
-                    "x": "Article",
-                    "y": Math.round(((progressData?.studentData?.number_of_articles_read || 0) / (progressData?.studentData?.number_of_articles || 0)) * 100)
+                    x: "Article",
+                    y:  (progressData?.studentData?.number_of_articles_read || 0)
                 },
 
             ]
         },
         {
-            "id": "Exercises",
-            "data": [
+            id: "Exercises",
+           data: [
                 {
-                    "x": "Exercises",
-                    "y": Math.round(((progressData?.studentData?.number_of_exercises_done || 0) / (progressData?.studentData?.number_of_exercises || 0)) * 100)
+                    x: "Exercises",
+                    y: (progressData?.studentData?.number_of_exercises_done || 0)
                 },
             ]
         },
         {
-            "id": "Submissions",
-            "data": [
+            id: "Submissions",
+            data: [
                 {
-                    "x": "Submission",
-                    "y": Math.round(((progressData?.studentData?.number_of_submissions || 0) / (progressData?.studentData?.number_of_submissions || 0)) * 100)
+                    x: "Submission",
+                    y:   (progressData?.studentData?.number_of_submissions || 0) 
                 },
 
             ]
@@ -45,6 +45,7 @@ const ProgressOverview = ({ progressData }) => {
                             valueFormat=">-.2f"
                             padding={0.4}
                             cornerRadius={2}
+                            margin={{ top: 30, bottom: 30}}
                             colors={{ scheme: 'set1' }}
                             radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
                             circularAxisOuter={{ tickSize: 5, tickPadding: 12, tickRotation: 0 }}

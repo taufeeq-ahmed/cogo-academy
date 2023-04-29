@@ -72,18 +72,20 @@ const EditBatch = ({ allCourses, show, toggle, batch }) => {
                     registerQuery={"batch_name"}
                 />
                 <div className={styles.check_courses}>
-                    {
-                        fields.map((item, index) => {
-                            return (
-                                <div className={styles.check_course}>
-                                    <input type='checkbox' value={item.value} {...register(`courses.${index}.selected`)} />
-                                    <span>{item.course_name}</span>
-                                </div>
-                            )
-                        })
-                    }
+                    <p>Courses Related:</p>
+                    <div className={styles.check_courses_box}>
+                        {
+                            fields.map((item, index) => {
+                                return (
+                                    <label className={styles.check_course}>
+                                        <input type='checkbox' value={item.value} {...register(`courses.${index}.selected`)} />
+                                        <span>{item.course_name}</span>
+                                    </label>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-                {/* <Button text='Submit' type='submit' btnStyle={{ marginTop: "10px" }} /> */}
             </form>
         </Modal >
     )

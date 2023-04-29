@@ -26,6 +26,16 @@
     cursor: not-allowed;
 }
 
+.secondary_btn {
+    background-color: white;
+    color: black;
+    border: 1px solid #E0E0E0;
+}
+
+.secondary_btn:hover {
+    background-color: #E0E0E0 !important;
+}
+
 .btn:hover {
     background: red;
 }
