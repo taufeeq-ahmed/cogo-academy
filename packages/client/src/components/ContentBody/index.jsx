@@ -11,6 +11,7 @@ import styles from './styles.module.css'
 const ContentBody = ({ element_content, handleMarkAsDone, updateCanvas, user }) => {
     const [disabled, setDisabled] = useState(true)
     const [code, setCode] = useState(element_content?.prefilled_code)
+    const [url, setUrl] = useState("")
     const [btnLoading, setBtnLoading] = useState(false);
     console.log(element_content)
 
@@ -34,6 +35,11 @@ const ContentBody = ({ element_content, handleMarkAsDone, updateCanvas, user }) 
         updateCanvas(code);
     }
 
+    const onURLChange = (url) => {
+        setUrl(url)
+        console.log(url)
+    }
+
     let contentElement;
 
     if (element_content?.article_id) {
@@ -41,13 +47,23 @@ const ContentBody = ({ element_content, handleMarkAsDone, updateCanvas, user }) 
         contentElement = <ArticleContent htmlContent={content} />
     } else if (element_content?.submission_id) {
         const content = element_content.submission_content;
-        contentElement = <SubmissionContent submissionContent={element_content} user={user} />
+        contentElement = <SubmissionContent onChange={onURLChange} submissionContent={element_content} user={user} />
     }
     else {
         contentElement = <EditorComponent onChange={onCodeChange} code={code} language={element_content.language} />
     }
 
 
+    const getData = () => {
+        if (element_content?.article_id) {
+            return ""
+        } else if (element_content?.submission_id) {
+            return url
+        }
+        else {
+            return code
+        }
+    }
 
     return (
         <>
@@ -55,7 +71,7 @@ const ContentBody = ({ element_content, handleMarkAsDone, updateCanvas, user }) 
                 {contentElement}
             </div>
             <div className={styles.content_footer}>
-                <Button onClick={() => handleMarkAsDone(code, setBtnLoading)}
+                <Button onClick={() => handleMarkAsDone(getData(), setBtnLoading)}
                     btnStyle={{ backgroundColor: element_content.done ? 'green' : '' }}
                     disabled={disabled}
                     loading={btnLoading}
