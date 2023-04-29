@@ -57,7 +57,7 @@ if (!data) return Astro.redirect("/error");
     <ProgressOverview client:load progressData={studentData} />
     <div style={{ marginTop: "40px" }}>
         <!-- <Table data={formatTableData()} client:load /> -->
-        <FormatTable studentData={studentData} client:only />
+        <FormatTable studentData={studentData} client:load />
     </div>
 </AdminLayout>
 
