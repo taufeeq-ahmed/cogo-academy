@@ -16,8 +16,7 @@
 }
 
 .dash_section {
-    flex: 1;
-    max-width: calc(100%/2);
+    width: 300px;
 }
 
 @media(min-width: 40rem) {
@@ -29,6 +28,10 @@
 @media(min-width: 64rem) {
     .section_item {
         width: 33.3333%;
+    }
+
+    .dash_section {
+        width: 100%;
     }
 }
 
