@@ -2,10 +2,11 @@ const { prisma } = require("../../helpers/db-client");
 const getSubmissionLinkMapFromDB = require("./get");
 const updateSubmissionLinkMapInDB = require("./update");
 
-const addSubmissionLinkMapToDB = async (data) => {
+const addSubmissionLinkMapToDB = async (params, data) => {
 
-    const { user_id, submission_id, submission_url } = data;
-    
+    const { submission_id, user_id } = params
+    const { submission_url } = data;
+
     const updatedMap = await prisma.user_Submission.upsert({
         where: {
             user_id_submission_id: {

@@ -9,6 +9,7 @@ import cross from '/assets/cross.svg';
 import LinkBtn from '../LinkBtn';
 import ArticlesList from "../ArticlesList/ArticlesList"
 import ExerciseList from '../ExerciseList';
+import SubmissionsList from "../SubmissionsList/SubmissionsList"
 
 const EditCourse = ({ course, show, toggle }) => {
     const { sections, course_id, course_name, image_url } = course;
@@ -109,6 +110,10 @@ const EditCourse = ({ course, show, toggle }) => {
                                                 <div className={styles.articles_list_box}>
                                                     <ArticlesList sectionId={item.section_id} />
                                                     <LinkBtn text=' + Add Article' link={`/admin/article/${item.section_id}/add`} />
+                                                </div>
+                                                <div className={styles.submission_list_box}>
+                                                    <SubmissionsList sectionId={item.section_id} />
+                                                    <LinkBtn text=' + Add Submission' link={`/admin/submission/${item.section_id}/add`} />
                                                 </div>
                                                 <div className={styles.exercises_list_box}>
                                                     <ExerciseList sectionId={item.section_id} />

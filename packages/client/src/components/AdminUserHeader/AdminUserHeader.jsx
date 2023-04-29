@@ -14,12 +14,12 @@ const AdminUserHeader = ({ userData, allBatches }) => {
     const [editstudent, setEditstudent] = useState(false);
     const toggleEditModal = () => setEditOpen(!editOpen);
     const toggleEdistudenttModal = () => setEditstudent(!editstudent);
-    const edithandler=()=>{
+    const edithandler = () => {
         setEditstudent(true)
     }
     const deletehandler = async () => {
-        const cnf=window.confirm("are you sure to delete")
-        if(cnf){
+        const cnf = window.confirm("are you sure to delete")
+        if (cnf) {
             const response = await instance.delete(`/user/${userData.user_id}`)
             if (response.status === 200)
                 window.location.href = `/admin`
@@ -27,14 +27,14 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                 alert("Something went wrong");
             }
         }
-    
+
 
     }
     return (
         <div>
             <div className={styles.delete_user}>
-            <Button text='Edit User' onClick={edithandler} />
-            <Button text='Delete User' onClick={deletehandler} />
+                <Button text='Edit User' onClick={edithandler} />
+                <Button text='Delete User' onClick={deletehandler} />
             </div>
             <div className={styles.adminuser_header}>
                 <div className={styles.admin_leftcontent}>
@@ -99,7 +99,7 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                         </div>
                         <div className={styles.icon_text}>
                             <div className={styles.number}>
-                                {userData?.number_of_submissions || 0}
+                                {userData?.number_of_submissions_done || 0}
                             </div>
                             <div className={styles.under_text}>
                                 Submissions

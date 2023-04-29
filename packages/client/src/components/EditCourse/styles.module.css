@@ -117,14 +117,16 @@ label {
 }
 
 .articles_list_box,
-.exercises_list_box {
+.exercises_list_box,
+.submission_list_box {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .articles_list_box>a,
-.exercises_list_box>a {
+.exercises_list_box>a,
+.submission_list_box>a {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;

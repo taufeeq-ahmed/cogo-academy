@@ -4,6 +4,7 @@ import InputBox from '../InputBox/InputBox'
 import DropDown from '../DropDown/Dropdown'
 import Button from '../Button/Button';
 import styles from './styles.module.css'
+import "./style.css"
 // import { set, useForm } from 'react-hook-form'
 import instance from '../../utils/axios'
 
@@ -51,14 +52,16 @@ const InviteUser = ({ batchOptions, token }) => {
                         value={inviteData.email}
                         setValue={(e) => { setInviteData({ ...inviteData, email: e.target.value }) }}
                     />
-                    <label htmlFor="batches">Batches</label>
-                    <DropDown
-                        options={batchOptions}
-                        placeHolder={'Batches '}
-                        isMulti
-                        isSearchable
-                        onChange={(data) => { setInviteData({ ...inviteData, batches: data }); }}
-                    />
+                    <div className={styles.drop_down_box}>
+                        <label htmlFor="batches">Batches</label>
+                        <DropDown
+                            options={batchOptions}
+                            placeHolder={'Batches '}
+                            isMulti
+                            // isSearchable
+                            onChange={(data) => { setInviteData({ ...inviteData, batches: data }); }}
+                        />
+                    </div>
                 </div>
             </Modal>
         </form>

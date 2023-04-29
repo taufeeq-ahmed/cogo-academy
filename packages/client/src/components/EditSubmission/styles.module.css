@@ -1,0 +1,11 @@
+@import url('../../styles/global.css');
+
+.edit_submission {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.control_buttons {
+    display: flex;
+}

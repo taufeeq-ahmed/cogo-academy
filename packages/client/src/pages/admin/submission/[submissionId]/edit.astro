@@ -1,0 +1,20 @@
+---
+import EditSubmission from "../../../../components/EditSubmission/EditSubmission";
+import AdminLayout from "../../../../layouts/AdminLayout.astro";
+import { fetchData, parseCookie } from "../../../../utils/common";
+const { submissionId } = Astro.params;
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const submission = await fetchData(`submission/${submissionId}`, token, batch);
+if (!submission) return Astro.redirect("/error");
+---
+
+<AdminLayout>
+    <EditSubmission client:load submission={submission} />
+</AdminLayout>

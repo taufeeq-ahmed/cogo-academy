@@ -31,7 +31,7 @@ const batchOptions = batches.map((batch) => {
 ---
 
 <AdminLayout title="Admin | Students" user={user}>
-  <div style={{ marginTop: "0px", height: "100vh" }}>
+  <div style={{ marginTop: "0px" }}>
     <div class="invite_user_component">
       <InviteUser client:load batchOptions={batchOptions} token={token} />
     </div>

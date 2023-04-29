@@ -44,7 +44,7 @@ const EditExercise = ({ exercise }) => {
         data.prefilled_code = code;
         try {
             await instance.patch(`/exercise/${exercise.exercise_id}/update`, data)
-            // window.location.href = ('/admin/courses');
+            window.location.href = ('/admin/courses');
         } catch (err) {
 
         }

@@ -12,9 +12,6 @@ const { userData, topThreeUsers, recentSections } = ff;
 
 <div class="dashboard">
     <div class="dash-nav">
-        <!-- <div class="dash-rank"> -->
-        <!-- <h2>Rank {userData?.user_rank}</h2> -->
-        <!-- </div> -->
         <div class="dash-box">
             <div class="img_div">
                 <img src={ExerciseSVG} alt="exercise-svg" />
@@ -39,7 +36,7 @@ const { userData, topThreeUsers, recentSections } = ff;
                 <img src={ProjectSVG} alt="exercise-svg" />
             </div>
             <div class="dash-stat">
-                <h1>{userData?.number_of_submissions || 0}</h1>
+                <h1>{userData?.number_of_submissions_done || 0}</h1>
                 <span>Submissions</span>
             </div>
         </div>
@@ -183,6 +180,10 @@ const { userData, topThreeUsers, recentSections } = ff;
         .dash_body {
             gap: 10px;
         }
+
+        .leader-board {
+            width: 300px;
+        }
     }
     @media (max-width: 768px) {
         .dash-nav {
@@ -240,6 +241,9 @@ const { userData, topThreeUsers, recentSections } = ff;
         }
         .leader-box {
             padding: 10px;
+            width: 100%;
+        }
+        .leader-board {
             width: 100%;
         }
     }

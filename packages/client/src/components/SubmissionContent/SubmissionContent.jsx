@@ -1,29 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
-import axios from 'axios';
-import instance from '../../utils/axios';
-const SubmissionContent = ({ submissionContent, user }) => {
-    const { user_id, github_username } = user;
-    const { submission_name, submission_description, submission_url, submission_id } = submissionContent;
+
+const SubmissionContent = ({ submissionContent, user, onChange }) => {
+    const { github_username } = user;
+    const { submission_name, submission_description, submission_url } = submissionContent;
     const [url, setURL] = useState(submission_url);
 
     const handleUrlInput = (e) => {
         setURL(e.target.value);
-    }
-    const handleUrlSubmit = () => {
-        // alert(user_id)
-        // alert(submission_id)
-        // alert(`https://github.com/${github_username}/${url}`)
-        instance.post(`user_submission/add`,
-            {
-                user_id: user_id,
-                submission_id: submission_id,
-                submission_url: `https://github.com/${github_username}/${url}`
-            },
-        )
-            .then((res) => {
-                console.log(res);
-            })
+        onChange(e.target.value);
     }
 
     return (
@@ -44,9 +29,7 @@ const SubmissionContent = ({ submissionContent, user }) => {
                     className={styles.submission_url}
                     value={url}
                     onChange={(e) => handleUrlInput(e)}
-
                 />
-                {/* <button className={styles.submission_url_btn} onClick={handleUrlSubmit}>save</button> */}
             </div>
         </div>
     )

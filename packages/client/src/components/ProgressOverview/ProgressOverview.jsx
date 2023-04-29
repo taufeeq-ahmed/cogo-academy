@@ -8,14 +8,14 @@ const ProgressOverview = ({ progressData }) => {
             data: [
                 {
                     x: "Article",
-                    y:  (progressData?.studentData?.number_of_articles_read || 0)
+                    y: (progressData?.studentData?.number_of_articles_read || 0)
                 },
 
             ]
         },
         {
             id: "Exercises",
-           data: [
+            data: [
                 {
                     x: "Exercises",
                     y: (progressData?.studentData?.number_of_exercises_done || 0)
@@ -27,7 +27,7 @@ const ProgressOverview = ({ progressData }) => {
             data: [
                 {
                     x: "Submission",
-                    y:   (progressData?.studentData?.number_of_submissions || 0) 
+                    y: (progressData?.studentData?.number_of_submissions || 0)
                 },
 
             ]
@@ -45,7 +45,7 @@ const ProgressOverview = ({ progressData }) => {
                             valueFormat=">-.2f"
                             padding={0.4}
                             cornerRadius={2}
-                            margin={{ top: 30, bottom: 30}}
+                            margin={{ top: 30, bottom: 30 }}
                             colors={{ scheme: 'set1' }}
                             radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
                             circularAxisOuter={{ tickSize: 5, tickPadding: 12, tickRotation: 0 }}
@@ -86,7 +86,7 @@ const ProgressOverview = ({ progressData }) => {
                         </div>
                         <div className={styles.progress_box}>
                             <div className={styles.number}>
-                                {(progressData?.studentData?.number_of_submissions || 0)} / {(progressData?.studentData?.number_of_submissions || 0)}
+                                {(progressData?.studentData?.number_of_submissions_done || 0)} / {(progressData?.studentData?.number_of_submissions || 0)}
                             </div>
                             <div className={styles.text}>
                                 Submissions
