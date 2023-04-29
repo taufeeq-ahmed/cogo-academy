@@ -18,7 +18,7 @@ const EditSubmission = ({ submission }) => {
         console.log(data)
         try {
             await instance.patch(`/submission/${submission.submission_id}`, data)
-            // window.location.href = ('/admin/courses');
+            window.location.href = ('/admin/courses');
         } catch (err) {
 
         }

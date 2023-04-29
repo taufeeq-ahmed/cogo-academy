@@ -73,7 +73,7 @@ model Submission {
     submission_id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     submission_name        String
     submission_description String
-    Section                Section?          @relation(fields: [section_id], references: [section_id])
+    section                Section?          @relation(fields: [section_id], references: [section_id])
     section_id             String?           @db.Uuid
     user_submission        User_Submission[]
     created_on             DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)

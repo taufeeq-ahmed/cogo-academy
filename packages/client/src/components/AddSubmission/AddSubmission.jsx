@@ -13,7 +13,7 @@ const AddSubmission = ({ sectionId }) => {
         console.log(data)
         try {
             await instance.post(`/submission/${sectionId}/add`, data)
-            // window.location.href = ('/admin/courses');
+            window.location.href = ('/admin/courses');
         } catch (err) {
 
         }

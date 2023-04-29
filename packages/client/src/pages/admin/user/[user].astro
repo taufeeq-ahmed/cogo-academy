@@ -31,14 +31,23 @@ const formatTableData = () => {
                 ];
                 return newArticle;
             }),
-            ...studentData.exercises.map((exercise) => {
+            ...studentData.submissions.map((submission) => {
                 const newArticle = [
+                    { name: submission?.submission?.submission_name },
+                    { name: submission?.submission?.section?.section_name },
+                    { name: submission?.submission?.section?.course?.course_name },
+                    { name: submission?.score || 0 },
+                ];
+                return newArticle;
+            }),
+            ...studentData.exercises.map((exercise) => {
+                const newExercise = [
                     { name: exercise?.exercise?.exercise_name },
                     { name: exercise?.exercise?.section?.section_name },
                     { name: exercise?.exercise?.section?.course?.course_name },
                     { name: exercise?.score || 0 },
                 ];
-                return newArticle;
+                return newExercise;
             }),
         ],
     };

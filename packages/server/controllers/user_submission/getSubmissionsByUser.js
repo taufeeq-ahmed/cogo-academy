@@ -7,8 +7,25 @@ const getSubmissionsByUserFromDB = async (params) => {
             user_id: user_id,
         },
         include: {
-            submission: true
-        }
+            submission: {
+                select: {
+                    submission_id: true,
+                    submission_name: true,
+                    section: {
+                        select: {
+                            section_id: true,
+                            section_name: true,
+                            course: {
+                                select: {
+                                    course_id: true,
+                                    course_name: true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
     })
     return submissions;
 }

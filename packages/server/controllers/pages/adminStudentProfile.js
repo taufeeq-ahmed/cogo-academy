@@ -33,21 +33,21 @@ const getStudentProfilePageDataFromDB = async (params) => {
             }
         },
     })
-    // const submCount = await prisma.submission.aggregate({
-    //     _count: true,
-    //     where: {
-    //         section: {
-    //             course: {
-    //                 batches: {
-    //                     some: { batch_id: { in: studentData.batches.map((b) => b.batch_id) } }
-    //                 }
-    //             }
-    //         }
-    //     },
-    // })
+    const submCount = await prisma.submission.aggregate({
+        _count: true,
+        where: {
+            section: {
+                course: {
+                    batches: {
+                        some: { batch_id: { in: studentData.batches.map((b) => b.batch_id) } }
+                    }
+                }
+            }
+        },
+    })
     studentData.number_of_articles = artCount._count
     studentData.number_of_exercises = exerCount._count
-    // studentData.number_of_submissions = submCount._count
+    studentData.number_of_submissions = submCount._count
     const readArticles = await getReadArticlesByUserFromDB(params)
     const submissions = await getSubmissionsByUserFromDB(params)
     const exercises = await getExercisesByUserFromDB(params)
