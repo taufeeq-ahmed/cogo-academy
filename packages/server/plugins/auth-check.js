@@ -7,7 +7,10 @@ const PUBLIC_ROUTES = [
     '/invite_user',
     '/invited_user/:token',
     '/accept_invite',
-    '/user/add'
+    '/user/add',
+   '/forgot-password',
+   '/forgot-password/:token',
+   '/reset-password'
 ];
 
 const authCheckPlugin = async (fastify) => {

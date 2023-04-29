@@ -157,7 +157,7 @@ model Track {
 model UserAuth {
     id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     email      String
-    otp        String
+    token      String
     created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
