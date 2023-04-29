@@ -11,12 +11,15 @@ const token = cookies?.cogoacademytoken;
 const batch = cookies?.batch;
 
 const userdata = await fetchData(`admin/batches`, token, batch);
+
 if (!userdata) return Astro.redirect("/error");
 
 if (!token) {
     return Astro.redirect("/signin");
 }
+
 const data = await fetchData("users/isadmin", token, batch);
+
 if (!data) return Astro.redirect("/error");
 ---
 

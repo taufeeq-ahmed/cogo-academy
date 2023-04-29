@@ -50,7 +50,7 @@ const inviteUser = async (params = {}, body = {}) => {
 				Data: 'Cogo-Academy inviatation',
 			},
 		},
-		Source: 'swapnil.vaidya@cogoport.com',
+		Source: process.env.AWS_SES_DOMAIN,
 	};
 
 	const sendEmail = async () => {

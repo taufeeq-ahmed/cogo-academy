@@ -107,8 +107,8 @@ function SignIn() {
                         ><img
                                 src={eye}
                                 alt="Toggle Password Visibility"
-                            /></button
-                        >
+                            />
+                        </button>
                     </div>
                     {formErrors.password && (
                         <div className={styles.error}>{formErrors.password}</div>
