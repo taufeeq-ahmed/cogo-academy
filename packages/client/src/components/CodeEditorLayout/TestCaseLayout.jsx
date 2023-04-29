@@ -26,6 +26,7 @@ const TestCaseLayout = ({ testcases, instructions, content, activeTab, language 
                 return <Instruction instruction={instructions} />
             case 1:
                 if (language === 'html') return <ConsoleTab content={content} canvas />
+                else if (language === 'python') return <ConsoleTab content={content} />
                 else return <ConsoleTab content={content} />
             default:
                 return <TestCase testcases={testcases} />

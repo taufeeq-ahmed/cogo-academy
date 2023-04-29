@@ -7,8 +7,6 @@ import LinkBtn from "../LinkBtn"
 import styles from './styles.module.css'
 import instance from "../../utils/axios";
 
-
-
 const PlaygroundContent = ({ data, user }) => {
     const { clicked_element: element_content } = data
     const { next_element } = element_content
@@ -21,7 +19,7 @@ const PlaygroundContent = ({ data, user }) => {
     const [activeTab, setActiveTab] = useState(0)
     const [code, setCode] = useState(element_content.prefilled_code);
     const [content, setContent] = useState(code);
-    const delay = ms => new Promise(res => setTimeout(res, ms));
+
     useEffect(() => {
         setContent(code);
     }, [code])
@@ -40,6 +38,7 @@ const PlaygroundContent = ({ data, user }) => {
         }
         else if (element_content?.submission_id) {
             console.log("submitted")
+
         }
         else {
             setActiveTab(2)
@@ -48,26 +47,27 @@ const PlaygroundContent = ({ data, user }) => {
             })
                 .then((resp) => {
                     // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
-                    console.log(resp,"hello");
+                    console.log(resp, "hello");
                     const resultLst = resp?.data?.passed_testcase
-
+                    alert(JSON.stringify(resp?.data))
                     setTestCases((lst) => {
                         return lst.map((item) => {
-                            const status = resultLst.includes(item.test_case_id) ? true : false
+                            const status = resultLst?.includes(item.test_case_id) ? true : false
                             return {
                                 ...item,
                                 status
                             }
                         })
                     })
-                    setcontent( JSON.stringify(resp?.data?.result))
-                    // window.location.href = next_element
+                    setContent(JSON.stringify(resp?.data?.result))
+
+
                 })
                 .catch(err => console.log(err))
                 .finally(() => {
                     setBtnLoading(false);
                 })
-        
+
         }
 
     }
@@ -99,7 +99,6 @@ const PlaygroundContent = ({ data, user }) => {
                 {
                     element_content?.exercise_id ? (
                         <TestCaseLayout
-
                             testcases={testCases}
                             instructions={instructions}
                             content={content}
