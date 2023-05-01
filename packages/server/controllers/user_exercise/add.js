@@ -5,6 +5,8 @@ const path = require('path');
 const testcode = require('../../code/tests-sql')
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
+
+
 const addExerciseDoneToDB = async (req) => {
     const { user_id } = req.user
     const { exercise_id } = req.params;
@@ -76,14 +78,17 @@ const addExerciseDoneToDB = async (req) => {
     }
 
     else if (exercise.language === "python") {
+        const fileName = user_id + exercise_id;
         try {
 
-            fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.py"), code);
-            const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
-
-            const res = JSON.parse(String.fromCharCode(...proc))
-
-
+            exercise.test_cases.map((tc) => {
+                tc.fileName = fileName;
+            })
+            fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER + '/python', fileName + ".py"), code, () => {
+                console.log("saved succesfully");
+            });
+            const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER + '/python', "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
+            const { passed: res, console_result } = JSON.parse(String.fromCharCode(...proc))
             if (res.length === exercise.test_cases.length) {
                 await prisma.user_Exercise.update({
                     where: {
@@ -98,13 +103,16 @@ const addExerciseDoneToDB = async (req) => {
                     }
                 })
             }
-            return { passed_testcase: res, result: "" }
+            fs.rm(path.join(__dirname, '..', '..', CODE_FOLDER + '/python', fileName + ".py"), () => {
+                console.log("removed")
+            });
+            return { passed_testcase: res, result: console_result }
         } catch (error) {
+            fs.rm(path.join(__dirname, '..', '..', CODE_FOLDER + '/python', fileName + ".py"), () => { });
             console.log("Error: ", error);
             return { passed_testcase: [], result: "" }
         }
     } else if (exercise.language === "SQL") {
-
         try {
             const res = await testcode({ code: code, exercise: exercise })
             console.log(res, "res");

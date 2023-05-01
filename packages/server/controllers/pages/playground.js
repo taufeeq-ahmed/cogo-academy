@@ -17,8 +17,7 @@ const getPlaygroundDataFromDB = async (req) => {
     const { course: { course_id } } = await prisma.section.findFirst({
         where: {
             section_id: section_id
-        }
-        ,
+        },
         include: {
             course: {
                 select: {
@@ -29,9 +28,8 @@ const getPlaygroundDataFromDB = async (req) => {
     })
 
     const { user_id } = req.user
-
     params.user_id = user_id
-
+    
     const all_submissions = await getSubmissionBySectionIdFromDB(params);
     const newAllSubmissions = all_submissions.map((submission) => {
         const { user_submission, ...subs } = submission;

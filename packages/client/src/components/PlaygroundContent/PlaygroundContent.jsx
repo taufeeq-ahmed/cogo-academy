@@ -7,8 +7,6 @@ import LinkBtn from "../LinkBtn"
 import styles from './styles.module.css'
 import instance from "../../utils/axios";
 
-
-
 const PlaygroundContent = ({ data, user }) => {
     const { clicked_element: element_content } = data
     const { next_element } = element_content
@@ -60,15 +58,16 @@ const PlaygroundContent = ({ data, user }) => {
 
                     setTestCases((lst) => {
                         return lst.map((item) => {
-                            const status = resultLst.includes(item.test_case_id) ? true : false
+                            const status = resultLst?.includes(item.test_case_id) ? true : false
                             return {
                                 ...item,
                                 status
                             }
                         })
                     })
-                    setcontent(JSON.stringify(resp?.data?.result))
-                    // window.location.href = next_element
+                    setContent(JSON.stringify(resp?.data?.result))
+
+
                 })
                 .catch(err => console.log(err))
                 .finally(() => {
@@ -147,5 +146,4 @@ const PlaygroundContent = ({ data, user }) => {
         </>
     )
 }
-
 export default PlaygroundContent
