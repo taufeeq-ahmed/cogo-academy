@@ -91,9 +91,6 @@ const SectionCard = ({ section, dash = false }) => {
                                 <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={getLink()} /> :
                                 <p className={styles.coming_soon}>Coming soon..</p>}
                         </div>
-                        {(section?.first_article_id || section?.first_submission_id || section?.first_exercise_id) ?
-                            <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={getLink()} /> :
-                            <p className={styles.coming_soon}>Coming soon..</p>}
                     </div>
                 </div>
             </a>
