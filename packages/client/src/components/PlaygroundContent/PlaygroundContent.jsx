@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import LinkBtn from "../LinkBtn"
 import styles from './styles.module.css'
 import instance from "../../utils/axios";
+import './styles.css'
 
 const PlaygroundContent = ({ data, user }) => {
     const { clicked_element: element_content } = data
