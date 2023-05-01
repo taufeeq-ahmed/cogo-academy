@@ -19,11 +19,11 @@
     width: 300px;
 }
 
-/* @media(min-width: 40rem) {
+@media(min-width: 40rem) {
     .section_item {
         width: 50%;
     }
-} */
+}
 
 @media(min-width: 64rem) {
     .section_item {
