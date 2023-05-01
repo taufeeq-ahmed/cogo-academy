@@ -13,6 +13,7 @@ const getSectionsFromDB = async (params) => {
             article: {
                 include: {
                     section: true
+
                 }
             }
         },

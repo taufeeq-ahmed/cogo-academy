@@ -19,6 +19,10 @@ const SectionCard = ({ section, dash = false }) => {
             type = "submission"
             link_id = section.first_submission_id
         }
+        else {
+            type = "exercise"
+            link_id = section.first_exercise_id
+        }
         return `playground/${section?.section_id}/${type}/${link_id}`
     }
 
@@ -29,7 +33,8 @@ const SectionCard = ({ section, dash = false }) => {
             number_of_submissions = 0,
 
             number_of_articles_read = 0,
-            number_of_submissions_done = 0
+            number_of_submissions_done = 0,
+            number_of_exercises_done = 0
         } = section
         const denominator = number_of_articles + number_of_exercises + number_of_submissions
 
@@ -37,7 +42,7 @@ const SectionCard = ({ section, dash = false }) => {
             return 0
         }
 
-        const res = ((number_of_articles_read + number_of_submissions_done) / denominator) * 100
+        const res = ((number_of_articles_read + number_of_submissions_done + number_of_exercises_done) / denominator) * 100
 
         if (res >= 100) return 100
 
@@ -80,7 +85,7 @@ const SectionCard = ({ section, dash = false }) => {
                                 <span>{section?.duration_in_minutes} Minutes</span>
                             </div>
                         </div>
-                        {(section.first_article_id || section.first_submission_id) ?
+                        {(section.first_article_id || section.first_submission_id || section.first_exercise_id) ?
                             <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={getLink()} /> :
                             <p className={styles.coming_soon}>Coming soon..</p>}
                     </div>
