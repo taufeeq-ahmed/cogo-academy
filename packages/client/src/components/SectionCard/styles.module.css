@@ -14,7 +14,11 @@
 .section_item {
     padding: 10px;
 }
+.section_link{
+    text-decoration: none;
+    color: black;
 
+}
 .dash_section {
     width: 300px;
 }
