@@ -6,7 +6,7 @@ import Instruction from './Instruction';
 import TestCase from './TestCase';
 import ConsoleTab from './ConsoleTab';
 
-const TestCaseLayout = ({ testcases, instructions, content, activeTab, language = 'python' }) => {
+const TestCaseLayout = ({ testcases, instructions, content, activeTab, language }) => {
     const [activeButton, setActiveButton] = useState(activeTab);
     useEffect(() => {
         setActiveButton(activeTab)
@@ -27,7 +27,7 @@ const TestCaseLayout = ({ testcases, instructions, content, activeTab, language 
             case 1:
                 if (language === 'html') return <ConsoleTab content={content} canvas />
                 else if (language === 'python') return <ConsoleTab content={content} />
-                else return <ConsoleTab content={content} />
+                else return <ConsoleTab language={language} content={content} />
             default:
                 return <TestCase testcases={testcases} />
         }
