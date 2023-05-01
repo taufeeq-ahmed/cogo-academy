@@ -1,7 +1,7 @@
-.dropdown-container {
+.drop_down_box  .dropdown-container {
     width: 100% !important;
 }
 
-.dropdown-menu {
+.drop_down_box .dropdown-menu {
     position: relative;
 }

@@ -57,14 +57,14 @@ const AdminUserHeader = ({ userData, allBatches }) => {
                             Batch
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <div className={styles.name}>
                             {userData?.track?.track_name || "No Track"}
                         </div>
                         <div className={styles.under_text}>
                             Track
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={styles.icons_details}>
                     <div className={styles.exercises_number}>

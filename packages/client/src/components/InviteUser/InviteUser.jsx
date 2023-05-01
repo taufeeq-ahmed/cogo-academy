@@ -52,7 +52,7 @@ const InviteUser = ({ batchOptions, token }) => {
                         value={inviteData.email}
                         setValue={(e) => { setInviteData({ ...inviteData, email: e.target.value }) }}
                     />
-                    <div className={styles.drop_down_box}>
+                    <div className="drop_down_box">
                         <label htmlFor="batches">Batches</label>
                         <DropDown
                             options={batchOptions}

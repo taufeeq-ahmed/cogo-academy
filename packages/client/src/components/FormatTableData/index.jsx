@@ -3,8 +3,6 @@ import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import Table from '../Table/Table';
 const FormatTable = ({ studentData }) => {
-    console.log("...........--------------------")
-    console.log("daslkndasld", studentData)
 
     const [showModal, setshowModal] = useState(false);
     const [exe, setexercise] = useState("");
@@ -25,6 +23,16 @@ const FormatTable = ({ studentData }) => {
                         { name: article?.article?.section?.section_name },
                         { name: article?.article?.section?.course?.course_name },
                         { name: article?.score || 0 },
+                        // { name: <button onClick={reportHandler}>Report</button> },
+                    ];
+                    return newArticle;
+                }),
+                ...studentData.submissions?.map((submission) => {
+                    const newArticle = [
+                        { name: submission?.submission?.submission_name },
+                        { name: submission?.submission?.section?.section_name },
+                        { name: submission?.submission?.section?.course?.course_name },
+                        { name: submission?.score || 0 },
                         // { name: <button onClick={reportHandler}>Report</button> },
                     ];
                     return newArticle;
