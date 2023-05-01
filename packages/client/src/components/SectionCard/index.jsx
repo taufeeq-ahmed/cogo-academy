@@ -10,18 +10,18 @@ const SectionCard = ({ section, dash = false }) => {
 
     const getLink = () => {
         let type = "article"
-        let link_id = section.first_article_id
-        if (section.first_article_id) {
+        let link_id = section?.first_article_id
+        if (section?.first_article_id) {
             type = "article"
-            link_id = section.first_article_id
+            link_id = section?.first_article_id
         }
-        else if (section.first_submission_id) {
+        else if (section?.first_submission_id) {
             type = "submission"
-            link_id = section.first_submission_id
+            link_id = section?.first_submission_id
         }
         else {
             type = "exercise"
-            link_id = section.first_exercise_id
+            link_id = section?.first_exercise_id
         }
         return `playground/${section?.section_id}/${type}/${link_id}`
     }
@@ -55,17 +55,17 @@ const SectionCard = ({ section, dash = false }) => {
             <div className={styles.section}>
                 <div className={styles.imgDiv}>
                     <img
-                        src={section.image_url || "https://source.unsplash.com/random"}
+                        src={section?.image_url || "https://source.unsplash.com/random"}
                         alt="profile-pic"
                     />
                 </div>
                 <div className={styles.section_content}>
                     <div className={styles.section_header}>
-                        <span>{section.section_name}</span>
+                        <span>{section?.section_name}</span>
                     </div>
                     <div className={styles.section_body}>
                         <p>
-                            {section.description}
+                            {section?.description}
                         </p>
                     </div>
                     <div className={styles.section_progress}>
@@ -85,7 +85,7 @@ const SectionCard = ({ section, dash = false }) => {
                                 <span>{section?.duration_in_minutes} Minutes</span>
                             </div>
                         </div>
-                        {(section.first_article_id || section.first_submission_id || section.first_exercise_id) ?
+                        {(section?.first_article_id || section?.first_submission_id || section?.first_exercise_id) ?
                             <LinkBtn icon={ArrowSVG} iconPlacement="right" text="Continue" link={getLink()} /> :
                             <p className={styles.coming_soon}>Coming soon..</p>}
                     </div>

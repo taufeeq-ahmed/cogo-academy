@@ -13,9 +13,6 @@ const getSectionByCourseIdFromDB = async (params) => {
                 }
             },
             articles: {
-                select: {
-                    article_id: true
-                },
                 orderBy: {
                     created_on: 'asc'
                 },
