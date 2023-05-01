@@ -60,8 +60,9 @@ const getReadArticle = require("./user_article/get");
 const getReadArticlesByUser = require("./user_article/getArticlesByUser");
 const signUpUser = require("./auth/signUp");
 const signInUser = require("./auth/signIn");
-
+const resetPassword=require("./auth/changepassword")
 const forgotPassword = require("./auth/forgotPassword");
+const validatereset = require("./auth/validateresetlink");
 const userInvitation = require("./user/invite");
 const getInvite = require("./user/getInvite");
 const acceptInviteUser = require("./user/acceptInvite");
@@ -83,6 +84,8 @@ const registerRoutes = async (fastify) => {
         await signInUser(fastify);
         await forgotPassword(fastify);
         await isAdmin(fastify)
+        await validatereset(fastify);
+        await resetPassword(fastify);
     }
     await authRoutes(fastify)
     const userRoutes = async (fastify) => {
@@ -92,6 +95,7 @@ const registerRoutes = async (fastify) => {
         await deleteUser(fastify);
         await getFilteredUsers(fastify)
         await updateUserBatches(fastify)
+
     }
     await userRoutes(fastify);
     const sectionRoutes = async (fastify) => {
