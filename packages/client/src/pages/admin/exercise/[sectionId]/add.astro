@@ -6,7 +6,7 @@ const { sectionId } = Astro.params;
 const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
 
 const token = cookies?.cogoacademytoken;
-const batch = cookies?.batch
+const batch = cookies?.batch;
 const userdata = await fetchData(`admin/batches`, token, batch);
 if (!userdata) return Astro.redirect("/error");
 

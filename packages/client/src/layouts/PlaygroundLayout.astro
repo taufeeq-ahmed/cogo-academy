@@ -94,7 +94,7 @@ if (!batch) {
                     }
                 </div>
             </TabsNav>
-            <PlaygroundContent data={data} client:load user={userData} />
+            <PlaygroundContent data={data} client:only user={userData} />
         </div>
     </body>
 </html>
