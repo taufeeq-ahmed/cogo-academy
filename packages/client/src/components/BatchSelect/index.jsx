@@ -7,7 +7,7 @@ const BatchSelect = ({ batches }) => {
     const [isMounted, setIsMounted] = useState(false)
 
     useEffect(() => {
-        const expires = new Date(Date.now() + 60 * 60 * 1000); // Cookie expires in 1 hour
+        const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // Cookie expires in 1 hour
         selectedBatch !== null && (document.cookie = `batch=${batches[parseInt(selectedBatch)].batch_id};  expires=${expires.toUTCString()}; path=/`)
         if (isMounted) {
             window.location.href = "/"

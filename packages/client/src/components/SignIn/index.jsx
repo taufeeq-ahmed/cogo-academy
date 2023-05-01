@@ -19,7 +19,7 @@ function SignIn() {
         if (Object.keys(errors).length > 0) {
             setFormErrors(errors);
             return;
-          }
+        }
         try {
             const response = await instance.post('/users/login',
                 { email, password }
@@ -27,7 +27,7 @@ function SignIn() {
             if (response.status === 200) {
                 const { token } = await response.data;
                 console.log('token', token);
-                const expires = new Date(Date.now() + 60 * 60 * 1000); // Cookie expires in 1 hour
+                const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // Cookie expires in 1 hour
                 document.cookie = `cogoacademytoken=${token}; expires=${expires.toUTCString()}; path=/`;
                 window.location.href = '/'
                 setFormErrors({});
