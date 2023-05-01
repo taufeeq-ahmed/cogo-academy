@@ -11,7 +11,7 @@ const Header = ({ text, user, isSearch = false, query = "", setQuery = () => { }
 			{!isSearch && (<div className={styles.course_title}>{text}</div>)}
 			{isSearch &&
 				<div className={styles.search_box}>
-					<InputBox icon={SearchSVG} type={"text"} value={query} setValue={(e) => setQuery(e.target.value)} placeholder={'Search for Content'} />
+					<InputBox icon={SearchSVG} type={"text"} value={query} setValue={(e) => setQuery(e.target.value)} placeholder={'Search for Sections'} />
 				</div>
 			}
 			<div className={styles.header_right}>

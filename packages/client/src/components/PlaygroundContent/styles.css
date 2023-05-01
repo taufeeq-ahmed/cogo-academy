@@ -1,0 +1,77 @@
+@import url('../../styles/global.css');
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 7px 12px 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: max-content;
+    height: min-content;
+    gap: 5px;
+    background-color: #EE3425;
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    border: none;
+    outline: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.disabled_btn {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.secondary_btn {
+    background-color: white;
+    color: black;
+    border: 1px solid #E0E0E0;
+}
+
+.secondary_btn:hover {
+    background-color: #E0E0E0 !important;
+}
+
+.btn:hover {
+    background: red;
+}
+
+.btn:active {
+    background-color: #828282;
+}
+.link_btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #E0E0E0;
+    cursor: pointer;
+    width: max-content;
+    height: min-content;
+    gap: 5px;
+    background-color: white;
+    color: var(--font-color-btn);
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.link_btn:hover {
+    background: #FFFCE6;
+    border: 1px solid #FDE74D;
+    border-radius: 6px;
+}
+
+.text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
