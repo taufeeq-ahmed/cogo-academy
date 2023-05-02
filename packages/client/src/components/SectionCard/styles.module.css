@@ -14,16 +14,20 @@
 .section_item {
     padding: 10px;
 }
+.section_link{
+    text-decoration: none;
+    color: black;
 
+}
 .dash_section {
     width: 300px;
 }
 
-/* @media(min-width: 40rem) {
+@media(min-width: 40rem) {
     .section_item {
         width: 50%;
     }
-} */
+}
 
 @media(min-width: 64rem) {
     .section_item {

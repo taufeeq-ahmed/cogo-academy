@@ -100,6 +100,7 @@ const getSectionsFromDB = async (params) => {
         const firstArticleId = articles?.[0]?.article_id;
         const firstSubmissionId = submissions?.[0]?.submission_id;
         const firstExerciseId = exercises?.[0]?.exercise_id;
+        // console.log(time_to_read)
         return {
             ...section,
             first_article_id: firstArticleId,
@@ -108,7 +109,8 @@ const getSectionsFromDB = async (params) => {
             number_of_articles: articles.length,
             number_of_submissions: submissions.length,
             number_of_exercises: exercises.length,
-            image_url: sec.course.image_url
+            image_url: sec.course.image_url,
+            duration_in_minutes: articles.reduce((val, cur) => val + cur.article_time_in_mins, 0),
         };
     }).map((sec) => {
         return {

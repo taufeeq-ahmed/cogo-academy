@@ -252,7 +252,7 @@ const addExerciseDoneToDB = async (req) => {
                 })
             }
             console.log(result)
-            return result
+            return { passed_testcase: result }
         } catch (error) {
             console.log("Error: ", error);
             return []
