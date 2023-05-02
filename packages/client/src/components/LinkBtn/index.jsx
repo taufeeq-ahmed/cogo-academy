@@ -1,4 +1,4 @@
-import styles from "./styles.css"
+import "./styles.css"
 
 const LinkBtn = ({ text, link, iconPlacement = "left", icon, iconStyle, btnStyle }) => {
     return (
