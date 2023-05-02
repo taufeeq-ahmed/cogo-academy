@@ -111,10 +111,9 @@ const addExerciseDoneToDB = async (req) => {
             console.log("Error: ", error);
             return { passed_testcase: [], result: "" }
         }
-    } else if (exercise.language === "SQL") {
+    } else if (exercise.language === "sql") {
         try {
             const res = await testcode({ code: code, exercise: exercise })
-            console.log(res, "res");
             if (res.passed_testcase.length === exercise.test_cases.length) {
 
                 await prisma.user_Exercise.update({
@@ -141,8 +140,6 @@ const addExerciseDoneToDB = async (req) => {
     }
 
     else if (exercise.language === "javascript") {
-        console.log("-----------------")
-        console.log("JAVASCRIPT")
         try {
             // fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.js"), code);
             // const proc = exec("node " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.js ") + "'" + JSON.stringify(exercise.test_cases) + "'");

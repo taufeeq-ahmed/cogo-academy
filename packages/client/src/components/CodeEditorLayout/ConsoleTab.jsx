@@ -24,7 +24,7 @@ const ConsoleTab = ({ content , canvas =false, language}) => {
     if (canvas) {
         return <div ref={divRef} />;
     }
-    if(language==="SQL"){
+    if(language==="sql"){
         if(!IsJsonString(content)){
             return (
                 <div className={styles.console_tab}>
