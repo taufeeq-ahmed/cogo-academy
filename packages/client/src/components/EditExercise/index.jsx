@@ -41,7 +41,7 @@ const EditExercise = ({ exercise }) => {
     });
     const onSubmit = async (data) => {
         data.language = language;
-        data.prefilled_code = code;
+        data.prefilled_code = data.prefilled_code;
         try {
             await instance.patch(`/exercise/${exercise.exercise_id}/update`, data)
             window.location.href = ('/admin/courses');

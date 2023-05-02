@@ -8,17 +8,14 @@ const PUBLIC_ROUTES = [
     '/invited_user/:token',
     '/accept_invite',
     '/user/add',
-   '/forgot-password',
-   '/forgot-password/:token',
-   '/reset-password'
+    '/forgot-password',
+    '/forgot-password/:token',
+    '/reset-password'
 ];
 
 const authCheckPlugin = async (fastify) => {
     await fastify.addHook('preHandler', async (request, reply) => {
         const { routerPath } = request;
-
-        console.log("-----------------------------")
-        console.log(request.query.batch_id)
         // request.params = request.query.batch_id
 
         if (PUBLIC_ROUTES.includes(routerPath)) {

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import LinkBtn from "../LinkBtn"
 import styles from './styles.module.css'
 import instance from "../../utils/axios";
+import './styles.css'
 
 const PlaygroundContent = ({ data, user }) => {
     const { clicked_element: element_content } = data
@@ -116,27 +117,25 @@ const PlaygroundContent = ({ data, user }) => {
                             {(links) && <div className={styles.right_box_title}>Additional Links</div>}
                             {links?.map((link) => {
                                 return (
+                                    <a target="_blank" href={link.link_url} className={styles.linkhover}>
                                     <div className={styles.link_box}>
-                                        <a target="_blank" href={link.link_url}>
-                                            <img src={LinkSVG} alt="" />
-                                        </a>
+                                       
+                                            <img src={LinkSVG} className={styles.image} alt="" />
+                                      
                                         <div className={styles.link_content}>
-                                            <a
-                                                target="_blank"
-                                                href={link.link_url}
+                                            <div
                                                 className={styles.link_title}
                                             >
                                                 {link.link_name}
-                                            </a>
-                                            <a
-                                                target="_blank"
-                                                href={link.link_url}
+                                            </div>
+                                            <div
                                                 className={styles.domain_text}
                                             >
                                                 {link.link_url}
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
+                                    </a>
                                 );
                             })}
                         </>

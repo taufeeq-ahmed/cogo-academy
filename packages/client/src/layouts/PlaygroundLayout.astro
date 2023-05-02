@@ -57,7 +57,7 @@ if (!batch) {
         <MobileHeader />
         <div class="root">
             <TabsNav>
-                <p class="left_title">Course Contents</p>
+                <p class="left_title">Section Contents</p>
                 <div class="scrollable_nav">
                     {
                         data?.all_elements?.map((element: any) => {
@@ -94,7 +94,7 @@ if (!batch) {
                     }
                 </div>
             </TabsNav>
-            <PlaygroundContent data={data} client:load user={userData} />
+            <PlaygroundContent data={data} client:only user={userData} />
         </div>
     </body>
 </html>
