@@ -6,7 +6,7 @@ const EditorComponent = ({ onChange,
     code,
     theme,
     className,
-    height, style_box={} }) => {
+    height, style_box = {} }) => {
     function handleEditorChange(value) {
         onChange(value);
     }

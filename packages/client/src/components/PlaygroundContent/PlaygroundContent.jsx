@@ -56,7 +56,7 @@ const PlaygroundContent = ({ data, user }) => {
                     // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
                     console.log(resp, "hello");
                     const resultLst = resp?.data?.passed_testcase
-
+                    alert(JSON.stringify(resultLst))
                     setTestCases((lst) => {
                         return lst.map((item) => {
                             const status = resultLst?.includes(item.test_case_id) ? true : false
@@ -118,23 +118,23 @@ const PlaygroundContent = ({ data, user }) => {
                             {links?.map((link) => {
                                 return (
                                     <a target="_blank" href={link.link_url} className={styles.linkhover}>
-                                    <div className={styles.link_box}>
-                                       
+                                        <div className={styles.link_box}>
+
                                             <img src={LinkSVG} className={styles.image} alt="" />
-                                      
-                                        <div className={styles.link_content}>
-                                            <div
-                                                className={styles.link_title}
-                                            >
-                                                {link.link_name}
-                                            </div>
-                                            <div
-                                                className={styles.domain_text}
-                                            >
-                                                {link.link_url}
+
+                                            <div className={styles.link_content}>
+                                                <div
+                                                    className={styles.link_title}
+                                                >
+                                                    {link.link_name}
+                                                </div>
+                                                <div
+                                                    className={styles.domain_text}
+                                                >
+                                                    {link.link_url}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </a>
                                 );
                             })}
