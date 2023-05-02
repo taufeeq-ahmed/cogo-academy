@@ -85,7 +85,6 @@ const addExerciseDoneToDB = async (req) => {
                 tc.fileName = fileName;
             })
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER + '/python', fileName + ".py"), code, () => {
-                console.log("saved succesfully");
             });
             const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER + '/python', "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
             const { passed: res, console_result } = JSON.parse(String.fromCharCode(...proc))

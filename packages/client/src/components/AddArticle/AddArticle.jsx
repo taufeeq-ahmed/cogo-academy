@@ -35,7 +35,6 @@ const AddArticle = ({ sectionId }) => {
     // const onSubmit = async data => {  };
     // const [text, setText] = useState('');
     const addArticle = async (data) => {
-        console.log(data);
         data.article_content=text;
         data.article_time_in_mins=parseInt(data.article_time_in_mins);
         try {

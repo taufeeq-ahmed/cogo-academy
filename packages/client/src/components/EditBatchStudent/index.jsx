@@ -6,12 +6,6 @@ import Modal from '../Modal/Modal';
 
 
 const EditBatchStudent = ({ userData, batches, allBatches, show, toggle }) => {
-
-    console.log("--s-d-asd-asd-sa-dsa-d-asd")
-    console.log(batches)
-    console.log(allBatches)
-
-
     const batchIdList = batches.map((b) => {
         return b.batch_id
     })

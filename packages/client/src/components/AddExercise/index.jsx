@@ -46,7 +46,6 @@ const AddExercise = ({ sectionId }) => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
         data.language = selectedLanguage;
         data.prefilled_code = code;
         try {

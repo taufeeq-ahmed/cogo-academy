@@ -15,7 +15,6 @@ const EditSubmission = ({ submission }) => {
 
 
     const onSubmit = async (data) => {
-        console.log(data)
         try {
             await instance.patch(`/submission/${submission.submission_id}`, data)
             window.location.href = ('/admin/courses');

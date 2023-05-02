@@ -100,7 +100,6 @@ const getSectionsFromDB = async (params) => {
         const firstArticleId = articles?.[0]?.article_id;
         const firstSubmissionId = submissions?.[0]?.submission_id;
         const firstExerciseId = exercises?.[0]?.exercise_id;
-        // console.log(time_to_read)
         return {
             ...section,
             first_article_id: firstArticleId,
