@@ -58,6 +58,7 @@
     gap: 10px;
     padding: 10px;
     margin-top: 15px;
+    width: 100%;
 }
 
 .testcase_box {
@@ -72,9 +73,9 @@
     font-size: 12px;
     color: #000000;
     padding: 15px;
-    white-space: nowrap;
+    /* white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis
+    text-overflow: ellipsis */
 }
 
 .console_tab{

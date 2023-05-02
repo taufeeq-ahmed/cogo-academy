@@ -15,7 +15,6 @@ const EditSubmission = ({ submission }) => {
 
 
     const onSubmit = async (data) => {
-        console.log(data)
         try {
             await instance.patch(`/submission/${submission.submission_id}`, data)
             window.location.href = ('/admin/courses');
@@ -24,9 +23,26 @@ const EditSubmission = ({ submission }) => {
         }
     }
 
+    const handleDeleteSubmission = async () => {
+        const cnf = window.confirm("are you sure to delete")
+        if (cnf) {
+            const response = await instance.delete(`/submission/${submission.submission_id}`)
+            if (response.status === 200)
+                window.location.href = `/admin/courses`
+            else {
+                alert("Something went wrong");
+            }
+        }
+    }
+
     return (
         <form className={styles.edit_submission} onSubmit={handleSubmit(onSubmit)}>
-            <p>Edit Submission</p>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>Edit Submission
+                <Button
+                    btnType="secondary"
+                    text="Delete Section"
+                    onClick={handleDeleteSubmission}
+                /></div>
             <div className={styles.box}>
                 <label>Submission Name</label>
                 <InputBox
@@ -37,7 +53,7 @@ const EditSubmission = ({ submission }) => {
                     register={register}
                     registerQuery={"submission_name"}
                     required />
-                <label>Submission Description</label>
+                <label style={{ marginTop: "20px" }}>Submission Description</label>
                 <InputBox
                     textarea
                     placeholder={"Submission Description"}

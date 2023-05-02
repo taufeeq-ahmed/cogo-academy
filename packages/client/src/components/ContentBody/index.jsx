@@ -13,7 +13,6 @@ const ContentBody = ({ element_content, handleMarkAsDone, updateCanvas, user }) 
     const [code, setCode] = useState(element_content?.prefilled_code)
     const [url, setUrl] = useState("")
     const [btnLoading, setBtnLoading] = useState(false);
-    console.log(element_content)
 
     const contentRef = useRef()
     useEffect(() => {
@@ -37,7 +36,6 @@ const ContentBody = ({ element_content, handleMarkAsDone, updateCanvas, user }) 
 
     const onURLChange = (url) => {
         setUrl(url)
-        console.log(url)
     }
 
     let contentElement;

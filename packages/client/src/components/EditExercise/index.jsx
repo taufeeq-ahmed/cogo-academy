@@ -58,9 +58,29 @@ const EditExercise = ({ exercise }) => {
     const codeHandler = (code) => {
         setcode(code);
     }
+
+    const handleDeleteExercise = async () => {
+        const cnf = window.confirm("Are you sure to delete? ")
+        if (cnf) {
+            const response = await instance.delete(`/exercise/${exercise.exercise_id}/delete`)
+            if (response.status === 200)
+                window.location.href = `/admin/courses`
+            else {
+                alert("Something went wrong");
+            }
+        }
+    }
+
     return (
         <FormProvider {...methods}>
             <form className="edit_exercise" onSubmit={handleSubmit(onSubmit)}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>Edit Exercise
+                    <Button
+                        btnType="secondary"
+                        text="Delete Exercise"
+                        onClick={handleDeleteExercise}
+                    />
+                </div>
                 <div className="container">
                     <div className="box">
                         <div className="dropdown">

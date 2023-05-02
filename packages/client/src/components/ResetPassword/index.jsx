@@ -35,7 +35,6 @@ const toggle2=()=>{
         if(data.password!==data.confirm_password){
             alert("password not match")
         }
-        console.log(data,"pass");
         const newdata={email:authrization.email,password:data.password}
         try {
             const response = await instance.post(`/reset-password`, { data:newdata });
