@@ -78,6 +78,7 @@ const addUserExercise = require("./user_exercise/add");
 const getUserExercise = require("./user_exercise/get");
 const updateStatusCourse=require('./course/updateStatus');
 const updateExercies = require("./exercise/update");
+const deleteExercise = require("./exercise/delete");
 const registerRoutes = async (fastify) => {
     const authRoutes = async (fastify) => {
         await signUpUser(fastify);
@@ -130,6 +131,7 @@ const registerRoutes = async (fastify) => {
         await getExercise(fastify)
         await getAllExerciesBySection(fastify)
         await updateExercies(fastify)
+        await deleteExercise(fastify)
     }
     await exerciseRoutes(fastify)
     const linkRoutes = async (fastify) => {
