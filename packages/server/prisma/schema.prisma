@@ -99,6 +99,7 @@ model TestCase {
     output       String
     exercise     Exercise @relation(fields: [exercise_id], references: [exercise_id], onDelete: Cascade)
     exercise_id  String   @db.Uuid
+    created_on   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
 model User_Exercise {

@@ -58,8 +58,7 @@ const EditExercise = ({ exercise }) => {
         if (cnf) {
             const response = await instance.delete(`/exercise/${exercise.exercise_id}/delete`)
             if (response.status === 200)
-                // window.location.href = `/admin/courses`
-                console.log("das")
+                window.location.href = `/admin/courses`
             else {
                 alert("Something went wrong");
             }
