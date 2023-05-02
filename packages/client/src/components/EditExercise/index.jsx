@@ -24,7 +24,7 @@ const EditExercise = ({ exercise }) => {
     });
     const { register, control, handleSubmit, reset, watch } = methods;
     const [selectedLanguage, setSelectedLanguage] = useState('');
-    const [code, setcode] = useState({prefilled_code});
+    const [code, setcode] = useState({ prefilled_code });
     const [text, setText] = useState('');
     const {
         fields,
@@ -52,15 +52,36 @@ const EditExercise = ({ exercise }) => {
     const codeHandler = (code) => {
         setcode(code);
     }
+
+    const handleDeleteExercise = async () => {
+        const cnf = window.confirm("Are you sure to delete? ")
+        if (cnf) {
+            const response = await instance.delete(`/exercise/${exercise.exercise_id}/delete`)
+            if (response.status === 200)
+                // window.location.href = `/admin/courses`
+                console.log("das")
+            else {
+                alert("Something went wrong");
+            }
+        }
+    }
+
     return (
         <FormProvider {...methods}>
             <form className="edit_exercise" onSubmit={handleSubmit(onSubmit)}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>Edit Exercise
+                    <Button
+                        btnType="secondary"
+                        text="Delete Exercise"
+                        onClick={handleDeleteExercise}
+                    />
+                </div>
                 <div className="container">
                     <div className="box">
                         <div className="dropdown">
                             <label> Select Language</label>
-                            <InputBox 
-                            // placeHolder={'Language'}
+                            <InputBox
+                                // placeHolder={'Language'}
                                 // onChange={(selectedOption) => {
                                 //     setSelectedLanguage(selectedOption.label);
                                 // }}
@@ -95,7 +116,7 @@ const EditExercise = ({ exercise }) => {
                         placeholder={"instructions"}
                         required
                     /> */}
-                    <ControlledRTEditor id='rte' name='instruction'/>
+                    <ControlledRTEditor id='rte' name='instruction' />
                     {/* </div> */}
                     <div className="codeeditor">
                         <label > Enter Code </label>
