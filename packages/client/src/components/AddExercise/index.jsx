@@ -69,7 +69,7 @@ const AddExercise = ({ sectionId }) => {
                             <label> Select Language</label>
                             <Dropdown placeHolder={'Language'}
                                 onChange={(selectedOption) => {
-                                    setSelectedLanguage(selectedOption.label);
+                                    setSelectedLanguage(selectedOption.value);
                                 }}
                                 options={languages}
                                 styles={{ flex: 1 }}
