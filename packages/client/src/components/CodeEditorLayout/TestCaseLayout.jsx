@@ -7,10 +7,12 @@ import TestCase from './TestCase';
 import ConsoleTab from './ConsoleTab';
 
 const TestCaseLayout = ({ testcases, instructions, content, activeTab, language }) => {
+
     const [activeButton, setActiveButton] = useState(activeTab);
     useEffect(() => {
         setActiveButton(activeTab)
     }, [activeTab])
+
     const buttonStyle = { backgroundColor: "white", color: "black", justifyContent: "center" }
     const activeButtonStyle = {
         backgroundColor: "red",
