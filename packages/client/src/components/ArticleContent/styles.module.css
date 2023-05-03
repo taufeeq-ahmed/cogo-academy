@@ -1,4 +1,6 @@
-
+.article_content{
+    padding: 0px 20px;
+}
 .article_content h1 {
     border-bottom: 1px solid lightgrey;
     font-weight: 700;
