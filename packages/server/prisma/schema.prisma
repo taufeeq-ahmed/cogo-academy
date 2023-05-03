@@ -176,8 +176,8 @@ model movie {
     id             Int    @unique
     title          String
     director       String
-    year           String
-    length_minutes String
+    year           Int
+    length_minutes Int
 }
 
 model employees {
