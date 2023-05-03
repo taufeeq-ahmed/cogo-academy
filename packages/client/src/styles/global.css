@@ -1,6 +1,6 @@
 /* @import url("@cogoport/components/dist/themes/base.css");
 @import url("@cogoport/components/dist/themes/dawn.css"); */
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 body,
 html {
   padding: 0;

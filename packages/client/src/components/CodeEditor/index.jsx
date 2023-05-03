@@ -1,6 +1,7 @@
 import Editor from "@monaco-editor/react";
 import React from "react";
 import styles from './styles.module.css'
+
 const EditorComponent = ({ onChange,
     language,
     code,
@@ -20,6 +21,7 @@ const EditorComponent = ({ onChange,
                 theme={theme}
                 options={{
                     fontSize: 16,
+                    fontFamily: 'monospace'
                 }}
                 onChange={(value) => handleEditorChange(value)}
             />
