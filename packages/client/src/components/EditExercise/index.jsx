@@ -9,8 +9,14 @@ import instance from '../../utils/axios'
 import Button from '../Button/Button'
 import ControlledRTEditor from "../RTEditor/ControlledRTEditor";
 // import ControlledRTEditor from "../RichTextEditor/ControlledRTEditor";
-const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { label: 'JAVASCRIPT', id: '132' }, { label: 'SQL', id: '234' }, { label: 'PYTHON', id: '324' }, { label: 'RUBY', id: '342' }];
-
+const languages = [
+    { label: 'HTML', value: 'html' },
+    { label: 'CSS', value: 'css' },
+    { label: 'JAVASCRIPT', value: 'javascript' },
+    { label: 'SQL', value: 'sql' },
+    { label: 'PYTHON', value: 'python' },
+    { label: 'RUBY', value: 'ruby' }
+];
 const EditExercise = ({ exercise }) => {
     const { test_cases, exercise_name, prefilled_code, language, instruction } = exercise;
     const methods = useForm({

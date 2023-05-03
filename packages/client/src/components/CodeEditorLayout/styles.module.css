@@ -16,16 +16,6 @@
 
 }
 
-.success {
-    background-color: green;
-    color: white !important;
-}
-
-.error {
-    background-color: red;
-    color: white !important;
-}
-
 .component_container {
     display: flex;
     justify-content: center;
@@ -35,6 +25,7 @@
     overflow: auto;
     padding: 15px;
     flex: 1;
+    
 }
 
 .btn_div {
@@ -70,14 +61,20 @@
     border: 1px solid #E0E0E0;
     border-radius: 6px;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     color: #000000;
     padding: 15px;
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis */
+    
 }
+.success {
+    border :1px solid green;
+    color: green;
 
+}
+.error {
+    border :1px solid red;
+    color: red;
+}
 .console_tab{
     margin-top: 15px;
     overflow: auto;
