@@ -13,12 +13,14 @@ const EditorComponent = ({ onChange,
 
     return (
         <div className={styles.style_box}>
-            <Editor height={height ?? '80vh'}
+            <Editor height={height ?? '100vh'}
                 width={`100%`}
                 language={language || 'html'}
                 value={code}
                 theme={theme}
-                // defaultValue={code}
+                options={{
+                    fontSize: 16,
+                }}
                 onChange={(value) => handleEditorChange(value)}
             />
         </div>
