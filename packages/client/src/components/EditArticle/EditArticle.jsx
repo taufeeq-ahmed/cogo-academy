@@ -8,7 +8,6 @@ import './styles.css';
 const EditArticle = ({ article }) => {
 
     // const [text, setText] = useState('');
-    console.log(article);
     const { article_name, article_time_in_mins, article_content, article_id, Links} = article;
     const methods = useForm({
         defaultValues: {
@@ -34,7 +33,6 @@ const EditArticle = ({ article }) => {
         name: "Links"
     });
     const updateArticle = async (data) => {
-        console.log(data);
         try {
             data.article_time_in_mins=parseInt(data.article_time_in_mins);
             await instance.patch(`/article/${article_id}`, data)

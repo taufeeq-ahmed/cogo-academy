@@ -9,8 +9,14 @@ import instance from '../../utils/axios'
 import Button from '../Button/Button'
 import ControlledRTEditor from "../RTEditor/ControlledRTEditor";
 // import ControlledRTEditor from "../RichTextEditor/ControlledRTEditor";
-const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { label: 'JAVASCRIPT', id: '132' }, { label: 'SQL', id: '234' }, { label: 'PYTHON', id: '324' }, { label: 'RUBY', id: '342' }];
-
+const languages = [
+    { label: 'HTML', value: 'html' },
+    { label: 'CSS', value: 'css' },
+    { label: 'JAVASCRIPT', value: 'javascript' },
+    { label: 'SQL', value: 'sql' },
+    { label: 'PYTHON', value: 'python' },
+    { label: 'RUBY', value: 'ruby' }
+];
 const EditExercise = ({ exercise }) => {
     const { test_cases, exercise_name, prefilled_code, language, instruction } = exercise;
     const methods = useForm({
@@ -24,7 +30,7 @@ const EditExercise = ({ exercise }) => {
     });
     const { register, control, handleSubmit, reset, watch } = methods;
     const [selectedLanguage, setSelectedLanguage] = useState('');
-    const [code, setcode] = useState({prefilled_code});
+    const [code, setcode] = useState({ prefilled_code });
     const [text, setText] = useState('');
     const {
         fields,
@@ -41,7 +47,7 @@ const EditExercise = ({ exercise }) => {
     });
     const onSubmit = async (data) => {
         data.language = language;
-        data.prefilled_code = code;
+        data.prefilled_code = data.prefilled_code;
         try {
             await instance.patch(`/exercise/${exercise.exercise_id}/update`, data)
             window.location.href = ('/admin/courses');
@@ -52,15 +58,35 @@ const EditExercise = ({ exercise }) => {
     const codeHandler = (code) => {
         setcode(code);
     }
+
+    const handleDeleteExercise = async () => {
+        const cnf = window.confirm("Are you sure to delete? ")
+        if (cnf) {
+            const response = await instance.delete(`/exercise/${exercise.exercise_id}/delete`)
+            if (response.status === 200)
+                window.location.href = `/admin/courses`
+            else {
+                alert("Something went wrong");
+            }
+        }
+    }
+
     return (
         <FormProvider {...methods}>
             <form className="edit_exercise" onSubmit={handleSubmit(onSubmit)}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>Edit Exercise
+                    <Button
+                        btnType="secondary"
+                        text="Delete Exercise"
+                        onClick={handleDeleteExercise}
+                    />
+                </div>
                 <div className="container">
                     <div className="box">
                         <div className="dropdown">
                             <label> Select Language</label>
-                            <InputBox 
-                            // placeHolder={'Language'}
+                            <InputBox
+                                // placeHolder={'Language'}
                                 // onChange={(selectedOption) => {
                                 //     setSelectedLanguage(selectedOption.label);
                                 // }}
@@ -95,7 +121,7 @@ const EditExercise = ({ exercise }) => {
                         placeholder={"instructions"}
                         required
                     /> */}
-                    <ControlledRTEditor id='rte' name='instruction'/>
+                    <ControlledRTEditor id='rte' name='instruction' />
                     {/* </div> */}
                     <div className="codeeditor">
                         <label > Enter Code </label>

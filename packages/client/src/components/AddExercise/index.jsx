@@ -11,7 +11,14 @@ import Button from '../Button/Button'
 import ControlledRTEditor from "../RTEditor/ControlledRTEditor";
 // import JoditEditor from "jodit-react";
 // import ControlledRTEditor from "../RichTextEditor/ControlledRTEditor";
-const languages = [{ label: 'HTML', id: '123' }, { label: 'CSS', id: '124' }, { label: 'JAVASCRIPT', id: '132' }, { label: 'SQL', id: '234' }, { label: 'PYTHON', id: '324' }, { label: 'RUBY', id: '342' }];
+const languages = [
+    { label: 'HTML', value: 'html' },
+    { label: 'CSS', value: 'css' },
+    { label: 'JAVASCRIPT', value: 'javascript' },
+    { label: 'SQL', value: 'sql' },
+    { label: 'PYTHON', value: 'python' },
+    { label: 'RUBY', value: 'ruby' }
+];
 
 const AddExercise = ({ sectionId }) => {
     const methods = useForm({
@@ -39,7 +46,6 @@ const AddExercise = ({ sectionId }) => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
         data.language = selectedLanguage;
         data.prefilled_code = code;
         try {
@@ -62,7 +68,7 @@ const AddExercise = ({ sectionId }) => {
                             <label> Select Language</label>
                             <Dropdown placeHolder={'Language'}
                                 onChange={(selectedOption) => {
-                                    setSelectedLanguage(selectedOption.label);
+                                    setSelectedLanguage(selectedOption.value);
                                 }}
                                 options={languages}
                                 styles={{ flex: 1 }}
@@ -105,7 +111,7 @@ const AddExercise = ({ sectionId }) => {
                     registerQuery={"instruction"}
                     placeholder={"instructions"}
                     required /> */}
-                    <ControlledRTEditor  id='rte' name='instruction' />
+                    <ControlledRTEditor id='rte' name='instruction' />
                     {/* </div> */}
                     <div className="codeeditor">
                         <label > Enter Code </label>

@@ -76,7 +76,6 @@ const TableStudents = () => {
                         }
                     })])
                 const newData = data.studentsList.map((user) => {
-                    console.log("user", user)
                     const newUser = [
                         { link: `/admin/user/${user.user_id}`, name: user?.user_name },
                         { name: user?.batches.map((b) => b.batch_name).toString() },
@@ -111,7 +110,6 @@ const TableStudents = () => {
     //     setTrack(selected.value)
     // }
     const handleBatchChange = (selected) => {
-        console.log(selected)
         clearTable()
         setBatch(selected.value)
     }

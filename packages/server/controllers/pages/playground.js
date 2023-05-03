@@ -108,7 +108,6 @@ const getPlaygroundDataFromDB = async (req) => {
             clicked_element.prefilled_code = userExercise?.code
         }
         clicked_element.next_element = next_element
-        console.log(all_elements)
         return { all_elements, clicked_element, user: req.user };
     }
 

@@ -1,44 +1,51 @@
-
+.article_content{
+    padding: 0px 20px;
+}
 .article_content h1 {
     border-bottom: 1px solid lightgrey;
-    margin-bottom: 10px;
-    font-size: 2.5rem;
-    border-bottom: 1px solid lightgrey;
-    margin-bottom: 10px;
-    font-weight: 500 !important;
-    margin:0;
+    font-weight: 700;
+    margin-top:0px;
+    font-size: 2rem;
+    border-bottom: none;
+    margin-bottom: 1.5rem;
+    color: #4F4F4F;
+    
 }
 .article_content h6 {
     font-size: 1rem;
     color: gray;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-weight: inherit;
-    margin:0;
+    margin-top:0px;
 }
 .article_content h2{
-    font-size: 2rem;
+    font-size: 1.4rem;
     border-bottom: 1px solid lightgray;
-    margin-top: 2rem;
     margin-bottom: 1rem;
-    margin:0;
+    font-weight: 700;
+    margin-top:0px;
+    border-bottom: none;
+    color: #4F4F4F;
 }
 .article_content p {
     margin: 0.9rem 0px;
     color: rgb(102, 112, 133);
-    font-size: 18px;
+    /* color: #4F4F4F; */
     text-align: justify;
     text-justify: inter-word;
+    line-height: 1.4;
+    border-bottom: none;
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 .article_content pre {
     background-color: rgb(220, 245, 255);
     color: black;
     padding: 20px 20px 0px;
     overflow-x: scroll;
-    margin-top: 5px;
-    margin-bottom: 5px;
     font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
     font-size: 1em;
-    margin: 0px;
+    margin-bottom: 1rem;
 }
 .article_content a {
     border-bottom: 1px solid rgb(9, 103, 140);
@@ -50,7 +57,8 @@
     font-size: 1.5rem;
     font-weight: normal;
     color: black;
-    margin: 0;
+    margin-bottom: 10px;
+    color: #4F4F4F;
 }
 .article_content ul {
     color: rgb(102, 112, 133);
@@ -59,9 +67,24 @@
     margin-block: 1em;
     margin-inline: 0px;
     padding-inline-start: 40px;
+     /* color: #4F4F4F;  */
+    line-height:1.4;
+    border-bottom: none;
+    margin-top: 0;
+    margin-bottom: 1rem;
+
 }
 .article_content li {
-    font-size: 18px;
+    /* font-size: 18px; */
     display: list-item;
     text-align: -webkit-match-parent;
+    /* color: #4F4F4F; */
+    line-height:1.4;
+    border-bottom: none;
+    margin-top: 0;
+    /* margin-bottom: 1rem; */
+}
+.article_content iframe{
+    height: 500px;
+    width: 100%;
 }

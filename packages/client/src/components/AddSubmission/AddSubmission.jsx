@@ -10,7 +10,6 @@ const AddSubmission = ({ sectionId }) => {
 
 
     const onSubmit = async (data) => {
-        console.log(data)
         try {
             await instance.post(`/submission/${sectionId}/add`, data)
             window.location.href = ('/admin/courses');

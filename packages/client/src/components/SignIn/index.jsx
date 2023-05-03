@@ -26,7 +26,6 @@ function SignIn() {
             );
             if (response.status === 200) {
                 const { token } = await response.data;
-                console.log('token', token);
                 const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // Cookie expires in 1 hour
                 document.cookie = `cogoacademytoken=${token}; expires=${expires.toUTCString()}; path=/`;
                 window.location.href = '/'

@@ -57,7 +57,8 @@ const getRecentSectionsFromDB = async (req) => {
                 ...section,
                 first_article_id: userArticle?.article_id,
                 number_of_articles: articles.length,
-                image_url: section.course.image_url
+                image_url: section.course.image_url,
+                duration_in_minutes: articles.reduce((val, cur) => val + cur.article_time_in_mins, 0),
             };
         }
         return null

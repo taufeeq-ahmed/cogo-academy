@@ -6,7 +6,11 @@ const getExerciseFromDB = async (params) => {
             exercise_id: exercise_id
         },
         include: {
-            test_cases: true
+            test_cases: {
+                orderBy: {
+                    created_on: 'asc'
+                }
+            },
         }
     })
     return exercise;

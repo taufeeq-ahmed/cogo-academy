@@ -2,13 +2,18 @@ const { prisma } = require("../../helpers/db-client");
 const updateExercisesInDB = async (params, data) => {
     const { exercise_id } = params;
     const { language, exercise_name, instruction, prefilled_code, test_cases } = data;
-    const exercise = await prisma.exercise.findUnique({ where: { exercise_id } });
-    const test= exercise.test_cases?.map((item)=>{
-        item.test_case_id;
-    })
-    const newTestCases = test_cases
-        .filter((testCase) => testCase.test_case_id === undefined);
-    const existingTestCases=test_cases.filter((tc)=>test?.includes(tc.test_case_id));
+
+    const newTestCases = []
+    const existingTestCases = []
+
+    test_cases.forEach((tc) => {
+        if (tc?.test_case_id) {
+            existingTestCases.push(tc)
+        }
+        else {
+            newTestCases.push(tc)
+        }
+    });
 
     const updateExercise = await prisma.exercise.update({
         where: {
@@ -20,11 +25,22 @@ const updateExercisesInDB = async (params, data) => {
             prefilled_code: prefilled_code,
             exercise_name: exercise_name,
             test_cases: {
-                create: [...newTestCases],
-                update:existingTestCases,
+                createMany: {
+                    data: [...newTestCases]
+                },
             }
         }
     })
+
+    existingTestCases.map(async (testCase) => {
+        await prisma.testCase.update({
+            where: {
+                test_case_id: testCase.test_case_id
+            },
+            data: testCase
+        })
+    })
+
     return updateExercise;
 }
 module.exports = updateExercisesInDB;

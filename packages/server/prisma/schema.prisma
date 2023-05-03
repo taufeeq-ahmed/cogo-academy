@@ -97,14 +97,15 @@ model TestCase {
     text         String
     input        String
     output       String
-    exercise     Exercise @relation(fields: [exercise_id], references: [exercise_id])
+    exercise     Exercise @relation(fields: [exercise_id], references: [exercise_id], onDelete: Cascade)
     exercise_id  String   @db.Uuid
+    created_on   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 }
 
 model User_Exercise {
     id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user        User     @relation(fields: [user_id], references: [user_id])
-    exercise    Exercise @relation(fields: [exercise_id], references: [exercise_id])
+    user        User     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+    exercise    Exercise @relation(fields: [exercise_id], references: [exercise_id], onDelete: Cascade)
     score       Int?
     code        String?
     done        Boolean  @default(false)
@@ -117,8 +118,8 @@ model User_Exercise {
 
 model User_Article {
     id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user       User     @relation(fields: [user_id], references: [user_id])
-    article    Article  @relation(fields: [article_id], references: [article_id])
+    user       User     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+    article    Article  @relation(fields: [article_id], references: [article_id], onDelete: Cascade)
     user_id    String   @db.Uuid
     article_id String   @db.Uuid
     score      Int?
@@ -129,12 +130,13 @@ model User_Article {
 
 model User_Submission {
     submission_linkmap_id String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    user                  User       @relation(fields: [user_id], references: [user_id])
+    user                  User       @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
     user_id               String     @db.Uuid
-    submission            Submission @relation(fields: [submission_id], references: [submission_id])
+    submission            Submission @relation(fields: [submission_id], references: [submission_id], onDelete: Cascade)
     submission_id         String     @db.Uuid
     submission_url        String
     score                 Int?
+    updated_on            DateTime   @default(dbgenerated("now()")) @db.Timestamptz(3)
 
     @@unique([user_id, submission_id])
 }
@@ -168,31 +170,4 @@ model UserInvites {
     created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
 
     @@unique([email, token])
-}
-model movie {
-    id           Int     @unique
-    title         String   
-    director     String
-    year      String 
-    length_minutes String
-
-}
-model employees {
-    id           Int     @unique
-    role           String    
-    name         String   
-    building     String?
-    years_employed      Int 
-}
-model patients {
-    first_name           String    
-    last_name         String   
-    gender     String?
-    city      String 
-    province_id String
-    allergies String?
-    patient_id Int @unique
-    birth_date DateTime
-    height Int
-    weight Int
 }
