@@ -54,9 +54,7 @@ const PlaygroundContent = ({ data, user }) => {
             })
                 .then((resp) => {
                     // const resultLst = JSON.parse(resp?.data?.replaceAll("\'", "\"")) || []
-                    console.log(resp, "hello");
                     const resultLst = resp?.data?.passed_testcase
-                    alert(JSON.stringify(resultLst))
                     setTestCases((lst) => {
                         return lst.map((item) => {
                             const status = resultLst?.includes(item.test_case_id) ? true : false

@@ -6,7 +6,6 @@ import styles from './styles.module.css'
 
 const SectionCard = ({ section, dash = false }) => {
 
-    console.log("section", section)
 
     const getLink = () => {
         let type = "article"

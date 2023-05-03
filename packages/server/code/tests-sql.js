@@ -3,6 +3,7 @@ const { prisma } = require("../helpers/db-client");
 
 async function testcode( {code,exercise}){
     let result
+    console.log("inside sql");
     try{
             result = await prisma.$queryRawUnsafe(code)
         }

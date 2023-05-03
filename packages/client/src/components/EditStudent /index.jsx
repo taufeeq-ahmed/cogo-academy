@@ -7,7 +7,6 @@ import Modal from '../Modal/Modal';
 
 const EditStudent = ({ userData, show, toggle }) => {
 
-    console.log(userData)
 
     const { email, user_name ,github_username,isAdmin} = userData;
 
@@ -24,7 +23,6 @@ const EditStudent = ({ userData, show, toggle }) => {
 
 
     const onSubmit = async (data) => {
-        console.log(data,"data");
         data.isAdmin = (data.isAdmin.toLowerCase() === 'true');
         await instance.patch(`/user/${userData.user_id}`, { new_data:data })
         .then(() => {

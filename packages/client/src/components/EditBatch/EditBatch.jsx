@@ -9,7 +9,6 @@ import Modal from '../Modal/Modal';
 
 const EditBatch = ({ allCourses, show, toggle, batch }) => {
 
-    console.log("sadosapj", batch)
 
     const batchCoursesIds = batch.courses.map((b) => {
         return b.course_id

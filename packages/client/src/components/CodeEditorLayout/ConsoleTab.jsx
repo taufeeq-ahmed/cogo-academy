@@ -22,10 +22,9 @@ const ConsoleTab = ({ content , canvas =false, language}) => {
     }, []);
 
     if (canvas) {
-        console.log("inside can");
         return <div ref={divRef} />;
     }
-    if(language==="SQL"){
+    if(language==="sql"){
         if(!IsJsonString(content)){
             return (
                 <div className={styles.console_tab}>
@@ -36,10 +35,7 @@ const ConsoleTab = ({ content , canvas =false, language}) => {
         else{
      
         const newcontent=JSON.parse(content)
-        console.log("inside sql",newcontent);
         const head=Object.keys(newcontent[0])
-        console.log(newcontent[0]);
-
 
         return(
             <div className={styles.console_tab}>
