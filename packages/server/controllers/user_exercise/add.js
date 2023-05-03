@@ -89,11 +89,11 @@ const addExerciseDoneToDB = async (req) => {
     else if (exercise.language === "python") {
         const fileName = user_id + exercise_id;
         try {
+
             exercise.test_cases.map((tc) => {
                 tc.fileName = fileName;
             })
             fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER + '/python', fileName + ".py"), code, () => {
-                console.log("saved succesfully");
             });
             const proc = exec("python3 " + path.join(__dirname, '..', '..', CODE_FOLDER + '/python', "tests.py ") + "'" + JSON.stringify(exercise.test_cases) + "'");
             const { passed: res, console_result } = JSON.parse(String.fromCharCode(...proc))
@@ -120,10 +120,9 @@ const addExerciseDoneToDB = async (req) => {
             console.log("Error: ", error);
             return { passed_testcase: [], result: "" }
         }
-    } else if (exercise.language === "SQL") {
+    } else if (exercise.language === "sql") {
         try {
             const res = await testcode({ code: code, exercise: exercise })
-            console.log(res, "res");
             if (res.passed_testcase.length === exercise.test_cases.length) {
 
                 await prisma.user_Exercise.update({
@@ -150,8 +149,6 @@ const addExerciseDoneToDB = async (req) => {
     }
 
     else if (exercise.language === "javascript") {
-        console.log("-----------------")
-        console.log("JAVASCRIPT")
         try {
             // fs.writeFileSync(path.join(__dirname, '..', '..', CODE_FOLDER, "input_code.js"), code);
             // const proc = exec("node " + path.join(__dirname, '..', '..', CODE_FOLDER, "tests.js ") + "'" + JSON.stringify(exercise.test_cases) + "'");
@@ -260,7 +257,7 @@ const addExerciseDoneToDB = async (req) => {
                 })
             }
             console.log(result)
-            return result
+            return { passed_testcase: result }
         } catch (error) {
             console.log("Error: ", error);
             return []
