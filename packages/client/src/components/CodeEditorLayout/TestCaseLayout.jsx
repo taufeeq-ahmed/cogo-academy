@@ -15,8 +15,8 @@ const TestCaseLayout = ({ testcases, instructions, content, activeTab, language 
 
     const buttonStyle = { backgroundColor: "white", color: "black", justifyContent: "center" }
     const activeButtonStyle = {
-        backgroundColor: "red",
-        color: "white",
+        backgroundColor: "#FDEBE9",
+        color: "#EE3425",
     };
     let txt = ["Instructions", "Console", "Test Cases"];
     if (language == 'html') {
