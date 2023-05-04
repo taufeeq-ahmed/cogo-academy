@@ -173,7 +173,7 @@ const addExerciseDoneToDB = async (req) => {
                     // console.log("tcase", tcase)
                     const output = func(tcase);
                     console.log(output, expected[id], tcase, output == expected[id])
-                    if (output === parseInt(expected[id])) {
+                    if (JSON.stringify(output) === JSON.stringify((expected[id]))) {
                         passed_test_cases += 1
                         result.push(id)
                     }
