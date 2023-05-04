@@ -174,6 +174,7 @@ const addExerciseDoneToDB = async (req) => {
                     const output = func(tcase);
                     console.log(output, expected[id], tcase, output === expected[id])
                     const isPassed = JSON.stringify(output) === JSON.stringify(expected[id]);
+                    console.log("isPassed:", isPassed)
                     if (isPassed) {
 
                         passed_test_cases += 1
