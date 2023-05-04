@@ -169,7 +169,7 @@ const addExerciseDoneToDB = async (req) => {
             let passed_test_cases = 0;
             for (const id in testCases) {
                 try {
-                    const tcase = eval(testCases[id])
+                    const tcase = JSON.parse(testCases[id])
 
                     const output = func(tcase);
                     const isPassed = (JSON.stringify(output) === expected[id]);
