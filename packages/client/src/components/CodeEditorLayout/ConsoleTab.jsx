@@ -14,7 +14,6 @@ const ConsoleTab = ({ content , canvas =false, language}) => {
             }
 
         }, []);
-        console.log("inside can");
         return <div ref={divRef} />;
     }
     // if(language==="sql"){
