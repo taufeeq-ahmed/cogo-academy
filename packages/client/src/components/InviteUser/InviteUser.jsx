@@ -45,13 +45,17 @@ const InviteUser = ({ batchOptions, token }) => {
             <Button text='Invite User' onClick={toggleModal} type='button' />
             <Modal isShowing={open} toggle={toggleModal} heading={'Invite User'} handleSubmit={sendInvite} >
                 <div className={styles.invite_user}>
-                    <label htmlFor="email">Email</label>
-                    <InputBox
-                        placeholder={'Email'}
-                        name={"email"}
-                        value={inviteData.email}
-                        setValue={(e) => { setInviteData({ ...inviteData, email: e.target.value }) }}
-                    />
+                    <div className={styles.emailinput}>
+
+                    
+                        <label htmlFor="email">Email</label>
+                        <InputBox
+                            placeholder={'Email'}
+                            name={"email"}
+                            value={inviteData.email}
+                            setValue={(e) => { setInviteData({ ...inviteData, email: e.target.value }) }}
+                        />
+                     </div>
                     <div className="drop_down_box">
                         <label htmlFor="batches">Batches</label>
                         <DropDown

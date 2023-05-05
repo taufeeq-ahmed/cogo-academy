@@ -26,7 +26,6 @@ export async function fetchData(url, token, batch = null) {
         }
         return data;
     } catch (error) {
-        // console.log(error)
         return false;
     }
 }
