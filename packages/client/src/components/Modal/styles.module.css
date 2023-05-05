@@ -29,6 +29,9 @@ label {
     max-height: 90%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     position: relative;
+    @media (max-width: 768px) {
+        max-width: 90%;
+    }
 }
 
 .modal_big {
@@ -37,6 +40,9 @@ label {
 
 .modal_small {
     width: 30%;
+    @media (max-width: 768px) {
+        width: 90%;
+    }
 }
 
 .modal_header {
