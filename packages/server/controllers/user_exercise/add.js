@@ -154,6 +154,7 @@ const addExerciseDoneToDB = async (req) => {
 
             const func = eval(`(${code})`)
             const result = []
+            console.log("here");
             let passed_test_cases = 0;
             for (const id in testCases) {
                 try {
@@ -168,6 +169,7 @@ const addExerciseDoneToDB = async (req) => {
                     }
                 } catch (error) {
                     console.log(error)
+                    
                 }
             }
 
