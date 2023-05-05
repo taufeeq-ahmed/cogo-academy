@@ -39,7 +39,6 @@ function SignIn() {
             setError('Invalid Password or Email');
             setFormErrors({});
         }
-        console.log(err);
     };
     const validateForm = () => {
         let errors = {};

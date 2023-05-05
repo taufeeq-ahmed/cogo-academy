@@ -15,11 +15,11 @@ def test_code()
     passed_test_cases = 0
     result={}
     passed = []
-    conole_result=''
+    console_result=''
     test_cases.keys.each do |id|
         begin
             code_result = solution(eval(test_cases[id]))
-            conole_result=code_result
+            console_result=code_result
             if code_result.to_i == expected[id].to_i
                 passed_test_cases += 1
                 passed.append(id)
@@ -29,7 +29,7 @@ def test_code()
         end
     end
     result['passed']=passed;
-    result['console_result']=conole_result;
+    result['console_result']=console_result;
     puts result.to_json
 end
 test_code()

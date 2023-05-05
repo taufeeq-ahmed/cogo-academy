@@ -23,4 +23,5 @@
 
 .existing_articles>p {
     margin: 0;
+    font-weight: 600;
 }
