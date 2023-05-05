@@ -3,12 +3,20 @@ import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import Table from '../Table/Table';
 const FormatTable = ({ studentData }) => {
-
+    const [header, setheader]=useState("Code")
     const [showModal, setshowModal] = useState(false);
     const [exe, setexercise] = useState("");
+    const [sub, setSubmission]=useState("");
+    const reportHandlerSub=(submission)=>{
+        console.log(submission);
+        setshowModal(true);
+        setSubmission(submission);
+        setheader("Submission_link");
+    }
     const reportHandler = (exercise) => {
         setshowModal(true);
         setexercise(exercise);
+        setheader("Code");
     }
     const closeModalHandler = () => {
         setshowModal(false);
@@ -33,7 +41,7 @@ const FormatTable = ({ studentData }) => {
                         { name: submission?.submission?.section?.section_name },
                         { name: submission?.submission?.section?.course?.course_name },
                         { name: submission?.score || 0 },
-                        // { name: <button onClick={reportHandler}>Report</button> },
+                        { name: <Button onClick={() => reportHandlerSub(submission)} text={'Report'} /> },
                     ];
                     return newArticle;
                 }),
@@ -56,10 +64,10 @@ const FormatTable = ({ studentData }) => {
             <Table data={formatTableData()} />
             <Modal
                 isShowing={showModal}
-                heading={"Code"}
+                heading={header}
                 toggle={closeModalHandler}
                 submitText={"Close"} >
-                {exe?.code}
+                {exe? exe.code : sub.submission_url}
             </Modal>
         </>
     )
