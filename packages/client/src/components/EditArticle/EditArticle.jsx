@@ -33,6 +33,7 @@ const EditArticle = ({ article }) => {
         name: "Links"
     });
     const updateArticle = async (data) => {
+        data.article_content=text;
         try {
             data.article_time_in_mins=parseInt(data.article_time_in_mins);
             await instance.patch(`/article/${article_id}`, data)
@@ -127,7 +128,7 @@ const EditArticle = ({ article }) => {
                 <div className="editor">
                     <RichTextEditor
                         value={text}
-                        onChange={setText}
+                        onChange={(text) => setText(text)}
                         register={register}
                         registerQuery='article_content'
                     />
