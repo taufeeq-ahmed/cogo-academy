@@ -98,9 +98,9 @@
   align-items: center;
 }
 
-@media(width<768px) {
+@media (max-width: 768px) {
   .dropdown-container {
-    width: 4rem;
+    width: 80px;
     font-size: 12px;
   }
 }

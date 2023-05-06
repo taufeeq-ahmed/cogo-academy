@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
 
 .heading_text {
@@ -17,6 +18,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.search_box{
+    padding: 16px;
+    width: fit-content;
+
+    @media(max-width: 768px) {
+        padding: 16px 8px ;
+    }
+}
+.search_box_dropdown{
+    padding: 16px;
+    width: fit-content;
+
+    @media(max-width: 768px) {
+        padding: 16px 8px;
+    }
 }
 
 .search_box>div {

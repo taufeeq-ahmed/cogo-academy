@@ -120,7 +120,7 @@ const TableStudents = () => {
                     Students ({tableData.rows.length}) {loading && "Loading.."}
                 </div>
                 <div className={styles.heading_inputs}>
-                    <div style={{ padding: 16, width: 'fit-content' }}>
+                    <div className={styles.search_box_dropdown}>
                         <Dropdown
                             placeHolder={"Select Batch"}
                             options={batchOptions}
@@ -134,7 +134,7 @@ const TableStudents = () => {
                             onChange={handleTrackChange}
                         />
                     </div> */}
-                    <div style={{ padding: 16, width: 'fit-content' }} className={styles.search_box} >
+                    <div className={styles.search_box} >
                         <InputBox icon={SearchSVG} type={"text"} value={query} setValue={(e) => setQuery(e.target.value)} placeholder={'Search for Users'} />
                     </div>
                 </div>
