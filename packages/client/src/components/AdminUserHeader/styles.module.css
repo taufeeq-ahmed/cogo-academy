@@ -1,0 +1,95 @@
+.delete_user{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+    gap: 10px;
+}
+.adminuser_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px;
+    border-bottom: 1px solid #F2F3FA;
+}
+
+.admin_leftcontent {
+    display: flex;
+    gap: 10px;
+}
+
+.admin_leftcontent>div {
+    padding: 10px;
+}
+
+.name,
+.number {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.exercises_icon_container,
+.articles_icon_container,
+.projects_icon_container {
+    background: #F2F3FA;
+    border: 1px solid #F2F3FA;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.batch_edit_btn {
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.under_text {
+    color: #828282;
+}
+
+.number {
+    display: inline;
+}
+
+.icon {
+    width: 16px;
+    height: 20px;
+}
+
+.icon_text {
+    display: flex;
+    flex-direction: column;
+}
+
+.exercises_number,
+.articles_number,
+.projects_number {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+}
+
+.icons_details {
+    display: flex;
+}
+
+
+
+@media (max-width:900px) {
+    .adminuser_header {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+@media (max-width:600px) {
+
+    .exercises_icon_container,
+    .articles_icon_container,
+    .projects_icon_container {
+        display: none;
+    }
+}

@@ -1,0 +1,23 @@
+---
+import AdminLayout from "../../../../layouts/AdminLayout.astro";
+import { fetchData, parseCookie } from "../../../../utils/common";
+import AddExercise from "../../../../components/AddExercise";
+const { sectionId } = Astro.params;
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+const userdata = await fetchData(`admin/batches`, token, batch);
+if (!userdata) return Astro.redirect("/error");
+
+if (!token) {
+    return Astro.redirect("/signin");
+}
+
+const data = await fetchData("users/isadmin", token, batch);
+if (!data) return Astro.redirect("/error");
+---
+
+<AdminLayout user={userdata.user}>
+    <AddExercise client:only sectionId={sectionId} />
+</AdminLayout>

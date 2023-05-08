@@ -1,0 +1,20 @@
+@import url('../../styles/global.css');
+
+.edit_submission {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.control_buttons {
+    display: flex;
+}
+
+label {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: #4F4F4F;
+    line-height: 21px;
+}

@@ -1,0 +1,27 @@
+.exercise_list {
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.exercise_list>a {
+    margin: 0 10px;
+    display: inline-flex;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: #FEF3E9 !important;
+}
+
+.exercise_list>a:first-of-type {
+    margin-left: 0;
+}
+
+.exercise_list>a:last-of-type {
+    margin-right: 0;
+}
+
+.existing_exercises>p {
+    margin: 0;
+    font-weight: 600;
+}

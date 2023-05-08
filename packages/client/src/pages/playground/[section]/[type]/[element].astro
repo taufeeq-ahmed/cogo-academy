@@ -1,0 +1,22 @@
+---
+import PlaygroundLayout from "../../../../layouts/PlaygroundLayout.astro";
+import { parseCookie } from "../../../../utils/common";
+
+const { section, element, type } = Astro.params;
+
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+if (!token) {
+    return Astro.redirect("/signin");
+}
+
+---
+
+<PlaygroundLayout
+    sectionId={section}
+    elementId={element}
+    title="Section"
+    type={type}
+/>

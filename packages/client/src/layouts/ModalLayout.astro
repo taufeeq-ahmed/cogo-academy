@@ -1,0 +1,59 @@
+---
+import AdminLayout from "./AdminLayout.astro";
+const { title, user } = Astro.props;
+---
+
+<AdminLayout title={title} user={user}>
+    <slot />
+    <dialog id="modal">
+        <div class="modal_header">
+            <slot name="modal_header_slot" />
+        </div>
+        <div class="modal_content">
+            <slot name="modal_content_slot" />
+        </div>
+        <div class="modal_footer">
+            <slot name="modal_footer_slot" />
+        </div>
+    </dialog>
+</AdminLayout>
+
+<style>
+    #modal {
+        max-width: 70%;
+        min-width: 40%;
+        width: fit-content;
+        border: 1px solid white;
+        border-radius: 6px;
+        padding: 0px;
+    }
+    #modal::backdrop {
+        background: rgb(0 0 0 / 0.4);
+    }
+    .modal_footer {
+        border-top: 1px solid #e0e0e0;
+        padding: 10px;
+        display: flex;
+        justify-content: end;
+    }
+    .modal_header {
+        padding: 10px;
+        border-bottom: 1px solid #e0e0e0;
+        font-weight: 500;
+        font-size: 20px;
+    }
+    .modal_content {
+        padding: 20px;
+    }
+</style>
+<script>
+    var modal = document.querySelector("#modal");
+    const openModal = document.querySelector("#open_modal");
+    const closeModal = document.querySelector("#close_modal");
+    openModal.addEventListener("click", () => {
+        modal.showModal();
+    });
+    closeModal.addEventListener("click", () => {
+        modal.close();
+    });
+</script>

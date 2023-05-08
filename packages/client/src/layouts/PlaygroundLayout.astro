@@ -1,0 +1,128 @@
+---
+const { title } = Astro.props;
+import TabsNav from "../components/TabsNav.astro";
+import BookSVG from "/assets/book.svg";
+import { fetchData, parseCookie } from "../utils/common";
+import MobileHeader from "../components/MobileHeader.astro";
+import PlaygroundContent from "../components/PlaygroundContent/PlaygroundContent";
+
+const { sectionId, elementId, type = "article" } = Astro.props;
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+const data = await fetchData(
+    `playground/${sectionId}/${type}/${elementId}`,
+    token
+);
+const { userData } = await fetchData(`user-dashboard`, token, batch);
+const { user_id } = userData;
+
+if (data.clicked_element.submission_id) {
+    const res = await fetchData(
+        `user_submission/${user_id}/${data.clicked_element.submission_id}`,
+        token,
+        batch
+    );
+
+    if (res) {
+        res.submission_url = res?.submission_url?.split("/")?.pop();
+        data.clicked_element.submission_url = res.submission_url;
+    }
+}
+
+if (!token) {
+    return Astro.redirect("/signin");
+}
+if (!batch) {
+    return Astro.redirect("/batchselect");
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Playground - {title}</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"
+        ></script>
+    </head>
+    <body>
+        <MobileHeader />
+        <div class="root">
+            <TabsNav>
+                <p class="left_title">Section Contents</p>
+                <div class="scrollable_nav">
+                    {
+                        data?.all_elements?.map((element: any) => {
+                            return (
+                                <a
+                                    href={`/playground/${sectionId}/${element.element_type}/${element.element_id}`}
+                                    class={`tab ${
+                                        elementId === element.element_id
+                                            ? "tab_selected"
+                                            : "not-selected"
+                                    }`}
+                                >
+                                    <div class="img-div">
+                                        <input
+                                            type="checkbox"
+                                            checked={!!element.done}
+                                        />
+                                    </div>
+                                    <div class="name-time">
+                                        <div>{element.element_name}</div>
+                                        <div>
+                                            <img
+                                                src={BookSVG}
+                                                alt="book-icon"
+                                            />
+                                            <span>
+                                                {element.element_time_in_mins}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            );
+                        })
+                    }
+                </div>
+            </TabsNav>
+            <PlaygroundContent data={data} client:only user={userData} />
+        </div>
+    </body>
+</html>
+
+<style>
+    .root {
+        display: flex;
+        height: 100vh;
+    }
+    .name-time {
+        font-size: 14px;
+    }
+    .name-time > div:last-child {
+        font-weight: 400;
+        font-size: var(--font-size-sm);
+        color: var(--color-secondary-2);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .left_title.right_box_title {
+        color: var(--font-color);
+        font-weight: 500;
+    }
+    input[type="checkbox"] {
+        pointer-events: none;
+    }
+    .scrollable_nav {
+        overflow: scroll;
+    }
+</style>

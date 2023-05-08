@@ -1,0 +1,29 @@
+---
+import CourseSections from "../components/CourseSections";
+import Layout from "../layouts/Layout.astro";
+import { fetchData, parseCookie } from "../utils/common";
+
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+if (!token) {
+  return Astro.redirect("/signin");
+}
+const { course } = Astro.params;
+
+const data = await fetchData(`landing/${course}`, token, batch);
+---
+
+<Layout
+  title={`Course - ${course}`}
+  courses={data.allCourses}
+  header_title={"Course"}
+  isSearch
+>
+  <CourseSections
+    sections={data.sections}
+    userData={data.userData}
+    client:load
+  />
+</Layout>

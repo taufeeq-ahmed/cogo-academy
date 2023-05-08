@@ -1,0 +1,250 @@
+---
+import ExerciseSVG from "/assets/exercises.svg";
+import ProjectSVG from "/assets/projects.svg";
+import LeaderBoardSVG from "/assets/leaderboard.svg";
+import LessonSVG from "/assets/lesson.svg";
+import Tile from "./Tile.astro";
+import SectionCard from "./SectionCard";
+const { data } = Astro.props;
+const ff = !data.error ? data : { userData: {}, topThreeUsersData: [] };
+const { userData, topThreeUsers, recentSections } = ff;
+---
+
+<div class="dashboard">
+    <div class="dash-nav">
+        <div class="dash-box">
+            <div class="img_div">
+                <img src={ExerciseSVG} alt="exercise-svg" />
+            </div>
+            <div class="dash-stat">
+                <h1>{userData?.number_of_exercises_done || 0}</h1>
+                <span>Exercises</span>
+            </div>
+        </div>
+        <div class="dash-box">
+            <div class="img_div">
+                <img src={LessonSVG} alt="lesson-svg" />
+            </div>
+            <div class="dash-stat">
+                <h1>{userData?.number_of_articles_read || 0}</h1>
+                <span>Articles</span>
+            </div>
+        </div>
+
+        <div class="dash-box">
+            <div class="img_div">
+                <img src={ProjectSVG} alt="exercise-svg" />
+            </div>
+            <div class="dash-stat">
+                <h1>{userData?.number_of_submissions_done || 0}</h1>
+                <span>Submissions</span>
+            </div>
+        </div>
+    </div>
+    <h4>Jump right back in!</h4>
+    <div class="dash_body">
+        <div class="dash-sections">
+            {
+                recentSections?.map((section) => {
+                    return (
+                        <SectionCard
+                            dash={true}
+                            section={section}
+                            client:load
+                        />
+                    );
+                })
+            }
+        </div>
+        <div class="leader-box">
+            <div class="leader-board-title">
+                <div class="leader-board-text">Leaderboard</div>
+                <div class="leader-board-icon">
+                    <img src={LeaderBoardSVG} />
+                </div>
+            </div>
+            <div class="leader-board">
+                {
+                    topThreeUsers?.map((user) => {
+                        return <Tile user={user} />;
+                    })
+                }
+                {
+                    topThreeUsers?.filter(
+                        (user) => user.user_id === userData?.user_id
+                    ).length === 0 && <Tile user={userData} />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dash-rank > h2 {
+        color: var(--font-color);
+        font-weight: 500;
+        font-size: 24px;
+        height: 100%;
+    }
+    .dash-stat > h1 {
+        font-weight: 500;
+        font-size: 24px;
+    }
+
+    .dash-stat > span {
+        font-weight: 400;
+        font-size: 16px;
+        color: #828282;
+    }
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    .dash-nav {
+        display: flex;
+        padding: 0 0 24px 0;
+        border-bottom: 1px solid #e0e0e0;
+        margin: 0px;
+    }
+    .dash-sections {
+        display: flex;
+        overflow: auto;
+        gap: 20px;
+        padding: 5px;
+    }
+
+    .section_item {
+        background-color: red;
+    }
+
+    .dash_body {
+        display: flex;
+        justify-content: space-between;
+    }
+    .leader-box {
+        display: flex;
+        padding: 0 24px;
+        flex-direction: column;
+        height: 375px;
+    }
+    .leader-board {
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+        overflow-y: auto;
+        margin-top: 10px;
+        border-radius: 6px;
+        width: 400px;
+    }
+    .leader-board-title {
+        font-weight: 500;
+        font-size: 16px;
+        display: flex;
+        gap: 5px;
+    }
+    .dash-rank {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+    }
+    .dash-box {
+        width: 200px;
+        display: flex;
+        align-items: center;
+
+        gap: 15px;
+    }
+    .dash-rank,
+    .dash-box {
+        margin-right: 20px;
+    }
+    .dash-stat {
+        display: flex;
+        flex-direction: column;
+    }
+    .img_div {
+        padding: 15px;
+        border-radius: 50%;
+        background-color: #f2f3fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .img_div > img {
+        width: 20px;
+    }
+
+    @media (max-width: 1200px) {
+        .dash_body {
+            gap: 10px;
+        }
+
+        .leader-board {
+            width: 300px;
+        }
+    }
+    @media (max-width: 768px) {
+        .dash-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .dash-rank > h2 {
+            color: var(--font-color);
+            font-weight: 500;
+            font-size: 20px;
+        }
+        .dash-stat > h1 {
+            font-weight: 500;
+            font-size: 20px;
+        }
+        .dash-stat > span {
+            font-weight: 400;
+            font-size: 16px;
+            color: #828282;
+        }
+        .img_div > img {
+            width: 15px;
+        }
+        .img_div {
+            padding: 10px;
+        }
+        .dash-box {
+            width: 100%;
+            margin: 5px;
+        }
+        .dash-stat {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .dash-stat span {
+            margin: 10px;
+        }
+        .dash-rank {
+            margin: 10px;
+        }
+        .dashboard h4 {
+            margin: 20px 0px;
+            font-weight: 500;
+            font-size: 18px;
+            margin-inline: auto;
+        }
+        .dash_body {
+            display: block;
+        }
+        .dash-sections {
+            width: 100%;
+        }
+        .leader-box {
+            padding: 10px;
+            width: 100%;
+        }
+        .leader-board {
+            width: 100%;
+        }
+    }
+</style>

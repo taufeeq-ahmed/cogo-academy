@@ -1,0 +1,36 @@
+---
+import Button from "../../components/Button/Button";
+import ModalLayout from "../../layouts/ModalLayout.astro";
+import { fetchData, parseCookie } from "../../utils/common";
+import AdminBatchCard from "../../components/AdminBatchCard";
+import AddBatch from "../../components/AddBatch";
+import cross from "/assets/cross.svg";
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import BatchesPage from "../../components/BatchesPage/BatchesPage";
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+if (!token) {
+    return Astro.redirect("/signin");
+}
+
+const data = await fetchData(`admin/batches`, token, batch);
+if (!data) return Astro.redirect("/error");
+
+const allCourses = await fetchData("course/list", token, batch);
+---
+
+<AdminLayout title="Admin | Batches" user={data.user}>
+    <BatchesPage allCourses={allCourses} batches={data?.batches} client:load />
+    <!-- <div slot="modal_header_slot" class="close_btn">
+        <span>Add Course</span>
+        <div class="btn"><img src={cross} id={"close_modal"} /></div>
+    </div>
+    <div slot="modal_content_slot">
+        <AddBatch client:load courses={allCourses} />
+    </div>
+    <div slot="modal_footer_slot" class="modal_footer">
+        <Button text="Close Modal" id={"close_modal"} />
+    </div> -->
+</AdminLayout>

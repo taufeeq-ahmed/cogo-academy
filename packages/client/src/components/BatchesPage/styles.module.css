@@ -1,0 +1,36 @@
+.courses_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.course {
+    flex: 1;
+    min-width: calc(100% / 3);
+    max-width: calc(100% / 3);
+}
+
+.create_course_container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 35px 0px 20px;
+    /* width: 90%; */
+}
+
+.close_btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.create_course_container .header_title {
+    font-size: 24px;
+}
+
+@media (max-width: 900px) {
+    .create_course_button {
+        display: none !important;
+    }
+}

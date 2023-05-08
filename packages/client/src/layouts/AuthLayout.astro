@@ -1,0 +1,95 @@
+---
+import Demo from "/assets/authfront.svg";
+import "../styles/global.css";
+import BrandLogo from "/assets/brand.svg";
+import MobileHeader from "../components/MobileHeader.astro";
+import Toast from "../components/Toast";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <title>Authentication</title>
+    </head>
+    <body>
+        <MobileHeader />
+        <div class="container">
+            <div class="content">
+                <div class="brand-logo">
+                    <a href="/"><img src={BrandLogo} alt="brand-logo" /></a>
+                </div>
+                <slot />
+            </div>
+            <div class="image_box">
+                <img alt="cogo-academy" src={Demo} />
+            </div>
+        </div>
+    </body>
+</html>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+    .content {
+        flex: 1;
+        height: 100vh;
+        overflow: auto;
+    }
+    .image_box {
+        flex: 1;
+        background-size: cover;
+        background-position: center;
+        background-color: #fafafa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    .brand-logo {
+        margin-bottom: 36px;
+        margin-left: 36px;
+        margin-top: 36px;
+    }
+    /* media queries for smaller screens */
+    /* @media screen and (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+        .brand-logo {
+            margin: 10px;
+            text-align: center;
+        }
+        .image_box {
+            height: 0vh;
+            display: none;
+        }
+    } */
+    @media (width<1000px) {
+        .image_box {
+            display: none;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .brand-logo {
+            margin: 10px;
+        }
+        .image_box {
+            display: none;
+        }
+    }
+</style>

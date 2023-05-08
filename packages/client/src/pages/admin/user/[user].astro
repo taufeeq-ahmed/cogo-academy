@@ -1,0 +1,62 @@
+---
+import AdminUserHeader from "../../../components/AdminUserHeader/AdminUserHeader";
+import FormatTable from "../../../components/FormatTableData";
+import ProgressOverview from "../../../components/ProgressOverview/ProgressOverview";
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { fetchData, parseCookie } from "../../../utils/common";
+const { user } = Astro.params;
+
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const data = await fetchData(`admin/user/${user}`, token, batch);
+const { studentData, user: userData } = data;
+if (!data) return Astro.redirect("/error");
+
+// const formatTableData = () => {
+//     const tableData = {
+//         head: ["Title", "Section", "Course", "Score", "Action"],
+//         rows: [
+//             ...studentData.readArticles.map((article) => {
+//                 const newArticle = [
+//                     { name: article?.article?.article_name },
+//                     { name: article?.article?.section?.section_name },
+//                     { name: article?.article?.section?.course?.course_name },
+//                     { name: article?.score || 0 },
+//                     // { name: <button>Report</button> },
+//                 ];
+//                 return newArticle;
+//             }),
+//             ...studentData.exercises.map((exercise) => {
+//                 const newArticle = [
+//                     { name: exercise?.exercise?.exercise_name },
+//                     { name: exercise?.exercise?.section?.section_name },
+//                     { name: exercise?.exercise?.section?.course?.course_name },
+//                     { name: exercise?.score || 0 },
+//                 ];
+//                 return newArticle;
+//             }),
+//         ],
+//     };
+//     return tableData;
+// };
+---
+
+<AdminLayout title="Admin | User Profile Page" user={userData}>
+    <AdminUserHeader
+        client:load
+        userData={studentData.studentData}
+        allBatches={studentData.allBatches}
+    />
+    <ProgressOverview client:load progressData={studentData} />
+    <div style={{ marginTop: "40px" }}>
+        <FormatTable studentData={studentData} client:load />
+    </div>
+</AdminLayout>
+
+<style></style>

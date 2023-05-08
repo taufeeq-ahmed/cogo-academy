@@ -1,0 +1,13 @@
+.drop_down_box {
+    margin-top: 10px;
+    label{
+        font-size: 16px;
+    }
+}
+.emailinput{
+    margin-bottom: 12px;
+    label{
+        font-weight: 500;
+        font-size: 16px !important;
+    }
+}

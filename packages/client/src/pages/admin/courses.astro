@@ -1,0 +1,18 @@
+---
+import { fetchData, parseCookie } from "../../utils/common";
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import CoursesPage from "../../components/CoursesPage/CoursesPage";
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+if (!token) {
+    return Astro.redirect("/signin");
+}
+const data = await fetchData(`admin/courses`, token, batch);
+if (!data) return Astro.redirect("/error");
+---
+
+<AdminLayout title={"Admin | Courses"} user={data.user}>
+    <CoursesPage courses={data?.courses} client:load />
+</AdminLayout>

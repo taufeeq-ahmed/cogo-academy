@@ -1,0 +1,18 @@
+---
+import SignIn from "../components/SignIn";
+import AuthLayout from "../layouts/AuthLayout.astro";
+import { parseCookie } from "../utils/common";
+
+const cookies = parseCookie(Astro?.request?.headers?.get("cookie"));
+
+const token = cookies?.cogoacademytoken;
+const batch = cookies?.batch;
+
+if (token) {
+    return Astro.redirect("/");
+}
+---
+
+<AuthLayout>
+    <SignIn client:load />
+</AuthLayout>

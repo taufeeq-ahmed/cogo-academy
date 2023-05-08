@@ -1,0 +1,35 @@
+.container_body {
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    overflow: auto;
+    flex: 1;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .container_body {
+        justify-content: center;
+    }
+}
+
+.section_cards {
+    display: flex;
+}
+.nocontent{
+    width: 100%;
+
+
+align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.nocontenttext{
+    text-align: center;
+   font-size: 18px;
+   font-weight: 600;
+}
+.nocontentimage{
+   height: 300px;
+   width: 300px;
+}

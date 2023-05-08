@@ -1,0 +1,16 @@
+---
+import SignUp from "../../components/SignUp";
+import AuthLayout from "../../layouts/AuthLayout.astro";
+import { fetchData } from "../../utils/common";
+
+const { token } = Astro.params;
+
+function parseJwt(token) {
+    return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
+}
+const userData = parseJwt(token);
+---
+
+<AuthLayout>
+    <SignUp userData={userData} token={token} client:load />
+</AuthLayout>

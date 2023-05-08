@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
@@ -10,18 +7,167 @@ datasource db {
     url      = env("DATABASE_URL_SCHEMA")
 }
 
-model Users {
-    id                           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    name                         String
-    email                        String   @unique
-    password                     String
-    github_username              String
-    batch                        String
-    total_score                  Int?
-    created_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-    updated_on                   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
-    number_of_exercises_done     Int?     @default(0)
-    number_of_projects_submitted Int?     @default(0)
+model User {
+    user_id         String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_name       String
+    email           String            @unique
+    password        String
+    github_username String?
+    total_score     Int?              @default(0)
+    created_on      DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    updated_on      DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+    user_rank       Int?              @default(0)
+    batches         Batch[]
+    track           Track?            @relation(fields: [track_id], references: [track_id])
+    track_id        String?           @db.Uuid
+    user_article    User_Article[]
+    user_submission User_Submission[]
+    isAdmin         Boolean           @default(false)
+    user_exercise   User_Exercise[]
+}
 
-    @@map("users")
+model Course {
+    course_id   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    course_name String
+    sections    Section[]
+    batches     Batch[]
+    image_url   String    @default("")
+    isActive    Boolean   @default(false)
+}
+
+model Section {
+    section_id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    section_name        String
+    description         String
+    duration_in_minutes Int          @default(0)
+    course              Course?      @relation(fields: [course_id], references: [course_id])
+    course_id           String?      @db.Uuid
+    articles            Article[]
+    submissions         Submission[]
+    exercises           Exercise[]
+    created_on          DateTime     @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model Article {
+    article_id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    article_name         String
+    article_time_in_mins Int
+    article_content      String         @db.Text
+    total_score          Int            @default(1)
+    section              Section?       @relation(fields: [section_id], references: [section_id])
+    section_id           String?        @db.Uuid
+    Links                Link[]
+    user_article         User_Article[]
+    created_on           DateTime       @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model Link {
+    link_id    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    link_name  String
+    link_url   String
+    Article    Article? @relation(fields: [article_id], references: [article_id])
+    article_id String?  @db.Uuid
+}
+
+model Submission {
+    submission_id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    submission_name        String
+    submission_description String
+    section                Section?          @relation(fields: [section_id], references: [section_id])
+    section_id             String?           @db.Uuid
+    user_submission        User_Submission[]
+    created_on             DateTime          @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model Exercise {
+    exercise_id    String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    exercise_name  String
+    instruction    String
+    language       String
+    prefilled_code String
+    test_cases     TestCase[]
+    section        Section?        @relation(fields: [section_id], references: [section_id])
+    section_id     String?         @db.Uuid
+    user_exercise  User_Exercise[]
+    created_on     DateTime        @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model TestCase {
+    test_case_id String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    text         String
+    input        String
+    output       String
+    exercise     Exercise @relation(fields: [exercise_id], references: [exercise_id], onDelete: Cascade)
+    exercise_id  String   @db.Uuid
+    created_on   DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model User_Exercise {
+    id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user        User     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+    exercise    Exercise @relation(fields: [exercise_id], references: [exercise_id], onDelete: Cascade)
+    score       Int?
+    code        String?
+    done        Boolean  @default(false)
+    updated_on  DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+    user_id     String   @db.Uuid
+    exercise_id String   @db.Uuid
+
+    @@unique([user_id, exercise_id])
+}
+
+model User_Article {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user       User     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+    article    Article  @relation(fields: [article_id], references: [article_id], onDelete: Cascade)
+    user_id    String   @db.Uuid
+    article_id String   @db.Uuid
+    score      Int?
+    updated_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+
+    @@unique([user_id, article_id])
+}
+
+model User_Submission {
+    submission_linkmap_id String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user                  User       @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+    user_id               String     @db.Uuid
+    submission            Submission @relation(fields: [submission_id], references: [submission_id], onDelete: Cascade)
+    submission_id         String     @db.Uuid
+    submission_url        String
+    score                 Int?
+    updated_on            DateTime   @default(dbgenerated("now()")) @db.Timestamptz(3)
+
+    @@unique([user_id, submission_id])
+}
+
+model Batch {
+    batch_id   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    batch_name String
+    users      User[]
+    courses    Course[]
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model Track {
+    track_id   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    track_name String
+    User       User[]
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model UserAuth {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    email      String
+    token      String
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+}
+
+model UserInvites {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    email      String   @unique
+    token      String
+    created_on DateTime @default(dbgenerated("now()")) @db.Timestamptz(3)
+
+    @@unique([email, token])
 }

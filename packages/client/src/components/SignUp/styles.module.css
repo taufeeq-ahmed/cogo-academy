@@ -1,0 +1,157 @@
+.error{
+    color: red;
+}
+
+.signup_container {
+    margin: 0 auto;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.heading {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+    display: flex;
+    justify-content: center;
+}
+
+.subheading {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* COGO GREY */
+
+    color: #757575;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form .section {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.email,
+.text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 4px 0px 8px;
+    gap: 2px;
+    width: 390px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+.password_input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 4px 0px 8px;
+    gap: 2px;
+    width: 390px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+.password {
+    border: none;
+    width: 100%;
+    outline: none;
+}
+.toggle_password {
+    background-color: white;
+    border: none;
+}
+.batch, .track{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding: 0px 4px 0px 8px; */
+    gap: 2px;
+    width: 390px;
+    height: 40px;
+    /* border: 1px solid red; */
+    border-radius: 6px;
+    margin-bottom: 16px;
+
+}
+.bottom {
+    width: 390px;
+}
+.bottom span {
+    width: 171px;
+    height: 17px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #757575;
+}
+button[type="submit"] {
+    color: white;
+    padding: 8px 16px;
+    gap: 4px;
+    width: 390px;
+    height: 40px;
+    background: #ee3425;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+a {
+    width: 102px;
+    height: 18px;
+    font-weight: 400;
+    font-size: 12px;
+    text-decoration-line: underline;
+    color: #757575;
+}
+button {
+    cursor: pointer;
+}
+button[type="submit"]:hover {
+    background-color: rgb(199, 125, 125);
+}
+.bottom{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+@media (max-width:768px){
+    .password_input{
+        width: 360px;
+    }
+    .text,.email{
+        width: 360px;
+    }
+    .btn{
+        width: 360px;
+    }
+    button[type="submit"] {
+        
+        width: 360px;
+        
+    }
+    
+}

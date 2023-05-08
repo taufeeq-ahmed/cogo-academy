@@ -1,0 +1,27 @@
+.submissions_list {
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.submissions_list>a {
+    margin: 0 10px;
+    display: inline-flex;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: #F3FAFA !important;
+}
+
+.submissions_list>a:first-of-type {
+    margin-left: 0;
+}
+
+.submissions_list>a:last-of-type {
+    margin-right: 0;
+}
+
+.existing_submissions>p {
+    margin: 0;
+    font-weight: 600;
+}

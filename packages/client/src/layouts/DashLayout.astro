@@ -1,0 +1,21 @@
+---
+import Layout from "./Layout.astro";
+const { title, selected, courses } = Astro.props;
+---
+
+<Layout title={title} selected={selected} courses={courses}>
+    <slot name="header" />
+    <div class="container_body">
+        <slot />
+    </div>
+</Layout>
+
+<style>
+    .container_body {
+        display: flex;
+        flex-wrap: wrap;
+        overflow: auto;
+        gap: 20px;
+        padding: 5px;
+    }
+</style>

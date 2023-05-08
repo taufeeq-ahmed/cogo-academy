@@ -1,0 +1,41 @@
+@import url('../../styles/global.css');
+
+.input_box {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    color: var(--border-color);
+    border-radius: 6px;
+}
+
+.input_box img {
+    padding: 10px;
+}
+
+.input {
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.input::placeholder {
+    color: #BDBDBD;
+}
+
+.input_box:focus-within {
+    border: 1px solid #828282;
+}
+
+.input_textarea {
+    flex: 1;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.input_textarea::placeholder {
+    color: #BDBDBD;
+}

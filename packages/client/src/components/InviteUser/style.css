@@ -1,0 +1,7 @@
+.drop_down_box  .dropdown-container {
+    width: 100% !important;
+}
+
+.drop_down_box .dropdown-menu {
+    position: relative;
+}
